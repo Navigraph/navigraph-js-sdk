@@ -1,0 +1,7 @@
+{
+  "extends": "tsconfig/mega-base.json",
+  "compilerOptions": {
+    "outDir": "dist"
+  },
+  "exclude": ["dist/**/*"]
+}

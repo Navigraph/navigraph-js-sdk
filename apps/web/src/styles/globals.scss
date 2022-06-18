@@ -1,0 +1,308 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.dark {
+  --background: 12 12 15;
+  --foreground: 22 22 25;
+  --separator: 52 52 61;
+  --text: 156 167 178;
+}
+
+.light {
+  --background: 255 255 255;
+  --foreground: 250 252 253;
+  --separator: 229 240 245;
+  --text: 70 85 93;
+}
+
+::selection {
+  background-color: #47a3f3;
+  color: #fefefe;
+}
+
+html {
+  min-width: 360px;
+  scroll-behavior: smooth;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+
+#__next {
+  @apply bg-background;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* https://seek-oss.github.io/capsize/ */
+.capsize::before {
+  content: "";
+  margin-bottom: -0.098em;
+  display: table;
+}
+
+.capsize::after {
+  content: "";
+  margin-top: -0.219em;
+  display: table;
+}
+
+.prose .anchor {
+  @apply absolute invisible no-underline;
+
+  margin-left: -1em;
+  padding-right: 0.5em;
+  width: 80%;
+  max-width: 700px;
+  cursor: pointer;
+}
+
+.anchor:hover {
+  @apply visible;
+}
+
+.prose h1 {
+  font-weight: 700;
+}
+
+.prose a {
+  @apply transition-all;
+}
+
+.prose .anchor:after {
+  @apply text-gray-300 dark:text-gray-700;
+  content: "#";
+}
+
+.prose *:hover > .anchor {
+  @apply visible no-underline;
+}
+
+.prose pre {
+  @apply border shadow-code-light dark:shadow-code-dark border-gray-200 bg-gray-50 dark:border-gray-700 dark:bg-gray-900;
+}
+
+.prose :not(pre) code {
+  @apply text-gray-800 dark:text-blue-400 px-[6px] py-0.5 border border-gray-100 dark:border-gray-800 rounded-lg bg-blue-100/40 dark:bg-blue-deep-800/50;
+}
+
+.prose pre code {
+  @apply text-gray-800 dark:text-gray-200 dark:bg-gray-900;
+}
+
+.prose img {
+  /* Don't apply styles to next/image */
+  @apply m-0 my-10;
+}
+
+.prose > :first-child {
+  /* Override removing top margin, causing layout shift */
+  margin-top: 1.5em !important;
+  margin-bottom: 0.7em !important;
+}
+
+.token.comment,
+.token.prolog,
+.token.doctype,
+.token.cdata {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.token.punctuation {
+  @apply text-gray-700 dark:text-gray-300;
+}
+
+.token.property,
+.token.tag,
+.token.boolean,
+.token.number,
+.token.constant,
+.token.symbol,
+.token.deleted {
+  @apply text-cyan-500 dark:text-cyan-300;
+}
+
+.token.selector,
+.token.attr-name,
+.token.string,
+.token.char,
+.token.builtin,
+.token.inserted {
+  @apply text-green-500 dark:text-green-300  text-opacity-70;
+}
+
+.token.operator,
+.token.entity,
+.token.url,
+.language-css .token.string,
+.style .token.string {
+  @apply text-yellow-500;
+}
+
+.token.atrule,
+.token.attr-value,
+.token.keyword {
+  @apply text-blue-500;
+}
+
+.token.function,
+.token.class-name {
+  @apply text-blue-700 font-bold dark:text-yellow-300;
+}
+
+.token.regex,
+.token.important,
+.token.variable {
+  @apply text-yellow-500;
+}
+
+code[class*="language-"],
+pre[class*="language-"] {
+  @apply text-gray-800 dark:text-gray-50;
+}
+
+pre::-webkit-scrollbar {
+  display: none;
+}
+
+pre {
+  -ms-overflow-style: none; /* IE and Edge */
+  scrollbar-width: none; /* Firefox */
+}
+
+.rehype-code-title {
+  @apply mt-6 px-5 py-3 font-mono text-sm font-bold text-gray-800 bg-gray-200 border border-b-0 border-gray-200 rounded-t-lg dark:text-gray-200 dark:border-gray-700 dark:bg-gray-800;
+}
+
+.rehype-code-title + pre {
+  @apply mt-0 rounded-t-none;
+}
+
+.highlight-line {
+  @apply block px-3 -mx-4 bg-gray-100 border-l-4 border-blue-500 dark:bg-gray-800;
+}
+
+.line-number::before {
+  @apply inline-block w-4 text-right mr-4 -ml-2 text-gray-300;
+  content: attr(line);
+}
+
+.tabular-code-tabs {
+  @apply inline-flex w-full px-1 pt-2 list-none;
+  margin-bottom: 0 !important;
+}
+
+.tabular-code-tab {
+  @apply text-white cursor-pointer hover:bg-gray-200 dark:hover:bg-gray-800;
+
+  &:before {
+    content: none !important;
+  }
+
+  &:not(.active-tab) {
+    @apply px-4 py-2 font-semibold text-blue-800 dark:text-white rounded opacity-80;
+  }
+  &.active-tab {
+    @apply px-4 py-2 -mb-px font-semibold text-blue-400 border-b-2 border-blue-400 rounded-t;
+  }
+}
+
+/* Remove Safari input shadow on mobile */
+input[type="text"],
+input[type="email"] {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.step > h3 {
+  @apply my-0;
+}
+
+.sidenote {
+  &.info {
+    @apply border-blue-500 bg-blue-400 bg-opacity-20;
+    & svg {
+      @apply text-blue-500;
+    }
+  }
+  &.warning {
+    @apply border-yellow-500 bg-yellow-400 bg-opacity-20;
+    & svg {
+      @apply text-yellow-500;
+    }
+  }
+  &.error {
+    @apply border-red-500 bg-red-500 bg-opacity-20;
+    & svg {
+      @apply text-red-500;
+    }
+  }
+}
+
+table {
+  display: block;
+  max-width: fit-content;
+  overflow-x: auto;
+  white-space: nowrap;
+}
+
+aside > p {
+  margin: 0 !important;
+}
+
+#theme-toggle {
+  background: transparent;
+  border: none;
+  width: 28px;
+  height: 28px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 10px;
+  cursor: pointer;
+
+  .moon {
+    width: 100%;
+    z-index: 99;
+    color: #000;
+
+    transition: transform 0.2s;
+  }
+
+  .moon-circle {
+    transition: transform 0.2s;
+  }
+
+  &.dark {
+    .moon {
+      transform: scale(0.45);
+      color: #fff;
+    }
+    .moon-circle {
+      transform: translate(20px, -20px);
+    }
+  }
+
+  .ray {
+    width: 6px;
+    height: 2px;
+    border-radius: 2px;
+    position: absolute;
+    background-color: white;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  @for $i from 1 through 9 {
+    .ray:nth-child(#{$i}) {
+      transform: rotate(#{$i * 45}deg) translateX(12px) scaleX(1);
+
+      .light & {
+        transform: rotate(#{$i * 45}deg) translateX(12px) scaleX(0.01);
+        opacity: 0;
+      }
+    }
+  }
+}

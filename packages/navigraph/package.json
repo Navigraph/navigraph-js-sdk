@@ -1,0 +1,72 @@
+{
+  "name": "navigraph",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "source": "./src/index.ts",
+  "license": "MIT",
+  "private": true,
+  "exports": {
+    "./app": {
+      "node": {
+        "require": "./app/dist/index.cjs.js",
+        "import": "./app/dist/index.mjs"
+      },
+      "default": "./app/dist/index.esm.js"
+    },
+    "./auth": {
+      "node": {
+        "require": "./auth/dist/index.cjs.js",
+        "import": "./auth/dist/index.mjs"
+      },
+      "default": "./auth/dist/index.esm.js"
+    },
+    "./charts": {
+      "node": {
+        "require": "./charts/dist/index.cjs.js",
+        "import": "./charts/dist/index.mjs"
+      },
+      "default": "./charts/dist/index.esm.js"
+    },
+    "./weather": {
+      "node": {
+        "require": "./weather/dist/index.cjs.js",
+        "import": "./weather/dist/index.mjs"
+      },
+      "default": "./weather/dist/index.esm.js"
+    }
+  },
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "dev": "rollup -c -w",
+    "build": "rollup -c",
+    "lint": "TIMING=1 eslint src --fix",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "dependencies": {
+    "auth": "*",
+    "app": "*",
+    "charts": "*",
+    "weather": "*"
+  },
+  "devDependencies": {
+    "@rollup/plugin-commonjs": "21.0.0",
+    "@rollup/plugin-json": "^4.1.0",
+    "@rollup/plugin-node-resolve": "13.0.5",
+    "rollup": "2.57.0",
+    "rollup-plugin-sourcemaps": "0.6.3",
+    "rollup-plugin-terser": "7.0.2",
+    "rollup-plugin-typescript2": "0.30.0",
+    "rollup-plugin-uglify": "6.0.4",
+    "tsconfig": "*",
+    "typescript": "^4.5.3"
+  },
+  "components": [
+    "app",
+    "auth",
+    "charts",
+    "weather"
+  ]
+}

@@ -1,0 +1,30 @@
+{
+  "name": "auth",
+  "version": "0.0.0",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "source": "./src/index.ts",
+  "license": "MIT",
+  "private": true,
+  "files": [
+    "dist/**"
+  ],
+  "scripts": {
+    "dev": "tsc -w",
+    "build": "tsc",
+    "lint": "TIMING=1 eslint src --fix",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
+  "devDependencies": {
+    "@types/qr-image": "^3.2.5",
+    "tsconfig": "*",
+    "typescript": "^4.5.3"
+  },
+  "dependencies": {
+    "@navigraph/pkce": "^1.0.3",
+    "axios": "^0.24.0",
+    "pkce-challenge": "^2.2.0",
+    "qr-image": "^3.2.0",
+    "app": "*"
+  }
+}

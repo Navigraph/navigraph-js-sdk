@@ -14,26 +14,7 @@
   },
   "devDependencies": {
     "prettier": "^2.5.1",
-    "turbo": "latest"
-  },
-  "turbo": {
-    "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "lint": {
-        "outputs": []
-      },
-      "dev": {
-        "cache": false
-      }
-    }
+    "turbo": "^1.2.16"
   },
   "engines": {
     "npm": ">=7.0.0",
