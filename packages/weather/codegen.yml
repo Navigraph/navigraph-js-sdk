@@ -1,5 +1,5 @@
 overwrite: true
-schema: "https://weather.devigraph.com/graphql"
+schema: "https://weather.api.devigraph.com/graphql"
 documents: ./operations/**/*.graphql
 generates:
   src/generated/graphql.ts:

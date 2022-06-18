@@ -46,9 +46,9 @@ export type Metar = {
 
 export type MetarCloud = {
   __typename?: 'MetarCloud';
-  cloud_base_ft_agl?: Maybe<Scalars['Float']>;
-  cloud_top_ft_agl?: Maybe<Scalars['Float']>;
-  sky_cover: Scalars['String'];
+  cloudBaseFtAgl?: Maybe<Scalars['Float']>;
+  cloudTopFtAgl?: Maybe<Scalars['Float']>;
+  skyCover: Scalars['String'];
 };
 
 export type Pirep = {
@@ -81,26 +81,26 @@ export type Pirep = {
 
 export type PirepCloud = {
   __typename?: 'PirepCloud';
-  cloud_base_ft_agl?: Maybe<Scalars['Float']>;
-  cloud_top_ft_agl?: Maybe<Scalars['Float']>;
-  sky_cover: Scalars['String'];
+  cloudBaseFtAgl?: Maybe<Scalars['Float']>;
+  cloudTopFtAgl?: Maybe<Scalars['Float']>;
+  skyCover: Scalars['String'];
 };
 
 export type PirepIcing = {
   __typename?: 'PirepIcing';
-  icing_base_ft_msl?: Maybe<Scalars['Float']>;
-  icing_intensity?: Maybe<Scalars['String']>;
-  icing_top_ft_msl?: Maybe<Scalars['Float']>;
-  icing_type?: Maybe<Scalars['String']>;
+  icingBaseFtMsl?: Maybe<Scalars['Float']>;
+  icingIntensity?: Maybe<Scalars['String']>;
+  icingTopFtMsl?: Maybe<Scalars['Float']>;
+  icingType?: Maybe<Scalars['String']>;
 };
 
 export type PirepTurbulence = {
   __typename?: 'PirepTurbulence';
-  turbulence_base_ft_msl?: Maybe<Scalars['Float']>;
-  turbulence_freq?: Maybe<Scalars['String']>;
-  turbulence_intensity?: Maybe<Scalars['String']>;
-  turbulence_top_ft_msl?: Maybe<Scalars['Float']>;
-  turbulence_type?: Maybe<Scalars['String']>;
+  turbulenceBaseFtMsl?: Maybe<Scalars['Float']>;
+  turbulenceFreq?: Maybe<Scalars['String']>;
+  turbulenceIntensity?: Maybe<Scalars['String']>;
+  turbulenceTopFtMsl?: Maybe<Scalars['Float']>;
+  turbulenceType?: Maybe<Scalars['String']>;
 };
 
 export type Query = {
@@ -235,59 +235,59 @@ export type Taf = {
 
 export type TafCloud = {
   __typename?: 'TafCloud';
-  cloud_base_ft_agl?: Maybe<Scalars['Float']>;
-  cloud_type: Scalars['String'];
-  sky_cover: Scalars['String'];
+  cloudBaseFtAgl?: Maybe<Scalars['Float']>;
+  cloudType: Scalars['String'];
+  skyCover: Scalars['String'];
 };
 
 export type TafForecast = {
   __typename?: 'TafForecast';
-  altim_in_hg?: Maybe<Scalars['String']>;
-  change_indicator?: Maybe<Scalars['String']>;
+  altimInHg?: Maybe<Scalars['Float']>;
+  changeIndicator?: Maybe<Scalars['String']>;
   clouds?: Maybe<Array<TafCloud>>;
-  fcst_time_from: Scalars['String'];
-  fcst_time_to: Scalars['String'];
+  fcstTimeFrom: Scalars['String'];
+  fcstTimeTo: Scalars['String'];
   icing?: Maybe<TafIcing>;
-  not_decoded?: Maybe<Scalars['String']>;
+  notDecoded?: Maybe<Scalars['String']>;
   probability?: Maybe<Scalars['String']>;
   surfaceTemp?: Maybe<Array<TafSurfaceTemperature>>;
-  time_becoming?: Maybe<Scalars['String']>;
+  timeBecoming?: Maybe<Scalars['String']>;
   turbulence?: Maybe<TafTurbulence>;
-  vert_vis_ft?: Maybe<Scalars['String']>;
-  visibility_statute_mi?: Maybe<Scalars['String']>;
+  vertVisFt?: Maybe<Scalars['Float']>;
+  visibilityStatuteMi?: Maybe<Scalars['Float']>;
   wind?: Maybe<TafWind>;
-  wx_number?: Maybe<Scalars['String']>;
+  wxNumber?: Maybe<Scalars['String']>;
 };
 
 export type TafIcing = {
   __typename?: 'TafIcing';
-  icing_intensity: Scalars['String'];
-  icing_max_alt_ft_agl?: Maybe<Scalars['Float']>;
-  icing_min_alt_ft_agl?: Maybe<Scalars['Float']>;
+  icingIntensity: Scalars['String'];
+  icingMaxAltFtAgl?: Maybe<Scalars['Float']>;
+  icingMinAltFtAgl?: Maybe<Scalars['Float']>;
 };
 
 export type TafSurfaceTemperature = {
   __typename?: 'TafSurfaceTemperature';
-  max_or_min_temp_c?: Maybe<Scalars['Float']>;
-  sfc_temp_c?: Maybe<Scalars['Float']>;
-  valid_time?: Maybe<Scalars['String']>;
+  maxOrMinTempC?: Maybe<Scalars['Float']>;
+  sfcTempC?: Maybe<Scalars['Float']>;
+  validTime?: Maybe<Scalars['String']>;
 };
 
 export type TafTurbulence = {
   __typename?: 'TafTurbulence';
-  turbulence_intensity: Scalars['String'];
-  turbulence_max_alt_ft_agl?: Maybe<Scalars['Float']>;
-  turbulence_min_alt_ft_agl?: Maybe<Scalars['Float']>;
+  turbulenceIntensity: Scalars['String'];
+  turbulenceMaxAltFtAgl?: Maybe<Scalars['Float']>;
+  turbulenceMinAltFtAgl?: Maybe<Scalars['Float']>;
 };
 
 export type TafWind = {
   __typename?: 'TafWind';
-  wind_dir_degrees?: Maybe<Scalars['Float']>;
-  wind_gust_kt?: Maybe<Scalars['Float']>;
-  wind_shear_dir_degrees?: Maybe<Scalars['Float']>;
-  wind_shear_hgt_ft_agl?: Maybe<Scalars['Float']>;
-  wind_shear_speed_kt?: Maybe<Scalars['Float']>;
-  wind_speed_kt?: Maybe<Scalars['Float']>;
+  windDirDegrees?: Maybe<Scalars['Float']>;
+  windGustKt?: Maybe<Scalars['Float']>;
+  windShearDirDegrees?: Maybe<Scalars['Float']>;
+  windShearHgtFtAgl?: Maybe<Scalars['Float']>;
+  windShearSpeedKt?: Maybe<Scalars['Float']>;
+  windSpeedKt?: Maybe<Scalars['Float']>;
 };
 
 export type GetMetarQueryVariables = Exact<{
