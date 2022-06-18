@@ -2,6 +2,7 @@ import { DeviceFlowParams } from "navigraph/auth";
 import { useState } from "react";
 import { useNavigraphAuth } from "src/hooks/useNavigraphAuth";
 import { weather } from "../lib/navigraph";
+import { requestChartsIndex } from "navigraph/charts";
 
 export default function LoginScreen() {
   const [params, setParams] = useState<DeviceFlowParams | null>(null);
@@ -10,6 +11,8 @@ export default function LoginScreen() {
   const { user, isInitialized, signin } = useNavigraphAuth();
 
   const fetchMetar = () => weather.getMetar({ icao: "KJFK" }).then(({ metar }) => setData(metar.rawText));
+
+  const fetchChartsIndex = () => requestChartsIndex("KJFK").then(console.log);
 
   const handleSignIn = () => signin((p) => setParams(p)).catch(() => setParams(null));
 
@@ -42,6 +45,12 @@ export default function LoginScreen() {
           </h2>
           <button onClick={fetchMetar} className="bg-white text-black py-2 px-4 font-semibold rounded-md">
             Fetch METAR report
+          </button>
+          <button
+            onClick={fetchChartsIndex}
+            className="bg-white text-black py-2 px-4 font-semibold rounded-md"
+          >
+            Fetch charts index
           </button>
         </>
       )}
