@@ -17,8 +17,6 @@ authenticatedAxios.interceptors.response.use(
   async (error) => {
     const app = _apps.get("DEFAULT");
 
-    console.log(REFRESH_TOKEN);
-
     if (app && error.response.status === 401 && REFRESH_TOKEN) {
       const tokenResponse = await tokenCall({
         client_id: app.clientId,

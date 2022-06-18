@@ -34,10 +34,7 @@ const loadPersistedCredentials = async (app: NavigraphApp) => {
   setAccessToken(storage.getItem("accessToken") ?? undefined);
   setRefreshToken(storage.getItem("refreshToken") ?? undefined);
 
-  if (ACCESS_TOKEN) console.log("Found ACCESS token");
   if (REFRESH_TOKEN) {
-    console.log("Found REFRESH token");
-
     const tokens = await tokenCall({
       client_id: app.clientId,
       client_secret: app.clientSecret,

@@ -25,6 +25,5 @@ export const getDefaultApp = () => {
 
 /** A test export */
 export function initialize(app: NavigraphApp) {
-  console.log("App initialized.:", app);
   _apps.set("DEFAULT", app);
 }
