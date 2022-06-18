@@ -1,6 +1,6 @@
 import axios from "axios";
 import { IDENTITY_ROOT } from "../constants";
-import { ACCESS_TOKEN, LISTENERS, setAccessToken, setRefreshToken, setUser } from "../internal";
+import { ACCESS_TOKEN, setAccessToken, setRefreshToken, setUser } from "../internal";
 import { User } from "../public-types";
 import { TokenResponse } from "../types";
 

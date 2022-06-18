@@ -2,8 +2,8 @@ import { NavigraphApp, _apps } from "app";
 import { Unsubscribe } from ".";
 import { signInWithDeviceFlow } from "./flows/device-flow";
 import { parseUser, tokenCall } from "./flows/shared";
-import { ACCESS_TOKEN, LISTENERS, REFRESH_TOKEN, setAccessToken, setRefreshToken, USER } from "./internal";
-import type { Listener } from "./public-types"; // prettier-ignore
+import { LISTENERS, REFRESH_TOKEN, setAccessToken, setRefreshToken, USER } from "./internal";
+import type { Listener } from "./public-types";
 
 export const getOpenIDContext = () => {
   const app = _apps.get("DEFAULT");
