@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/app",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/navigraph-app.cjs.js",
   "module": "dist/navigraph-app.esm.js",
   "types": "./dist/navigraph-app.cjs.d.ts",
