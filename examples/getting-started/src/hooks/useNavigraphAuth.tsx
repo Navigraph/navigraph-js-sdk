@@ -16,7 +16,7 @@ const authContext = createContext<NavigraphAuthContext>({
 
 // Provider component that wraps your app and makes auth object ...
 // ... available to any child component that calls useAuth().
-export function NavigraphAuthProvider({ children }) {
+export function NavigraphAuthProvider({ children }: { children: React.ReactNode }) {
   const auth = useProvideAuth();
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
@@ -27,7 +27,7 @@ export const useNavigraphAuth = () => {
 };
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState<User | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
   // Subscribe to user on mount

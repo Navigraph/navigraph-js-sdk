@@ -1,5 +1,5 @@
 import { getApp, Logger, NavigraphApp, NotInitializedError } from "@navigraph/app";
-import { LISTENERS, setUser, tokenStorage, USER } from "./internal";
+import { LISTENERS, tokenStorage, USER } from "./internal";
 import type { CustomStorage, Listener, StorageKeys, Unsubscribe } from "./public-types";
 import { signInWithDeviceFlow } from "./flows/device-flow";
 import { parseUser, tokenCall } from "./flows/shared";
@@ -35,9 +35,10 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}) => {
   loadPersistedCredentials(app);
 
   return {
-    onAuthStateChanged: (cb: Listener): Unsubscribe => {
-      LISTENERS.push(cb);
-      return () => LISTENERS.splice(LISTENERS.indexOf(cb), 1)[0];
+    onAuthStateChanged: (callback: Listener): Unsubscribe => {
+      LISTENERS.push(callback);
+      callback(USER);
+      return () => LISTENERS.splice(LISTENERS.indexOf(callback), 1)[0];
     },
     signOut: () => tokenStorage.setAccessToken(),
     getUser: () => USER,
@@ -61,7 +62,5 @@ const loadPersistedCredentials = async (app: NavigraphApp) => {
       tokenStorage.setRefreshToken(tokens.refresh_token);
       parseUser(tokens.access_token);
     }
-  } else {
-    setUser(null);
   }
 };

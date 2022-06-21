@@ -2,7 +2,7 @@ import React from "react";
 import { DeviceFlowParams } from "navigraph/auth";
 import { useState } from "react";
 import { useNavigraphAuth } from "./hooks/useNavigraphAuth";
-import { weather, charts } from "./lib/navigraph";
+import { charts } from "./lib/navigraph";
 
 function App() {
   const [params, setParams] = useState<DeviceFlowParams | null>(null);
@@ -10,10 +10,9 @@ function App() {
 
   const { user, isInitialized, signIn } = useNavigraphAuth();
 
-  const fetchMetar = () => weather.getMetar({ icao: "KJFK" }).then(({ metar }) => setData(metar?.rawText));
-
   // eslint-disable-next-line no-console
-  const fetchChartsIndex = () => charts.getChartsIndex({ icao: "KJFK" }).then(console.log);
+  const fetchChartsIndex = () =>
+    charts.getChartsIndex({ icao: "KJFK" }).then((d) => setData(JSON.stringify(d, null, 2)));
 
   const handleSignIn = () => signIn((p) => setParams(p));
   return (
@@ -43,9 +42,6 @@ function App() {
           <h2 className="text-2xl">
             Welcome, <span className="text-blue-400 font-bold">{user.preferred_username}</span>
           </h2>
-          <button onClick={fetchMetar} className="bg-white text-black py-2 px-4 font-semibold rounded-md">
-            Fetch METAR report
-          </button>
           <button
             onClick={fetchChartsIndex}
             className="bg-white text-black py-2 px-4 font-semibold rounded-md"

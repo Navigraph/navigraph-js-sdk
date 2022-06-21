@@ -35,15 +35,12 @@ function useProvideAuth() {
   // component that utilizes this hook to re-render with the latest auth object.
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((u) => {
+      if (!isInitialized) setIsInitialized(true);
       setUser(u);
     });
     // Cleanup subscription on unmount
     return () => unsubscribe();
-  }, []);
-
-  useEffect(() => {
-    user && setIsInitialized(true);
-  }, [user]);
+  }, [isInitialized]);
 
   return {
     user,

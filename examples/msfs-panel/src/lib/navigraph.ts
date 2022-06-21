@@ -1,6 +1,5 @@
 import { initializeApp, Scope } from "navigraph/app";
 import { getAuth } from "navigraph/auth";
-import { getWeatherAPI } from "navigraph/weather";
 import { getChartsAPI } from "navigraph/charts";
 
 const config = {
@@ -32,5 +31,4 @@ export const auth = getAuth({
     accessToken: "cool_access_token",
   },
 });
-export const weather = getWeatherAPI();
 export const charts = getChartsAPI();

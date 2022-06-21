@@ -1,21 +1,20 @@
+import React from "react";
 import { DeviceFlowParams } from "navigraph/auth";
 import { useState } from "react";
 import { useNavigraphAuth } from "../hooks/useNavigraphAuth";
-import { weather, charts } from "../lib/navigraph";
+import { charts } from "../lib/navigraph";
 
-export default function LoginScreen() {
+function App() {
   const [params, setParams] = useState<DeviceFlowParams | null>(null);
-  const [data, setData] = useState<string | null>(null);
+  const [data, setData] = useState<string | undefined>(undefined);
 
   const { user, isInitialized, signIn } = useNavigraphAuth();
 
-  const fetchMetar = () => weather.getMetar({ icao: "KJFK" }).then(({ metar }) => setData(metar.rawText));
-
   // eslint-disable-next-line no-console
-  const fetchChartsIndex = () => charts.getChartsIndex({ icao: "KJFK" }).then(console.log);
+  const fetchChartsIndex = () =>
+    charts.getChartsIndex({ icao: "KJFK" }).then((d) => setData(JSON.stringify(d, null, 2)));
 
-  const handleSignIn = () => signIn((p) => setParams(p)).catch(() => setParams(null));
-
+  const handleSignIn = () => signIn((p) => setParams(p));
   return (
     <main className="flex flex-col space-y-10 items-center justify-center min-h-screen">
       {!isInitialized && <div>Loading...</div>}
@@ -43,9 +42,6 @@ export default function LoginScreen() {
           <h2 className="text-2xl">
             Welcome, <span className="text-blue-400 font-bold">{user.preferred_username}</span>
           </h2>
-          <button onClick={fetchMetar} className="bg-white text-black py-2 px-4 font-semibold rounded-md">
-            Fetch METAR report
-          </button>
           <button
             onClick={fetchChartsIndex}
             className="bg-white text-black py-2 px-4 font-semibold rounded-md"
@@ -58,3 +54,5 @@ export default function LoginScreen() {
     </main>
   );
 }
+
+export default App;
