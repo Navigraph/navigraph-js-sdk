@@ -1,5 +1,11 @@
 # navigraph
 
+## 1.2.0
+
+### Minor Changes
+
+- [`7a3fb41`](https://github.com/Navigraph/sdk/commit/7a3fb41740a897eb1bbc7304fdc6299f50c55af4) Thanks [@SkySails](https://github.com/SkySails)! - Npm compatibility bump
+
 ## 1.0.1
 
 ### Patch Changes
