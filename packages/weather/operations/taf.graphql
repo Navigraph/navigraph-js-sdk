@@ -1,0 +1,5 @@
+query getTaf($icao: String!) {
+  taf(icao: $icao) {
+    rawText
+  }
+}

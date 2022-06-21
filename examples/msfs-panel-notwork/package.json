@@ -1,0 +1,30 @@
+{
+  "name": "msfs-panel-nowork",
+  "private": true,
+  "version": "0.0.0",
+  "scripts": {
+    "build:static": "node scripts/build.js",
+    "build:vite": "tsc && vite build",
+    "dev": "vite",
+    "package": "rimraf dist && ./scripts/build.bat && cd dist && bestzip navigraph-ingamepanels-demo.zip navigraph-ingamepanels-demo",
+    "build": "tsc && vite build && yarn build:static && yarn package",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "navigraph": "1.0.0",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "@types/react": "^18.0.0",
+    "@types/react-dom": "^18.0.0",
+    "@vitejs/plugin-react": "^1.3.0",
+    "bestzip": "^2.2.0",
+    "buffer": "^6.0.3",
+    "readline-sync": "^1.4.10",
+    "rimraf": "^3.0.2",
+    "typescript": "^4.6.3",
+    "vite": "^2.9.9",
+    "vite-plugin-legacy": "^2.1.0"
+  }
+}
