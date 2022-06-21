@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/weather",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "main": "dist/navigraph-weather.cjs.js",
   "module": "dist/navigraph-weather.esm.js",
   "types": "./dist/navigraph-weather.cjs.d.ts",
