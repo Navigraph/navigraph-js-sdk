@@ -1,0 +1,17 @@
+{
+  "name": "@navigraph/charts",
+  "version": "1.1.0",
+  "main": "dist/navigraph-charts.cjs.js",
+  "module": "dist/navigraph-charts.esm.js",
+  "types": "./dist/navigraph-charts.cjs.d.ts",
+  "source": "./src/index.ts",
+  "private": false,
+  "license": "MIT",
+  "files": [
+    "dist/**"
+  ],
+  "dependencies": {
+    "@navigraph/auth": "1.1.0",
+    "@navigraph/app": "1.1.0"
+  }
+}
