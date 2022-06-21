@@ -1,6 +1,6 @@
 {
   "name": "navigraph",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "license": "MIT",
   "files": [
     "app",
@@ -8,8 +8,8 @@
     "charts"
   ],
   "dependencies": {
-    "@navigraph/app": "1.0.0",
-    "@navigraph/auth": "1.0.0",
-    "@navigraph/charts": "1.0.0"
+    "@navigraph/app": "1.0.1",
+    "@navigraph/auth": "1.0.1",
+    "@navigraph/charts": "1.0.1"
   }
 }

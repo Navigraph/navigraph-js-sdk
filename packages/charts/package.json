@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/charts",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "dist/navigraph-charts.cjs.js",
   "module": "dist/navigraph-charts.esm.js",
   "types": "./dist/navigraph-charts.cjs.d.ts",
@@ -10,7 +10,7 @@
     "dist/**"
   ],
   "dependencies": {
-    "@navigraph/auth": "1.0.0",
-    "@navigraph/app": "1.0.0"
+    "@navigraph/auth": "1.0.1",
+    "@navigraph/app": "1.0.1"
   }
 }

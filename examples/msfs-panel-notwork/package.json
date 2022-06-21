@@ -1,7 +1,7 @@
 {
   "name": "msfs-panel-nowork",
   "private": true,
-  "version": "0.0.0",
+  "version": "0.0.1",
   "scripts": {
     "build:static": "node scripts/build.js",
     "build:vite": "tsc && vite build",
@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "navigraph": "1.0.0",
+    "navigraph": "1.0.1",
     "react": "^18.0.0",
     "react-dom": "^18.0.0"
   },
