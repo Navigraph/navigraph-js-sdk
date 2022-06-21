@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 1.1.2
+
+### Patch Changes
+
+- [`318fe64`](https://github.com/Navigraph/sdk/commit/318fe642ca5916b82a17cbd96903b3181aba6076) Thanks [@SkySails](https://github.com/SkySails)! - Send initial user object when registering authentication state listeners
+
 ## 1.1.1
 
 ### Patch Changes
