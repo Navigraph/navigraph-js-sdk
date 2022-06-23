@@ -5,10 +5,28 @@ import { signInWithDeviceFlow } from "./flows/device-flow";
 import { parseUser, tokenCall } from "./flows/shared";
 
 interface AuthParameters {
+  /**
+   * Storage keys to be used when persisting credentials.
+   * @example
+   * authParams.keys = {
+   *   accessToken: "ACCESS_TOKEN"
+   * }
+   */
   keys?: Partial<StorageKeys>;
+  /**
+   * Custom storage implementation to be used when persisting credentials.
+   * @example
+   * authParams.storage = {
+   *   getItem: (key: string) => getSomeItem(key),
+   *   setItem: (key: string, val: string) => setSomeItem(key, val),
+   * }
+   */
   storage?: CustomStorage;
 }
 
+/**
+ * Returns authentication utilities associated with the currently set up {@link NavigraphApp}.
+ */
 export const getAuth = ({ keys, storage }: AuthParameters = {}) => {
   if (typeof localStorage === "undefined" && !storage) {
     Logger.warning(
@@ -35,12 +53,19 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}) => {
   loadPersistedCredentials(app);
 
   return {
+    /** Subscribes to changes to the authenticated user.
+     * @example const unsubscribe = auth.onAuthStateChanged((u) => setUser(u));
+     */
     onAuthStateChanged: (callback: Listener): Unsubscribe => {
       LISTENERS.push(callback);
       callback(USER);
       return () => LISTENERS.splice(LISTENERS.indexOf(callback), 1)[0];
     },
+    /** Signs out the currently authenticated user. */
     signOut: () => tokenStorage.setAccessToken(),
+    /** Grabs information about the currently authenticated user.
+     * @returns {User|null} The currently authenticated user
+     */
     getUser: () => USER,
     signInWithDeviceFlow,
   };

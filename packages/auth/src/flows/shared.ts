@@ -29,17 +29,21 @@ export const parseUser = (accessToken?: TokenResponse["access_token"]): User | n
   }
 
   const filter = ["name"];
-  const user = Object.fromEntries(
-    Object.entries(parseJwt(accessToken) || {}).filter(([key]) => !filter.includes(key))
-  ) as User;
+  const user = parseJwt(accessToken);
+
+  if (user) {
+    filter.forEach((filteredKey) => {
+      filteredKey in user && delete user[filteredKey as keyof User];
+    });
+  }
 
   return user;
 };
 
-export const parseJwt = (token: string): User | undefined => {
+export const parseJwt = (token: string): User | null => {
   try {
     return JSON.parse(atob(token.split(".")[1]));
   } catch (e) {
-    return undefined;
+    return null;
   }
 };

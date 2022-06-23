@@ -19,7 +19,7 @@ authenticatedAxios.interceptors.response.use(
     const app = getApp();
     const REFRESH_TOKEN = tokenStorage.getRefreshToken();
 
-    if (app && error.response.status === 401 && REFRESH_TOKEN) {
+    if (app && error?.response?.status === 401 && REFRESH_TOKEN) {
       const tokenResponse = await tokenCall({
         client_id: app.clientId,
         client_secret: app.clientSecret,
@@ -43,6 +43,6 @@ authenticatedAxios.interceptors.response.use(
       LISTENERS.forEach((listener) => listener(null));
     }
 
-    return error.config;
+    throw error;
   }
 );

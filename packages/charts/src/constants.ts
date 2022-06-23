@@ -1,1 +1,1 @@
-export const CHARTS_API_ROOT = "https://charts.api-v2.navigraph.com";
+export const CHARTS_API_ROOT = "https://api.navigraph.com/v2/charts";

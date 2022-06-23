@@ -2,11 +2,12 @@
   "name": "msfs-panel",
   "version": "1.0.0",
   "private": true,
+  "homepage": "./",
   "files": [
     "dist"
   ],
   "dependencies": {
-    "navigraph": "1.1.1",
+    "navigraph": "1.1.2",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"
@@ -22,16 +23,20 @@
     "@types/react": "^16.9.56",
     "@types/react-dom": "^16.9.9",
     "@types/react-router-dom": "^5.1.6",
-    "react-scripts": "4.0.0",
+    "cross-env": "^7.0.3",
     "eslint": "^7.11.0",
+    "react-scripts": "4.0.2",
+    "readline-sync": "^1.4.10",
+    "rimraf": "^3.0.2",
     "typescript": "4.0.5"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "cross-env BUILD_PATH='./navigraph-ingamepanels-demo/html_ui/InGamePanels/NavigraphDemoPanel' react-scripts build",
+    "build:static": "node scripts/build.js",
+    "package": "rimraf panel-dist && ./scripts/build.bat",
     "test": "react-scripts test",
-    "eject": "react-scripts eject",
-    "prepare": "babel src --out-dir dist --extensions .tsx --copy-files"
+    "eject": "react-scripts eject"
   },
   "eslintConfig": {
     "extends": [
@@ -41,14 +46,10 @@
   },
   "browserslist": {
     "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
+      "safari 10"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      "safari 10"
     ]
   }
 }

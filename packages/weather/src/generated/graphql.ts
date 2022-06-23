@@ -295,14 +295,14 @@ export type GetMetarQueryVariables = Exact<{
 }>;
 
 
-export type GetMetarQuery = { __typename?: 'Query', metar?: { __typename?: 'Metar', rawText: string, remark?: string | null | undefined, latitude?: number | null | undefined } | null | undefined };
+export type GetMetarQuery = { __typename?: 'Query', metar?: { __typename?: 'Metar', rawText: string, remark?: string | null, latitude?: number | null } | null };
 
 export type GetTafQueryVariables = Exact<{
   icao: Scalars['String'];
 }>;
 
 
-export type GetTafQuery = { __typename?: 'Query', taf?: { __typename?: 'Taf', rawText: string } | null | undefined };
+export type GetTafQuery = { __typename?: 'Query', taf?: { __typename?: 'Taf', rawText: string } | null };
 
 
 export const GetMetarDocument = gql`
@@ -322,18 +322,18 @@ export const GetTafDocument = gql`
 }
     `;
 
-export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string) => Promise<T>;
+export type SdkFunctionWrapper = <T>(action: (requestHeaders?:Record<string, string>) => Promise<T>, operationName: string, operationType?: string) => Promise<T>;
 
 
-const defaultWrapper: SdkFunctionWrapper = (action, _operationName) => action();
+const defaultWrapper: SdkFunctionWrapper = (action, _operationName, _operationType) => action();
 
 export function getSdk(client: GraphQLClient, withWrapper: SdkFunctionWrapper = defaultWrapper) {
   return {
     getMetar(variables: GetMetarQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetMetarQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetMetarQuery>(GetMetarDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getMetar');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetMetarQuery>(GetMetarDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getMetar', 'query');
     },
     getTaf(variables: GetTafQueryVariables, requestHeaders?: Dom.RequestInit["headers"]): Promise<GetTafQuery> {
-      return withWrapper((wrappedRequestHeaders) => client.request<GetTafQuery>(GetTafDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTaf');
+      return withWrapper((wrappedRequestHeaders) => client.request<GetTafQuery>(GetTafDocument, variables, {...requestHeaders, ...wrappedRequestHeaders}), 'getTaf', 'query');
     }
   };
 }

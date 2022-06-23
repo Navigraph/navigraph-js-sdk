@@ -8,3 +8,16 @@ export class NotInitializedError extends Error {
     this.name = "NotInitializedError";
   }
 }
+export class UserDeniedAccessError extends Error {
+  constructor() {
+    super("Authentication failed. User denied access.");
+    this.name = "UserDeniedAccessError";
+  }
+}
+
+export class DeviceFlowTokenExpiredError extends Error {
+  constructor() {
+    super("Authentication failed. Device flow token expired.");
+    this.name = "DeviceFlowTokenExpiredError";
+  }
+}

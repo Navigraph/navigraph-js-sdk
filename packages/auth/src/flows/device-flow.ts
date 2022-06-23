@@ -1,5 +1,11 @@
 import pkce from "@navigraph/pkce";
-import { getApp, NotInitializedError, NavigraphApp } from "@navigraph/app";
+import {
+  getApp,
+  NotInitializedError,
+  NavigraphApp,
+  UserDeniedAccessError,
+  DeviceFlowTokenExpiredError,
+} from "@navigraph/app";
 import axios from "axios";
 import qr from "qr-image";
 import { IDENTITY_DEVICE_AUTH } from "../constants";
@@ -7,7 +13,7 @@ import type { DeviceFlowCallback, QrObject, User } from "../public-types";
 import type { AuthorizationResponse, TokenResponse } from "../types";
 import { parseUser, tokenCall } from "./shared";
 
-const MAX_ATTEMPTS = 3;
+const MAX_ATTEMPTS = 12;
 
 function createQR(url: string): QrObject {
   const buffer = qr.imageSync(url);
@@ -19,6 +25,7 @@ function createQR(url: string): QrObject {
 
 /**
  * Initializes a device flow login sequence.
+ * @param callback - A callback that will be called with the initial parameters, such as the QR code or the verification uri and code.
  *
  * See
  * {@link https://developers.navigraph.com/docs/authentication/device-authorization Device Authorization Flow With PKCE} and
@@ -32,7 +39,6 @@ function createQR(url: string): QrObject {
  * }).then((u) => setUser(u));
  * ```
  *
- * @param callback - A callback that will be called with the initial parameters, such as the QR code or the verification uri and code.
  * @async
  * @returns {Promise<User>} A promise that resolves with the user object.
  */
@@ -100,7 +106,7 @@ async function poll(
 
     return response;
   } catch (error: any) {
-    switch (error.response.data.error) {
+    switch (error?.response?.data?.error) {
       case "slow_down":
         attempts++;
         params.interval += 5000;
@@ -109,9 +115,9 @@ async function poll(
         attempts++;
         return poll(app, params, attempts);
       case "access_denied":
-        throw new Error("Authentication failed. User denied access.");
+        throw new UserDeniedAccessError();
       case "expired_token":
-        throw new Error("Authentication failed. Token expired.");
+        throw new DeviceFlowTokenExpiredError();
       default:
         throw error;
     }
