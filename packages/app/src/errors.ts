@@ -21,3 +21,10 @@ export class DeviceFlowTokenExpiredError extends Error {
     this.name = "DeviceFlowTokenExpiredError";
   }
 }
+
+export class NonGeoreferencedChartError extends Error {
+  constructor(indexNumber: string) {
+    super(`Could not calculate bounds for ${indexNumber || "a chart"} since it is not georeferenced`);
+    this.name = "NonGeoreferencedChartError";
+  }
+}
