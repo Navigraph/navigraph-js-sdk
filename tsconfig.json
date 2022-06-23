@@ -14,7 +14,6 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
-    "incremental": true,
     "declarationMap": true
   },
   "include": ["packages"],

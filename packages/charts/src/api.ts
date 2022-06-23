@@ -3,26 +3,40 @@ import { authenticatedAxios } from "@navigraph/auth";
 import { CHARTS_API_ROOT } from "./constants";
 import { Chart, ChartsIndexResponse } from "./public-types";
 
-const getChartsIndex = async (props: { icao: string }): Promise<ChartsIndexResponse["charts"]> => {
-  const result = await authenticatedAxios.get<ChartsIndexResponse>(`${CHARTS_API_ROOT}/charts/${props.icao}`);
-  return result.data.charts;
+/** Fetches an index of available charts for a specified airport
+ * @param options.icao - The ICAO code of an airport
+ * @returns {Chart[]} A list of chart objects
+ */
+const getChartsIndex = async ({ icao }: { icao: string }): Promise<Chart[] | null> => {
+  const result = await authenticatedAxios
+    .get<ChartsIndexResponse>(`${CHARTS_API_ROOT}/${icao}`)
+    .catch((e) => Logger.err("Failed to fetch charts index. Reason:", e?.message));
+  return result?.data?.charts || null;
 };
 
+/** Fetches a chart image blob based on a {@link Chart} object.
+ * @param {Chart} options.chart - The chart relevant Chart object
+ * @param {("light"|"dark")} options.theme - The theme to apply to the chart
+ * @returns {Blob} A chart image blob
+ */
 const getChartImage = async ({
   chart,
-  dayMode = true,
+  theme = "light",
 }: {
   chart: Chart;
-  dayMode?: boolean;
-}): Promise<Blob> => {
-  const imageUrl = dayMode ? chart.image_day_url : chart.image_night_url;
-  const result = await authenticatedAxios.get<Blob>(imageUrl, {
-    responseType: "blob",
-  });
-  // eslint-disable-next-line no-undef
-  return new File([result.data], chart + ".png");
+  /** @default "light" */
+  theme: "light" | "dark";
+}): Promise<Blob | null> => {
+  const imageUrl = theme === "light" ? chart.image_day_url : chart.image_night_url;
+  const result = await authenticatedAxios
+    .get<Blob>(imageUrl, {
+      responseType: "blob",
+    })
+    .catch((e) => Logger.err("Failed to fetch charts image. Reason:", e?.message));
+  return result?.data || null;
 };
 
+/** Grabs a reference to an object containing available Navigraph Charts API functionality */
 export const getChartsAPI = () => {
   const app = getApp();
 
