@@ -1,6 +1,6 @@
 {
   "name": "navigraph",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "license": "MIT",
   "sideEffects": "false",
   "files": [
@@ -12,8 +12,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@navigraph/app": "1.1.1",
-    "@navigraph/auth": "1.1.2",
-    "@navigraph/charts": "1.1.2"
+    "@navigraph/app": "1.2.0",
+    "@navigraph/auth": "1.2.0",
+    "@navigraph/charts": "1.2.0"
   }
 }

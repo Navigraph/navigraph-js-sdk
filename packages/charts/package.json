@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/charts",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "main": "./dist/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/index.d.ts",
@@ -21,7 +21,7 @@
     "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
   },
   "dependencies": {
-    "@navigraph/auth": "1.1.2",
-    "@navigraph/app": "1.1.1"
+    "@navigraph/auth": "1.2.0",
+    "@navigraph/app": "1.2.0"
   }
 }
