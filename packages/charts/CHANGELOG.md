@@ -1,5 +1,19 @@
 # @navigraph/charts
 
+## 1.2.0
+
+### Minor Changes
+
+- [#6](https://github.com/Navigraph/sdk/pull/6) [`a01e7b5`](https://github.com/Navigraph/sdk/commit/a01e7b5d2df08a7eba74cb42b03929e1f500ba19) Thanks [@SkySails](https://github.com/SkySails)! - Improve MSFS compatibility & documentation
+
+* [#8](https://github.com/Navigraph/sdk/pull/8) [`64a92f0`](https://github.com/Navigraph/sdk/commit/64a92f0fcccd78497ac406dde4e47411fe5c44d6) Thanks [@SkySails](https://github.com/SkySails)! - Add `calculateChartBounds` utility
+
+### Patch Changes
+
+- Updated dependencies [[`a01e7b5`](https://github.com/Navigraph/sdk/commit/a01e7b5d2df08a7eba74cb42b03929e1f500ba19), [`64a92f0`](https://github.com/Navigraph/sdk/commit/64a92f0fcccd78497ac406dde4e47411fe5c44d6)]:
+  - @navigraph/app@1.2.0
+  - @navigraph/auth@1.2.0
+
 ## 1.1.2
 
 ### Patch Changes

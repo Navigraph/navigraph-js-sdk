@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/auth",
-  "version": "1.1.2",
+  "version": "1.2.0",
   "main": "./dist/index.js",
   "module": "./dist/esm/index.js",
   "types": "./dist/index.d.ts",
@@ -22,7 +22,7 @@
   },
   "dependencies": {
     "@navigraph/pkce": "^1.0.3",
-    "@navigraph/app": "1.1.1",
+    "@navigraph/app": "1.2.0",
     "axios": "^0.24.0",
     "qr-image": "^3.2.0"
   },

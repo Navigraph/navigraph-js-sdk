@@ -1,5 +1,11 @@
 # @navigraph/weather
 
+## 1.2.0
+
+### Minor Changes
+
+- [#6](https://github.com/Navigraph/sdk/pull/6) [`a01e7b5`](https://github.com/Navigraph/sdk/commit/a01e7b5d2df08a7eba74cb42b03929e1f500ba19) Thanks [@SkySails](https://github.com/SkySails)! - Improve MSFS compatibility & documentation
+
 ## 1.1.1
 
 ### Patch Changes
