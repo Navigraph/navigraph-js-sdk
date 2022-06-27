@@ -26,6 +26,7 @@ interface AuthParameters {
 
 /**
  * Returns authentication utilities associated with the currently set up {@link NavigraphApp}.
+ * @see {@link NavigraphApp}
  */
 export const getAuth = ({ keys, storage }: AuthParameters = {}) => {
   if (typeof localStorage === "undefined" && !storage) {
