@@ -23,8 +23,7 @@
   "dependencies": {
     "@navigraph/pkce": "^1.0.3",
     "@navigraph/app": "1.2.0",
-    "axios": "^0.24.0",
-    "qr-image": "^3.2.0"
+    "axios": "^0.24.0"
   },
   "devDependencies": {
     "@types/qr-image": "^3.2.5"

@@ -7,21 +7,12 @@ import {
   DeviceFlowTokenExpiredError,
 } from "@navigraph/app";
 import axios from "axios";
-import qr from "qr-image";
 import { IDENTITY_DEVICE_AUTH } from "../constants";
-import type { DeviceFlowCallback, QrObject, User } from "../public-types";
+import type { DeviceFlowCallback, User } from "../public-types";
 import type { AuthorizationResponse, TokenResponse } from "../types";
 import { parseUser, tokenCall } from "./shared";
 
 const MAX_ATTEMPTS = 12;
-
-function createQR(url: string): QrObject {
-  const buffer = qr.imageSync(url);
-  return {
-    buffer,
-    imgSrc: `data:image/png;base64,${buffer.toString("base64")}`,
-  };
-}
 
 /**
  * Initializes a device flow login sequence.
@@ -74,7 +65,6 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
       verification_uri,
       verification_uri_complete,
       user_code,
-      qr: createQR(verification_uri_complete),
     });
   }
 
