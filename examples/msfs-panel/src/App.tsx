@@ -26,7 +26,6 @@ function App() {
       )}
       {params?.verification_uri_complete && !user && (
         <>
-          <img src={params.qr.imgSrc} alt="" />
           <a
             href={params.verification_uri_complete}
             className="text-blue-600"
