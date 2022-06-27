@@ -13,5 +13,9 @@ export const getApp = () => {
  * @param {NavigraphApp} app - The configuration needed to define your Navigraph application
  * */
 export function initializeApp(app: NavigraphApp) {
+  const DEFAULT_SCOPES = ["userinfo", "openid"];
+
+  app.scopes.push(...(DEFAULT_SCOPES as any));
+
   _apps.set("DEFAULT", app);
 }

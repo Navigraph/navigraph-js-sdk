@@ -1,9 +1,7 @@
 export enum Scope {
   "CHARTS" = "charts",
   "FMSDATA" = "fmsdata",
-  "USERINFO" = "userinfo",
   "OFFLINE" = "offline_access",
-  "OPENID" = "openid",
 }
 
 /** The configuration needed to define your Navigraph application */
