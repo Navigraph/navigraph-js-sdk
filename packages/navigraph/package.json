@@ -4,10 +4,14 @@
   "license": "MIT",
   "sideEffects": "false",
   "files": [
-    "app",
-    "auth",
-    "charts"
+    "dist/**"
   ],
+  "scripts": {
+    "build": "tsup --format esm,cjs --dts ",
+    "dev": "tsup src/index.ts --format esm,cjs --legacy-output --watch --dts --sourcemap inline",
+    "lint": "TIMING=1 eslint src/**/*.ts* --fix",
+    "clean": "rm -rf .turbo && rm -rf node_modules && rm -rf dist"
+  },
   "publishConfig": {
     "access": "public"
   },
