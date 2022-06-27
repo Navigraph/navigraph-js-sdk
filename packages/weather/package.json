@@ -20,7 +20,7 @@
     "watch:gql": "yarn codegen -w",
     "watch:ts": "tsup src/index.ts --format esm,cjs --legacy-output --watch --dts --sourcemap inline",
     "clean": "rimraf .turbo node_modules dist",
-    "lint": "TIMING=1 eslint src/**/*.ts* --fix",
+    "lint": "cross-env TIMING=1 eslint src/**/*.ts --fix",
     "codegen": "graphql-codegen --config codegen.yml"
   },
   "dependencies": {
