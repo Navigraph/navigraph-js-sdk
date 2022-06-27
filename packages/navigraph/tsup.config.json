@@ -1,3 +1,8 @@
 {
-  "entry": ["app/index.ts", "auth/index.ts", "charts/index.ts"]
+  "outDir": "./",
+  "entry": {
+    "app/dist/index": "./app/index.ts",
+    "auth/dist/index": "./auth/index.ts",
+    "charts/dist/index": "./charts/index.ts"
+  }
 }
