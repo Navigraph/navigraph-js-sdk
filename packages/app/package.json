@@ -1,9 +1,10 @@
 {
   "name": "@navigraph/app",
   "version": "1.2.1",
-  "main": "./dist/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/index.js",
+  "browser": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
   "source": "./src/index.ts",
   "license": "MIT",
   "private": false,
@@ -15,8 +16,8 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --legacy-output --dts ",
-    "dev": "tsup src/index.ts --format esm,cjs --legacy-output --watch --dts --sourcemap inline",
+    "build": "tsup src/index.ts --format esm,cjs --dts ",
+    "dev": "tsup src/index.ts --format esm,cjs --watch --dts --sourcemap inline",
     "lint": "cross-env TIMING=1 eslint src/**/*.ts --fix",
     "clean": "rimraf .turbo node_modules dist"
   }

@@ -1,9 +1,10 @@
 {
   "name": "@navigraph/weather",
   "version": "1.2.0",
-  "main": "./dist/index.js",
-  "module": "./dist/esm/index.js",
-  "types": "./dist/index.d.ts",
+  "main": "dist/index.js",
+  "browser": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts",
   "source": "./src/index.ts",
   "license": "MIT",
   "private": true,
@@ -15,10 +16,10 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --legacy-output --dts ",
+    "build": "tsup src/index.ts --format esm,cjs --dts ",
     "dev": "npm-run-all --parallel watch:gql watch:ts",
     "watch:gql": "yarn codegen -w",
-    "watch:ts": "tsup src/index.ts --format esm,cjs --legacy-output --watch --dts --sourcemap inline",
+    "watch:ts": "tsup src/index.ts --format esm,cjs --watch --dts --sourcemap inline",
     "clean": "rimraf .turbo node_modules dist",
     "lint": "cross-env TIMING=1 eslint src/**/*.ts --fix",
     "codegen": "graphql-codegen --config codegen.yml"
