@@ -1,5 +1,12 @@
 # getting-started
 
+## 1.0.6
+
+### Patch Changes
+
+- Updated dependencies [[`0325973`](https://github.com/Navigraph/sdk/commit/03259735f5627a6a405d527dd3ed80f0a42311b1)]:
+  - navigraph@1.2.2
+
 ## 1.0.5
 
 ### Patch Changes
