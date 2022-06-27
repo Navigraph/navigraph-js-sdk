@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Ask a question
+    url: https://github.com/Navigraph/sdk/discussions
+    about: Ask questions and discuss topics with other community members
+  - name: Chat with other community members
+    url: https://discord.gg/navigraph
+    about: The official Navigraph Discord community
