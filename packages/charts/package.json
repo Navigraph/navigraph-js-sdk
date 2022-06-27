@@ -17,7 +17,7 @@
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --legacy-output --dts ",
     "dev": "tsup src/index.ts --format esm,cjs --legacy-output --watch --dts --sourcemap inline",
-    "lint": "TIMING=1 eslint src/**/*.ts* --fix",
+    "lint": "cross-env TIMING=1 eslint src/**/*.ts --fix",
     "clean": "rimraf .turbo node_modules dist"
   },
   "dependencies": {

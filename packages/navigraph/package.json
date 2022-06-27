@@ -8,8 +8,6 @@
   ],
   "scripts": {
     "build": "tsup --format esm,cjs --dts ",
-    "dev": "tsup src/index.ts --format esm,cjs --legacy-output --watch --dts --sourcemap inline",
-    "lint": "TIMING=1 eslint src/**/*.ts* --fix",
     "clean": "rimraf .turbo node_modules dist"
   },
   "publishConfig": {
