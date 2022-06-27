@@ -1,0 +1,7 @@
+{
+  "name": "@navigraph/auth",
+  "main": "dist/index.js",
+  "browser": "dist/index.mjs",
+  "module": "dist/index.mjs",
+  "typings": "dist/index.d.ts"
+}
