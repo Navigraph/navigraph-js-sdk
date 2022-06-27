@@ -13,7 +13,10 @@ interface Bounds {
   ne: LngLat;
 }
 
-/** Calculates the bounding box of the georeferenced part of a given chart.  */
+/**
+ *  Calculates the bounds to fit the chart image to in order for the
+ *  georeferenced part to correctly align with the real world.
+ */
 export default function calculateChartBounds(chart: Chart): Bounds {
   if (!chart.is_georeferenced) {
     throw new NonGeoreferencedChartError(chart.index_number);
