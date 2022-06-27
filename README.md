@@ -49,7 +49,7 @@ import { getChartsAPI } from "navigraph/charts";
 const config: NavigraphApp = {
   clientId: "<YOUR_NAVIGRAPH_CLIENT_ID>",
   clientSecret: "<YOUR_NAVIGRAPH_CLIENT_SECRET>",
-  scopes: [Scope.USERINFO, Scope.OPENID /* Additional scopes here */],
+  scopes: [Scope.CHARTS /* Additional scopes here */],
 };
 
 initializeApp(config);
