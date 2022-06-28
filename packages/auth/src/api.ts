@@ -11,6 +11,9 @@ interface AuthParameters {
    * authParams.keys = {
    *   accessToken: "ACCESS_TOKEN"
    * }
+   *
+   * @default
+   * { accessToken: "access_token", refreshToken: "refresh_token" }
    */
   keys?: Partial<StorageKeys>;
   /**
