@@ -1,5 +1,16 @@
 # @navigraph/auth
 
+## 2.0.2
+
+### Patch Changes
+
+- [`0543944`](https://github.com/Navigraph/sdk/commit/0543944fce3a7a1b7824763336e8072d8f3bb17d) Thanks [@SkySails](https://github.com/SkySails)! - Improve documentation
+
+* [`4d4ef82`](https://github.com/Navigraph/sdk/commit/4d4ef82f9e285877fbbd57715b9c4be62bb88c71) Thanks [@SkySails](https://github.com/SkySails)! - Improved the timing of the first callback from `onAuthStageChanged` after initial mount. The callback will no longer fire until it has made an attempt to restore a persisted session.
+
+* Updated dependencies [[`0543944`](https://github.com/Navigraph/sdk/commit/0543944fce3a7a1b7824763336e8072d8f3bb17d)]:
+  - @navigraph/app@1.2.3
+
 ## 2.0.1
 
 ### Patch Changes
