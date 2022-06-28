@@ -25,7 +25,7 @@ const getChartImage = async ({
 }: {
   chart: Chart;
   /** @default "light" */
-  theme: "light" | "dark";
+  theme?: "light" | "dark";
 }): Promise<Blob | null> => {
   const imageUrl = theme === "light" ? chart.image_day_url : chart.image_night_url;
   const result = await authenticatedAxios
