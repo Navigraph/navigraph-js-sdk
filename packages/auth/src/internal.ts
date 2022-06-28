@@ -1,6 +1,7 @@
 import { CustomStorage, Listener, StorageKeys, User } from "./public-types";
 
 export let USER: User | null = null;
+export let INITIALIZED = false;
 
 export const LISTENERS: Listener[] = [];
 
@@ -31,3 +32,5 @@ export const setUser = (user: User | null) => {
   USER = user;
   LISTENERS.forEach((listener) => listener(user));
 };
+
+export const setInitialized = (initialized: boolean) => (INITIALIZED = initialized);
