@@ -5,13 +5,18 @@ import { LISTENERS, tokenStorage } from "./internal";
 
 export const authenticatedAxios = axios.create();
 
-authenticatedAxios.interceptors.request.use((config) => ({
-  ...config,
-  headers: {
-    // Will cause header to be "Bearer null" if no token is set
-    Authorization: "Bearer " + tokenStorage.getAccessToken(),
-  },
-}));
+authenticatedAxios.interceptors.request.use((config) => {
+  const token = tokenStorage.getAccessToken();
+
+  if (token) {
+    config.headers = {
+      ...config.headers,
+      Authorization: `Bearer ${token}`,
+    };
+  }
+
+  return config;
+});
 
 authenticatedAxios.interceptors.response.use(
   (res) => res,
