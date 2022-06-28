@@ -57,7 +57,9 @@ initializeApp(config);
 export const auth = getAuth();
 export const charts = getChartsAPI();
 
-auth.signInWithDeviceFlow((params) => /* Show params.qr.imgSrc, scan it, sign in */)
+auth.signInWithDeviceFlow((params) =>
+  /* Show params.verification_uri_complete as a QR code, scan it, sign in */
+)
 
 charts.getChartsIndex({ icao: "KJFK" }).then(console.log) // => { "charts": [{ "index_number": "10-1P" ...
 ```
