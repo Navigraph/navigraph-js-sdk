@@ -1,5 +1,11 @@
 # @navigraph/app
 
+## 1.2.3
+
+### Patch Changes
+
+- [`0543944`](https://github.com/Navigraph/sdk/commit/0543944fce3a7a1b7824763336e8072d8f3bb17d) Thanks [@SkySails](https://github.com/SkySails)! - Improve documentation
+
 ## 1.2.2
 
 ### Patch Changes
