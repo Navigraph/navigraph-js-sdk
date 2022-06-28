@@ -6,6 +6,9 @@
   <h1>Navigraph SDK</h1>
 
   <p>The Navigraph SDK for TypeScript/JavaScript implementations of Navigraph APIs and services.</p>
+  
+  <a href="https://developers.devigraph.com/docs/sdk/getting-started"><strong>Read the documentation »</strong></a>
+  <br />
 
   <div align="center">
   <a href="https://img.shields.io/npm/v/navigraph?label=navigraph&style=flat-square">
