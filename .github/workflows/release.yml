@@ -13,6 +13,12 @@ jobs:
       - uses: actions/checkout@v2
         with:
           fetch-depth: 0
+          token: ${{ secrets.BOT_PAT }}
+
+      - name: Set up Git user
+        run: |
+          git config --global user.email "info@navigraph.com"
+          git config --global user.name "Navigraph Bot"
 
       - name: Setup Node.js
         uses: actions/setup-node@v3
