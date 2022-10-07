@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/charts",
-  "version": "1.2.3",
+  "version": "1.2.4",
   "main": "dist/index.js",
   "browser": "dist/index.mjs",
   "module": "dist/index.mjs",
@@ -22,7 +22,7 @@
     "clean": "rimraf .turbo node_modules dist"
   },
   "dependencies": {
-    "@navigraph/auth": "2.0.2",
+    "@navigraph/auth": "2.0.3",
     "@navigraph/app": "1.2.3"
   }
 }
