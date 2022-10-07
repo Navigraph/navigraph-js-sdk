@@ -8,7 +8,7 @@ function App() {
   const [params, setParams] = useState<DeviceFlowParams | null>(null);
   const [data, setData] = useState<string | undefined>(undefined);
 
-  const { user, isInitialized, signIn } = useNavigraphAuth();
+  const { user, isInitialized, signIn, signOut } = useNavigraphAuth();
 
   // eslint-disable-next-line no-console
   const fetchChartsIndex = () =>
@@ -22,6 +22,11 @@ function App() {
       {!params && !user && (
         <button className="bg-white text-black py-2 px-4 font-semibold rounded-md" onClick={handleSignIn}>
           Sign in
+        </button>
+      )}
+      {user && (
+        <button className="bg-white text-black py-2 px-4 font-semibold rounded-md" onClick={signOut}>
+          Sign out
         </button>
       )}
       {params?.verification_uri_complete && !user && (
