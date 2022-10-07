@@ -1,5 +1,5 @@
 import { getApp, Logger, NavigraphApp, NotInitializedError } from "@navigraph/app";
-import { tokenStorage, setInitialized, LISTENERS, USER, INITIALIZED } from "./internal";
+import { tokenStorage, setInitialized, LISTENERS, USER, INITIALIZED, signOut } from "./internal";
 import type { CustomStorage, Listener, StorageKeys, Unsubscribe } from "./public-types";
 import { signInWithDeviceFlow } from "./flows/device-flow";
 import { tokenCall } from "./flows/shared";
@@ -66,7 +66,7 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}) => {
       return () => LISTENERS.splice(LISTENERS.indexOf(callback), 1)[0];
     },
     /** Signs out the currently authenticated user. */
-    signOut: () => tokenStorage.setAccessToken(),
+    signOut,
     /** Grabs information about the currently authenticated user.
      * @returns {User|null} The currently authenticated user
      */
