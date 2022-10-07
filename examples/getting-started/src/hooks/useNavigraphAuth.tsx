@@ -6,12 +6,14 @@ interface NavigraphAuthContext {
   isInitialized: boolean;
   user: User | null;
   signIn: typeof auth.signInWithDeviceFlow;
+  signOut: typeof auth.signOut;
 }
 
 const authContext = createContext<NavigraphAuthContext>({
   isInitialized: false,
   user: null,
   signIn: () => Promise.reject("Not initialized"),
+  signOut: () => Promise.reject("Not initialized"),
 });
 
 // Provider component that wraps your app and makes auth object ...
@@ -46,5 +48,6 @@ function useProvideAuth() {
     user,
     isInitialized,
     signIn: auth.signInWithDeviceFlow,
+    signOut: auth.signOut,
   };
 }
