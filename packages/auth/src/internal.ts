@@ -1,3 +1,5 @@
+import { IDENTITY_ENDSESSION_ENDPOINT } from "./constants";
+import { authenticatedAxios } from "./network";
 import { CustomStorage, Listener, StorageKeys, User } from "./public-types";
 
 export let USER: User | null = null;
@@ -34,3 +36,10 @@ export const setUser = (user: User | null) => {
 };
 
 export const setInitialized = (initialized: boolean) => (INITIALIZED = initialized);
+
+export const signOut = () => {
+  tokenStorage.setAccessToken();
+  tokenStorage.setRefreshToken();
+  setUser(null);
+  authenticatedAxios.get(IDENTITY_ENDSESSION_ENDPOINT).catch(() => "");
+};
