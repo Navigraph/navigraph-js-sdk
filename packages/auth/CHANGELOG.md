@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.0.3
+
+### Patch Changes
+
+- [#12](https://github.com/Navigraph/sdk/pull/12) [`cbd7bc5`](https://github.com/Navigraph/sdk/commit/cbd7bc5b6df32301fcaa217e221d158b7b268b8d) Thanks [@SkySails](https://github.com/SkySails)! - Correctly handle signout by resetting tokens, broadcasting the user change to authentication listeners and ending the active session in identity.
+
 ## 2.0.2
 
 ### Patch Changes
