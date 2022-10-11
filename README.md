@@ -1,13 +1,14 @@
+
+
 <div align="center">
   <a href="https://navigraph.com">
     <img src="https://navigraph.com/assets/images/navigraph_logo_only.svg" alt="Logo" width="80" height="80">
   </a>
-
   <h1>Navigraph SDK</h1>
 
   <p>The Navigraph SDK for TypeScript/JavaScript implementations of Navigraph APIs and services.</p>
   
-  <a href="https://developers.devigraph.com/docs/sdk/getting-started"><strong>Read the documentation »</strong></a>
+  <a href="https://developers.devigraph.com/docs/sdk/getting-started"><strong>Getting Started »</strong></a>
   <br />
 
   <div align="center">
@@ -27,6 +28,9 @@
 </div>
 
 ## Installation
+
+> **Warning**
+> The SDK is currently in very early development and is still subject to change. Please keep this in mind when using it.
 
 ### Yarn
 
@@ -66,6 +70,9 @@ auth.signInWithDeviceFlow((params) =>
 
 charts.getChartsIndex({ icao: "KJFK" }).then(console.log) // => { "charts": [{ "index_number": "10-1P" ...
 ```
+
+> **Note**
+> A full reference will make its way to our developer documentation website in the future. In the meantime, please reference this usage section along with the [Gettin Started](https://developers.navigraph.com/docs/sdk/getting-started) guide!
 
 ## Supported environments
 
