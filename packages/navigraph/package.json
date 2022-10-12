@@ -1,6 +1,20 @@
 {
   "name": "navigraph",
   "version": "1.2.4",
+  "description": "A library for interacting with Navigraph services",
+  "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
+  "homepage": "https://navigraph.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Navigraph/navigraph-js-sdk"
+  },
+  "keywords": [
+    "navigraph",
+    "charts",
+    "AIRAC",
+    "fmsdata",
+    "sdk"
+  ],
   "license": "MIT",
   "sideEffects": false,
   "files": [
