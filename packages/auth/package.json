@@ -1,12 +1,28 @@
 {
   "name": "@navigraph/auth",
   "version": "2.0.3",
+  "license": "MIT",
+  "description": "Authentication with Navigraph services as part of the Navigraph SDK",
+  "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
+  "homepage": "https://navigraph.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Navigraph/navigraph-js-sdk",
+    "directory": "packages/auth"
+  },
+  "keywords": [
+    "navigraph",
+    "charts",
+    "AIRAC",
+    "fmsdata",
+    "sdk",
+    "authentication"
+  ],
   "main": "dist/index.js",
   "browser": "dist/index.mjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
   "source": "./src/index.ts",
-  "license": "MIT",
   "private": false,
   "sideEffects": false,
   "files": [
