@@ -1,5 +1,16 @@
 # navigraph
 
+## 1.2.5
+
+### Patch Changes
+
+- [#15](https://github.com/Navigraph/navigraph-js-sdk/pull/15) [`76e7c7d`](https://github.com/Navigraph/navigraph-js-sdk/commit/76e7c7d91a6b19d6040dc5b87561e8ecde6a6af2) Thanks [@SkySails](https://github.com/SkySails)! - Improved package documentation & information to an acceptable level.
+
+- Updated dependencies [[`76e7c7d`](https://github.com/Navigraph/navigraph-js-sdk/commit/76e7c7d91a6b19d6040dc5b87561e8ecde6a6af2)]:
+  - @navigraph/app@1.2.4
+  - @navigraph/auth@2.0.4
+  - @navigraph/charts@1.2.5
+
 ## 1.2.4
 
 ### Patch Changes
