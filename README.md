@@ -1,5 +1,3 @@
-
-
 <div align="center">
   <a href="https://navigraph.com">
     <img src="https://navigraph.com/assets/images/navigraph_logo_only.svg" alt="Logo" width="80" height="80">
@@ -72,7 +70,7 @@ charts.getChartsIndex({ icao: "KJFK" }).then(console.log) // => { "charts": [{ "
 ```
 
 > **Note**
-> A full reference will make its way to our developer documentation website in the future. In the meantime, please reference this usage section along with the [Gettin Started](https://developers.navigraph.com/docs/sdk/getting-started) guide!
+> A full reference will make its way to our developer documentation website in the future. In the meantime, please reference this usage section along with the [Getting Started](https://developers.navigraph.com/docs/sdk/getting-started) guide!
 
 ## Supported environments
 
