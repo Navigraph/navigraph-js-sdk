@@ -1,12 +1,27 @@
 {
   "name": "@navigraph/charts",
   "version": "1.2.4",
+  "license": "MIT",
+  "description": "Allows interaction with the Navigraph Charts API as part of the Navigraph SDK",
+  "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
+  "homepage": "https://navigraph.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Navigraph/navigraph-js-sdk",
+    "directory": "packages/charts"
+  },
+  "keywords": [
+    "navigraph",
+    "charts",
+    "AIRAC",
+    "fmsdata",
+    "sdk"
+  ],
   "main": "dist/index.js",
   "browser": "dist/index.mjs",
   "module": "dist/index.mjs",
   "typings": "dist/index.d.ts",
   "source": "./src/index.ts",
-  "license": "MIT",
   "private": false,
   "sideEffects": false,
   "files": [
