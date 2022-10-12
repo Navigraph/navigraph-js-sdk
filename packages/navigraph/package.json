@@ -1,6 +1,6 @@
 {
   "name": "navigraph",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "description": "A library for interacting with Navigraph services",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
   "homepage": "https://navigraph.com",
@@ -29,8 +29,8 @@
     "access": "public"
   },
   "dependencies": {
-    "@navigraph/app": "1.2.3",
-    "@navigraph/auth": "2.0.3",
-    "@navigraph/charts": "1.2.4"
+    "@navigraph/app": "1.2.4",
+    "@navigraph/auth": "2.0.4",
+    "@navigraph/charts": "1.2.5"
   }
 }
