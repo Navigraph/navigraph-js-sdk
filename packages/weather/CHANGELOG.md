@@ -1,5 +1,11 @@
 # @navigraph/weather
 
+## 1.2.2
+
+### Patch Changes
+
+- [#15](https://github.com/Navigraph/navigraph-js-sdk/pull/15) [`76e7c7d`](https://github.com/Navigraph/navigraph-js-sdk/commit/76e7c7d91a6b19d6040dc5b87561e8ecde6a6af2) Thanks [@SkySails](https://github.com/SkySails)! - Improved package documentation & information to an acceptable level.
+
 ## 1.2.1
 
 ### Patch Changes
