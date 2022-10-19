@@ -1,5 +1,12 @@
 # getting-started
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies []:
+  - navigraph@1.2.6
+
 ## 1.0.9
 
 ### Patch Changes
