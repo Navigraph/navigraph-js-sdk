@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.0.5
+
+### Patch Changes
+
+- [#17](https://github.com/Navigraph/navigraph-js-sdk/pull/17) [`c3a8058`](https://github.com/Navigraph/navigraph-js-sdk/commit/c3a8058a846c6a79cd9a9af8a01f6598fccf4d06) Thanks [@SkySails](https://github.com/SkySails)! - Call token revocation endpoint on signout instead of calling endsession.
+
 ## 2.0.4
 
 ### Patch Changes
