@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/charts",
-  "version": "1.2.5",
+  "version": "1.2.6",
   "license": "MIT",
   "description": "Allows interaction with the Navigraph Charts API as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
@@ -37,7 +37,7 @@
     "clean": "rimraf .turbo node_modules dist"
   },
   "dependencies": {
-    "@navigraph/auth": "2.0.4",
+    "@navigraph/auth": "2.0.5",
     "@navigraph/app": "1.2.4"
   }
 }
