@@ -31,6 +31,9 @@
   "publishConfig": {
     "access": "public"
   },
+  "engines": {
+    "node": ">=10"
+  },
   "scripts": {
     "build": "tsup src/index.ts --format esm,cjs --dts ",
     "dev": "tsup src/index.ts --format esm,cjs --watch --dts --sourcemap inline",
