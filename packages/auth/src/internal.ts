@@ -1,4 +1,5 @@
-import { IDENTITY_ENDSESSION_ENDPOINT } from "./constants";
+import { getApp, Logger } from "@navigraph/app";
+import { IDENTITY_REVOCATION_ENDPOINT } from "./constants";
 import { authenticatedAxios } from "./network";
 import { CustomStorage, Listener, StorageKeys, User } from "./public-types";
 
@@ -38,8 +39,24 @@ export const setUser = (user: User | null) => {
 export const setInitialized = (initialized: boolean) => (INITIALIZED = initialized);
 
 export const signOut = () => {
+  const app = getApp();
+  const refreshToken = tokenStorage.getRefreshToken();
+
+  if (app && refreshToken) {
+    authenticatedAxios
+      .post(
+        IDENTITY_REVOCATION_ENDPOINT,
+        new URLSearchParams({
+          client_id: app.clientId,
+          client_secret: app.clientSecret,
+          token__type_hint: "refresh_token",
+          token: refreshToken,
+        })
+      )
+      .catch(() => Logger.warning("Failed to revoke token on signout"));
+  }
+
   tokenStorage.setAccessToken();
   tokenStorage.setRefreshToken();
   setUser(null);
-  authenticatedAxios.get(IDENTITY_ENDSESSION_ENDPOINT).catch(() => "");
 };

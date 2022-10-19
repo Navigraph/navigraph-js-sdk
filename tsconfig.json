@@ -8,6 +8,7 @@
     "moduleResolution": "node",
     "skipLibCheck": true,
     "strict": true,
+    "noImplicitAny": true,
     "isolatedModules": true,
     "noFallthroughCasesInSwitch": true,
     "esModuleInterop": true,
