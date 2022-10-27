@@ -1,5 +1,15 @@
 # @navigraph/charts
 
+## 1.2.7
+
+### Patch Changes
+
+- [#19](https://github.com/Navigraph/navigraph-js-sdk/pull/19) [`58fb8fd`](https://github.com/Navigraph/navigraph-js-sdk/commit/58fb8fd8a9da0301a7a67a787f69c83b9ce171a6) Thanks [@kristianjohansson](https://github.com/kristianjohansson)! - Made domain configurable
+
+- Updated dependencies [[`58fb8fd`](https://github.com/Navigraph/navigraph-js-sdk/commit/58fb8fd8a9da0301a7a67a787f69c83b9ce171a6)]:
+  - @navigraph/app@1.2.5
+  - @navigraph/auth@2.0.6
+
 ## 1.2.6
 
 ### Patch Changes
