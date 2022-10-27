@@ -7,7 +7,7 @@ import {
   DeviceFlowTokenExpiredError,
 } from "@navigraph/app";
 import axios from "axios";
-import { IDENTITY_DEVICE_AUTH } from "../constants";
+import { getIdentityDeviceAuthEndpoint } from "../constants";
 import type { DeviceFlowCallback, User } from "../public-types";
 import type { AuthorizationResponse, TokenResponse } from "../types";
 import { parseUser, tokenCall } from "./shared";
@@ -44,7 +44,9 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
 
   // Initiate device flow
   // prettier-ignore
-  const response = await axios.post<AuthorizationResponse>(IDENTITY_DEVICE_AUTH,
+  const response = await axios
+    .post<AuthorizationResponse>(
+      getIdentityDeviceAuthEndpoint(),
       new URLSearchParams({
         client_id: app.clientId,
         client_secret: app.clientSecret,
@@ -52,7 +54,8 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
         code_challenge_method: "S256",
       }),
       { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
-    ).catch(() => new Error("Unable to sign in with device flow."))
+    )
+    .catch(() => new Error("Unable to sign in with device flow."));
 
   if (response instanceof Error) {
     throw response;

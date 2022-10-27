@@ -1,5 +1,5 @@
 import { getApp, Logger } from "@navigraph/app";
-import { IDENTITY_REVOCATION_ENDPOINT } from "./constants";
+import { getIdentityRevocationEndpoint } from "./constants";
 import { authenticatedAxios } from "./network";
 import { CustomStorage, Listener, StorageKeys, User } from "./public-types";
 
@@ -45,7 +45,7 @@ export const signOut = () => {
   if (app && refreshToken) {
     authenticatedAxios
       .post(
-        IDENTITY_REVOCATION_ENDPOINT,
+        getIdentityRevocationEndpoint(),
         new URLSearchParams({
           client_id: app.clientId,
           client_secret: app.clientSecret,
