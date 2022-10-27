@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/app",
-  "version": "1.2.4",
+  "version": "1.2.5",
   "license": "MIT",
   "description": "The fundamental part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",

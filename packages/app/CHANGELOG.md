@@ -1,5 +1,11 @@
 # @navigraph/app
 
+## 1.2.5
+
+### Patch Changes
+
+- [#19](https://github.com/Navigraph/navigraph-js-sdk/pull/19) [`58fb8fd`](https://github.com/Navigraph/navigraph-js-sdk/commit/58fb8fd8a9da0301a7a67a787f69c83b9ce171a6) Thanks [@kristianjohansson](https://github.com/kristianjohansson)! - Made domain configurable
+
 ## 1.2.4
 
 ### Patch Changes
