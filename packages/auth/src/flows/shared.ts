@@ -1,6 +1,6 @@
 import { Logger } from "@navigraph/app";
 import axios from "axios";
-import { IDENTITY_ROOT } from "../constants";
+import { getIdentityTokenEndpoint } from "src/constants";
 import { setUser, tokenStorage } from "../internal";
 import { User } from "../public-types";
 import { TokenResponse } from "../types";
@@ -8,7 +8,7 @@ import { TokenResponse } from "../types";
 export async function tokenCall(params: Record<string, string>) {
   return axios
     .post<TokenResponse>(
-      IDENTITY_ROOT + "/connect/token",
+      getIdentityTokenEndpoint(),
       new URLSearchParams(params),
       { headers: { "Content-Type": "application/x-www-form-urlencoded" }} // prettier-ignore
     )
