@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/auth",
-  "version": "2.0.5",
+  "version": "2.0.6",
   "license": "MIT",
   "description": "Authentication with Navigraph services as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
@@ -42,7 +42,7 @@
   },
   "dependencies": {
     "@navigraph/pkce": "^1.0.3",
-    "@navigraph/app": "1.2.4",
+    "@navigraph/app": "1.2.5",
     "axios": "^0.24.0"
   },
   "devDependencies": {
