@@ -1,4 +1,11 @@
-export const IDENTITY_ROOT = "https://identity.api.navigraph.com";
-export const IDENTITY_DEVICE_AUTH = IDENTITY_ROOT + "/connect/deviceauthorization";
-export const IDENTITY_ENDSESSION_ENDPOINT = IDENTITY_ROOT + "/connect/endsession";
-export const IDENTITY_REVOCATION_ENDPOINT = IDENTITY_ROOT + "/connect/revocation";
+import { getDefaultAppDomain } from "@navigraph/app";
+
+//TODO: Use Discovery doc
+export const IDENTITY_DEVICE_AUTH_ENDPOINT = "/connect/deviceauthorization";
+export const IDENTITY_TOKEN_ENDPOINT = "/connect/token";
+export const IDENTITY_REVOCATION_ENDPOINT = "/connect/revocation";
+
+export const getIdentityApiRoot = () => `https://identity.api.${getDefaultAppDomain()}`;
+export const getIdentityDeviceAuthEndpoint = () => getIdentityApiRoot() + IDENTITY_DEVICE_AUTH_ENDPOINT;
+export const getIdentityRevocationEndpoint = () => getIdentityApiRoot() + IDENTITY_REVOCATION_ENDPOINT;
+export const getIdentityTokenEndpoint = () => getIdentityApiRoot() + IDENTITY_TOKEN_ENDPOINT;

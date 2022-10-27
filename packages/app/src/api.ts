@@ -6,7 +6,7 @@ export const getApp = () => {
   const app = _apps.get("DEFAULT");
   return app;
 };
-
+export const getDefaultAppDomain = () => getApp()?.domain ?? "navigraph.com";
 /**
  * Initialize a Navigraph application. This configures the Navigraph SDK
  * with the necessary details to authenticate and communicate with Navigraph APIs.

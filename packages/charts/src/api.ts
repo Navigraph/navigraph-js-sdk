@@ -1,6 +1,6 @@
 import { getApp, Logger, NotInitializedError, Scope } from "@navigraph/app";
 import { authenticatedAxios } from "@navigraph/auth";
-import { CHARTS_API_ROOT } from "./constants";
+import { getChartsApiRoot } from "./constants";
 import { Chart, ChartsIndexResponse } from "./public-types";
 
 /** Fetches an index of available charts for a specified airport
@@ -9,7 +9,7 @@ import { Chart, ChartsIndexResponse } from "./public-types";
  */
 const getChartsIndex = async ({ icao }: { icao: string }): Promise<Chart[] | null> => {
   const result = await authenticatedAxios
-    .get<ChartsIndexResponse>(`${CHARTS_API_ROOT}/${icao}`)
+    .get<ChartsIndexResponse>(`${getChartsApiRoot()}/${icao}`)
     .catch((e) => Logger.err("Failed to fetch charts index. Reason:", e?.message));
   return result?.data?.charts || null;
 };

@@ -1,1 +1,3 @@
-export const CHARTS_API_ROOT = "https://api.navigraph.com/v2/charts";
+import { getDefaultAppDomain } from "@navigraph/app";
+
+export const getChartsApiRoot = () => `https://api.${getDefaultAppDomain()}/v2/charts`;
