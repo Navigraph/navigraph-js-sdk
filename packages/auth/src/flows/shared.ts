@@ -42,7 +42,7 @@ export const parseUser = (accessToken?: TokenResponse["access_token"]): User | n
 
 export const parseJwt = (token: string): User | null => {
   try {
-    return JSON.parse(atob(token.split(".")[1]));
+    return JSON.parse(atob(token.split(".")[1])) as User;
   } catch (e) {
     return null;
   }

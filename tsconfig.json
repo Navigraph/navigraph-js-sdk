@@ -17,6 +17,6 @@
     "downlevelIteration": true,
     "declarationMap": true
   },
-  "include": ["packages", "tsup.config.ts"],
+  "include": ["packages", ".eslintrc.js", "tsup.config.ts"],
   "exclude": ["**/node_modules"]
 }

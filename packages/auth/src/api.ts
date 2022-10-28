@@ -75,16 +75,16 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}) => {
   };
 };
 
-const loadPersistedCredentials = async (app: NavigraphApp) => {
+const loadPersistedCredentials = (app: NavigraphApp) => {
   const REFRESH_TOKEN = tokenStorage.getRefreshToken();
 
   if (REFRESH_TOKEN) {
-    await tokenCall({
+    tokenCall({
       client_id: app.clientId,
       client_secret: app.clientSecret,
       grant_type: "refresh_token",
       refresh_token: REFRESH_TOKEN,
-    });
+    }).catch(() => Logger.warning("Failed to load persisted credentials"));
   }
 
   setInitialized(true);
