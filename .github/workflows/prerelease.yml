@@ -1,6 +1,7 @@
 name: Prerelease (next)
 
 on:
+  workflow_dispatch:
   push:
     paths:
       - ".changeset/**"
