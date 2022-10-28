@@ -6,4 +6,4 @@
 "@navigraph/weather": patch
 ---
 
-Improved release process & contributor experience
+Improved release process & contributor DX
