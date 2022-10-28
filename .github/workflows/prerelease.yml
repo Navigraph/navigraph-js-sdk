@@ -39,7 +39,7 @@ jobs:
         with:
           publish: yarn release
           commit: "ci(changesets): version packages [no ci]"
-          title: "ci(changesets): version packages"
+          title: "ci(changesets, prerelease): version packages"
           setupGitUser: false
         env:
           GITHUB_TOKEN: ${{ secrets.BOT_PAT }}
