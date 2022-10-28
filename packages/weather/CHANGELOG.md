@@ -1,5 +1,11 @@
 # @navigraph/weather
 
+## 1.2.3
+
+### Patch Changes
+
+- [#22](https://github.com/Navigraph/navigraph-js-sdk/pull/22) [`68138ef`](https://github.com/Navigraph/navigraph-js-sdk/commit/68138efac4504c57ea2e7d9223c14e4442fbf179) Thanks [@navigraph-bot](https://github.com/navigraph-bot)! - Improved release process & contributor DX
+
 ## 1.2.2
 
 ### Patch Changes

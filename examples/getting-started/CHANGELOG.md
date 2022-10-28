@@ -1,5 +1,12 @@
 # getting-started
 
+## 1.0.12
+
+### Patch Changes
+
+- Updated dependencies [[`68138ef`](https://github.com/Navigraph/navigraph-js-sdk/commit/68138efac4504c57ea2e7d9223c14e4442fbf179)]:
+  - navigraph@1.2.8
+
 ## 1.0.11
 
 ### Patch Changes
