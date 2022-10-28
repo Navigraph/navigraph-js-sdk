@@ -1,11 +1,7 @@
 {
   "name": "@navigraph/weather",
   "version": "1.2.2",
-  "main": "dist/index.js",
-  "browser": "dist/index.mjs",
-  "module": "dist/index.mjs",
-  "typings": "dist/index.d.ts",
-  "source": "./src/index.ts",
+  "main": "./src/index.ts",
   "license": "MIT",
   "private": true,
   "sideEffects": false,
@@ -16,13 +12,15 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts ",
+    "build": "tsup src/index.ts --dts",
     "dev": "npm-run-all --parallel watch:gql watch:ts",
     "watch:gql": "yarn codegen -w",
-    "watch:ts": "tsup src/index.ts --format esm,cjs --watch --dts --sourcemap inline",
+    "watch:ts": "tsup src/index.ts --watch --sourcemap inline",
     "clean": "rimraf .turbo node_modules dist",
     "lint": "cross-env TIMING=1 eslint src/**/*.ts --fix",
-    "codegen": "graphql-codegen --config codegen.yml"
+    "codegen": "graphql-codegen --config codegen.yml",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "dependencies": {
     "graphql-request": "^3.7.0",
