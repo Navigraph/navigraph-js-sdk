@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "esnext",
     "module": "esnext",
     "lib": ["dom", "esnext"],
     "declaration": true,
@@ -17,6 +17,6 @@
     "downlevelIteration": true,
     "declarationMap": true
   },
-  "include": ["packages"],
+  "include": ["packages", "tsup.config.ts"],
   "exclude": ["**/node_modules"]
 }

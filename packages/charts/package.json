@@ -17,11 +17,7 @@
     "fmsdata",
     "sdk"
   ],
-  "main": "dist/index.js",
-  "browser": "dist/index.mjs",
-  "module": "dist/index.mjs",
-  "typings": "dist/index.d.ts",
-  "source": "./src/index.ts",
+  "main": "./src/index.ts",
   "private": false,
   "sideEffects": false,
   "files": [
@@ -31,10 +27,12 @@
     "access": "public"
   },
   "scripts": {
-    "build": "tsup src/index.ts --format esm,cjs --dts ",
-    "dev": "tsup src/index.ts --format esm,cjs --watch --dts --sourcemap inline",
+    "build": "tsup src/index.ts --dts",
+    "dev": "tsup src/index.ts --watch --sourcemap inline",
     "lint": "cross-env TIMING=1 eslint src/**/*.ts --fix",
-    "clean": "rimraf .turbo node_modules dist"
+    "clean": "rimraf .turbo node_modules dist",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
   },
   "dependencies": {
     "@navigraph/auth": "2.0.6",
