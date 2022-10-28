@@ -1,5 +1,5 @@
 import { NonGeoreferencedChartError } from "@navigraph/app";
-import { Chart } from "src/public-types";
+import { Chart } from "../public-types";
 
 type LngLat = {
   lng: number;

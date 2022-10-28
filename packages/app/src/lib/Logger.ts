@@ -5,61 +5,62 @@ export type LogLevel = typeof LEVELS[number];
 class Logger {
   level: LogLevel = "notice";
 
-  private _log(level: LogLevel, ...message: any[]) {
+  private _log(level: LogLevel, ...message: unknown[]) {
     if (LEVELS.indexOf(this.level) < LEVELS.indexOf(level)) {
       return;
     }
-
-    const prefixedMsg = ["[Navigraph SDK]", ...message];
 
     switch (level) {
       case "emerg":
       case "alert":
       case "crit":
       case "err":
-        console.error(...prefixedMsg);
+        console.error(...message);
+        break;
+      case "warning":
+        console.warn(...message);
         break;
       case "debug":
-        console.debug(...prefixedMsg);
+        console.debug(...message);
         break;
       default:
-        console.log(...prefixedMsg);
+        console.log(...message);
         break;
     }
   }
-  log(...message: any[]) {
+  log(...message: unknown[]) {
     this._log("info", ...message);
   }
 
-  emerg(...message: any[]) {
+  emerg(...message: unknown[]) {
     this._log("emerg", ...message);
   }
 
-  alert(...message: any[]) {
+  alert(...message: unknown[]) {
     this._log("alert", ...message);
   }
 
-  crit(...message: any[]) {
+  crit(...message: unknown[]) {
     this._log("crit", ...message);
   }
 
-  err(...message: any[]) {
+  err(...message: unknown[]) {
     this._log("err", ...message);
   }
 
-  warning(...message: any[]) {
+  warning(...message: unknown[]) {
     this._log("warning", ...message);
   }
 
-  notice(...message: any[]) {
+  notice(...message: unknown[]) {
     this._log("notice", ...message);
   }
 
-  info(...message: any[]) {
+  info(...message: unknown[]) {
     this._log("info", ...message);
   }
 
-  debug(...message: any[]) {
+  debug(...message: unknown[]) {
     this._log("debug", ...message);
   }
 }

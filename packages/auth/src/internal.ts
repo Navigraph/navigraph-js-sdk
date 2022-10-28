@@ -18,7 +18,7 @@ export let keys: StorageKeys = {
   refreshToken: "refresh_token",
 };
 
-export let tokenStorage = {
+export const tokenStorage = {
   getAccessToken: () => storage.getItem(keys.accessToken),
   getRefreshToken: () => storage.getItem(keys.refreshToken),
   setAccessToken: (accessToken?: string) => storage.setItem(keys.accessToken, accessToken ?? ""),
