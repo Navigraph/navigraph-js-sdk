@@ -98,21 +98,27 @@ async function poll(
     });
 
     return response;
-  } catch (error: any) {
-    switch (error?.response?.data?.error) {
-      case "slow_down":
-        attempts++;
-        params.interval += 5000;
-        return poll(app, params, attempts);
-      case "authorization_pending":
-        attempts++;
-        return poll(app, params, attempts);
-      case "access_denied":
-        throw new UserDeniedAccessError();
-      case "expired_token":
-        throw new DeviceFlowTokenExpiredError();
-      default:
-        throw error;
+  } catch (exception: unknown) {
+    if (axios.isAxiosError(exception)) {
+      const { error } = exception.response?.data as { error: string };
+
+      switch (error) {
+        case "slow_down":
+          attempts++;
+          params.interval += 5000;
+          return poll(app, params, attempts);
+        case "authorization_pending":
+          attempts++;
+          return poll(app, params, attempts);
+        case "access_denied":
+          throw new UserDeniedAccessError();
+        case "expired_token":
+          throw new DeviceFlowTokenExpiredError();
+        default:
+          throw error;
+      }
+    } else {
+      throw exception;
     }
   }
 }
