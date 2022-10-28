@@ -1,6 +1,6 @@
 import { Logger } from "@navigraph/app";
 import axios from "axios";
-import { getIdentityTokenEndpoint } from "src/constants";
+import { getIdentityTokenEndpoint } from "../constants";
 import { setUser, tokenStorage } from "../internal";
 import { User } from "../public-types";
 import { TokenResponse } from "../types";
