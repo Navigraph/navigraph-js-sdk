@@ -1,6 +1,6 @@
 import { Logger } from "@navigraph/app";
 import axios from "axios";
-import { getIdentityTokenEndpoint } from "src/constants";
+import { getIdentityTokenEndpoint } from "../constants";
 import { setUser, tokenStorage } from "../internal";
 import { User } from "../public-types";
 import { TokenResponse } from "../types";
@@ -42,7 +42,7 @@ export const parseUser = (accessToken?: TokenResponse["access_token"]): User | n
 
 export const parseJwt = (token: string): User | null => {
   try {
-    return JSON.parse(atob(token.split(".")[1]));
+    return JSON.parse(atob(token.split(".")[1])) as User;
   } catch (e) {
     return null;
   }
