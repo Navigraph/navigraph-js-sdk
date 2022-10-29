@@ -3,9 +3,9 @@ import axios from "axios";
 import { tokenCall } from "./flows/shared";
 import { LISTENERS, tokenStorage } from "./internal";
 
-export const authenticatedAxios = axios.create();
+export const navigraphRequest = axios.create();
 
-authenticatedAxios.interceptors.request.use((config) => {
+navigraphRequest.interceptors.request.use((config) => {
   const token = tokenStorage.getAccessToken();
 
   if (token) {
@@ -18,7 +18,7 @@ authenticatedAxios.interceptors.request.use((config) => {
   return config;
 });
 
-authenticatedAxios.interceptors.response.use(
+navigraphRequest.interceptors.response.use(
   (res) => res,
   async (error: AxiosError) => {
     const app = getApp();
