@@ -6,6 +6,7 @@ import {
   UserDeniedAccessError,
   DeviceFlowTokenExpiredError,
   InvalidClientError,
+  InvalidScopeError,
 } from "@navigraph/app";
 import axios, { AxiosError } from "axios";
 import { getIdentityDeviceAuthEndpoint } from "../constants";
@@ -33,6 +34,7 @@ const MAX_ATTEMPTS = 60; // 60 * 5 = 300 seconds / five minutes
  *
  * @throws {@link NotInitializedError} - If the SDK is not initialized.
  * @throws {@link InvalidClientError} - If the client id or secret is invalid.
+ * @throws {@link InvalidScopeError} - If the client contains one or several invalid scopes.
  * @throws {@link UserDeniedAccessError} - If the user denied access.
  * @throws {@link DeviceFlowTokenExpiredError} - If the user failed to authenticate within 5 mins.
  *
@@ -125,8 +127,10 @@ async function poll(
           throw new UserDeniedAccessError();
         case "expired_token":
           throw new DeviceFlowTokenExpiredError();
+        case "invalid_scope":
+          throw new InvalidScopeError();
         default:
-          throw error;
+          throw new Error("An unknown error ocurred: " + error);
       }
     } else {
       throw exception;
