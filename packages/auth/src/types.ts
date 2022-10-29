@@ -14,3 +14,8 @@ export interface AuthorizationResponse {
   expires_in: number;
   interval: number;
 }
+
+export interface FailedAuthorizationResponse {
+  message: string;
+  error_id: string;
+}

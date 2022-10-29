@@ -5,11 +5,12 @@ import {
   NavigraphApp,
   UserDeniedAccessError,
   DeviceFlowTokenExpiredError,
+  InvalidClientError,
 } from "@navigraph/app";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { getIdentityDeviceAuthEndpoint } from "../constants";
 import type { DeviceFlowCallback, User } from "../public-types";
-import type { AuthorizationResponse, TokenResponse } from "../types";
+import type { AuthorizationResponse, FailedAuthorizationResponse, TokenResponse } from "../types";
 import { parseUser, tokenCall } from "./shared";
 
 const MAX_ATTEMPTS = 60; // 60 * 5 = 300 seconds / five minutes
@@ -29,6 +30,11 @@ const MAX_ATTEMPTS = 60; // 60 * 5 = 300 seconds / five minutes
  *   // Display the code to user & wait for user complete flow
  * }).then((u) => setUser(u));
  * ```
+ *
+ * @throws {@link NotInitializedError} - If the SDK is not initialized.
+ * @throws {@link InvalidClientError} - If the client id or secret is invalid.
+ * @throws {@link UserDeniedAccessError} - If the user denied access.
+ * @throws {@link DeviceFlowTokenExpiredError} - If the user failed to authenticate within 5 mins.
  *
  * @async
  * @returns {Promise<User>} A promise that resolves with the user object.
@@ -54,7 +60,13 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
       }),
       { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
     )
-    .catch(() => new Error("Unable to sign in with device flow."));
+    .catch((err: AxiosError<FailedAuthorizationResponse>) => {
+      const status = err.response?.status;
+
+      return status && status < 500
+        ? new InvalidClientError()
+        : new Error(`Unable to sign in with device flow. ${err.message}`);
+    });
 
   if (response instanceof Error) {
     throw response;
