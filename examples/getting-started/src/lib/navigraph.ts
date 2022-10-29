@@ -5,7 +5,7 @@ import { getChartsAPI } from "navigraph/charts";
 const config: NavigraphApp = {
   clientId: "<YOUR_NAVIGRAPH_CLIENT_ID>",
   clientSecret: "<YOUR_NAVIGRAPH_CLIENT_SECRET>",
-  scopes: [Scope.CHARTS, Scope.OFFLINE, Scope.FMSDATA],
+  scopes: [Scope.CHARTS, Scope.FMSDATA],
 };
 
 initializeApp(config);
