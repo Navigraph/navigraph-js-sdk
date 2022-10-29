@@ -20,7 +20,7 @@ authenticatedAxios.interceptors.request.use((config) => {
 
 authenticatedAxios.interceptors.response.use(
   (res) => res,
-  async (error) => {
+  async (error: AxiosError) => {
     const app = getApp();
     const REFRESH_TOKEN = tokenStorage.getRefreshToken();
 
