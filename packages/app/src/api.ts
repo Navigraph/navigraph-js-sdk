@@ -1,5 +1,5 @@
 import { _apps } from "./internal";
-import { NavigraphApp } from "./public-types";
+import { NavigraphApp, Scope } from "./public-types";
 
 /** Grabs the currently authenticated Navigraph App. */
 export const getApp = () => {
@@ -13,9 +13,9 @@ export const getDefaultAppDomain = () => getApp()?.domain ?? "navigraph.com";
  * @param {NavigraphApp} app - The configuration needed to define your Navigraph application
  * */
 export function initializeApp(app: NavigraphApp) {
-  const DEFAULT_SCOPES = ["userinfo", "openid"];
+  const DEFAULT_SCOPES = ["userinfo", "openid", "offline_access"] as unknown as Scope[];
 
-  app.scopes.push(...(DEFAULT_SCOPES as any));
+  app.scopes = Array.from(new Set([...DEFAULT_SCOPES, ...app.scopes]));
 
   _apps.set("DEFAULT", app);
 }
