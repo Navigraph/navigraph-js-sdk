@@ -49,3 +49,5 @@ jobs:
 
       - name: Lint packages
         run: yarn lint
+        env:
+          TIMING: 1

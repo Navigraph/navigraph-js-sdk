@@ -33,7 +33,7 @@
   "scripts": {
     "build": "tsup src/index.ts --dts",
     "dev": "tsup src/index.ts --watch --sourcemap inline",
-    "lint": "cross-env TIMING=1 eslint src/**/*.ts --fix",
+    "lint": "eslint \"src/**/*.ts\"",
     "clean": "rimraf .turbo node_modules dist",
     "prepack": "clean-package",
     "postpack": "clean-package restore"

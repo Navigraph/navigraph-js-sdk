@@ -10,7 +10,7 @@ import { Chart, ChartsIndexResponse } from "./public-types";
 const getChartsIndex = async ({ icao }: { icao: string }): Promise<Chart[] | null> => {
   const result = await authenticatedAxios
     .get<ChartsIndexResponse>(`${getChartsApiRoot()}/${icao}`)
-    .catch((e) => Logger.err("Failed to fetch charts index. Reason:", e?.message));
+    .catch((e: AxiosError) => Logger.err("Failed to fetch charts index. Reason:", e?.message));
   return result?.data?.charts || null;
 };
 
@@ -32,7 +32,7 @@ const getChartImage = async ({
     .get<Blob>(imageUrl, {
       responseType: "blob",
     })
-    .catch((e) => Logger.err("Failed to fetch charts image. Reason:", e?.message));
+    .catch((e: AxiosError) => Logger.err("Failed to fetch charts image. Reason:", e?.message));
   return result?.data || null;
 };
 
