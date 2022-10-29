@@ -1,5 +1,5 @@
 import { getApp, Logger, NotInitializedError, Scope } from "@navigraph/app";
-import { authenticatedAxios } from "@navigraph/auth";
+import { navigraphRequest } from "@navigraph/auth";
 import { getChartsApiRoot } from "./constants";
 import { Chart, ChartsIndexResponse } from "./public-types";
 
@@ -8,7 +8,7 @@ import { Chart, ChartsIndexResponse } from "./public-types";
  * @returns {Chart[]} A list of chart objects
  */
 const getChartsIndex = async ({ icao }: { icao: string }): Promise<Chart[] | null> => {
-  const result = await authenticatedAxios
+  const result = await navigraphRequest
     .get<ChartsIndexResponse>(`${getChartsApiRoot()}/${icao}`)
     .catch((e: AxiosError) => Logger.err("Failed to fetch charts index. Reason:", e?.message));
   return result?.data?.charts || null;
@@ -28,7 +28,7 @@ const getChartImage = async ({
   theme?: "light" | "dark";
 }): Promise<Blob | null> => {
   const imageUrl = theme === "light" ? chart.image_day_url : chart.image_night_url;
-  const result = await authenticatedAxios
+  const result = await navigraphRequest
     .get<Blob>(imageUrl, {
       responseType: "blob",
     })
