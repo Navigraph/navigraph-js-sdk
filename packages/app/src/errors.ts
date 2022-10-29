@@ -22,6 +22,20 @@ export class DeviceFlowTokenExpiredError extends Error {
   }
 }
 
+export class InvalidScopeError extends Error {
+  constructor(scope?: string) {
+    super(`Authentication failed. Invalid scope ${scope ? ": " + scope : "provided."}`);
+    this.name = "InvalidScopeError";
+  }
+}
+
+export class InvalidClientError extends Error {
+  constructor() {
+    super("Unable to sign in with device flow. The client is likely incorrectly configured.");
+    this.name = "InvalidClientError";
+  }
+}
+
 export class NonGeoreferencedChartError extends Error {
   constructor(indexNumber: string) {
     super(`Could not calculate bounds for ${indexNumber || "a chart"} since it is not georeferenced`);

@@ -5,14 +5,16 @@ import {
   NavigraphApp,
   UserDeniedAccessError,
   DeviceFlowTokenExpiredError,
+  InvalidClientError,
+  InvalidScopeError,
 } from "@navigraph/app";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { getIdentityDeviceAuthEndpoint } from "../constants";
 import type { DeviceFlowCallback, User } from "../public-types";
-import type { AuthorizationResponse, TokenResponse } from "../types";
+import type { AuthorizationResponse, FailedAuthorizationResponse, TokenResponse } from "../types";
 import { parseUser, tokenCall } from "./shared";
 
-const MAX_ATTEMPTS = 12;
+const MAX_ATTEMPTS = 60; // 60 * 5 = 300 seconds / five minutes
 
 /**
  * Initializes a device flow login sequence.
@@ -30,6 +32,12 @@ const MAX_ATTEMPTS = 12;
  * }).then((u) => setUser(u));
  * ```
  *
+ * @throws {@link NotInitializedError} - If the SDK is not initialized.
+ * @throws {@link InvalidClientError} - If the client id or secret is invalid.
+ * @throws {@link InvalidScopeError} - If the client contains one or several invalid scopes.
+ * @throws {@link UserDeniedAccessError} - If the user denied access.
+ * @throws {@link DeviceFlowTokenExpiredError} - If the user failed to authenticate within 5 mins.
+ *
  * @async
  * @returns {Promise<User>} A promise that resolves with the user object.
  */
@@ -43,7 +51,6 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
   const { code_verifier, code_challenge } = pkce();
 
   // Initiate device flow
-  // prettier-ignore
   const response = await axios
     .post<AuthorizationResponse>(
       getIdentityDeviceAuthEndpoint(),
@@ -55,7 +62,13 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
       }),
       { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
     )
-    .catch(() => new Error("Unable to sign in with device flow."));
+    .catch((err: AxiosError<FailedAuthorizationResponse>) => {
+      const status = err.response?.status;
+
+      return status && status < 500
+        ? new InvalidClientError()
+        : new Error(`Unable to sign in with device flow. ${err.message}`);
+    });
 
   if (response instanceof Error) {
     throw response;
@@ -114,8 +127,10 @@ async function poll(
           throw new UserDeniedAccessError();
         case "expired_token":
           throw new DeviceFlowTokenExpiredError();
+        case "invalid_scope":
+          throw new InvalidScopeError();
         default:
-          throw error;
+          throw new Error("An unknown error ocurred: " + error);
       }
     } else {
       throw exception;
