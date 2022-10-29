@@ -9,9 +9,8 @@
     "build": "turbo run build --filter=./packages/*",
     "dev": "turbo run dev --filter=./packages/* --no-cache --continue --parallel",
     "clean": "turbo run clean --filter=./packages/*",
-    "lint": "turbo run lint --filter=./packages/*",
-    "lint:old": "eslint \"packages/**/src/*.ts\" --config .eslintrc",
-    "lint:fix": "yarn lint --fix",
+    "lint": "turbo run lint --parallel --continue --filter=./packages/* -- --max-warnings=0",
+    "lint:fix": "yarn lint --parallel --filter=./packages/* -- --fix",
     "release": "changeset publish"
   },
   "devDependencies": {
