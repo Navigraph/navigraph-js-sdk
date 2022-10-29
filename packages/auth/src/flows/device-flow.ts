@@ -12,7 +12,7 @@ import type { DeviceFlowCallback, User } from "../public-types";
 import type { AuthorizationResponse, TokenResponse } from "../types";
 import { parseUser, tokenCall } from "./shared";
 
-const MAX_ATTEMPTS = 12;
+const MAX_ATTEMPTS = 60; // 60 * 5 = 300 seconds / five minutes
 
 /**
  * Initializes a device flow login sequence.
@@ -43,7 +43,6 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
   const { code_verifier, code_challenge } = pkce();
 
   // Initiate device flow
-  // prettier-ignore
   const response = await axios
     .post<AuthorizationResponse>(
       getIdentityDeviceAuthEndpoint(),
