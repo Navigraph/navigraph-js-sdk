@@ -17,7 +17,7 @@
     "watch:gql": "yarn codegen -w",
     "watch:ts": "tsup src/index.ts --watch --sourcemap inline",
     "clean": "rimraf .turbo node_modules dist",
-    "lint": "cross-env TIMING=1 eslint \"src/**/*.ts\"",
+    "lint": "eslint \"src/**/*.ts\"",
     "codegen": "graphql-codegen --config codegen.yml",
     "prepack": "clean-package",
     "postpack": "clean-package restore"
