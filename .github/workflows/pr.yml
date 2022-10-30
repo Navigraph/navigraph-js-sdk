@@ -51,3 +51,27 @@ jobs:
         run: yarn lint
         env:
           TIMING: 1
+
+  test:
+    name: Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 16
+          cache: "yarn"
+
+      - name: Install dependencies
+        run: yarn install --frozen-lockfile
+        env:
+          CI: true
+          NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
+
+      - name: Lint packages
+        run: yarn test
+        env:
+          NODE_ENV: test
