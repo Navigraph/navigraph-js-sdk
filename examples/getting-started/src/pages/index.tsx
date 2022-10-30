@@ -10,7 +10,6 @@ function App() {
 
   const { user, isInitialized, signIn, signOut } = useNavigraphAuth();
 
-  // eslint-disable-next-line no-console
   const fetchChartsIndex = () =>
     charts.getChartsIndex({ icao: "KJFK" }).then((d) => setData(JSON.stringify(d, null, 2)));
 
