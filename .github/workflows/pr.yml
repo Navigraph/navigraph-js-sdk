@@ -69,7 +69,7 @@ jobs:
           CI: true
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
 
-      - name: Lint packages
+      - name: Test packages
         run: yarn test
         env:
           NODE_ENV: test
