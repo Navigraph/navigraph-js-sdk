@@ -48,6 +48,7 @@ it("given a valid chart, when no user is authenticated, should return null and l
 
   expect(response).toEqual(null);
   expect(consoleSpy).toHaveBeenCalledWith(
+    "[Navigraph]",
     "Failed to fetch charts image. Reason:",
     "Request failed with status code 401"
   );

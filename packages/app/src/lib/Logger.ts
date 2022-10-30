@@ -15,16 +15,16 @@ class Logger {
       case "alert":
       case "crit":
       case "err":
-        console.error(...message);
+        console.error("[Navigraph]", ...message);
         break;
       case "warning":
-        console.warn(...message);
+        console.warn("[Navigraph]", ...message);
         break;
       case "debug":
-        console.debug(...message);
+        console.debug("[Navigraph]", ...message);
         break;
       default:
-        console.log(...message);
+        console.log("[Navigraph]", ...message);
         break;
     }
   }

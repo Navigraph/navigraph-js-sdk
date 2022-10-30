@@ -19,6 +19,7 @@ it("given a valid icao, when no user is authenticated, should return null and lo
 
   expect(response).toEqual(null);
   expect(consoleSpy).toHaveBeenCalledWith(
+    "[Navigraph]",
     "Failed to fetch charts index. Reason:",
     "Request failed with status code 401"
   );
