@@ -18,6 +18,6 @@
     "declarationMap": true,
     "typeRoots": ["./node_modules/@types", "./@types"]
   },
-  "include": ["packages", ".eslintrc.js", "tsup.config.ts", "@types/**/*.d.ts"],
+  "include": ["packages", ".eslintrc.js", "tsup.config.ts", "@types/**/*.d.ts", "jest.config.js"],
   "exclude": ["**/node_modules"]
 }
