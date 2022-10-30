@@ -26,7 +26,7 @@ export interface BoundingBoxes {
   insets: Inset[];
 }
 
-export interface Chart {
+export type Chart = {
   image_day: string;
   image_night: string;
   thumb_day: string;
@@ -34,21 +34,22 @@ export interface Chart {
   icao_airport_identifier: string;
   id: string;
   category: string;
-  precision_approach?: boolean;
+  precision_approach: boolean | null;
   index_number: string;
   name: string;
   revision_date: string;
-  is_georeferenced: boolean;
   width: number;
   height: number;
-  bounding_boxes: BoundingBoxes;
   procedures: string[];
   runways: string[];
   image_day_url: string;
   image_night_url: string;
   thumb_day_url: string;
   thumb_night_url: string;
-}
+} & (
+  | { is_georeferenced: true; bounding_boxes: BoundingBoxes }
+  | { is_georeferenced: false; bounding_boxes: null }
+);
 
 export interface ChartsIndexResponse {
   charts: Chart[];
