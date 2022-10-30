@@ -2,8 +2,6 @@ name: Build & lint PR
 
 on:
   push:
-    paths:
-      - "packages/**"
 
 jobs:
   build:
