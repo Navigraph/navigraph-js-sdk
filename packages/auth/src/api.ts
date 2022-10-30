@@ -54,15 +54,23 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}) => {
     throw new NotInitializedError("Auth");
   }
 
-  loadPersistedCredentials(app);
+  const initPromise = loadPersistedCredentials(app).catch(() =>
+    Logger.warning("Failed to load persisted credentials")
+  );
 
   return {
     /** Subscribes to changes to the authenticated user.
      * @example const unsubscribe = auth.onAuthStateChanged((u) => setUser(u));
      */
     onAuthStateChanged: (callback: Listener): Unsubscribe => {
-      LISTENERS.push(callback);
-      INITIALIZED && callback(USER);
+      const promise = INITIALIZED ? Promise.resolve() : initPromise;
+
+      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      promise.then(() => {
+        callback(USER);
+        LISTENERS.push(callback);
+      });
+
       return () => LISTENERS.splice(LISTENERS.indexOf(callback), 1)[0];
     },
     /** Signs out the currently authenticated user. */
@@ -75,17 +83,18 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}) => {
   };
 };
 
-const loadPersistedCredentials = (app: NavigraphApp) => {
+const loadPersistedCredentials = async (app: NavigraphApp) => {
   const REFRESH_TOKEN = tokenStorage.getRefreshToken();
 
   if (REFRESH_TOKEN) {
-    tokenCall({
+    await tokenCall({
       client_id: app.clientId,
       client_secret: app.clientSecret,
       grant_type: "refresh_token",
       refresh_token: REFRESH_TOKEN,
-    }).catch(() => Logger.warning("Failed to load persisted credentials"));
+    });
   }
 
   setInitialized(true);
+  return Promise.resolve();
 };
