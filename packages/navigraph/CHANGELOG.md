@@ -1,5 +1,16 @@
 # navigraph
 
+## 1.2.9
+
+### Patch Changes
+
+- [`c68b5f6`](https://github.com/Navigraph/navigraph-js-sdk/commit/c68b5f609d1026a31019c50a1edca81cca711af9) Thanks [@SkySails](https://github.com/SkySails)! - Patch bump to catch up with NPM version
+
+- Updated dependencies [[`c68b5f6`](https://github.com/Navigraph/navigraph-js-sdk/commit/c68b5f609d1026a31019c50a1edca81cca711af9)]:
+  - @navigraph/app@1.2.7
+  - @navigraph/auth@2.0.8
+  - @navigraph/charts@1.2.9
+
 ## 1.2.8
 
 ### Patch Changes
