@@ -1,5 +1,13 @@
 # @navigraph/auth
 
+## 2.0.9
+
+### Patch Changes
+
+- [#28](https://github.com/Navigraph/navigraph-js-sdk/pull/28) [`d86fc3d`](https://github.com/Navigraph/navigraph-js-sdk/commit/d86fc3d561eb1359b4e67543fb815b3e51fe879d) Thanks [@SkySails](https://github.com/SkySails)! - Reduce amount of `onAuthStateChanged` events sent during init process, making it easier to track when the module is properly initialized.
+
+  Previously, a set up `onAuthStateChanged` event listener would receive `null` before the modules had fully initialized. With this new behavior, when the module has not yet declared itself ready, the initial state update will be _delayed_ until such is the case.
+
 ## 2.0.8
 
 ### Patch Changes

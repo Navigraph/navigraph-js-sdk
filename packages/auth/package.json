@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/auth",
-  "version": "2.0.8",
+  "version": "2.0.9",
   "license": "MIT",
   "description": "Authentication with Navigraph services as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
