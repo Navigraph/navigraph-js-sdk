@@ -1,5 +1,12 @@
 # msfs-panel
 
+## 1.0.10
+
+### Patch Changes
+
+- Updated dependencies [[`c68b5f6`](https://github.com/Navigraph/navigraph-js-sdk/commit/c68b5f609d1026a31019c50a1edca81cca711af9)]:
+  - navigraph@1.2.9
+
 ## 1.0.9
 
 ### Patch Changes
