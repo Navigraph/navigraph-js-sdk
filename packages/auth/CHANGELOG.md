@@ -1,5 +1,16 @@
 # @navigraph/auth
 
+## 2.0.7
+
+### Patch Changes
+
+- [#21](https://github.com/Navigraph/navigraph-js-sdk/pull/21) [`e017bc4`](https://github.com/Navigraph/navigraph-js-sdk/commit/e017bc45c64fe80e65ed7606747eb6f3d8ca68b1) Thanks [@SkySails](https://github.com/SkySails)! - Handle failed attempts at restoring a previous session. This used to throw an error, but now just warns the implementor of the fact that a failed attempt was made.
+
+* [#24](https://github.com/Navigraph/navigraph-js-sdk/pull/24) [`db63744`](https://github.com/Navigraph/navigraph-js-sdk/commit/db637448dfcbefc0ad8d11fc76a18ed2bff8f6b0) Thanks [@SkySails](https://github.com/SkySails)! - Improve error handling by throwing more unique errors
+
+* Updated dependencies [[`4e36132`](https://github.com/Navigraph/navigraph-js-sdk/commit/4e36132bdd1a0aae1ef428ff32553c7b656ae85d), [`db63744`](https://github.com/Navigraph/navigraph-js-sdk/commit/db637448dfcbefc0ad8d11fc76a18ed2bff8f6b0)]:
+  - @navigraph/app@1.2.6
+
 ## 2.0.6
 
 ### Patch Changes

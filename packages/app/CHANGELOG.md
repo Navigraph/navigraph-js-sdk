@@ -1,5 +1,13 @@
 # @navigraph/app
 
+## 1.2.6
+
+### Patch Changes
+
+- [`4e36132`](https://github.com/Navigraph/navigraph-js-sdk/commit/4e36132bdd1a0aae1ef428ff32553c7b656ae85d) Thanks [@SkySails](https://github.com/SkySails)! - Include `offline_access` scope by default and dedupe list of scopes.
+
+* [#24](https://github.com/Navigraph/navigraph-js-sdk/pull/24) [`db63744`](https://github.com/Navigraph/navigraph-js-sdk/commit/db637448dfcbefc0ad8d11fc76a18ed2bff8f6b0) Thanks [@SkySails](https://github.com/SkySails)! - Improve error handling by throwing more unique errors
+
 ## 1.2.5
 
 ### Patch Changes
