@@ -1,6 +1,6 @@
 import { getApp, Logger, NavigraphApp, NotInitializedError } from "@navigraph/app";
 import { tokenStorage, setInitialized, LISTENERS, USER, INITIALIZED, signOut } from "./internal";
-import type { CustomStorage, Listener, StorageKeys, Unsubscribe } from "./public-types";
+import type { CustomStorage, Listener, NavigraphAuth, StorageKeys, Unsubscribe } from "./public-types";
 import { signInWithDeviceFlow } from "./flows/device-flow";
 import { tokenCall } from "./flows/shared";
 
@@ -31,7 +31,7 @@ interface AuthParameters {
  * Returns authentication utilities associated with the currently set up {@link NavigraphApp}.
  * @see {@link NavigraphApp}
  */
-export const getAuth = ({ keys, storage }: AuthParameters = {}) => {
+export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth => {
   if (typeof localStorage === "undefined" && !storage) {
     Logger.warning(
       "No storage API available in your environment. Please provide a custom tokenStorage implementation."

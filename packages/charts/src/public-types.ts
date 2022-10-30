@@ -54,3 +54,8 @@ export type Chart = {
 export interface ChartsIndexResponse {
   charts: Chart[];
 }
+
+export interface NavigraphCharts {
+  getChartsIndex: typeof import("./lib/getChartsIndex").default;
+  getChartImage: typeof import("./lib/getChartImage").default;
+}

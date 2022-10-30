@@ -41,3 +41,10 @@ export type StorageKeys = {
   accessToken: string;
   refreshToken: string;
 };
+
+export interface NavigraphAuth {
+  onAuthStateChanged: (callback: Listener) => Unsubscribe;
+  signOut: () => void;
+  getUser: () => User | null;
+  signInWithDeviceFlow: (callback: DeviceFlowCallback) => Promise<User>;
+}

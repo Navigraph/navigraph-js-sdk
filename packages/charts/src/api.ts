@@ -1,9 +1,10 @@
 import { getApp, Logger, NotInitializedError, Scope } from "@navigraph/app";
 import getChartImage from "./lib/getChartImage";
 import getChartsIndex from "./lib/getChartsIndex";
+import { NavigraphCharts as NavigraphChartsAPI } from "./public-types";
 
 /** Grabs a reference to an object containing available Navigraph Charts API functionality */
-export const getChartsAPI = () => {
+export const getChartsAPI = (): NavigraphChartsAPI => {
   const app = getApp();
 
   if (!app) {
