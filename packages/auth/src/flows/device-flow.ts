@@ -14,8 +14,6 @@ import type { DeviceFlowCallback, User } from "../public-types";
 import type { AuthorizationResponse, FailedAuthorizationResponse, TokenResponse } from "../types";
 import { parseUser, tokenCall } from "./shared";
 
-const MAX_ATTEMPTS = 60; // 60 * 5 = 300 seconds / five minutes
-
 /**
  * Initializes a device flow login sequence.
  * @param callback - A callback that will be called with the initial parameters, such as the QR code or the verification uri and code.
@@ -94,10 +92,6 @@ async function poll(
   params: AuthorizationResponse & { code_verifier: string },
   attempts = 0
 ): Promise<TokenResponse> {
-  if (attempts >= MAX_ATTEMPTS) {
-    throw new Error("Unable to sign in with device flow. Max attempts reached.");
-  }
-
   await new Promise((resolve) => setTimeout(resolve, params.interval));
 
   try {
