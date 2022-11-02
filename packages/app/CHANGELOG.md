@@ -1,5 +1,13 @@
 # @navigraph/app
 
+## 1.2.8
+
+### Patch Changes
+
+- [`614b35c`](https://github.com/Navigraph/navigraph-js-sdk/commit/614b35c9c77293133180880ca0e7d5bc446e3040) Thanks [@SkySails](https://github.com/SkySails)! - Add warning when an attempt is made to register a new app once one has already been registered
+
+* [`54b30ae`](https://github.com/Navigraph/navigraph-js-sdk/commit/54b30ae2fe43958ce25b6b61f0d34c9983b6ca0d) Thanks [@SkySails](https://github.com/SkySails)! - Add `[Navigraph]` prefix to logs from this SDK
+
 ## 1.2.7
 
 ### Patch Changes
