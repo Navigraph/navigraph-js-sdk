@@ -84,6 +84,8 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
 };
 
 const loadPersistedCredentials = async (app: NavigraphApp) => {
+  if (INITIALIZED) return Promise.resolve();
+
   const REFRESH_TOKEN = tokenStorage.getRefreshToken();
 
   if (REFRESH_TOKEN) {
