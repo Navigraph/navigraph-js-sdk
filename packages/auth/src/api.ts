@@ -59,9 +59,6 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
   );
 
   return {
-    /** Subscribes to changes to the authenticated user.
-     * @example const unsubscribe = auth.onAuthStateChanged((u) => setUser(u));
-     */
     onAuthStateChanged: (callback: Listener): Unsubscribe => {
       const promise = INITIALIZED ? Promise.resolve() : initPromise;
 
@@ -73,13 +70,10 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
 
       return () => LISTENERS.splice(LISTENERS.indexOf(callback), 1)[0];
     },
-    /** Signs out the currently authenticated user. */
     signOut,
-    /** Grabs information about the currently authenticated user.
-     * @returns {User|null} The currently authenticated user
-     */
     getUser: () => USER,
     signInWithDeviceFlow,
+    isInitialized: () => INITIALIZED,
   };
 };
 

@@ -1,3 +1,5 @@
+import { signInWithDeviceFlow } from "./flows/device-flow";
+
 export type DeviceFlowParams = {
   /** The url used to sign in manually (url excl. code)  */
   verification_uri: string;
@@ -43,8 +45,42 @@ export type StorageKeys = {
 };
 
 export interface NavigraphAuth {
+  /** Subscribes to changes to the authenticated user.
+   * @example const unsubscribe = auth.onAuthStateChanged((u) => setUser(u));
+   */
   onAuthStateChanged: (callback: Listener) => Unsubscribe;
+  /** Signs out the currently authenticated user. */
   signOut: () => void;
+  /** Grabs information about the currently authenticated user.
+   * @returns {User|null} The currently authenticated user
+   */
   getUser: () => User | null;
-  signInWithDeviceFlow: (callback: DeviceFlowCallback) => Promise<User>;
+  /**
+   * Initializes a device flow login sequence.
+   * @param callback - A callback that will be called with the initial parameters, such as the QR code or the verification uri and code.
+   *
+   * See
+   * {@link https://developers.navigraph.com/docs/authentication/device-authorization Device Authorization Flow With PKCE} and
+   * {@link https://developers.navigraph.com/docs/authentication/pkce Proof Key for Code Exchange (PKCE)} for detailed documentation.
+   *
+   * @example
+   * ```javascript
+   * // Initialize device flow sequence
+   * auth.signInWithDeviceFlow((p) => {
+   *   // Display the code to user & wait for user complete flow
+   * }).then((u) => setUser(u));
+   * ```
+   *
+   * @throws {@link NotInitializedError} - If the SDK is not initialized.
+   * @throws {@link InvalidClientError} - If the client id or secret is invalid.
+   * @throws {@link InvalidScopeError} - If the client contains one or several invalid scopes.
+   * @throws {@link UserDeniedAccessError} - If the user denied access.
+   * @throws {@link DeviceFlowTokenExpiredError} - If the user failed to authenticate within 5 mins.
+   *
+   * @async
+   * @returns {Promise<User>} A promise that resolves with the user object.
+   */
+  signInWithDeviceFlow: typeof signInWithDeviceFlow;
+  /** Indicates whether the auth module has made an attempt to resume a previous session. */
+  isInitialized: () => boolean;
 }
