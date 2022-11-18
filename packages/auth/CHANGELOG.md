@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.0.12
+
+### Patch Changes
+
+- [#36](https://github.com/Navigraph/navigraph-js-sdk/pull/36) [`cd6873f`](https://github.com/Navigraph/navigraph-js-sdk/commit/cd6873f6faca9de47aca491e62870cba038a184f) Thanks [@SkySails](https://github.com/SkySails)! - Support asynchronous CustomStorage implementations
+
 ## 2.0.11
 
 ### Patch Changes
