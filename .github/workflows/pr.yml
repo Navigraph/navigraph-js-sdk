@@ -7,6 +7,8 @@ on:
       - reopened
       - synchronize
       - ready_for_review
+    branches:
+      - !changeset-release/main
 
 jobs:
   build:
