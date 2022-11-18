@@ -5,8 +5,8 @@ import { LISTENERS, tokenStorage } from "./internal";
 
 export const navigraphRequest = axios.create();
 
-navigraphRequest.interceptors.request.use((config) => {
-  const token = tokenStorage.getAccessToken();
+navigraphRequest.interceptors.request.use(async (config) => {
+  const token = await tokenStorage.getAccessToken();
 
   if (token) {
     config.headers = {
@@ -22,7 +22,7 @@ navigraphRequest.interceptors.response.use(
   (res) => res,
   async (error: AxiosError) => {
     const app = getApp();
-    const REFRESH_TOKEN = tokenStorage.getRefreshToken();
+    const REFRESH_TOKEN = await tokenStorage.getRefreshToken();
 
     if (app && error?.response?.status === 401 && REFRESH_TOKEN) {
       const tokenResponse = await tokenCall({
@@ -33,8 +33,8 @@ navigraphRequest.interceptors.response.use(
       });
 
       if (tokenResponse.refresh_token) {
-        tokenStorage.setAccessToken(tokenResponse.access_token);
-        tokenStorage.setRefreshToken(tokenResponse.refresh_token);
+        await tokenStorage.setAccessToken(tokenResponse.access_token);
+        await tokenStorage.setRefreshToken(tokenResponse.refresh_token);
 
         return axios.request({
           ...error.config,

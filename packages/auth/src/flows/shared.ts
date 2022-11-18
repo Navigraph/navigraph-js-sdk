@@ -12,10 +12,10 @@ export async function tokenCall(params: Record<string, string>) {
       new URLSearchParams(params),
       { headers: { "Content-Type": "application/x-www-form-urlencoded" }} // prettier-ignore
     )
-    .then(({ data }) => {
+    .then(async ({ data }) => {
       if (data.access_token && data.refresh_token) {
-        tokenStorage.setAccessToken(data.access_token);
-        tokenStorage.setRefreshToken(data.refresh_token);
+        await tokenStorage.setAccessToken(data.access_token);
+        await tokenStorage.setRefreshToken(data.refresh_token);
         setUser(parseUser(data.access_token));
       }
       return data;
