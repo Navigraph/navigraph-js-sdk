@@ -38,9 +38,9 @@ export const setUser = (user: User | null) => {
 
 export const setInitialized = (initialized: boolean) => (INITIALIZED = initialized);
 
-export const signOut = () => {
+export const signOut = async () => {
   const app = getApp();
-  const refreshToken = tokenStorage.getRefreshToken();
+  const refreshToken = await tokenStorage.getRefreshToken();
 
   if (app && refreshToken) {
     navigraphRequest
@@ -56,7 +56,7 @@ export const signOut = () => {
       .catch(() => Logger.warning("Failed to revoke token on signout"));
   }
 
-  tokenStorage.setAccessToken();
-  tokenStorage.setRefreshToken();
+  await tokenStorage.setAccessToken();
+  await tokenStorage.setRefreshToken();
   setUser(null);
 };

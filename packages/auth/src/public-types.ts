@@ -35,8 +35,8 @@ export type Unsubscribe = () => void;
 
 /** TODO: Add description */
 export type CustomStorage = {
-  getItem(key: string): string | null;
-  setItem(key: string, value: string): void;
+  getItem(key: string): string | null | Promise<string | null>;
+  setItem(key: string, value: string): void | Promise<void>;
 };
 
 export type StorageKeys = {
