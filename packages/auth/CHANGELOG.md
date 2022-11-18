@@ -1,5 +1,13 @@
 # @navigraph/auth
 
+## 2.0.11
+
+### Patch Changes
+
+- [`41be723`](https://github.com/Navigraph/navigraph-js-sdk/commit/41be723002f665a7caa888208269f3842cbb6a66) Thanks [@SkySails](https://github.com/SkySails)! - Improve developer-facing documentation & types
+
+* [`219fc1a`](https://github.com/Navigraph/navigraph-js-sdk/commit/219fc1aa2c9b09a4a093568a07a0e21fcc2a2bba) Thanks [@SkySails](https://github.com/SkySails)! - Prevent attempt to load persisted credentials if an attempt has already been made
+
 ## 2.0.10
 
 ### Patch Changes
