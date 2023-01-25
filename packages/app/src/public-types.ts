@@ -1,6 +1,7 @@
 export enum Scope {
   "CHARTS" = "charts",
   "FMSDATA" = "fmsdata",
+  "EMAIL" = "email",
   /** @deprecated Included by default, no need to include it explicitly */
   "OFFLINE" = "offline_access",
 }
