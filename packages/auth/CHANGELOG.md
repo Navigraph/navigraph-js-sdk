@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.2.0
+
+### Minor Changes
+
+- [`ac9d6e1`](https://github.com/Navigraph/navigraph-js-sdk/commit/ac9d6e1d241d43b732bef8677993bdc55bc27ac3) Thanks [@SkySails](https://github.com/SkySails)! - Fix issue where wrong endpoint would be called with `withCredentials` set to true, causing CORS issues.
+
 ## 2.1.0
 
 ### Minor Changes
