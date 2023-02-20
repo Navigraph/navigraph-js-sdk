@@ -8,7 +8,7 @@ import { TokenResponse } from "../types";
 export async function tokenCall(params: Record<string, string>) {
   return axios
     .post<TokenResponse>(getIdentityTokenEndpoint(), new URLSearchParams(params), {
-      withCredentials: params.scopes?.includes(Scope.TILES) ? true : undefined,
+      withCredentials: params.scope?.includes(Scope.TILES) ? true : undefined,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     })
     .then(async ({ data }) => {
