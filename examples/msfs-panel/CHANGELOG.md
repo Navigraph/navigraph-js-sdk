@@ -1,5 +1,12 @@
 # msfs-panel
 
+## 1.0.15
+
+### Patch Changes
+
+- Updated dependencies []:
+  - navigraph@1.2.14
+
 ## 1.0.14
 
 ### Patch Changes

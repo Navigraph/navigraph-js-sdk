@@ -1,5 +1,16 @@
 # @navigraph/auth
 
+## 2.1.0
+
+### Minor Changes
+
+- [`7d7d597`](https://github.com/Navigraph/navigraph-js-sdk/commit/7d7d597b502e7e8b0b6a92980f2c3d0b39472cbc) Thanks [@SkySails](https://github.com/SkySails)! - Add `tiles` scope for use by authorized clients. With this scope included, token requests will have to be configured to store received cookies for cross-origin requests, which is currently handled automatically.
+
+### Patch Changes
+
+- Updated dependencies [[`89f2d85`](https://github.com/Navigraph/navigraph-js-sdk/commit/89f2d85f0f6850ea06cfae39cc0c8061ab0bf988), [`7d7d597`](https://github.com/Navigraph/navigraph-js-sdk/commit/7d7d597b502e7e8b0b6a92980f2c3d0b39472cbc)]:
+  - @navigraph/app@1.3.0
+
 ## 2.0.12
 
 ### Patch Changes
