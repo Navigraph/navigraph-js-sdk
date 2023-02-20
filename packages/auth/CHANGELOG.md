@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.2.1
+
+### Patch Changes
+
+- [`ec55b55`](https://github.com/Navigraph/navigraph-js-sdk/commit/ec55b5505aab9baa20c2f95ea63ff0ec1a330e55) Thanks [@SkySails](https://github.com/SkySails)! - Fixed a typo, `scopes` should have been `scope`
+
 ## 2.2.0
 
 ### Minor Changes
