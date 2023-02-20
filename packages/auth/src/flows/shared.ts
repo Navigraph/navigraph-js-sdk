@@ -1,4 +1,4 @@
-import { Logger } from "@navigraph/app";
+import { Logger, Scope } from "@navigraph/app";
 import axios from "axios";
 import { getIdentityTokenEndpoint } from "../constants";
 import { setUser, tokenStorage } from "../internal";
@@ -7,11 +7,10 @@ import { TokenResponse } from "../types";
 
 export async function tokenCall(params: Record<string, string>) {
   return axios
-    .post<TokenResponse>(
-      getIdentityTokenEndpoint(),
-      new URLSearchParams(params),
-      { headers: { "Content-Type": "application/x-www-form-urlencoded" }} // prettier-ignore
-    )
+    .post<TokenResponse>(getIdentityTokenEndpoint(), new URLSearchParams(params), {
+      withCredentials: params.scopes?.includes(Scope.TILES) ? true : undefined,
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    })
     .then(async ({ data }) => {
       if (data.access_token && data.refresh_token) {
         await tokenStorage.setAccessToken(data.access_token);

@@ -7,7 +7,6 @@ import {
   DeviceFlowTokenExpiredError,
   InvalidClientError,
   InvalidScopeError,
-  Scope,
 } from "@navigraph/app";
 import axios, { AxiosError } from "axios";
 import { getIdentityDeviceAuthEndpoint } from "../constants";
@@ -59,10 +58,7 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
         code_challenge,
         code_challenge_method: "S256",
       }),
-      {
-        headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        withCredentials: app.scopes.includes(Scope.TILES) ? true : undefined,
-      }
+      { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
     )
     .catch((err: AxiosError<FailedAuthorizationResponse>) => {
       const status = err.response?.status;
