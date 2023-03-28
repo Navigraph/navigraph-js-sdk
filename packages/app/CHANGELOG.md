@@ -1,5 +1,11 @@
 # @navigraph/app
 
+## 1.3.1
+
+### Patch Changes
+
+- [#42](https://github.com/Navigraph/navigraph-js-sdk/pull/42) [`ae78223`](https://github.com/Navigraph/navigraph-js-sdk/commit/ae782238a109ba370711dcb66d896a7636fc7e3a) Thanks [@SkySails](https://github.com/SkySails)! - Included dependencies like `axios` and `@navigraph/pkce` in the final bundle. Also bumped the target to ES6, which should fix some warnings when using Rollup related to usage of global `this`.
+
 ## 1.3.0
 
 ### Minor Changes
