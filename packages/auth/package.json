@@ -39,11 +39,10 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@navigraph/pkce": "^1.0.3",
-    "@navigraph/app": "1.3.0",
-    "axios": "^0.24.0"
+    "@navigraph/app": "1.3.0"
   },
   "devDependencies": {
-    "@types/qr-image": "^3.2.5"
+    "@navigraph/pkce": "^1.0.3",
+    "axios": "^0.24.0"
   }
 }

@@ -33,9 +33,9 @@
     "jest-environment-jsdom": "^29.2.2",
     "prettier": "^2.7.1",
     "rimraf": "^3.0.2",
-    "ts-jest": "^29.0.3",
+    "ts-jest": "^29.0.5",
     "tsup": "^6.3.0",
-    "turbo": "^1.2.16",
-    "typescript": "^4.7.4"
+    "turbo": "^1.8.5",
+    "typescript": "^5.0.2"
   }
 }
