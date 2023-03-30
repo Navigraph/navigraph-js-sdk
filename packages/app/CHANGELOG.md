@@ -1,5 +1,11 @@
 # @navigraph/app
 
+## 1.3.2
+
+### Patch Changes
+
+- [#44](https://github.com/Navigraph/navigraph-js-sdk/pull/44) [`1a39b1b`](https://github.com/Navigraph/navigraph-js-sdk/commit/1a39b1b2592cfc34742cfc80f4f7785328d30427) Thanks [@SkySails](https://github.com/SkySails)! - Introduced optional signal parameter that can be used to abort authentication attempts.
+
 ## 1.3.1
 
 ### Patch Changes
