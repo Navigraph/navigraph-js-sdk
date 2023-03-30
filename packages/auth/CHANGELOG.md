@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.2.4
+
+### Patch Changes
+
+- [#46](https://github.com/Navigraph/navigraph-js-sdk/pull/46) [`2644065`](https://github.com/Navigraph/navigraph-js-sdk/commit/2644065fc6a605467121f52e095f94c8a8b7450f) Thanks [@SkySails](https://github.com/SkySails)! - Refactored use of `AbortController` to instead use the more backwards-compatible `CancelToken` from `axios`.
+
 ## 2.2.3
 
 ### Patch Changes
