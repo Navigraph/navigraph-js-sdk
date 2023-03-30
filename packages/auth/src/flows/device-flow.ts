@@ -8,7 +8,7 @@ import {
   InvalidClientError,
   InvalidScopeError,
 } from "@navigraph/app";
-import axios, { AxiosError } from "axios";
+import axios, { AxiosError, CancelToken } from "axios";
 import { getIdentityDeviceAuthEndpoint } from "../constants";
 import type { DeviceFlowCallback, User } from "../public-types";
 import type { AuthorizationResponse, FailedAuthorizationResponse, TokenResponse } from "../types";
@@ -41,7 +41,7 @@ import { parseUser, tokenCall } from "./shared";
  */
 export async function signInWithDeviceFlow(
   callback: DeviceFlowCallback,
-  signal = new AbortController().signal
+  cancelToken: CancelToken
 ): Promise<User> {
   const app = getApp();
 
@@ -85,7 +85,7 @@ export async function signInWithDeviceFlow(
     });
   }
 
-  const tokens = await poll(app, { ...response.data, interval: interval * 1000, code_verifier }, signal);
+  const tokens = await poll(app, { ...response.data, interval: interval * 1000, code_verifier }, cancelToken);
 
   return parseUser(tokens.access_token) as User;
 }
@@ -93,7 +93,7 @@ export async function signInWithDeviceFlow(
 async function poll(
   app: NavigraphApp,
   params: AuthorizationResponse & { code_verifier: string },
-  signal?: AbortSignal,
+  cancelToken?: CancelToken,
   attempts = 0
 ): Promise<TokenResponse> {
   await new Promise((resolve) => setTimeout(resolve, params.interval));
@@ -108,7 +108,7 @@ async function poll(
         grant_type: "urn:ietf:params:oauth:grant-type:device_code",
         scope: app.scopes.join(" "),
       },
-      signal
+      cancelToken
     );
 
     return response;
@@ -120,10 +120,10 @@ async function poll(
         case "slow_down":
           attempts++;
           params.interval += 5000;
-          return poll(app, params, signal, attempts);
+          return poll(app, params, cancelToken, attempts);
         case "authorization_pending":
           attempts++;
-          return poll(app, params, signal, attempts);
+          return poll(app, params, cancelToken, attempts);
         case "access_denied":
           throw new UserDeniedAccessError();
         case "expired_token":

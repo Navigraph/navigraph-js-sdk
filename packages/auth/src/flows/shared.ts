@@ -1,18 +1,14 @@
 import { AuthenticationAbortedError, Logger, Scope } from "@navigraph/app";
-import axios, { Cancel } from "axios";
+import axios, { CancelToken } from "axios";
 import { getIdentityTokenEndpoint } from "../constants";
 import { setUser, tokenStorage } from "../internal";
 import { User } from "../public-types";
 import { TokenResponse } from "../types";
 
-function isCancelError(error: unknown): error is Cancel {
-  return !!error && typeof error === "object" && "message" in error && error.message === "canceled";
-}
-
-export async function tokenCall(params: Record<string, string>, signal?: AbortSignal) {
+export async function tokenCall(params: Record<string, string>, cancelToken?: CancelToken) {
   return axios
     .post<TokenResponse>(getIdentityTokenEndpoint(), new URLSearchParams(params), {
-      signal: signal,
+      cancelToken,
       withCredentials: params.scope?.includes(Scope.TILES) ? true : undefined,
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
     })
@@ -25,9 +21,7 @@ export async function tokenCall(params: Record<string, string>, signal?: AbortSi
       return data;
     })
     .catch((err) => {
-      if (isCancelError(err)) {
-        throw new AuthenticationAbortedError();
-      }
+      if (axios.isCancel(err)) throw new AuthenticationAbortedError();
 
       throw err;
     });
