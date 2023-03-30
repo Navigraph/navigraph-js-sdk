@@ -39,7 +39,10 @@ import { parseUser, tokenCall } from "./shared";
  * @async
  * @returns {Promise<User>} A promise that resolves with the user object.
  */
-export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promise<User> {
+export async function signInWithDeviceFlow(
+  callback: DeviceFlowCallback,
+  signal = new AbortController().signal
+): Promise<User> {
   const app = getApp();
 
   if (!app) {
@@ -82,7 +85,7 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
     });
   }
 
-  const tokens = await poll(app, { ...response.data, interval: interval * 1000, code_verifier });
+  const tokens = await poll(app, { ...response.data, interval: interval * 1000, code_verifier }, signal);
 
   return parseUser(tokens.access_token) as User;
 }
@@ -90,19 +93,23 @@ export async function signInWithDeviceFlow(callback: DeviceFlowCallback): Promis
 async function poll(
   app: NavigraphApp,
   params: AuthorizationResponse & { code_verifier: string },
+  signal?: AbortSignal,
   attempts = 0
 ): Promise<TokenResponse> {
   await new Promise((resolve) => setTimeout(resolve, params.interval));
 
   try {
-    const response = await tokenCall({
-      client_id: app.clientId,
-      client_secret: app.clientSecret,
-      code_verifier: params.code_verifier,
-      device_code: params.device_code,
-      grant_type: "urn:ietf:params:oauth:grant-type:device_code",
-      scope: app.scopes.join(" "),
-    });
+    const response = await tokenCall(
+      {
+        client_id: app.clientId,
+        client_secret: app.clientSecret,
+        code_verifier: params.code_verifier,
+        device_code: params.device_code,
+        grant_type: "urn:ietf:params:oauth:grant-type:device_code",
+        scope: app.scopes.join(" "),
+      },
+      signal
+    );
 
     return response;
   } catch (exception: unknown) {
@@ -113,10 +120,10 @@ async function poll(
         case "slow_down":
           attempts++;
           params.interval += 5000;
-          return poll(app, params, attempts);
+          return poll(app, params, signal, attempts);
         case "authorization_pending":
           attempts++;
-          return poll(app, params, attempts);
+          return poll(app, params, signal, attempts);
         case "access_denied":
           throw new UserDeniedAccessError();
         case "expired_token":

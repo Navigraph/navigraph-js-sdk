@@ -36,6 +36,13 @@ export class InvalidClientError extends Error {
   }
 }
 
+export class AuthenticationAbortedError extends Error {
+  constructor() {
+    super("Unable to sign in with device flow. The authentication was aborted.");
+    this.name = "AuthenticationAborted";
+  }
+}
+
 export class NonGeoreferencedChartError extends Error {
   constructor(indexNumber: string) {
     super(`Could not calculate bounds for ${indexNumber || "a chart"} since it is not georeferenced`);
