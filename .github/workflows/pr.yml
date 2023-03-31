@@ -7,8 +7,10 @@ on:
       - reopened
       - synchronize
       - ready_for_review
-    branches:
-      - !changeset-release/main
+    paths-ignore:
+      - "**/CHANGELOG.md"
+      - "**/package.json"
+      - ".changeset/*"
 
 jobs:
   build:
