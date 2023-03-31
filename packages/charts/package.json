@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/charts",
-  "version": "1.2.19",
+  "version": "1.2.20",
   "license": "MIT",
   "description": "Allows interaction with the Navigraph Charts API as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
@@ -35,7 +35,7 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@navigraph/auth": "2.2.4",
+    "@navigraph/auth": "2.2.5",
     "@navigraph/app": "1.3.2"
   }
 }
