@@ -1,11 +1,11 @@
 import { AuthenticationAbortedError, Logger, Scope } from "@navigraph/app";
-import axios, { CancelToken } from "axios";
+import axios from "axios";
 import { getIdentityTokenEndpoint } from "../constants";
 import { setUser, tokenStorage } from "../internal";
-import { User } from "../public-types";
+import { NavigraphCancelToken, User } from "../public-types";
 import { TokenResponse } from "../types";
 
-export async function tokenCall(params: Record<string, string>, cancelToken?: CancelToken) {
+export async function tokenCall(params: Record<string, string>, cancelToken?: NavigraphCancelToken) {
   return axios
     .post<TokenResponse>(getIdentityTokenEndpoint(), new URLSearchParams(params), {
       cancelToken,

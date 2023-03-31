@@ -8,9 +8,9 @@ import {
   InvalidClientError,
   InvalidScopeError,
 } from "@navigraph/app";
-import axios, { AxiosError, CancelToken } from "axios";
+import axios, { AxiosError } from "axios";
 import { getIdentityDeviceAuthEndpoint } from "../constants";
-import type { DeviceFlowCallback, User } from "../public-types";
+import type { NavigraphCancelToken, DeviceFlowCallback, User } from "../public-types";
 import type { AuthorizationResponse, FailedAuthorizationResponse, TokenResponse } from "../types";
 import { parseUser, tokenCall } from "./shared";
 
@@ -24,10 +24,11 @@ import { parseUser, tokenCall } from "./shared";
  *
  * @example
  * ```javascript
+ * const cancelSource = CancelToken.source();
  * // Initialize device flow sequence
  * auth.signInWithDeviceFlow((p) => {
  *   // Display the code to user & wait for user complete flow
- * }).then((u) => setUser(u));
+ * }, cancelSource.token).then((u) => setUser(u));
  * ```
  *
  * @throws {@link NotInitializedError} - If the SDK is not initialized.
@@ -41,7 +42,7 @@ import { parseUser, tokenCall } from "./shared";
  */
 export async function signInWithDeviceFlow(
   callback: DeviceFlowCallback,
-  cancelToken: CancelToken
+  cancelToken?: NavigraphCancelToken
 ): Promise<User> {
   const app = getApp();
 
@@ -93,7 +94,7 @@ export async function signInWithDeviceFlow(
 async function poll(
   app: NavigraphApp,
   params: AuthorizationResponse & { code_verifier: string },
-  cancelToken?: CancelToken,
+  cancelToken?: NavigraphCancelToken,
   attempts = 0
 ): Promise<TokenResponse> {
   await new Promise((resolve) => setTimeout(resolve, params.interval));
