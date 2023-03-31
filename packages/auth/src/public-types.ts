@@ -55,32 +55,39 @@ export interface NavigraphAuth {
    * @returns {User|null} The currently authenticated user
    */
   getUser: () => User | null;
-  /**
-   * Initializes a device flow login sequence.
-   * @param callback - A callback that will be called with the initial parameters, such as the QR code or the verification uri and code.
-   *
-   * See
-   * {@link https://developers.navigraph.com/docs/authentication/device-authorization Device Authorization Flow With PKCE} and
-   * {@link https://developers.navigraph.com/docs/authentication/pkce Proof Key for Code Exchange (PKCE)} for detailed documentation.
-   *
-   * @example
-   * ```javascript
-   * // Initialize device flow sequence
-   * auth.signInWithDeviceFlow((p) => {
-   *   // Display the code to user & wait for user complete flow
-   * }).then((u) => setUser(u));
-   * ```
-   *
-   * @throws {@link NotInitializedError} - If the SDK is not initialized.
-   * @throws {@link InvalidClientError} - If the client id or secret is invalid.
-   * @throws {@link InvalidScopeError} - If the client contains one or several invalid scopes.
-   * @throws {@link UserDeniedAccessError} - If the user denied access.
-   * @throws {@link DeviceFlowTokenExpiredError} - If the user failed to authenticate within 5 mins.
-   *
-   * @async
-   * @returns {Promise<User>} A promise that resolves with the user object.
-   */
+  /** @inheritdoc */
   signInWithDeviceFlow: typeof signInWithDeviceFlow;
   /** Indicates whether the auth module has made an attempt to resume a previous session. */
   isInitialized: () => boolean;
+}
+
+export interface CancelStatic {
+  new (message?: string): Cancel;
+}
+
+export interface Cancel {
+  message: string;
+}
+
+export interface Canceler {
+  (message?: string): void;
+}
+
+export interface NavigraphCancelTokenStatic {
+  new (executor: (cancel: Canceler) => void): NavigraphCancelToken;
+  source(): CancelTokenSource;
+}
+
+/** A `CancelToken`, as defined by Axios. Can be used to abort ongoing sign-in attempts after polling has already started. */
+export interface NavigraphCancelToken {
+  promise: Promise<Cancel>;
+  reason?: Cancel;
+  throwIfRequested(): void;
+}
+
+export interface CancelTokenSource {
+  /** Cancellation token to be provided to the SDK */
+  token: NavigraphCancelToken;
+  /** Cancels any requests that are referencing the associated {@link NavigraphCancelToken} */
+  cancel: Canceler;
 }
