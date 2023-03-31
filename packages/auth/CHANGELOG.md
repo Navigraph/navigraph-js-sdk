@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.2.5
+
+### Patch Changes
+
+- [#48](https://github.com/Navigraph/navigraph-js-sdk/pull/48) [`647450d`](https://github.com/Navigraph/navigraph-js-sdk/commit/647450d34d98664c2f760e83fa11bbc8c7908191) Thanks [@SkySails](https://github.com/SkySails)! - Marked `cancelToken` as optional when using `signInWithDeviceFlow`. Also improved types of the `CancelToken` itself.
+
 ## 2.2.4
 
 ### Patch Changes

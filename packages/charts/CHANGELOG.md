@@ -1,5 +1,14 @@
 # @navigraph/charts
 
+## 1.2.20
+
+### Patch Changes
+
+- [#50](https://github.com/Navigraph/navigraph-js-sdk/pull/50) [`fc9d30f`](https://github.com/Navigraph/navigraph-js-sdk/commit/fc9d30fdf3566874878ae181ebe22309dc20b5fe) Thanks [@SkySails](https://github.com/SkySails)! - Added `ChartCategory` type for improved type-safety when dealing with chart objects.
+
+- Updated dependencies [[`647450d`](https://github.com/Navigraph/navigraph-js-sdk/commit/647450d34d98664c2f760e83fa11bbc8c7908191)]:
+  - @navigraph/auth@2.2.5
+
 ## 1.2.19
 
 ### Patch Changes
