@@ -26,6 +26,8 @@ export interface BoundingBoxes {
   insets: Inset[];
 }
 
+export type ChartCategory = "APT" | "REF" | "ARR" | "DEP" | "APP";
+
 export type Chart = {
   image_day: string;
   image_night: string;
@@ -33,7 +35,7 @@ export type Chart = {
   thumb_night: string;
   icao_airport_identifier: string;
   id: string;
-  category: string;
+  category: ChartCategory;
   precision_approach: boolean | null;
   index_number: string;
   name: string;
