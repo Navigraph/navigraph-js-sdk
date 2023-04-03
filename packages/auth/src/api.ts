@@ -1,10 +1,16 @@
-import { getApp, Logger, NavigraphApp, NotInitializedError } from "@navigraph/app";
-import { tokenStorage, setInitialized, LISTENERS, USER, INITIALIZED, signOut, setUser } from "./internal";
+import { getApp, Logger, NotInitializedError } from "@navigraph/app";
+import {
+  tokenStorage,
+  setInitialized,
+  LISTENERS,
+  USER,
+  INITIALIZED,
+  signOut,
+  verifyUser,
+  getUser,
+} from "./internal";
 import type { CustomStorage, Listener, NavigraphAuth, StorageKeys, Unsubscribe } from "./public-types";
 import { signInWithDeviceFlow } from "./flows/device-flow";
-import { parseUser, tokenCall } from "./flows/shared";
-import { runWithLock } from "./lib/storageLock";
-import isExpiredToken from "./lib/isExpiredToken";
 
 interface AuthParameters {
   /**
@@ -51,19 +57,12 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
     tokenStorage.setStorage(localStorage);
   }
 
-  if (keys) {
-    tokenStorage.setKeys(keys);
-  }
+  if (keys) tokenStorage.setKeys(keys);
 
   const app = getApp();
+  if (!app) throw new NotInitializedError("Auth");
 
-  if (!app) {
-    throw new NotInitializedError("Auth");
-  }
-
-  const initPromise = loadPersistedCredentials(app).catch(() =>
-    Logger.warning("Failed to load persisted credentials")
-  );
+  const initPromise = loadPersistedCredentials();
 
   return {
     onAuthStateChanged: (callback: Listener): Unsubscribe => {
@@ -78,38 +77,14 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
       return () => LISTENERS.splice(LISTENERS.indexOf(callback), 1)[0];
     },
     signOut,
-    getUser: () => USER,
+    getUser,
     signInWithDeviceFlow,
     isInitialized: () => INITIALIZED,
   };
 };
 
-const loadPersistedCredentials = async (app: NavigraphApp) => {
+const loadPersistedCredentials = async () => {
   if (INITIALIZED) return Promise.resolve();
-
-  const ACCESS_TOKEN = await tokenStorage.getAccessToken();
-
-  if (ACCESS_TOKEN && !isExpiredToken(ACCESS_TOKEN)) {
-    setUser(parseUser(ACCESS_TOKEN));
-    setInitialized(true);
-    return Promise.resolve();
-  }
-
-  return new Promise<void>((resolve, reject) => {
-    runWithLock("NAVIGRAPH_SDK_INIT", async () => {
-      const REFRESH_TOKEN = await tokenStorage.getRefreshToken();
-
-      if (REFRESH_TOKEN) {
-        await tokenCall({
-          client_id: app.clientId,
-          client_secret: app.clientSecret,
-          grant_type: "refresh_token",
-          refresh_token: REFRESH_TOKEN,
-        }).catch(reject);
-      }
-
-      setInitialized(true);
-      resolve();
-    }).catch(reject);
-  });
+  await verifyUser().catch(() => Logger.warning("Failed to load persisted credentials"));
+  setInitialized(true);
 };
