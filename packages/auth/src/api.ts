@@ -3,6 +3,7 @@ import { tokenStorage, setInitialized, LISTENERS, USER, INITIALIZED, signOut } f
 import type { CustomStorage, Listener, NavigraphAuth, StorageKeys, Unsubscribe } from "./public-types";
 import { signInWithDeviceFlow } from "./flows/device-flow";
 import { tokenCall } from "./flows/shared";
+import { runWithLock } from "./lib/storageLock";
 
 interface AuthParameters {
   /**
@@ -18,6 +19,11 @@ interface AuthParameters {
   keys?: Partial<StorageKeys>;
   /**
    * Custom storage implementation to be used when persisting credentials.
+   *
+   * **Note:** The provided storage will be used to provide locking functionality for the authentication process.
+   * This means that whatever storage implementation you provide must be *shared* between all instances of the SDK.
+   * In MSFS, this this means using the `DataStore` API instead of `localStorage`.
+   *
    * @example
    * authParams.storage = {
    *   getItem: (key: string) => getSomeItem(key),
@@ -77,20 +83,28 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
   };
 };
 
-const loadPersistedCredentials = async (app: NavigraphApp) => {
-  if (INITIALIZED) return Promise.resolve();
+const loadPersistedCredentials = async (app: NavigraphApp) =>
+  new Promise<void>((resolve, reject) => {
+    if (INITIALIZED) return resolve();
 
-  const REFRESH_TOKEN = await tokenStorage.getRefreshToken();
+    void runWithLock("NAVIGRAPH_SDK_INIT", async () => {
+      const REFRESH_TOKEN = await tokenStorage.getRefreshToken();
 
-  if (REFRESH_TOKEN) {
-    await tokenCall({
-      client_id: app.clientId,
-      client_secret: app.clientSecret,
-      grant_type: "refresh_token",
-      refresh_token: REFRESH_TOKEN,
-    });
-  }
+      try {
+        if (REFRESH_TOKEN) {
+          await tokenCall({
+            client_id: app.clientId,
+            client_secret: app.clientSecret,
+            grant_type: "refresh_token",
+            refresh_token: REFRESH_TOKEN,
+          }).catch(reject);
+        }
+      } catch (e) {
+        reject(e);
+      } finally {
+        setInitialized(true);
+      }
 
-  setInitialized(true);
-  return Promise.resolve();
-};
+      resolve();
+    }).catch(reject);
+  });
