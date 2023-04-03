@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 export const LEVELS = ["emerg", "alert", "crit", "err", "warning", "notice", "info", "debug"] as const;
-export type LogLevel = typeof LEVELS[number];
+export type LogLevel = (typeof LEVELS)[number];
 
 class Logger {
   level: LogLevel = "notice";
