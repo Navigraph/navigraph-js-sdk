@@ -1,9 +1,10 @@
 import { getApp, Logger, NavigraphApp, NotInitializedError } from "@navigraph/app";
-import { tokenStorage, setInitialized, LISTENERS, USER, INITIALIZED, signOut } from "./internal";
+import { tokenStorage, setInitialized, LISTENERS, USER, INITIALIZED, signOut, setUser } from "./internal";
 import type { CustomStorage, Listener, NavigraphAuth, StorageKeys, Unsubscribe } from "./public-types";
 import { signInWithDeviceFlow } from "./flows/device-flow";
-import { tokenCall } from "./flows/shared";
+import { parseUser, tokenCall } from "./flows/shared";
 import { runWithLock } from "./lib/storageLock";
+import isExpiredToken from "./lib/isExpiredToken";
 
 interface AuthParameters {
   /**
@@ -83,28 +84,32 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
   };
 };
 
-const loadPersistedCredentials = async (app: NavigraphApp) =>
-  new Promise<void>((resolve, reject) => {
-    if (INITIALIZED) return resolve();
+const loadPersistedCredentials = async (app: NavigraphApp) => {
+  if (INITIALIZED) return Promise.resolve();
 
-    void runWithLock("NAVIGRAPH_SDK_INIT", async () => {
+  const ACCESS_TOKEN = await tokenStorage.getAccessToken();
+
+  if (ACCESS_TOKEN && !isExpiredToken(ACCESS_TOKEN)) {
+    setUser(parseUser(ACCESS_TOKEN));
+    setInitialized(true);
+    return Promise.resolve();
+  }
+
+  return new Promise<void>((resolve, reject) => {
+    runWithLock("NAVIGRAPH_SDK_INIT", async () => {
       const REFRESH_TOKEN = await tokenStorage.getRefreshToken();
 
-      try {
-        if (REFRESH_TOKEN) {
-          await tokenCall({
-            client_id: app.clientId,
-            client_secret: app.clientSecret,
-            grant_type: "refresh_token",
-            refresh_token: REFRESH_TOKEN,
-          }).catch(reject);
-        }
-      } catch (e) {
-        reject(e);
-      } finally {
-        setInitialized(true);
+      if (REFRESH_TOKEN) {
+        await tokenCall({
+          client_id: app.clientId,
+          client_secret: app.clientSecret,
+          grant_type: "refresh_token",
+          refresh_token: REFRESH_TOKEN,
+        }).catch(reject);
       }
 
+      setInitialized(true);
       resolve();
     }).catch(reject);
   });
+};
