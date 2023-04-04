@@ -1,5 +1,13 @@
 # navigraph
 
+## 1.2.21
+
+### Patch Changes
+
+- Updated dependencies [[`268420c`](https://github.com/Navigraph/navigraph-js-sdk/commit/268420c2ee34f0e9698d659229127343f25f2f8e), [`8e43986`](https://github.com/Navigraph/navigraph-js-sdk/commit/8e43986980a6006d2d967004f3a23c5f13a9c155)]:
+  - @navigraph/auth@2.3.0
+  - @navigraph/charts@1.2.21
+
 ## 1.2.20
 
 ### Patch Changes
