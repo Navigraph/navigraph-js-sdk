@@ -1,5 +1,13 @@
 # @navigraph/auth
 
+## 2.3.0
+
+### Minor Changes
+
+- [#51](https://github.com/Navigraph/navigraph-js-sdk/pull/51) [`268420c`](https://github.com/Navigraph/navigraph-js-sdk/commit/268420c2ee34f0e9698d659229127343f25f2f8e) Thanks [@SkySails](https://github.com/SkySails)! - Added locking behavior for SDK initialization process. This should prevent multiple instances of the SDK from initializing at the same time in a context where the tokens are shared, such as within an MSFS project with multiple entrypoints.
+
+- [#52](https://github.com/Navigraph/navigraph-js-sdk/pull/52) [`8e43986`](https://github.com/Navigraph/navigraph-js-sdk/commit/8e43986980a6006d2d967004f3a23c5f13a9c155) Thanks [@SkySails](https://github.com/SkySails)! - Added a `verify` parameter to the `getUser` function that optionally forces a re-verification of the user's credentials. Can be useful when syncing multiple instances of the SDK running in different contexts with shared credentials.
+
 ## 2.2.5
 
 ### Patch Changes
