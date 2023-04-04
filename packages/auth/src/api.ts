@@ -85,6 +85,9 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
 
 const loadPersistedCredentials = async () => {
   if (INITIALIZED) return Promise.resolve();
-  await verifyUser().catch(() => Logger.warning("Failed to load persisted credentials"));
+  await verifyUser().catch((e) => {
+    Logger.warning("Failed to load persisted credentials", e);
+    signOut().catch((e) => Logger.warning("Failed to sign out after failed initialization attempt", e));
+  });
   setInitialized(true);
 };
