@@ -1,4 +1,5 @@
 import { signInWithDeviceFlow } from "./flows/device-flow";
+import { getUser } from "./internal";
 
 export type DeviceFlowParams = {
   /** The url used to sign in manually (url excl. code)  */
@@ -51,10 +52,8 @@ export interface NavigraphAuth {
   onAuthStateChanged: (callback: Listener) => Unsubscribe;
   /** Signs out the currently authenticated user. */
   signOut: () => void;
-  /** Grabs information about the currently authenticated user.
-   * @returns {User|null} The currently authenticated user
-   */
-  getUser: () => User | null;
+  /** @inheritdoc */
+  getUser: typeof getUser;
   /** @inheritdoc */
   signInWithDeviceFlow: typeof signInWithDeviceFlow;
   /** Indicates whether the auth module has made an attempt to resume a previous session. */
