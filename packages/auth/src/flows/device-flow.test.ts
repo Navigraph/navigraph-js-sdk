@@ -33,17 +33,35 @@ const tokenOKResponse = {
 describe("Device Flow Authentication", () => {
   let auth: ReturnType<typeof getAuth>;
 
-  beforeAll(() => {
+  beforeAll(async () => {
     initializeApp({
       clientId: "test_client",
       clientSecret: "secret",
       scopes: [Scope.CHARTS],
     });
 
+    timeoutSpy.mockImplementation((cb) => ogTimeout(cb, 0));
+
+    // Simulate an expired token request
+    localStorage.setItem("refresh_token", "invalid_refresh_token");
+    postSpy.mockImplementation(() =>
+      Promise.reject({
+        isAxiosError: true,
+        response: {
+          status: 400,
+          data: "bad request",
+        },
+      })
+    );
+
     auth = getAuth();
+
+    // Wait for the lock to be established and released
+    await new Promise((resolve) => ogTimeout(resolve, 50));
   });
 
   beforeEach(() => {
+    localStorage.clear();
     jest.clearAllMocks();
   });
 

@@ -1,8 +1,10 @@
 import { getApp, Logger, NavigraphApp, NotInitializedError } from "@navigraph/app";
-import { tokenStorage, setInitialized, LISTENERS, USER, INITIALIZED, signOut } from "./internal";
+import { tokenStorage, setInitialized, LISTENERS, USER, INITIALIZED, signOut, setUser } from "./internal";
 import type { CustomStorage, Listener, NavigraphAuth, StorageKeys, Unsubscribe } from "./public-types";
 import { signInWithDeviceFlow } from "./flows/device-flow";
-import { tokenCall } from "./flows/shared";
+import { parseUser, tokenCall } from "./flows/shared";
+import { runWithLock } from "./lib/storageLock";
+import isExpiredToken from "./lib/isExpiredToken";
 
 interface AuthParameters {
   /**
@@ -18,6 +20,11 @@ interface AuthParameters {
   keys?: Partial<StorageKeys>;
   /**
    * Custom storage implementation to be used when persisting credentials.
+   *
+   * **Note:** The provided storage will be used to provide locking functionality for the authentication process.
+   * This means that whatever storage implementation you provide must be *shared* between all instances of the SDK.
+   * In MSFS, this this means using the `DataStore` API instead of `localStorage`.
+   *
    * @example
    * authParams.storage = {
    *   getItem: (key: string) => getSomeItem(key),
@@ -80,17 +87,29 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
 const loadPersistedCredentials = async (app: NavigraphApp) => {
   if (INITIALIZED) return Promise.resolve();
 
-  const REFRESH_TOKEN = await tokenStorage.getRefreshToken();
+  const ACCESS_TOKEN = await tokenStorage.getAccessToken();
 
-  if (REFRESH_TOKEN) {
-    await tokenCall({
-      client_id: app.clientId,
-      client_secret: app.clientSecret,
-      grant_type: "refresh_token",
-      refresh_token: REFRESH_TOKEN,
-    });
+  if (ACCESS_TOKEN && !isExpiredToken(ACCESS_TOKEN)) {
+    setUser(parseUser(ACCESS_TOKEN));
+    setInitialized(true);
+    return Promise.resolve();
   }
 
-  setInitialized(true);
-  return Promise.resolve();
+  return new Promise<void>((resolve, reject) => {
+    runWithLock("NAVIGRAPH_SDK_INIT", async () => {
+      const REFRESH_TOKEN = await tokenStorage.getRefreshToken();
+
+      if (REFRESH_TOKEN) {
+        await tokenCall({
+          client_id: app.clientId,
+          client_secret: app.clientSecret,
+          grant_type: "refresh_token",
+          refresh_token: REFRESH_TOKEN,
+        }).catch(reject);
+      }
+
+      setInitialized(true);
+      resolve();
+    }).catch(reject);
+  });
 };

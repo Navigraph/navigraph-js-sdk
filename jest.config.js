@@ -3,4 +3,5 @@ module.exports = {
   preset: "ts-jest",
   testEnvironment: "jsdom",
   modulePathIgnorePatterns: ["<rootDir>/packages/navigraph"],
+  setupFiles: ["jest-localstorage-mock"],
 };
