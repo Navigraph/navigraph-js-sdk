@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.3.1
+
+### Patch Changes
+
+- [#54](https://github.com/Navigraph/navigraph-js-sdk/pull/54) [`eb64ddd`](https://github.com/Navigraph/navigraph-js-sdk/commit/eb64dddaac618d47bdbb88dd41b17db5ff67a221) Thanks [@SkySails](https://github.com/SkySails)! - Improved handling of signouts on failed initialization or token refresh attempts.
+
 ## 2.3.0
 
 ### Minor Changes

@@ -1,5 +1,14 @@
 # @navigraph/charts
 
+## 1.2.22
+
+### Patch Changes
+
+- [#55](https://github.com/Navigraph/navigraph-js-sdk/pull/55) [`3927692`](https://github.com/Navigraph/navigraph-js-sdk/commit/39276928c56a25f3f2f8a0a2776e75da785345e6) Thanks [@SkySails](https://github.com/SkySails)! - Updated the `Chart` types & associated documentation to better aid developers. Also added information about the newly introduced additional bounding boxes: `profile`, `minimums` and `header`.
+
+- Updated dependencies [[`eb64ddd`](https://github.com/Navigraph/navigraph-js-sdk/commit/eb64dddaac618d47bdbb88dd41b17db5ff67a221)]:
+  - @navigraph/auth@2.3.1
+
 ## 1.2.21
 
 ### Patch Changes
