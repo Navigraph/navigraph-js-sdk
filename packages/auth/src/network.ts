@@ -1,7 +1,8 @@
-import { getApp } from "@navigraph/app";
+import { Logger, getApp } from "@navigraph/app";
 import axios from "axios";
 import { tokenCall } from "./flows/shared";
-import { LISTENERS, tokenStorage } from "./internal";
+import { tokenStorage } from "./internal";
+import { signOut } from "./internal";
 
 export const navigraphRequest = axios.create();
 
@@ -45,7 +46,7 @@ navigraphRequest.interceptors.response.use(
       }
 
       // If refresh attempt fails, logout
-      LISTENERS.forEach((listener) => listener(null));
+      signOut().catch((e) => Logger.warning("Failed to sign out after a token refresh failure", e));
     }
 
     throw error;
