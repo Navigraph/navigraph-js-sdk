@@ -15,9 +15,8 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "downlevelIteration": true,
-    "declarationMap": true,
-    "typeRoots": ["./node_modules/@types", "./@types"]
+    "declarationMap": true
   },
-  "include": ["packages", ".eslintrc.js", "tsup.config.ts", "@types/**/*.d.ts", "jest.config.js"],
+  "include": ["packages", ".eslintrc.js", "tsup.config.ts", "jest.config.js"],
   "exclude": ["**/node_modules"]
 }

@@ -7,11 +7,37 @@ import {
   UserDeniedAccessError,
 } from "@navigraph/app";
 import axios from "axios";
-import { getAuth } from "../api";
+import getAuth from "../lib/getAuth";
 
 const postSpy = jest.spyOn(axios, "post");
 const ogTimeout = setTimeout;
 const timeoutSpy = jest.spyOn(global, "setTimeout");
+
+const generateJWT = () => {
+  const header = {
+    alg: "RS256",
+    kid: "bjb1ivAdT1Vv5BBLgMG58skmpak",
+  };
+  const encodedHeader = Buffer.from(JSON.stringify(header)).toString("base64");
+  const encodedPayload = Buffer.from(
+    JSON.stringify({
+      amr: ["urn:ietf:params:oauth:grant-type:device_code"],
+      aud: "https://identity.api.devigraph.com/resources",
+      auth_time: Date.now() / 1000,
+      client_id: "test_client",
+      exp: Date.now() / 1000 + 3600,
+      idp: "idsrv",
+      iss: "https://identity.api.devigraph.com",
+      nbf: Date.now() / 1000 - 10,
+      preferred_username: "test_user",
+      scope: ["charts", "fmsdata", "offline_access", "openid", "userinfo"],
+      sub: "test-sub",
+      subscriptions: ["fmsdata", "charts"],
+    })
+  ).toString("base64");
+  const signature = "test_signature";
+  return `${encodedHeader}.${encodedPayload}.${signature}`;
+};
 
 const deviceAuthOKResponse = {
   device_code: "test_device_code",
@@ -23,8 +49,7 @@ const deviceAuthOKResponse = {
 };
 
 const tokenOKResponse = {
-  access_token:
-    "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiIsIng1dCI6ImJqbzFpdkFkVDFWdjVCQkxnTUc1OHNrbXBhayIsImtpZCI6ImJqbzFpdkFkVDFWdjVCQkxnTUc1OHNrbXBhayJ9.eyJpc3MiOiJodHRwczovL2lkZW50aXR5LmFwaS5kZXZpZ3JhcGguY29tIiwiYXVkIjoiaHR0cHM6Ly9pZGVudGl0eS5hcGkuZGV2aWdyYXBoLmNvbS9yZXNvdXJjZXMiLCJleHAiOjE2NjcwODgxODksIm5iZiI6MTY2NzA4NDU4OSwiY2xpZW50X2lkIjoidGVzdF9jbGllbnQiLCJzY29wZSI6WyJjaGFydHMiLCJmbXNkYXRhIiwib2ZmbGluZV9hY2Nlc3MiLCJvcGVuaWQiLCJ1c2VyaW5mbyJdLCJzdWIiOiJ0ZXN0LXN1YiIsImF1dGhfdGltZSI6MTY2NzA4NDU4OSwiaWRwIjoiaWRzcnYiLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJ0ZXN0X3VzZXIiLCJuYW1lIjoidGVzdF91c2VyIiwiYW1yIjpbInVybjppZXRmOnBhcmFtczpvYXV0aDpncmFudC10eXBlOmRldmljZV9jb2RlIl0sInN1YnNjcmlwdGlvbnMiOlsiZm1zZGF0YSIsImNoYXJ0cyJdfQ.l2Mqx2uM-DMWCvRvUc3i_BBOmQVFVIbHig1mz3l7d5gKLFNHMmxfFQsG2nFTln1gmXW7U628oT7BuHtzv5Ub0-3lBGQQZbcTfUHC_FNktvq0rSofZcVOw6gsU3Qfqpbo46D2hRSPx5LTLawYE0a9X4DM0kAXEeLwlErUf8mCSArvgrP7Jmlp4bPvYodaSbu741OMZbXnEEeAxAXn8pVrlpRMRjf0ICoJ_XZ7cOxpuKiX1sbO8IBeJpUkypzywGTNvl_IKmuXd9euW4V8lhBtgv9avhTlEnu6fyowVtAjNd6iRLHxzG-JNUnKAi1NjnXrpJtcgPR5afWui7t85bEUhA",
+  access_token: generateJWT(),
   expires_in: 3600,
   token_type: "Bearer",
   refresh_token: "e658ab3ee17d5063ba4ca236450d3750",
@@ -152,14 +177,6 @@ describe("Device Flow Authentication", () => {
 
     // Verify that the token is correctly decoded
     expect(user).toEqual({
-      amr: ["urn:ietf:params:oauth:grant-type:device_code"],
-      aud: "https://identity.api.devigraph.com/resources",
-      auth_time: 1667084589,
-      client_id: "test_client",
-      exp: 1667088189,
-      idp: "idsrv",
-      iss: "https://identity.api.devigraph.com",
-      nbf: 1667084589,
       preferred_username: "test_user",
       scope: ["charts", "fmsdata", "offline_access", "openid", "userinfo"],
       sub: "test-sub",

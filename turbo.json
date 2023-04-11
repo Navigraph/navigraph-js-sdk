@@ -3,17 +3,13 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"]
+      "outputs": ["dist/**"]
     },
-    "lint": {
-      "outputs": []
-    },
-    "dev": {
-      "cache": false
-    },
-    "clean": {
-      "cache": false
-    }
+    "lint": { "outputs": [] },
+    "dev": { "cache": false },
+    "clean": { "cache": false },
+    "prepack": { "cache": false },
+    "postpack": { "cache": false }
   },
   "globalDependencies": ["tsconfig.json"]
 }

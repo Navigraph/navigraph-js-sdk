@@ -10,9 +10,25 @@ import {
 } from "@navigraph/app";
 import axios, { AxiosError } from "axios";
 import { getIdentityDeviceAuthEndpoint } from "../constants";
-import type { NavigraphCancelToken, DeviceFlowCallback, User } from "../public-types";
-import type { AuthorizationResponse, FailedAuthorizationResponse, TokenResponse } from "../types";
-import { parseUser, tokenCall } from "./shared";
+import { NavigraphCancelToken } from "../lib/navigraphRequest";
+import { AuthorizationResponse, FailedAuthorizationResponse, TokenResponse } from "../api/types";
+import { requestToken } from "../api/requestToken";
+import { decodeUser } from "../util";
+import { User } from "../internals/user";
+
+/** Parameters needed in order enable a user to authenticate using the device flow. */
+export type DeviceFlowParams = {
+  /** The url used to sign in manually (url excl. code)  */
+  verification_uri: string;
+  /** The url used to sign in automatically (url incl.code) */
+  verification_uri_complete: string;
+  /** The code that can be used to sign in manually  */
+  user_code: string;
+};
+
+/** A callback that will be called with the initial parameters,
+ *  such as the QR code or the verification uri and code. */
+export type DeviceFlowCallback = (params: DeviceFlowParams) => void;
 
 /**
  * Initializes a device flow login sequence.
@@ -88,7 +104,7 @@ export async function signInWithDeviceFlow(
 
   const tokens = await poll(app, { ...response.data, interval: interval * 1000, code_verifier }, cancelToken);
 
-  return parseUser(tokens.access_token) as User;
+  return decodeUser(tokens.access_token) as User;
 }
 
 async function poll(
@@ -100,7 +116,7 @@ async function poll(
   await new Promise((resolve) => setTimeout(resolve, params.interval));
 
   try {
-    const response = await tokenCall(
+    const response = await requestToken(
       {
         client_id: app.clientId,
         client_secret: app.clientSecret,
