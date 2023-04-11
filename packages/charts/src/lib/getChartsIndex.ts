@@ -1,5 +1,5 @@
 import { Logger } from "@navigraph/app";
-import { navigraphRequest } from "@navigraph/auth";
+import { navigraphRequest, isAxiosError } from "@navigraph/auth";
 import { getChartsApiRoot } from "../constants";
 import { Chart, ChartsIndexResponse } from "../public-types";
 
@@ -10,6 +10,8 @@ import { Chart, ChartsIndexResponse } from "../public-types";
 export default async function getChartsIndex({ icao }: { icao: string }): Promise<Chart[] | null> {
   const result = await navigraphRequest
     .get<ChartsIndexResponse>(`${getChartsApiRoot()}/${icao}`)
-    .catch((e: AxiosError) => Logger.err("Failed to fetch charts index. Reason:", e?.message));
+    .catch((e: unknown) =>
+      Logger.err("Failed to fetch charts index. Reason:", isAxiosError(e) ? e.message : e)
+    );
   return result?.data?.charts || null;
 }

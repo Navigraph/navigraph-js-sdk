@@ -1,5 +1,5 @@
 import { Logger } from "@navigraph/app";
-import { navigraphRequest } from "@navigraph/auth";
+import { isAxiosError, navigraphRequest } from "@navigraph/auth";
 import { Chart } from "../public-types";
 
 /** Fetches a chart image blob based on a {@link Chart} object.
@@ -20,6 +20,8 @@ export default async function getChartImage({
     .get<Blob>(imageUrl, {
       responseType: "blob",
     })
-    .catch((e: AxiosError) => Logger.err("Failed to fetch charts image. Reason:", e?.message));
+    .catch((e: unknown) =>
+      Logger.err("Failed to fetch charts image. Reason:", isAxiosError(e) ? e.message : e)
+    );
   return result?.data || null;
 }

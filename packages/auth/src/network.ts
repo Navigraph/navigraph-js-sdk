@@ -1,8 +1,10 @@
 import { Logger, getApp } from "@navigraph/app";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { tokenCall } from "./flows/shared";
 import { tokenStorage } from "./internal";
 import { signOut } from "./internal";
+
+export const isAxiosError = (payload: unknown): payload is AxiosError => axios.isAxiosError(payload);
 
 export const navigraphRequest = axios.create();
 
