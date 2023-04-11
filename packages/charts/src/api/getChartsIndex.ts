@@ -1,7 +1,7 @@
 import { Logger } from "@navigraph/app";
 import { navigraphRequest, isAxiosError } from "@navigraph/auth";
 import { getChartsApiRoot } from "../constants";
-import { Chart, ChartsIndexResponse } from "../public-types";
+import { Chart, ChartsIndexResponse } from "./types";
 
 /** Fetches an index of available charts for a specified airport
  * @param options.icao - The ICAO code of an airport

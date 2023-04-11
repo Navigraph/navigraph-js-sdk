@@ -1,6 +1,6 @@
 import { Logger } from "@navigraph/app";
 import { isAxiosError, navigraphRequest } from "@navigraph/auth";
-import { Chart } from "../public-types";
+import { Chart } from "./types";
 
 /** Fetches a chart image blob based on a {@link Chart} object.
  * @param {Chart} options.chart - The chart relevant Chart object

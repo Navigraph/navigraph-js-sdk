@@ -1,6 +1,6 @@
 import { navigraphRequest } from "@navigraph/auth";
-import { Chart } from "../public-types";
 import getChartImage from "./getChartImage";
+import { Chart } from "./types";
 
 const getSpy = jest.spyOn(navigraphRequest, "get");
 const consoleSpy = jest.spyOn(console, "error").mockImplementation();
@@ -37,6 +37,7 @@ it("given a valid chart, when no user is authenticated, should return null and l
   getSpy.mockImplementation(() =>
     Promise.reject({
       message: "Request failed with status code 401",
+      isAxiosError: true,
       response: {
         status: 401,
         data: "Unauthorized",

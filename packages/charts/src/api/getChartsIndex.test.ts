@@ -8,6 +8,7 @@ it("given a valid icao, when no user is authenticated, should return null and lo
   getSpy.mockImplementation(() =>
     Promise.reject({
       message: "Request failed with status code 401",
+      isAxiosError: true,
       response: {
         status: 401,
         data: "Unauthorized",

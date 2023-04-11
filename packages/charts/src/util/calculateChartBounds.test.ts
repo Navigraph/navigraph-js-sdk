@@ -1,6 +1,6 @@
 import { NonGeoreferencedChartError } from "@navigraph/app";
-import { Chart } from "../public-types";
 import calculateChartBounds from "./calculateChartBounds";
+import { Chart } from "../api/types";
 
 // prettier-ignore
 const georeferencedChart = {
