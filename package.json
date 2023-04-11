@@ -11,6 +11,8 @@
     "clean": "turbo run clean --filter=./packages/*",
     "lint": "turbo run lint --parallel --continue --filter=./packages/* -- --max-warnings=0",
     "lint:fix": "yarn lint --parallel --filter=./packages/* -- --fix",
+    "prepack": "turbo run prepack --filter=./packages/*",
+    "postpack": "turbo run postpack --filter=./packages/*",
     "test": "jest --verbose",
     "release": "changeset publish"
   },
@@ -36,7 +38,7 @@
     "rimraf": "^3.0.2",
     "ts-jest": "^29.1.0",
     "tsup": "^6.3.0",
-    "turbo": "^1.8.5",
+    "turbo": "^1.8.8",
     "typescript": "^5.0.4"
   }
 }
