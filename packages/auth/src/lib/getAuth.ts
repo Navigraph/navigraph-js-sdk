@@ -1,24 +1,15 @@
 import { getApp, Logger, NotInitializedError } from "@navigraph/app";
-import {
-  tokenStorage,
-  setInitialized,
-  LISTENERS,
-  USER,
-  INITIALIZED,
-  signOut,
-  verifyUser,
-  getUser,
-} from "./internal";
-import type { CustomStorage, Listener, NavigraphAuth, StorageKeys, Unsubscribe } from "./public-types";
-import { signInWithDeviceFlow } from "./flows/device-flow";
+import { signInWithDeviceFlow } from "../flows/device-flow";
+import { CustomStorage, StorageKeys, tokenStorage } from "../internals/storage";
+import loadPersistedCredentials, { INITIALIZED } from "../internals/loadPersistedCredentials";
+import { getUser, Unsubscribe, USER, USER_LISTENERS, UserCallback } from "../internals/user";
+import signOut from "../internals/signOut";
 
-interface AuthParameters {
+export interface AuthParameters {
   /**
    * Storage keys to be used when persisting credentials.
    * @example
-   * authParams.keys = {
-   *   accessToken: "ACCESS_TOKEN"
-   * }
+   * { accessToken: "NAVIGRAPH_ACCESS_TOKEN" }
    *
    * @default
    * { accessToken: "access_token", refreshToken: "refresh_token" }
@@ -32,7 +23,7 @@ interface AuthParameters {
    * In MSFS, this this means using the `DataStore` API instead of `localStorage`.
    *
    * @example
-   * authParams.storage = {
+   * {
    *   getItem: (key: string) => getSomeItem(key),
    *   setItem: (key: string, val: string) => setSomeItem(key, val),
    * }
@@ -44,7 +35,7 @@ interface AuthParameters {
  * Returns authentication utilities associated with the currently set up {@link NavigraphApp}.
  * @see {@link NavigraphApp}
  */
-export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth => {
+export default function getAuth({ keys, storage }: AuthParameters = {}) {
   if (typeof localStorage === "undefined" && !storage) {
     Logger.warning(
       "No storage API available in your environment. Please provide a custom tokenStorage implementation."
@@ -57,7 +48,7 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
     tokenStorage.setStorage(localStorage);
   }
 
-  if (keys) tokenStorage.setKeys(keys);
+  if (keys) tokenStorage.setStorageKeys(keys);
 
   const app = getApp();
   if (!app) throw new NotInitializedError("Auth");
@@ -65,29 +56,20 @@ export const getAuth = ({ keys, storage }: AuthParameters = {}): NavigraphAuth =
   const initPromise = loadPersistedCredentials();
 
   return {
-    onAuthStateChanged: (callback: Listener): Unsubscribe => {
+    onAuthStateChanged: (callback: UserCallback, initialNotify = true): Unsubscribe => {
       const promise = INITIALIZED ? Promise.resolve() : initPromise;
 
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       promise.then(() => {
-        callback(USER);
-        LISTENERS.push(callback);
+        initialNotify && callback(USER);
+        USER_LISTENERS.add(callback);
       });
 
-      return () => LISTENERS.splice(LISTENERS.indexOf(callback), 1)[0];
+      return () => USER_LISTENERS.remove(callback);
     },
     signOut,
     getUser,
     signInWithDeviceFlow,
     isInitialized: () => INITIALIZED,
   };
-};
-
-const loadPersistedCredentials = async () => {
-  if (INITIALIZED) return Promise.resolve();
-  await verifyUser().catch((e) => {
-    Logger.warning("Failed to load persisted credentials", e);
-    signOut().catch((e) => Logger.warning("Failed to sign out after failed initialization attempt", e));
-  });
-  setInitialized(true);
-};
+}

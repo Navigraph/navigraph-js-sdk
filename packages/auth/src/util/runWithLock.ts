@@ -1,7 +1,7 @@
 // Inspiration & Source: https://github.com/taylorhakes/localstorage-lock
 // Modified to support async functions
 
-import { storage } from "../internal";
+import { STORAGE } from "../internals/storage";
 
 function getId() {
   return `${Date.now()}:${Math.random()}`;
@@ -19,7 +19,7 @@ type Lock = {
   time: number;
 };
 
-export async function runWithLock(
+export default async function runWithLock(
   key: string,
   fn: () => Promise<void>,
   { timeout = 1000, lockWriteTime = 50, checkTime = 10, retry = true }: Options = {}
@@ -32,7 +32,7 @@ export async function runWithLock(
       }, checkTime)
     );
 
-  const result = await storage.getItem(key);
+  const result = await STORAGE.getItem(key);
 
   if (result) {
     // Check to make sure the lock hasn't expired
@@ -42,17 +42,17 @@ export async function runWithLock(
       if (retry) await timerRunWithLock();
       return;
     } else {
-      await storage.setItem(key, "");
+      await STORAGE.setItem(key, "");
     }
   }
 
   const id = getId();
-  await storage.setItem(key, JSON.stringify({ id, time: Date.now() }));
+  await STORAGE.setItem(key, JSON.stringify({ id, time: Date.now() }));
 
   // Delay a bit, to see if another worker is in this section
   await new Promise<void>((r) =>
     setTimeout(async () => {
-      const currentResult = await storage.getItem(key);
+      const currentResult = await STORAGE.getItem(key);
       if (!currentResult) return;
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
@@ -67,7 +67,7 @@ export async function runWithLock(
       try {
         await fn();
       } finally {
-        await storage.setItem(key, "");
+        await STORAGE.setItem(key, "");
       }
       r();
     }, lockWriteTime)
