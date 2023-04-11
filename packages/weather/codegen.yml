@@ -1,9 +1,0 @@
-overwrite: true
-schema: "https://weather.api.devigraph.com/graphql"
-documents: ./operations/**/*.graphql
-generates:
-  src/generated/graphql.ts:
-    plugins:
-      - "typescript"
-      - "typescript-operations"
-      - "typescript-graphql-request"

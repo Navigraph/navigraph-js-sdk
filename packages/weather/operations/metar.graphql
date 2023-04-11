@@ -1,7 +1,0 @@
-query getMetar($icao: String!) {
-  metar(icao: $icao) {
-    rawText
-    remark
-    latitude
-  }
-}
