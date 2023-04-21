@@ -1,3 +1,5 @@
+import { ChartTypeCode } from "./chartTypeCodes";
+
 /**
  * A bounding box representation in pixels from the origin (top left) of the chart.
  *
@@ -61,6 +63,8 @@ export type Chart = {
   icao_airport_identifier: string;
   id: string;
   category: ChartCategory;
+  /** The type of chart, with higher granularity than {@link Chart.category category}. Can be used to facilitate more fine-grained filtering. */
+  type_code: ChartTypeCode;
   precision_approach: boolean | null;
   index_number: string;
   name: string;
