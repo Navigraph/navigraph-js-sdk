@@ -1,6 +1,7 @@
 import { navigraphRequest } from "@navigraph/auth";
 import getChartImage from "./getChartImage";
 import { Chart } from "./types";
+import { ChartTypeCode } from "./chartTypeCodes";
 
 const getSpy = jest.spyOn(navigraphRequest, "get");
 const consoleSpy = jest.spyOn(console, "error").mockImplementation();
@@ -13,6 +14,7 @@ const chart: Chart = {
   icao_airport_identifier: "ESSA",
   id: "ESSA01P1",
   category: "APT",
+  type_code: "P" as ChartTypeCode,
   bounding_boxes: null,
   precision_approach: null,
   index_number: "10-1P1",
