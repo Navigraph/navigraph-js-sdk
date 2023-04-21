@@ -1,5 +1,11 @@
 # @navigraph/charts
 
+## 1.2.23
+
+### Patch Changes
+
+- [#58](https://github.com/Navigraph/navigraph-js-sdk/pull/58) [`f8e9c67`](https://github.com/Navigraph/navigraph-js-sdk/commit/f8e9c671ceabaa83729e47fc9402a9fc3f1a3e0f) Thanks [@SkySails](https://github.com/SkySails)! - Added exhaustive types to the `Chart.type_code` property using enums that contain all possible types in the source.
+
 ## 1.2.22
 
 ### Patch Changes
