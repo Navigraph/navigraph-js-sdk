@@ -1,5 +1,14 @@
 # @navigraph/auth
 
+## 2.3.2
+
+### Patch Changes
+
+- [`16e00c0`](https://github.com/Navigraph/navigraph-js-sdk/commit/16e00c0516b599999c257ecfb1fc79ea6ea69e3e) Thanks [@SkySails](https://github.com/SkySails)! - Synchronize packages after internal reorganization.
+
+- Updated dependencies [[`16e00c0`](https://github.com/Navigraph/navigraph-js-sdk/commit/16e00c0516b599999c257ecfb1fc79ea6ea69e3e)]:
+  - @navigraph/app@1.3.3
+
 ## 2.3.1
 
 ### Patch Changes
