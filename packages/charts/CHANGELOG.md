@@ -1,5 +1,11 @@
 # @navigraph/charts
 
+## 1.2.25
+
+### Patch Changes
+
+- [`dcf8ace`](https://github.com/Navigraph/navigraph-js-sdk/commit/dcf8ace68c72403b30d94fe6bab67feab5291ddd) Thanks [@SkySails](https://github.com/SkySails)! - Added missing exports of chart type-code enums.
+
 ## 1.2.24
 
 ### Patch Changes
