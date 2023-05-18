@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.4.0
+
+### Minor Changes
+
+- [#62](https://github.com/Navigraph/navigraph-js-sdk/pull/62) [`c49ebbc`](https://github.com/Navigraph/navigraph-js-sdk/commit/c49ebbcffaaac1a7102659eada0c8dde998386ec) Thanks [@SkySails](https://github.com/SkySails)! - Reintroduced authentication-related types that went missing in `v1.2.22` following an internal reorganization.
+
 ## 2.3.2
 
 ### Patch Changes
