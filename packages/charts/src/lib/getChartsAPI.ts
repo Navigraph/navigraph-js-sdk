@@ -1,6 +1,7 @@
 import { getApp, Logger, NotInitializedError, Scope } from "@navigraph/app";
 import getChartImage from "../api/getChartImage";
 import getChartsIndex from "../api/getChartsIndex";
+import getAirportInfo from "../api/getAirportInfo";
 
 /** Grabs a reference to an object containing available Navigraph Charts API functionality */
 export const getChartsAPI = () => {
@@ -17,5 +18,6 @@ export const getChartsAPI = () => {
   return {
     getChartsIndex,
     getChartImage,
+    getAirportInfo,
   };
 };
