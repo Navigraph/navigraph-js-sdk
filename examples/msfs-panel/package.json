@@ -1,13 +1,13 @@
 {
   "name": "msfs-panel",
-  "version": "1.0.27",
+  "version": "1.0.28",
   "private": true,
   "homepage": "./",
   "files": [
     "dist"
   ],
   "dependencies": {
-    "navigraph": "1.2.26",
+    "navigraph": "1.2.27",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-router-dom": "^5.2.0"

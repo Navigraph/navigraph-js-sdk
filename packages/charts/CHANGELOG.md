@@ -1,5 +1,11 @@
 # @navigraph/charts
 
+## 1.3.0
+
+### Minor Changes
+
+- [#64](https://github.com/Navigraph/navigraph-js-sdk/pull/64) [`9c2d597`](https://github.com/Navigraph/navigraph-js-sdk/commit/9c2d597a710d86e662bcd9da8190871d5722096c) Thanks [@SkySails](https://github.com/SkySails)! - Added airport information endpoint access. This endpoint can be used to fetch details such as available fuel, types of repair services etc..
+
 ## 1.2.26
 
 ### Patch Changes
