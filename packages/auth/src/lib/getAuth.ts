@@ -56,6 +56,7 @@ export default function getAuth({ keys, storage }: AuthParameters = {}) {
   const initPromise = loadPersistedCredentials();
 
   return {
+    /** Adds a callback that is called whenever the signe-in user changes. */
     onAuthStateChanged: (callback: UserCallback, initialNotify = true): Unsubscribe => {
       const promise = INITIALIZED ? Promise.resolve() : initPromise;
 
@@ -73,3 +74,5 @@ export default function getAuth({ keys, storage }: AuthParameters = {}) {
     isInitialized: () => INITIALIZED,
   };
 }
+
+export type NavigraphAuth = ReturnType<typeof getAuth>;
