@@ -2,25 +2,25 @@ import { Logger, getDefaultAppDomain } from "@navigraph/app";
 import { NavigraphAuth } from "@navigraph/auth";
 import { TileLayer, Coords, DoneCallback } from "leaflet";
 
-enum RasterSource {
+export enum NavigraphRasterSource {
   "IFR HIGH" = "ifr.hi",
   "IFR LOW" = "ifr.lo",
   "VFR" = "vfr",
   "WORLD" = "world",
 }
 
-type RasterTheme = "DAY" | "NIGHT";
+export type RasterTheme = "DAY" | "NIGHT";
 
 function getNavigraphTileURL(
-  source: keyof typeof RasterSource = "VFR",
+  source: keyof typeof NavigraphRasterSource = "VFR",
   theme: RasterTheme = "DAY",
   retina = false
 ) {
-  return `https://enroute-bitmap.charts.api-v2.${getDefaultAppDomain()}/styles/${RasterSource[source]}.${theme.toLowerCase()}/{z}/{x}/{y}${retina ? "@2x" : "{r}"}.png` // prettier-ignore
+  return `https://enroute-bitmap.charts.api-v2.${getDefaultAppDomain()}/styles/${NavigraphRasterSource[source]}.${theme.toLowerCase()}/{z}/{x}/{y}${retina ? "@2x" : "{r}"}.png` // prettier-ignore
 }
 
 export interface PresetConfig {
-  source: keyof typeof RasterSource;
+  source: keyof typeof NavigraphRasterSource;
   theme: RasterTheme;
   forceRetina?: boolean;
 }
@@ -35,14 +35,14 @@ export interface PresetConfig {
  * navigraphLayer.setPreset({ source: "IFR LOW", theme: "DAY" });
  * ```
  */
-export default class NavigraphTileLayer extends TileLayer {
+export class NavigraphTileLayer extends TileLayer {
   /** A list of tiles that has failed to load since the last successful tile load. */
   protected FAILED_TILES = new Set<string>();
 
   /** Indicates whether map tiles failed to load due to authentication being invalid or missing. */
   private isMissingAuth = false;
 
-  constructor(public auth: NavigraphAuth, public preset: PresetConfig) {
+  constructor(public auth: NavigraphAuth, public preset: PresetConfig = { source: "VFR", theme: "DAY" }) {
     super(getNavigraphTileURL(preset.source, preset.theme, preset.forceRetina));
 
     auth.onAuthStateChanged((user) => {
