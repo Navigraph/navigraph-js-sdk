@@ -11,5 +11,5 @@ export default function isExpiredToken(accessToken?: string, threshold = EXPIRY_
   if (!accessToken) return true;
   const decodedToken = decodeAccessToken(accessToken);
   if (!decodedToken) return true;
-  return decodedToken.exp * 1000 < Date.now() - threshold;
+  return decodedToken.exp * 1000 < Date.now() + threshold;
 }
