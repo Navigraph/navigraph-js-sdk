@@ -1,5 +1,21 @@
 # @navigraph/charts
 
+## 1.4.0
+
+### Minor Changes
+
+- [#69](https://github.com/Navigraph/navigraph-js-sdk/pull/69) [`c4ee897`](https://github.com/Navigraph/navigraph-js-sdk/commit/c4ee897b0476d0435b45366940fc7381c568109e) Thanks [@SkySails](https://github.com/SkySails)! - Added `NavigraphTileLayer`, a Leaflet `TileLayer` that implements Navigraph enroute tiles.
+  The aim with this extension is to help developers by making the following features available:
+
+  - Switching of source between VFR, IFR and world map
+  - Changing of the theme between day and night
+  - Automatic handling of credential expiry, with useful hints in the log when something does not look quite right.
+
+### Patch Changes
+
+- Updated dependencies [[`2c364c2`](https://github.com/Navigraph/navigraph-js-sdk/commit/2c364c276047326ba3fbdd3f395a4e47a040fe16), [`693d01f`](https://github.com/Navigraph/navigraph-js-sdk/commit/693d01ff0fe04fc53bdb83865b5be5b3d2f8d035)]:
+  - @navigraph/auth@2.4.1
+
 ## 1.3.0
 
 ### Minor Changes

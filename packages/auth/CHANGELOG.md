@@ -1,5 +1,14 @@
 # @navigraph/auth
 
+## 2.4.1
+
+### Patch Changes
+
+- [#68](https://github.com/Navigraph/navigraph-js-sdk/pull/68) [`2c364c2`](https://github.com/Navigraph/navigraph-js-sdk/commit/2c364c276047326ba3fbdd3f395a4e47a040fe16) Thanks [@SkySails](https://github.com/SkySails)! - Added request buffers to all token requests, including user verification.
+  This ensures that the SDK does not send multiple identical token requests in parallel and instead returns one response for all requests, ultimately increasing both speed and reliability.
+
+- [#67](https://github.com/Navigraph/navigraph-js-sdk/pull/67) [`693d01f`](https://github.com/Navigraph/navigraph-js-sdk/commit/693d01ff0fe04fc53bdb83865b5be5b3d2f8d035) Thanks [@SkySails](https://github.com/SkySails)! - Fixed token expiry check. Previously, a token would be considered expired 3 minutes **after** it expired, but the intention was to treat it as expired 3 minutes **before** its real expiry.
+
 ## 2.4.0
 
 ### Minor Changes
