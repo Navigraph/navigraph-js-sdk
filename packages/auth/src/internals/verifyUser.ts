@@ -1,8 +1,10 @@
-import { NotInitializedError, getApp } from "@navigraph/app";
+import { Logger, NotInitializedError, getApp } from "@navigraph/app";
 import { tokenStorage } from "./storage";
 import { isExpiredToken, decodeUser, runWithLock } from "../util";
 import { setUser, USER, User } from "./user";
 import { requestToken } from "../api/requestToken";
+
+let verifyUserPromise: Promise<User | null> | null = null;
 
 /**
  * Verifies the validity of the currently stored access token. If the token is invalid or expired, a refresh attempt will be made.
@@ -21,7 +23,12 @@ export default async function verifyUser() {
     return user;
   }
 
-  return new Promise<User | null>((resolve, reject) => {
+  if (verifyUserPromise) {
+    Logger.debug("Found ongoing verification request, returning promise early");
+    return verifyUserPromise;
+  }
+
+  verifyUserPromise = new Promise<User | null>((resolve, reject) => {
     runWithLock("NAVIGRAPH_SDK_INIT", async () => {
       const REFRESH_TOKEN = await tokenStorage.getRefreshToken();
 
@@ -35,6 +42,10 @@ export default async function verifyUser() {
       }
 
       resolve(USER);
-    }).catch(reject);
+    })
+      .catch(reject)
+      .finally(() => (verifyUserPromise = null));
   });
+
+  return verifyUserPromise;
 }
