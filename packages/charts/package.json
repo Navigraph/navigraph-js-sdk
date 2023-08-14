@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/charts",
-  "version": "1.4.0",
+  "version": "2.0.0",
   "license": "MIT",
   "description": "Allows interaction with the Navigraph Charts API as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",

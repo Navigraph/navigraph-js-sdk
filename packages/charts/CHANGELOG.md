@@ -1,5 +1,13 @@
 # @navigraph/charts
 
+## 2.0.0
+
+### Major Changes
+
+- [`23db6a6`](https://github.com/Navigraph/navigraph-js-sdk/commit/23db6a601d77c12e2d7be5b2381c2d19af667fa8) Thanks [@SkySails](https://github.com/SkySails)! - Moved the Leaflet integration to a separate package.
+
+  You can now find the `NavigraphTileLayer` in `@navigraph/leaflet`!
+
 ## 1.4.0
 
 ### Minor Changes
