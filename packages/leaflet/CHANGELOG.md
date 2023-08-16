@@ -1,5 +1,13 @@
 # @navigraph/leaflet
 
+## 1.0.2
+
+### Patch Changes
+
+- [`5cb7606`](https://github.com/Navigraph/navigraph-js-sdk/commit/5cb7606baa7acfe8fdd9060b31795e0170a90cd3) Thanks [@SkySails](https://github.com/SkySails)! - Added ability to partially update the map preset. It is now possible to just change the theme, or just the source without specifying the other explicitly.
+
+- [`cbe01a5`](https://github.com/Navigraph/navigraph-js-sdk/commit/cbe01a52bec0a0bfe3086ae83700733dc0e7bc9c) Thanks [@SkySails](https://github.com/SkySails)! - Fixed typo in type name
+
 ## 1.0.1
 
 ### Patch Changes
