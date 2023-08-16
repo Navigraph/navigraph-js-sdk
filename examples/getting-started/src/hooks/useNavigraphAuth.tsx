@@ -16,31 +16,29 @@ const authContext = createContext<NavigraphAuthContext>({
   signOut: () => Promise.reject("Not initialized"),
 });
 
-// Provider component that wraps your app and makes auth object ...
-// ... available to any child component that calls useAuth().
+// Provider component that wraps your app and makes the authentication state
+// available to any child component that calls useAuth().
 export function NavigraphAuthProvider({ children }: { children: React.ReactNode }) {
   const auth = useProvideAuth();
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
 
-// Hook for child components to get the auth object ...
-// ... and re-render when it changes.
-export const useNavigraphAuth = () => {
-  return useContext(authContext);
-};
+// Hook for child components to access the authentication state
+export const useNavigraphAuth = () => useContext(authContext);
+
 // Provider hook that creates auth object and handles state
 function useProvideAuth() {
   const [user, setUser] = useState<User | null>(null);
   const [isInitialized, setIsInitialized] = useState(false);
 
-  // Subscribe to user on mount
-  // Because this sets state in the callback it will cause any
-  // component that utilizes this hook to re-render with the latest auth object.
+  // Subscribe to user changes on mount
+  // Whenever a user is signed in or out, this hook will respond to the change.
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((u) => {
       setUser(u);
-      if (!isInitialized) setIsInitialized(true);
+      setIsInitialized(true);
     });
+
     // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
