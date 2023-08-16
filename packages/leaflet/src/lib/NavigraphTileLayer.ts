@@ -69,9 +69,9 @@ export class NavigraphTileLayer extends TileLayer {
    * navigraphLayer.setPreset({ source: "IFR HIGH", theme: "NIGHT" });
    * ```
    */
-  public setPreset(preset: PresetConfig) {
-    this.preset = preset;
-    const newUrl = getNavigraphTileURL(preset.source, preset.theme, preset.forceRetina);
+  public setPreset(preset: Partial<PresetConfig>) {
+    this.preset = { ...this.preset, ...preset };
+    const newUrl = getNavigraphTileURL(this.preset.source, this.preset.theme, this.preset.forceRetina);
     this.setUrl(newUrl);
   }
 
