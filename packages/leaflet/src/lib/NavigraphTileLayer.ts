@@ -2,27 +2,28 @@ import { Logger, getDefaultAppDomain } from "@navigraph/app";
 import { NavigraphAuth } from "@navigraph/auth";
 import { TileLayer, Coords, DoneCallback } from "leaflet";
 
-export enum NavigraphRasterSource {
+enum NavigraphRasterSourceOption {
   "IFR HIGH" = "ifr.hi",
   "IFR LOW" = "ifr.lo",
   "VFR" = "vfr",
   "WORLD" = "world",
 }
 
-export type RasterTheme = "DAY" | "NIGHT";
-
-function getNavigraphTileURL(
-  source: keyof typeof NavigraphRasterSource = "VFR",
-  theme: RasterTheme = "DAY",
-  retina = false
-) {
-  return `https://enroute-bitmap.charts.api-v2.${getDefaultAppDomain()}/styles/${NavigraphRasterSource[source]}.${theme.toLowerCase()}/{z}/{x}/{y}${retina ? "@2x" : "{r}"}.png` // prettier-ignore
-}
+export type NavigationRasterSource = keyof typeof NavigraphRasterSourceOption;
+export type NavigraphRasterTheme = "DAY" | "NIGHT";
 
 export interface PresetConfig {
-  source: keyof typeof NavigraphRasterSource;
-  theme: RasterTheme;
+  source: NavigationRasterSource;
+  theme: NavigraphRasterTheme;
   forceRetina?: boolean;
+}
+
+function getNavigraphTileURL(
+  source: NavigationRasterSource = "VFR",
+  theme: NavigraphRasterTheme = "DAY",
+  retina = false
+) {
+  return `https://enroute-bitmap.charts.api-v2.${getDefaultAppDomain()}/styles/${NavigraphRasterSourceOption[source]}.${theme.toLowerCase()}/{z}/{x}/{y}${retina ? "@2x" : "{r}"}.png` // prettier-ignore
 }
 
 /**
