@@ -5,12 +5,14 @@ import { getChartsAPI } from "@navigraph/charts";
 const config: NavigraphApp = {
   clientId: "<YOUR_NAVIGRAPH_CLIENT_ID>",
   clientSecret: "<YOUR_NAVIGRAPH_CLIENT_SECRET>",
-  scopes: [Scope.CHARTS, Scope.EMAIL, Scope.FMSDATA],
+  scopes: [Scope.CHARTS, Scope.FMSDATA],
 };
+
+if (config.clientId.includes("<")) {
+  alert("Please add your client credentials in lib/navigraph.ts.");
+}
 
 initializeApp(config);
 
 export const auth = getAuth();
 export const charts = getChartsAPI();
-
-console.log("after init");
