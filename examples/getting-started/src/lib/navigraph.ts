@@ -1,6 +1,6 @@
-import { initializeApp, Scope, NavigraphApp } from "navigraph/app";
-import { getAuth } from "navigraph/auth";
-import { getChartsAPI } from "navigraph/charts";
+import { initializeApp, Scope, NavigraphApp } from "@navigraph/app";
+import { getAuth } from "@navigraph/auth";
+import { getChartsAPI } from "@navigraph/charts";
 
 const config: NavigraphApp = {
   clientId: "<YOUR_NAVIGRAPH_CLIENT_ID>",
