@@ -1,6 +1,6 @@
-import { User } from "navigraph/auth";
 import React, { useState, useEffect, useContext, createContext } from "react";
-import { auth } from "../../src/lib/navigraph";
+import { User } from "navigraph/auth";
+import { auth } from "../lib/navigraph";
 
 interface NavigraphAuthContext {
   isInitialized: boolean;
@@ -22,6 +22,7 @@ export function NavigraphAuthProvider({ children }: { children: React.ReactNode 
   const auth = useProvideAuth();
   return <authContext.Provider value={auth}>{children}</authContext.Provider>;
 }
+
 // Hook for child components to get the auth object ...
 // ... and re-render when it changes.
 export const useNavigraphAuth = () => {
