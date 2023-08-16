@@ -9,17 +9,17 @@ enum NavigraphRasterSourceOption {
   "WORLD" = "world",
 }
 
-export type NavigationRasterSource = keyof typeof NavigraphRasterSourceOption;
+export type NavigraphRasterSource = keyof typeof NavigraphRasterSourceOption;
 export type NavigraphRasterTheme = "DAY" | "NIGHT";
 
 export interface PresetConfig {
-  source: NavigationRasterSource;
+  source: NavigraphRasterSource;
   theme: NavigraphRasterTheme;
   forceRetina?: boolean;
 }
 
 function getNavigraphTileURL(
-  source: NavigationRasterSource = "VFR",
+  source: NavigraphRasterSource = "VFR",
   theme: NavigraphRasterTheme = "DAY",
   retina = false
 ) {
