@@ -5,20 +5,20 @@ import {
   InvalidScopeError,
   Scope,
   UserDeniedAccessError,
-} from "@navigraph/app";
-import axios from "axios";
-import getAuth from "../lib/getAuth";
+} from "@navigraph/app"
+import axios from "axios"
+import getAuth from "../lib/getAuth"
 
-const postSpy = jest.spyOn(axios, "post");
-const ogTimeout = setTimeout;
-const timeoutSpy = jest.spyOn(global, "setTimeout");
+const postSpy = jest.spyOn(axios, "post")
+const ogTimeout = setTimeout
+const timeoutSpy = jest.spyOn(global, "setTimeout")
 
 const generateJWT = () => {
   const header = {
     alg: "RS256",
     kid: "bjb1ivAdT1Vv5BBLgMG58skmpak",
-  };
-  const encodedHeader = Buffer.from(JSON.stringify(header)).toString("base64");
+  }
+  const encodedHeader = Buffer.from(JSON.stringify(header)).toString("base64")
   const encodedPayload = Buffer.from(
     JSON.stringify({
       amr: ["urn:ietf:params:oauth:grant-type:device_code"],
@@ -33,11 +33,11 @@ const generateJWT = () => {
       scope: ["charts", "fmsdata", "offline_access", "openid", "userinfo"],
       sub: "test-sub",
       subscriptions: ["fmsdata", "charts"],
-    })
-  ).toString("base64");
-  const signature = "test_signature";
-  return `${encodedHeader}.${encodedPayload}.${signature}`;
-};
+    }),
+  ).toString("base64")
+  const signature = "test_signature"
+  return `${encodedHeader}.${encodedPayload}.${signature}`
+}
 
 const deviceAuthOKResponse = {
   device_code: "test_device_code",
@@ -46,29 +46,29 @@ const deviceAuthOKResponse = {
   user_code: "TESTCODE",
   expires_in: 1800,
   interval: 5,
-};
+}
 
 const tokenOKResponse = {
   access_token: generateJWT(),
   expires_in: 3600,
   token_type: "Bearer",
   refresh_token: "e658ab3ee17d5063ba4ca236450d3750",
-};
+}
 
 describe("Device Flow Authentication", () => {
-  let auth: ReturnType<typeof getAuth>;
+  let auth: ReturnType<typeof getAuth>
 
   beforeAll(async () => {
     initializeApp({
       clientId: "test_client",
       clientSecret: "secret",
       scopes: [Scope.CHARTS],
-    });
+    })
 
-    timeoutSpy.mockImplementation((cb) => ogTimeout(cb, 0));
+    timeoutSpy.mockImplementation(cb => ogTimeout(cb, 0))
 
     // Simulate an expired token request
-    localStorage.setItem("refresh_token", "invalid_refresh_token");
+    localStorage.setItem("refresh_token", "invalid_refresh_token")
     postSpy.mockImplementation(() =>
       Promise.reject({
         isAxiosError: true,
@@ -76,30 +76,30 @@ describe("Device Flow Authentication", () => {
           status: 400,
           data: "bad request",
         },
-      })
-    );
+      }),
+    )
 
-    auth = getAuth();
+    auth = getAuth()
 
     // Wait for the lock to be established and released
-    await new Promise((resolve) => ogTimeout(resolve, 50));
-  });
+    await new Promise(resolve => ogTimeout(resolve, 50))
+  })
 
   beforeEach(() => {
-    localStorage.clear();
-    jest.clearAllMocks();
-  });
+    localStorage.clear()
+    jest.clearAllMocks()
+  })
 
   it("given a valid client config, returns a valid user object", async () => {
-    postSpy.mockImplementation((url) => {
+    postSpy.mockImplementation(url => {
       if (url.includes("deviceauthorization")) {
         return Promise.resolve({
           status: 200,
           data: deviceAuthOKResponse,
-        });
+        })
       } else if (url.includes("token")) {
         // Pending on first token call, then success
-        const isPending = postSpy.mock.calls.length <= 2;
+        const isPending = postSpy.mock.calls.length <= 2
         return isPending
           ? Promise.reject({
               isAxiosError: true,
@@ -111,26 +111,26 @@ describe("Device Flow Authentication", () => {
           : Promise.resolve({
               status: 200,
               data: tokenOKResponse,
-            });
+            })
       }
-      return Promise.reject();
-    });
+      return Promise.reject()
+    })
 
-    const callback = jest.fn();
-    const catchHandler = jest.fn();
-    const userChangedCallback = jest.fn();
+    const callback = jest.fn()
+    const catchHandler = jest.fn()
+    const userChangedCallback = jest.fn()
 
     // Mock setTimeout for the two next calls (first and second token request)
-    timeoutSpy.mockImplementation((cb) => ogTimeout(cb, 10));
+    timeoutSpy.mockImplementation(cb => ogTimeout(cb, 10))
 
-    auth.onAuthStateChanged(userChangedCallback);
+    auth.onAuthStateChanged(userChangedCallback)
     // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
-    const user = await auth.signInWithDeviceFlow(callback).catch(catchHandler);
+    const user = await auth.signInWithDeviceFlow(callback).catch(catchHandler)
 
     // Verify that all the expected requests have been made,
     // and that the params/data are correct
     expect(
-      postSpy.mock.calls.map(([url, data]) => [url, Object.fromEntries((data as URLSearchParams).entries())])
+      postSpy.mock.calls.map(([url, data]) => [url, Object.fromEntries((data as URLSearchParams).entries())]),
     ).toEqual([
       [
         "https://identity.api.navigraph.com/connect/deviceauthorization",
@@ -163,17 +163,17 @@ describe("Device Flow Authentication", () => {
           scope: "userinfo openid offline_access charts",
         }),
       ],
-    ]);
+    ])
 
     // Verify that callback received correct parameters
     expect(callback).toHaveBeenCalledWith({
       user_code: deviceAuthOKResponse.user_code,
       verification_uri: deviceAuthOKResponse.verification_uri,
       verification_uri_complete: deviceAuthOKResponse.verification_uri_complete,
-    });
+    })
 
     // Verify that signInWithDeviceFlow did not throw
-    expect(catchHandler).not.toHaveBeenCalled();
+    expect(catchHandler).not.toHaveBeenCalled()
 
     // Verify that the token is correctly decoded
     expect(user).toEqual({
@@ -181,18 +181,18 @@ describe("Device Flow Authentication", () => {
       scope: ["charts", "fmsdata", "offline_access", "openid", "userinfo"],
       sub: "test-sub",
       subscriptions: ["fmsdata", "charts"],
-    });
+    })
 
     // Verify that the `onAuthStateChanged` callback was called
-    expect(userChangedCallback).toHaveBeenCalledWith(user);
-  });
+    expect(userChangedCallback).toHaveBeenCalledWith(user)
+  })
   it("given a valid client config, when a user denies the acess, should throw", async () => {
-    postSpy.mockImplementation((url) => {
+    postSpy.mockImplementation(url => {
       if (url.includes("deviceauthorization")) {
         return Promise.resolve({
           status: 200,
           data: deviceAuthOKResponse,
-        });
+        })
       }
       return Promise.reject({
         isAxiosError: true,
@@ -200,22 +200,22 @@ describe("Device Flow Authentication", () => {
           status: 400,
           data: { error: "access_denied" },
         },
-      });
-    });
+      })
+    })
 
     // Mock setTimeout for the two next calls (first and second token request)
-    timeoutSpy.mockImplementation((cb) => ogTimeout(cb, 10));
+    timeoutSpy.mockImplementation(cb => ogTimeout(cb, 10))
 
-    await expect(auth.signInWithDeviceFlow(() => "")).rejects.toThrowError(UserDeniedAccessError);
-  });
+    await expect(auth.signInWithDeviceFlow(() => "")).rejects.toThrowError(UserDeniedAccessError)
+  })
 
   it("given a valid client config, when the device token has expired, should throw", async () => {
-    postSpy.mockImplementation((url) => {
+    postSpy.mockImplementation(url => {
       if (url.includes("deviceauthorization")) {
         return Promise.resolve({
           status: 200,
           data: deviceAuthOKResponse,
-        });
+        })
       }
       return Promise.reject({
         isAxiosError: true,
@@ -223,22 +223,22 @@ describe("Device Flow Authentication", () => {
           status: 400,
           data: { error: "expired_token" },
         },
-      });
-    });
+      })
+    })
 
     // Mock setTimeout for the two next calls (first and second token request)
-    timeoutSpy.mockImplementation((cb) => ogTimeout(cb, 10));
+    timeoutSpy.mockImplementation(cb => ogTimeout(cb, 10))
 
-    await expect(auth.signInWithDeviceFlow(() => "")).rejects.toThrowError(DeviceFlowTokenExpiredError);
-  });
+    await expect(auth.signInWithDeviceFlow(() => "")).rejects.toThrowError(DeviceFlowTokenExpiredError)
+  })
 
   it("given a client config containing unauthorized scope(s), should throw", async () => {
-    postSpy.mockImplementation((url) => {
+    postSpy.mockImplementation(url => {
       if (url.includes("deviceauthorization")) {
         return Promise.resolve({
           status: 200,
           data: deviceAuthOKResponse,
-        });
+        })
       }
       return Promise.reject({
         isAxiosError: true,
@@ -246,14 +246,14 @@ describe("Device Flow Authentication", () => {
           status: 400,
           data: { error: "invalid_scope" },
         },
-      });
-    });
+      })
+    })
 
     // Mock setTimeout for the two next calls (first and second token request)
-    timeoutSpy.mockImplementation((cb) => ogTimeout(cb, 10));
+    timeoutSpy.mockImplementation(cb => ogTimeout(cb, 10))
 
-    await expect(auth.signInWithDeviceFlow(() => "")).rejects.toThrowError(InvalidScopeError);
-  });
+    await expect(auth.signInWithDeviceFlow(() => "")).rejects.toThrowError(InvalidScopeError)
+  })
 
   it("given an invalid client configuration, should throw", async () => {
     postSpy.mockImplementation(() =>
@@ -263,12 +263,12 @@ describe("Device Flow Authentication", () => {
           status: 400,
           data: { message: "invalid client" },
         },
-      })
-    );
+      }),
+    )
 
     // Mock setTimeout for the two next calls (first and second token request)
-    timeoutSpy.mockImplementation((cb) => ogTimeout(cb, 10));
+    timeoutSpy.mockImplementation(cb => ogTimeout(cb, 10))
 
-    await expect(auth.signInWithDeviceFlow(() => "")).rejects.toThrowError(InvalidClientError);
-  });
-});
+    await expect(auth.signInWithDeviceFlow(() => "")).rejects.toThrowError(InvalidClientError)
+  })
+})

@@ -1,10 +1,10 @@
-import { navigraphRequest } from "@navigraph/auth";
-import getChartImage from "./getChartImage";
-import { Chart } from "./types";
-import { ChartTypeCode } from "./chartTypeCodes";
+import { navigraphRequest } from "@navigraph/auth"
+import { ChartTypeCode } from "./chartTypeCodes"
+import getChartImage from "./getChartImage"
+import { Chart } from "./types"
 
-const getSpy = jest.spyOn(navigraphRequest, "get");
-const consoleSpy = jest.spyOn(console, "error").mockImplementation();
+const getSpy = jest.spyOn(navigraphRequest, "get")
+const consoleSpy = jest.spyOn(console, "error").mockImplementation()
 
 const chart: Chart = {
   image_day: "essa01p1_d.png",
@@ -29,11 +29,11 @@ const chart: Chart = {
   image_night_url: "https://api.navigraph.com/v2/charts/ESSA/essa01p1_n.png",
   thumb_day_url: "https://api.navigraph.com/v2/charts/ESSA/essa01p1_thumb_d.png",
   thumb_night_url: "https://api.navigraph.com/v2/charts/ESSA/essa01p1_thumb_n.png",
-};
+}
 
 beforeEach(() => {
-  jest.clearAllMocks();
-});
+  jest.clearAllMocks()
+})
 
 it("given a valid chart, when no user is authenticated, should return null and log an error", async () => {
   getSpy.mockImplementation(() =>
@@ -44,17 +44,17 @@ it("given a valid chart, when no user is authenticated, should return null and l
         status: 401,
         data: "Unauthorized",
       },
-    })
-  );
+    }),
+  )
 
-  const response = await getChartImage({ chart, theme: "light" });
+  const response = await getChartImage({ chart, theme: "light" })
 
-  expect(response).toEqual(null);
+  expect(response).toEqual(null)
   expect(consoleSpy).toHaveBeenCalledWith(
     "[Navigraph]",
     "Failed to fetch charts image. Reason:",
-    "Request failed with status code 401"
-  );
-});
+    "Request failed with status code 401",
+  )
+})
 
 // TODO: Figure out how to mock `navigraphRequest` without breaking the interceptors in order to simulate authenticated requests

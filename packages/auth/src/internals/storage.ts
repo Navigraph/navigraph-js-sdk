@@ -1,15 +1,15 @@
-type MaybePromise<T> = T | Promise<T> | PromiseLike<T>;
+type MaybePromise<T> = T | Promise<T> | PromiseLike<T>
 
 /** Custom storage implementation to be used when persisting credentials. */
 export interface CustomStorage {
-  getItem(key: string): MaybePromise<string | null>;
-  setItem(key: string, value: string): MaybePromise<void>;
+  getItem(key: string): MaybePromise<string | null>
+  setItem(key: string, value: string): MaybePromise<void>
 }
 
 /**  Storage keys to be used when persisting credentials. */
 export interface StorageKeys {
-  accessToken: string;
-  refreshToken: string;
+  accessToken: string
+  refreshToken: string
 }
 
 /** The internal storage keys reference. This reference *can* be updated when the module
@@ -17,14 +17,14 @@ export interface StorageKeys {
 export let keys: StorageKeys = {
   accessToken: "access_token",
   refreshToken: "refresh_token",
-};
+}
 
 /** The internal storage interface. This reference is updated with an actual {@link CustomStorage}
  *  implementation (externally provided or localStorage) when the module is initialized. */
 export let STORAGE: CustomStorage = {
   getItem: () => null,
   setItem: () => undefined,
-};
+}
 
 /** A wrapper around the internal {@link STORAGE} interface, with utilities to handle authentication tokens. */
 export const tokenStorage = {
@@ -38,4 +38,4 @@ export const tokenStorage = {
       ...keys,
       ...newKeys,
     }),
-};
+}

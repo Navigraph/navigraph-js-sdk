@@ -1,6 +1,6 @@
-import { NonGeoreferencedChartError } from "@navigraph/app";
-import calculateChartBounds from "./calculateChartBounds";
-import { Chart } from "../api/types";
+import { NonGeoreferencedChartError } from "@navigraph/app"
+import { Chart } from "../api/types"
+import calculateChartBounds from "./calculateChartBounds"
 
 // prettier-ignore
 const georeferencedChart = {
@@ -18,17 +18,17 @@ const georeferencedChart = {
 const nonGeoreferencedChart = {
   ...georeferencedChart,
   is_georeferenced: false,
-} as Chart;
+} as Chart
 
 describe("Chart Bounds Calculation", () => {
   it("given a georeferenced chart, calculates chart bounds correctly", () => {
     expect(calculateChartBounds(georeferencedChart)).toEqual({
       ne: { lat: 60.147406265658745, lng: 18.76775132237674 },
       sw: { lat: 59.48580423110152, lng: 16.60487732321955 },
-    });
-  });
+    })
+  })
 
   it("given a non-georeferenced chart, throws a NonGeoreferencedChartError", () => {
-    expect(() => calculateChartBounds(nonGeoreferencedChart)).toThrowError(NonGeoreferencedChartError);
-  });
-});
+    expect(() => calculateChartBounds(nonGeoreferencedChart)).toThrowError(NonGeoreferencedChartError)
+  })
+})
