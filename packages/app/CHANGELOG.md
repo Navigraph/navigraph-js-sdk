@@ -1,5 +1,11 @@
 # @navigraph/app
 
+## 1.3.4
+
+### Patch Changes
+
+- [`5964894`](https://github.com/Navigraph/navigraph-js-sdk/commit/596489472608b75190ed5e969638c1c3a76eecdc) Thanks [@SkySails](https://github.com/SkySails)! - Removed `EMAIL` scope, as it is not going to be used.
+
 ## 1.3.3
 
 ### Patch Changes

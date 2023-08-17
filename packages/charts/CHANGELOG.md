@@ -1,5 +1,15 @@
 # @navigraph/charts
 
+## 2.0.1
+
+### Patch Changes
+
+- [`7d0bd67`](https://github.com/Navigraph/navigraph-js-sdk/commit/7d0bd6727385d0252a298c45e87bf7e4d77cd55e) Thanks [@SkySails](https://github.com/SkySails)! - Added ability to choose between standard and CAO charts when fetching a charts index.
+
+- Updated dependencies [[`5964894`](https://github.com/Navigraph/navigraph-js-sdk/commit/596489472608b75190ed5e969638c1c3a76eecdc)]:
+  - @navigraph/app@1.3.4
+  - @navigraph/auth@2.4.2
+
 ## 2.0.0
 
 ### Major Changes

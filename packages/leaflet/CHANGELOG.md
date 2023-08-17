@@ -1,5 +1,11 @@
 # @navigraph/leaflet
 
+## 1.0.3
+
+### Patch Changes
+
+- [`1d45f35`](https://github.com/Navigraph/navigraph-js-sdk/commit/1d45f356143b84b102bccf939b87ce9cd8328377) Thanks [@SkySails](https://github.com/SkySails)! - Added support for passing in a `TileLayerOptions` object to the `NavigraphTileLayer` in order to configure the default Leaflet options.
+
 ## 1.0.2
 
 ### Patch Changes
