@@ -1,5 +1,18 @@
 # getting-started
 
+## 2.0.0
+
+### Major Changes
+
+- [`981603b`](https://github.com/Navigraph/navigraph-js-sdk/commit/981603bb88a33ed40c219e18df689084dbca388c) Thanks [@SkySails](https://github.com/SkySails)! - Initial migration to React + Vite
+
+### Patch Changes
+
+- Updated dependencies [[`5964894`](https://github.com/Navigraph/navigraph-js-sdk/commit/596489472608b75190ed5e969638c1c3a76eecdc), [`7d0bd67`](https://github.com/Navigraph/navigraph-js-sdk/commit/7d0bd6727385d0252a298c45e87bf7e4d77cd55e)]:
+  - @navigraph/app@1.3.4
+  - @navigraph/charts@2.0.1
+  - @navigraph/auth@2.4.2
+
 ## 1.0.33
 
 ### Patch Changes
