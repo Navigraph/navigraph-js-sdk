@@ -1,6 +1,6 @@
 import { Logger, getDefaultAppDomain } from "@navigraph/app";
 import { NavigraphAuth } from "@navigraph/auth";
-import { TileLayer, Coords, DoneCallback } from "leaflet";
+import { TileLayer, Coords, DoneCallback, TileLayerOptions } from "leaflet";
 
 enum NavigraphRasterSourceOption {
   "IFR HIGH" = "ifr.hi",
@@ -43,8 +43,12 @@ export class NavigraphTileLayer extends TileLayer {
   /** Indicates whether map tiles failed to load due to authentication being invalid or missing. */
   private isMissingAuth = false;
 
-  constructor(public auth: NavigraphAuth, public preset: PresetConfig = { source: "VFR", theme: "DAY" }) {
-    super(getNavigraphTileURL(preset.source, preset.theme, preset.forceRetina));
+  constructor(
+    public auth: NavigraphAuth,
+    public preset: PresetConfig = { source: "VFR", theme: "DAY" },
+    tileOptions?: TileLayerOptions
+  ) {
+    super(getNavigraphTileURL(preset.source, preset.theme, preset.forceRetina), tileOptions);
 
     auth.onAuthStateChanged((user) => {
       if (this.isMissingAuth && user) {
