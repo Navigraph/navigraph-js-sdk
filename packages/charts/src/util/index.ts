@@ -1,1 +1,1 @@
-export { default as calculateChartBounds } from "./calculateChartBounds";
+export { default as calculateChartBounds } from "./calculateChartBounds"

@@ -154,7 +154,7 @@ export const ChartTypeCode = {
   ...ArrivalChartTypeCode,
   ...NoiseChartTypeCode,
   ...TextChartTypeCode,
-};
+}
 
 /** The type of chart, with higher granularity than a chart category. Can be used to facilitate more fine-grained filtering. */
 export type ChartTypeCode =
@@ -164,4 +164,4 @@ export type ChartTypeCode =
   | DepartureChartTypeCode
   | ArrivalChartTypeCode
   | NoiseChartTypeCode
-  | TextChartTypeCode;
+  | TextChartTypeCode

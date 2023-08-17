@@ -1,28 +1,28 @@
-import axios from "axios";
-import { getIdentityTokenEndpoint } from "../constants";
-import { NavigraphCancelToken } from "../lib/navigraphRequest";
-import { TokenResponse } from "./types";
-import { AuthenticationAbortedError, Logger, NotInitializedError, Scope, getApp } from "@navigraph/app";
-import { tokenStorage } from "../internals/storage";
-import { setUser } from "../internals/user";
-import { decodeUser } from "../util";
+import { AuthenticationAbortedError, getApp, Logger, NotInitializedError, Scope } from "@navigraph/app"
+import axios from "axios"
+import { getIdentityTokenEndpoint } from "../constants"
+import { tokenStorage } from "../internals/storage"
+import { setUser } from "../internals/user"
+import { NavigraphCancelToken } from "../lib/navigraphRequest"
+import { decodeUser } from "../util"
+import { TokenResponse } from "./types"
 
-const requests = new Map<string, Promise<TokenResponse> | null>();
+const requests = new Map<string, Promise<TokenResponse> | null>()
 
 /** Requests a token using provided options and updates the credential stores with the result. Also sets the user variable. */
 export async function requestToken(params: Record<string, string>, cancelToken?: NavigraphCancelToken) {
-  const app = getApp();
-  if (!app) throw new NotInitializedError("Auth");
+  const app = getApp()
+  if (!app) throw new NotInitializedError("Auth")
 
-  const key = JSON.stringify(params);
-  const ongoingRequest = requests.get(key);
+  const key = JSON.stringify(params)
+  const ongoingRequest = requests.get(key)
 
   if (ongoingRequest) {
-    Logger.debug("Found ongoing request with key " + key);
-    return ongoingRequest;
+    Logger.debug("Found ongoing request with key " + key)
+    return ongoingRequest
   }
 
-  Logger.debug("No ongoing request found with key " + key);
+  Logger.debug("No ongoing request found with key " + key)
 
   const requestPromise = axios
     .post<TokenResponse>(getIdentityTokenEndpoint(), new URLSearchParams(params), {
@@ -32,19 +32,19 @@ export async function requestToken(params: Record<string, string>, cancelToken?:
     })
     .then(async ({ data }) => {
       if (data.access_token && data.refresh_token) {
-        await tokenStorage.setAccessToken(data.access_token);
-        await tokenStorage.setRefreshToken(data.refresh_token);
-        setUser(decodeUser(data.access_token));
+        await tokenStorage.setAccessToken(data.access_token)
+        await tokenStorage.setRefreshToken(data.refresh_token)
+        setUser(decodeUser(data.access_token))
       }
-      return data;
+      return data
     })
-    .catch((err) => {
-      if (axios.isCancel(err)) throw new AuthenticationAbortedError();
+    .catch(err => {
+      if (axios.isCancel(err)) throw new AuthenticationAbortedError()
 
-      throw err;
+      throw err
     })
-    .finally(() => requests.delete(key));
+    .finally(() => requests.delete(key))
 
-  requests.set(key, requestPromise);
-  return requestPromise;
+  requests.set(key, requestPromise)
+  return requestPromise
 }

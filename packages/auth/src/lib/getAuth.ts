@@ -1,9 +1,9 @@
-import { getApp, Logger, NotInitializedError } from "@navigraph/app";
-import { signInWithDeviceFlow } from "../flows/device-flow";
-import { CustomStorage, StorageKeys, tokenStorage } from "../internals/storage";
-import loadPersistedCredentials, { INITIALIZED } from "../internals/loadPersistedCredentials";
-import { getUser, Unsubscribe, USER, USER_LISTENERS, UserCallback } from "../internals/user";
-import signOut from "../internals/signOut";
+import { getApp, Logger, NotInitializedError } from "@navigraph/app"
+import { signInWithDeviceFlow } from "../flows/device-flow"
+import loadPersistedCredentials, { INITIALIZED } from "../internals/loadPersistedCredentials"
+import signOut from "../internals/signOut"
+import { CustomStorage, StorageKeys, tokenStorage } from "../internals/storage"
+import { getUser, Unsubscribe, USER, USER_LISTENERS, UserCallback } from "../internals/user"
 
 export interface AuthParameters {
   /**
@@ -14,7 +14,7 @@ export interface AuthParameters {
    * @default
    * { accessToken: "access_token", refreshToken: "refresh_token" }
    */
-  keys?: Partial<StorageKeys>;
+  keys?: Partial<StorageKeys>
   /**
    * Custom storage implementation to be used when persisting credentials.
    *
@@ -28,7 +28,7 @@ export interface AuthParameters {
    *   setItem: (key: string, val: string) => setSomeItem(key, val),
    * }
    */
-  storage?: CustomStorage;
+  storage?: CustomStorage
 }
 
 /**
@@ -37,42 +37,40 @@ export interface AuthParameters {
  */
 export default function getAuth({ keys, storage }: AuthParameters = {}) {
   if (typeof localStorage === "undefined" && !storage) {
-    Logger.warning(
-      "No storage API available in your environment. Please provide a custom tokenStorage implementation."
-    );
+    Logger.warning("No storage API available in your environment. Please provide a custom tokenStorage implementation.")
   }
 
   if (storage) {
-    tokenStorage.setStorage(storage);
+    tokenStorage.setStorage(storage)
   } else if (typeof localStorage !== "undefined") {
-    tokenStorage.setStorage(localStorage);
+    tokenStorage.setStorage(localStorage)
   }
 
-  if (keys) tokenStorage.setStorageKeys(keys);
+  if (keys) tokenStorage.setStorageKeys(keys)
 
-  const app = getApp();
-  if (!app) throw new NotInitializedError("Auth");
+  const app = getApp()
+  if (!app) throw new NotInitializedError("Auth")
 
-  const initPromise = loadPersistedCredentials();
+  const initPromise = loadPersistedCredentials()
 
   return {
     /** Adds a callback that is called whenever the signe-in user changes. */
     onAuthStateChanged: (callback: UserCallback, initialNotify = true): Unsubscribe => {
-      const promise = INITIALIZED ? Promise.resolve() : initPromise;
+      const promise = INITIALIZED ? Promise.resolve() : initPromise
 
       // eslint-disable-next-line @typescript-eslint/no-floating-promises
       promise.then(() => {
-        initialNotify && callback(USER);
-        USER_LISTENERS.add(callback);
-      });
+        initialNotify && callback(USER)
+        USER_LISTENERS.add(callback)
+      })
 
-      return () => USER_LISTENERS.remove(callback);
+      return () => USER_LISTENERS.remove(callback)
     },
     signOut,
     getUser,
     signInWithDeviceFlow,
     isInitialized: () => INITIALIZED,
-  };
+  }
 }
 
-export type NavigraphAuth = ReturnType<typeof getAuth>;
+export type NavigraphAuth = ReturnType<typeof getAuth>

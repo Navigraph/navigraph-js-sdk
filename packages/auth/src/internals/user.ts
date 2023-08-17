@@ -1,22 +1,22 @@
-import verifyUser from "./verifyUser";
+import verifyUser from "./verifyUser"
 
 /**
  * A callback that fires every time that the authentication state changes.
  * @param user - The user object, or null if the user is not authenticated.
  */
-export type UserCallback = (user: User | null) => void;
+export type UserCallback = (user: User | null) => void
 
 /** Unsubscribe function to unmount a previously registered listener. */
-export type Unsubscribe = () => void;
+export type Unsubscribe = () => void
 
 export interface User {
-  scope: string[];
-  sub: string;
-  preferred_username: string;
-  subscriptions: string[];
+  scope: string[]
+  sub: string
+  preferred_username: string
+  subscriptions: string[]
 }
 
-export let USER: User | null = null;
+export let USER: User | null = null
 
 // prettier-ignore
 export const USER_LISTENERS = {
@@ -28,8 +28,8 @@ export const USER_LISTENERS = {
 
 /** Updates the {@link USER} variable and notifies registered listeners of the change */
 export function setUser(user: User | null) {
-  USER = user;
-  USER_LISTENERS.notify(user);
+  USER = user
+  USER_LISTENERS.notify(user)
 }
 
 /** Grabs information about the currently authenticated {@link USER user} from memory
@@ -37,9 +37,9 @@ export function setUser(user: User | null) {
  * @returns {User|null} The currently authenticated user
  * @throws {NotInitializedError} If the SDK has not been initialized
  */
-export function getUser(): User | null;
-export function getUser(verify?: false): User | null;
-export function getUser(verify?: true): Promise<User | null>;
+export function getUser(): User | null
+export function getUser(verify?: false): User | null
+export function getUser(verify?: true): Promise<User | null>
 export function getUser(verify?: boolean): User | null | Promise<User | null> {
-  return verify ? verifyUser() : USER;
+  return verify ? verifyUser() : USER
 }

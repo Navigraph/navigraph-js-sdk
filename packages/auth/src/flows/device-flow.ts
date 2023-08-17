@@ -1,34 +1,34 @@
-import pkce from "@navigraph/pkce";
 import {
-  getApp,
-  NotInitializedError,
-  NavigraphApp,
-  UserDeniedAccessError,
   DeviceFlowTokenExpiredError,
+  getApp,
   InvalidClientError,
   InvalidScopeError,
-} from "@navigraph/app";
-import axios, { AxiosError } from "axios";
-import { getIdentityDeviceAuthEndpoint } from "../constants";
-import { NavigraphCancelToken } from "../lib/navigraphRequest";
-import { AuthorizationResponse, FailedAuthorizationResponse, TokenResponse } from "../api/types";
-import { requestToken } from "../api/requestToken";
-import { decodeUser } from "../util";
-import { User } from "../internals/user";
+  NavigraphApp,
+  NotInitializedError,
+  UserDeniedAccessError,
+} from "@navigraph/app"
+import pkce from "@navigraph/pkce"
+import axios, { AxiosError } from "axios"
+import { requestToken } from "../api/requestToken"
+import { AuthorizationResponse, FailedAuthorizationResponse, TokenResponse } from "../api/types"
+import { getIdentityDeviceAuthEndpoint } from "../constants"
+import { User } from "../internals/user"
+import { NavigraphCancelToken } from "../lib/navigraphRequest"
+import { decodeUser } from "../util"
 
 /** Parameters needed in order enable a user to authenticate using the device flow. */
 export type DeviceFlowParams = {
   /** The url used to sign in manually (url excl. code)  */
-  verification_uri: string;
+  verification_uri: string
   /** The url used to sign in automatically (url incl.code) */
-  verification_uri_complete: string;
+  verification_uri_complete: string
   /** The code that can be used to sign in manually  */
-  user_code: string;
-};
+  user_code: string
+}
 
 /** A callback that will be called with the initial parameters,
  *  such as the QR code or the verification uri and code. */
-export type DeviceFlowCallback = (params: DeviceFlowParams) => void;
+export type DeviceFlowCallback = (params: DeviceFlowParams) => void
 
 /**
  * Initializes a device flow login sequence.
@@ -58,15 +58,15 @@ export type DeviceFlowCallback = (params: DeviceFlowParams) => void;
  */
 export async function signInWithDeviceFlow(
   callback: DeviceFlowCallback,
-  cancelToken?: NavigraphCancelToken
+  cancelToken?: NavigraphCancelToken,
 ): Promise<User> {
-  const app = getApp();
+  const app = getApp()
 
   if (!app) {
-    throw new NotInitializedError("Auth");
+    throw new NotInitializedError("Auth")
   }
 
-  const { code_verifier, code_challenge } = pkce();
+  const { code_verifier, code_challenge } = pkce()
 
   // Initiate device flow
   const response = await axios
@@ -78,18 +78,18 @@ export async function signInWithDeviceFlow(
         code_challenge,
         code_challenge_method: "S256",
       }),
-      { headers: { "Content-Type": "application/x-www-form-urlencoded" } }
+      { headers: { "Content-Type": "application/x-www-form-urlencoded" } },
     )
     .catch((err: AxiosError<FailedAuthorizationResponse>) => {
-      const status = err.response?.status;
+      const status = err.response?.status
 
       return status && status < 500
         ? new InvalidClientError()
-        : new Error(`Unable to sign in with device flow. ${err.message}`);
-    });
+        : new Error(`Unable to sign in with device flow. ${err.message}`)
+    })
 
   if (response instanceof Error) {
-    throw response;
+    throw response
   }
 
   const { verification_uri, verification_uri_complete, user_code, interval } = response.data; // prettier-ignore
@@ -99,21 +99,21 @@ export async function signInWithDeviceFlow(
       verification_uri,
       verification_uri_complete,
       user_code,
-    });
+    })
   }
 
-  const tokens = await poll(app, { ...response.data, interval: interval * 1000, code_verifier }, cancelToken);
+  const tokens = await poll(app, { ...response.data, interval: interval * 1000, code_verifier }, cancelToken)
 
-  return decodeUser(tokens.access_token) as User;
+  return decodeUser(tokens.access_token) as User
 }
 
 async function poll(
   app: NavigraphApp,
   params: AuthorizationResponse & { code_verifier: string },
   cancelToken?: NavigraphCancelToken,
-  attempts = 0
+  attempts = 0,
 ): Promise<TokenResponse> {
-  await new Promise((resolve) => setTimeout(resolve, params.interval));
+  await new Promise(resolve => setTimeout(resolve, params.interval))
 
   try {
     const response = await requestToken(
@@ -125,33 +125,33 @@ async function poll(
         grant_type: "urn:ietf:params:oauth:grant-type:device_code",
         scope: app.scopes.join(" "),
       },
-      cancelToken
-    );
+      cancelToken,
+    )
 
-    return response;
+    return response
   } catch (exception: unknown) {
     if (axios.isAxiosError(exception)) {
-      const { error } = exception.response?.data as { error: string };
+      const { error } = exception.response?.data as { error: string }
 
       switch (error) {
         case "slow_down":
-          attempts++;
-          params.interval += 5000;
-          return poll(app, params, cancelToken, attempts);
+          attempts++
+          params.interval += 5000
+          return poll(app, params, cancelToken, attempts)
         case "authorization_pending":
-          attempts++;
-          return poll(app, params, cancelToken, attempts);
+          attempts++
+          return poll(app, params, cancelToken, attempts)
         case "access_denied":
-          throw new UserDeniedAccessError();
+          throw new UserDeniedAccessError()
         case "expired_token":
-          throw new DeviceFlowTokenExpiredError();
+          throw new DeviceFlowTokenExpiredError()
         case "invalid_scope":
-          throw new InvalidScopeError();
+          throw new InvalidScopeError()
         default:
-          throw new Error("An unknown error ocurred: " + error);
+          throw new Error("An unknown error ocurred: " + error)
       }
     } else {
-      throw exception;
+      throw exception
     }
   }
 }

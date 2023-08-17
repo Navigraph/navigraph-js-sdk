@@ -1,1 +1,1 @@
-export * from "./lib/NavigraphTileLayer";
+export * from "./lib/NavigraphTileLayer"
