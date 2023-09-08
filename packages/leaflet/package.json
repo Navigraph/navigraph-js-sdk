@@ -37,6 +37,6 @@
     "leaflet": "^1.9.4"
   },
   "devDependencies": {
-    "@navigraph/auth": "2.4.2"
+    "@navigraph/auth": "2.4.3"
   }
 }
