@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.4.3
+
+### Patch Changes
+
+- [#75](https://github.com/Navigraph/navigraph-js-sdk/pull/75) [`ebe1b9f`](https://github.com/Navigraph/navigraph-js-sdk/commit/ebe1b9fc24df9d6407ff98b0e3fb28903889835f) Thanks [@SkySails](https://github.com/SkySails)! - Included a polyfill for `Promise.finally` to make the SDK work in MSFS directly out of the box without additional setup.
+
 ## 2.4.2
 
 ### Patch Changes
