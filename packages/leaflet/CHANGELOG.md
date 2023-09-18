@@ -4,7 +4,8 @@
 
 ### Minor Changes
 
-- [`9c63110`](https://github.com/Navigraph/navigraph-js-sdk/commit/9c63110fac945ac8ff5035215453aa24fb216069) Thanks [@SkySails](https://github.com/SkySails)! - - Added error handling for uninitialized or badly configured client settings.
+- [`9c63110`](https://github.com/Navigraph/navigraph-js-sdk/commit/9c63110fac945ac8ff5035215453aa24fb216069) Thanks [@SkySails](https://github.com/SkySails)!
+  - Added error handling for uninitialized or badly configured client settings.
   - Removed unnecessary and potentially problematic bundling of Navigraph dependencies
 
 ## 1.0.3
