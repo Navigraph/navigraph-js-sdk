@@ -1,4 +1,4 @@
-import { getDefaultAppDomain, Logger } from "@navigraph/app"
+import { getApp, getDefaultAppDomain, Logger, NotInitializedError, Scope } from "@navigraph/app"
 import { NavigraphAuth } from "@navigraph/auth"
 import { Coords, DoneCallback, TileLayer, TileLayerOptions } from "leaflet"
 
@@ -49,6 +49,16 @@ export class NavigraphTileLayer extends TileLayer {
     tileOptions?: TileLayerOptions,
   ) {
     super(getNavigraphTileURL(preset.source, preset.theme, preset.forceRetina), tileOptions)
+
+    const app = getApp()
+
+    if (!app) throw new NotInitializedError("NavigraphTileLayer")
+
+    if (!app.scopes.includes(Scope.TILES)) {
+      Logger.warning(
+        "NavigraphTileLayer was initialized, but the 'tiles' scope is missing. This may cause issues with loading tiles.",
+      )
+    }
 
     auth.onAuthStateChanged(user => {
       if (this.isMissingAuth && user) {
