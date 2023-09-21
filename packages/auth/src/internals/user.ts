@@ -33,7 +33,7 @@ export function setUser(user: User | null) {
 }
 
 /** Grabs information about the currently authenticated {@link USER user} from memory
- * @param verify Whether to verify the validity of the associated access token. If true, the function will return a promise instead.
+ * @param verify Whether to verify the signed in user with the server by attempting to grab new credentials. If true, the function will return a promise instead.
  * @returns {User|null} The currently authenticated user
  * @throws {NotInitializedError} If the SDK has not been initialized
  */
