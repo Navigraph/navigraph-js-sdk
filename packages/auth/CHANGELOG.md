@@ -1,5 +1,13 @@
 # @navigraph/auth
 
+## 2.5.0
+
+### Minor Changes
+
+- [`b1ecbc8`](https://github.com/Navigraph/navigraph-js-sdk/commit/b1ecbc89f6fe1c951bcf9a04d8cd03eba2342037) Thanks [@SkySails](https://github.com/SkySails)! - Changed the functionality of the user `verify` parameter that is passed to `getUser()`. The SDK will now always try to grab new credentials from the server when this option is passed, instead of first checking the validity of the access token.
+
+  This fixes an issue in `@navigraph/leaflet` where a complete refresh is _required_ in order to grab new credentials when tiles fail to load.
+
 ## 2.4.3
 
 ### Patch Changes
