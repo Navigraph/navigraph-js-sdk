@@ -60,12 +60,7 @@ export class NavigraphTileLayer extends TileLayer {
       )
     }
 
-    auth.onAuthStateChanged(user => {
-      if (this.isMissingAuth && user) {
-        this.redraw()
-        this.isMissingAuth = false
-      }
-    })
+    auth.onAuthStateChanged(() => this.redraw())
 
     if (!this.auth.isInitialized()) {
       Logger.warning(
