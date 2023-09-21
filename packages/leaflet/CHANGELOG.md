@@ -1,5 +1,11 @@
 # @navigraph/leaflet
 
+## 1.1.1
+
+### Patch Changes
+
+- [`f1a850f`](https://github.com/Navigraph/navigraph-js-sdk/commit/f1a850fd7ea613ba9467b93d7643de2887dcc97e) Thanks [@SkySails](https://github.com/SkySails)! - Improved reliability of the enroute map by making sure that it is re-rendered on every change to the authenticated user
+
 ## 1.1.0
 
 ### Minor Changes
