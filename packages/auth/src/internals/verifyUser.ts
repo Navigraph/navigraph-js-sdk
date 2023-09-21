@@ -1,27 +1,19 @@
 import { getApp, Logger, NotInitializedError } from "@navigraph/app"
 import { requestToken } from "../api/requestToken"
-import { decodeUser, isExpiredToken, runWithLock } from "../util"
+import { runWithLock } from "../util"
 import { tokenStorage } from "./storage"
-import { setUser, USER, User } from "./user"
+import { USER, User } from "./user"
 
 let verifyUserPromise: Promise<User | null> | null = null
 
 /**
- * Verifies the validity of the currently stored access token. If the token is invalid or expired, a refresh attempt will be made.
+ * Verifies the validity of the currently signed in user by attempting to refresh the access token.
  * @returns {Promise<User|null>} The currently authenticated user
  * @throws {NotInitializedError} If the SDK has not been initialized
  */
 export default async function verifyUser() {
   const app = getApp()
   if (!app) throw new NotInitializedError("Auth")
-
-  const ACCESS_TOKEN = await tokenStorage.getAccessToken()
-
-  if (ACCESS_TOKEN && !isExpiredToken(ACCESS_TOKEN)) {
-    const user = decodeUser(ACCESS_TOKEN)
-    setUser(user)
-    return user
-  }
 
   if (verifyUserPromise) {
     Logger.debug("Found ongoing verification request, returning promise early")
