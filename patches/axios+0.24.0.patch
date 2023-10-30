@@ -1,0 +1,14 @@
+diff --git a/node_modules/axios/lib/defaults.js b/node_modules/axios/lib/defaults.js
+index eaee189..be90e84 100644
+--- a/node_modules/axios/lib/defaults.js
++++ b/node_modules/axios/lib/defaults.js
+@@ -19,9 +19,6 @@ function getDefaultAdapter() {
+   if (typeof XMLHttpRequest !== 'undefined') {
+     // For browsers use XHR adapter
+     adapter = require('./adapters/xhr');
+-  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+-    // For node use HTTP adapter
+-    adapter = require('./adapters/http');
+   }
+   return adapter;
+ }
