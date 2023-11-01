@@ -4,8 +4,8 @@ import { getChartsAPI } from "@navigraph/charts"
 import { getPackagesAPI } from "@navigraph/packages"
 
 const config: NavigraphApp = {
-  clientId: "<YOUR_NAVIGRAPH_CLIENT_ID>",
-  clientSecret: "<YOUR_NAVIGRAPH_CLIENT_SECRET>",
+  clientId: import.meta.env.NG_CLIENT_ID,
+  clientSecret: import.meta.env.NG_CLIENT_SECRET,
   scopes: [Scope.CHARTS, Scope.FMSDATA],
 }
 
