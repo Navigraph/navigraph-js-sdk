@@ -1,0 +1,52 @@
+{
+  "name": "@navigraph/packages",
+  "version": "1.0.0",
+  "license": "MIT",
+  "description": "Allows interaction with the Navigraph Packages API as part of the Navigraph SDK",
+  "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
+  "homepage": "https://navigraph.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Navigraph/navigraph-js-sdk",
+    "directory": "packages/packages"
+  },
+  "keywords": [
+    "navigraph",
+    "charts",
+    "AIRAC",
+    "fmsdata",
+    "sdk"
+  ],
+  "main": "./src/index.ts",
+  "private": false,
+  "sideEffects": false,
+  "files": [
+    "dist/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --dts",
+    "dev": "tsup src/index.ts --watch --sourcemap inline",
+    "lint": "eslint \"src/**/*.ts\"",
+    "clean": "rimraf .turbo node_modules dist",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@navigraph/auth": "2.4.1",
+    "@navigraph/app": "1.3.3"
+  },
+  "devDependencies": {},
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/index.esm.js",
+      "require": "./dist/index.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./package.json": "./package.json"
+  }
+}
