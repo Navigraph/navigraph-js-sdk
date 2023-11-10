@@ -1,4 +1,4 @@
-import { Logger } from "@navigraph/app"
+import { Logger, RequestFailedError } from "@navigraph/app"
 import { isAxiosError, navigraphRequest } from "@navigraph/auth"
 import { getPackagesApiRoot } from "../constants"
 import { NavigraphPackage, PackageStatus } from "./types"
@@ -32,7 +32,7 @@ export interface PackageResponseItem {
  * @param {string} [options.format] - The format of the package data to be returned. If not specified, all available formats are returned.
  * @param {boolean} [options.single] - Set to true to return only the first package. If false or not provided, an array of packages is returned.
  * @returns {Promise<NavigraphPackage[] | NavigraphPackage | null>} A promise that resolves to either an array of NavigraphPackage objects, a single NavigraphPackage object, or null if no packages are found.
- * @throws {Error} Throws an error if the API request fails, with a message indicating the reason for failure.
+ * @throws {RequestFailedError} If the API request fails, with a message indicating the reason for failure.
  *
  * @example
  * // Fetch multiple packages in default format
@@ -58,7 +58,7 @@ export async function getPackages<
   } catch (e) {
     const error = isAxiosError(e) ? e.message : (e as string)
     Logger.err("Failed to fetch packages. Reason:", error)
-    throw new Error(`Failed to fetch packages. Reason: ${error}`)
+    throw new RequestFailedError("packages", error)
   }
 }
 

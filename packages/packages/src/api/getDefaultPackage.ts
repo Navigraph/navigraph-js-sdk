@@ -1,3 +1,4 @@
+import { NoPackagesFoundError } from "@navigraph/app"
 import { getPackages } from "./getPackages"
 import { NavigraphPackage } from "./types"
 
@@ -6,7 +7,8 @@ import { NavigraphPackage } from "./types"
  * This function is typically what should be used to retrieve a package from the Navigraph API.
  *
  * @returns {Promise<NavigraphPackage>} A promise that resolves to a NavigraphPackage object.
- * @throws {Error} Throws an error if no package is found or if the API request fails.
+ * @throws {NoPackagesFoundError} If no package is found or if the API request fails.
+ * @throws {RequestFailedError} If the API request fails.
  *
  * @example
  * try {
@@ -18,6 +20,6 @@ import { NavigraphPackage } from "./types"
  */
 export async function getDefaultPackage(): Promise<NavigraphPackage> {
   const packageItem = await getPackages({ single: true })
-  if (!packageItem) throw new Error("No package found")
+  if (!packageItem) throw new NoPackagesFoundError()
   return packageItem
 }

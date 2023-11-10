@@ -47,3 +47,17 @@ export class NonGeoreferencedChartError extends Error {
     this.name = "NonGeoreferencedChartError"
   }
 }
+
+export class NoPackagesFoundError extends Error {
+  constructor() {
+    super("No packages found")
+    this.name = "NoPackagesFoundError"
+  }
+}
+
+export class RequestFailedError extends Error {
+  constructor(resource: string, reason?: string) {
+    super(`Failed to fetch ${resource}${reason ? `. Reason: ${reason}` : ""}`)
+    this.name = "RequestFailedError"
+  }
+}

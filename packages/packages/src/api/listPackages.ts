@@ -1,3 +1,4 @@
+import { NoPackagesFoundError } from "@navigraph/app"
 import { getPackages } from "./getPackages"
 import { NavigraphPackage } from "./types"
 
@@ -10,7 +11,8 @@ import { NavigraphPackage } from "./types"
  * @param {string} [options.format] - The format(s) of the package data to be returned, specified as comma-separated values.
  *                                   If not provided, packages in all available formats for your client are returned.
  * @returns {Promise<NavigraphPackage[]>} A promise that resolves to an array of NavigraphPackage objects.
- * @throws {Error} Throws an error if no packages are found or if the API request fails.
+ * @throws {NoPackagesFoundError} If no package is found or if the API request fails.
+ * @throws {RequestFailedError} If the API request fails.
  *
  * @example
  * // Fetch packages in a specific format
@@ -22,6 +24,6 @@ import { NavigraphPackage } from "./types"
  */
 export async function listPackages(options?: { format: string }): Promise<NavigraphPackage[]> {
   const packages = await getPackages(options)
-  if (!packages) throw new Error("No packages found")
+  if (!packages) throw new NoPackagesFoundError()
   return packages
 }
