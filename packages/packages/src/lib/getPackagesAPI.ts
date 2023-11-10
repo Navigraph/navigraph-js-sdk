@@ -1,5 +1,7 @@
 import { getApp, Logger, NotInitializedError, Scope } from "@navigraph/app"
-import { getPackage, getPackages } from "../api/packageService"
+import { getDefaultPackage } from "../api/getDefaultPackage"
+import { getPackages } from "../api/getPackages"
+import { listPackages } from "../api/listPackages"
 
 /** Grabs a reference to an object containing available Navigraph Packages functionality */
 export const getPackagesAPI = () => {
@@ -13,5 +15,5 @@ export const getPackagesAPI = () => {
     )
   }
 
-  return { getPackages, getPackage }
+  return { listPackages, getDefaultPackage, getPackages }
 }
