@@ -42,18 +42,18 @@ export interface PackageResponseItem {
  * // Fetch a single package in a specific format
  * fetchPackages({ format: 'DFD', single: true }).then(package => console.log(package));
  */
-export async function getPackages(options?: {
-  format?: string
-  single?: boolean
-}): Promise<NavigraphPackage[] | NavigraphPackage | null> {
+export async function getPackages<
+  TSingle extends boolean = false,
+  TReturn = TSingle extends true ? NavigraphPackage : NavigraphPackage[],
+>(options?: { format?: string; single?: TSingle }): Promise<TReturn | null> {
   try {
     const formatQuery = options?.format ? `?format=${options.format}` : ""
     const result = await navigraphRequest.get<PackageResponseItem[]>(`${getPackagesApiRoot()}${formatQuery}`)
 
     if (options?.single) {
-      return result?.data && result?.data.length > 0 ? mapResponseToNavigraphPackage(result.data[0]) : null
+      return result?.data && result?.data.length > 0 ? (mapResponseToNavigraphPackage(result.data[0]) as TReturn) : null
     } else {
-      return result?.data ? result.data.map(mapResponseToNavigraphPackage) : null
+      return result?.data ? (result.data.map(mapResponseToNavigraphPackage) as TReturn) : null
     }
   } catch (e) {
     const error = isAxiosError(e) ? e.message : (e as string)

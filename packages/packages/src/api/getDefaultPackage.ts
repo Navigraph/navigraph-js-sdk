@@ -19,5 +19,5 @@ import { NavigraphPackage } from "./types"
 export async function getDefaultPackage(): Promise<NavigraphPackage> {
   const packageItem = await getPackages({ single: true })
   if (!packageItem) throw new Error("No package found")
-  return packageItem as NavigraphPackage
+  return packageItem
 }
