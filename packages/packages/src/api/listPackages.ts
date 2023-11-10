@@ -23,5 +23,5 @@ import { NavigraphPackage } from "./types"
 export async function listPackages(options?: { format: string }): Promise<NavigraphPackage[]> {
   const packages = await getPackages(options)
   if (!packages) throw new Error("No packages found")
-  return packages as NavigraphPackage[]
+  return packages
 }
