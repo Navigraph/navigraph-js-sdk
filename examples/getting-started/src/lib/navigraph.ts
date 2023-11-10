@@ -9,7 +9,7 @@ const config: NavigraphApp = {
   scopes: [Scope.CHARTS, Scope.FMSDATA],
 }
 
-if (config.clientId.includes("<")) {
+if (!config.clientId || config.clientId.includes("<")) {
   alert("Please add your client credentials in lib/navigraph.ts.")
 }
 
