@@ -54,16 +54,14 @@ export default async function getPackages<
   TReturn = TDefault extends true ? NavigraphPackage : TFormat extends string ? NavigraphPackage : NavigraphPackage[],
 >(options?: { format?: TFormat; default?: TDefault }): Promise<TReturn | null> {
   try {
-    const params = [
-      ["format", options?.format ?? null],
-      ["defaultOnly", options?.default ?? null],
-    ].filter((p): p is [string, string] => p[1] !== null)
+    const params = new URLSearchParams({
+      format: options?.format ?? "",
+      defaultOnly: options?.default ? "true" : "",
+    })
 
-    const result = await navigraphRequest.get<PackageResponseItem[]>(
-      `${getPackagesApiRoot()}${new URLSearchParams(params).toString()}`,
-    )
+    const result = await navigraphRequest.get<PackageResponseItem[]>(`${getPackagesApiRoot()}?${params.toString()}`)
 
-    if (options?.default) {
+    if (options?.format || options?.default) {
       return result?.data && result?.data.length > 0 ? (mapResponseToNavigraphPackage(result.data[0]) as TReturn) : null
     } else {
       return result?.data ? (result.data.map(mapResponseToNavigraphPackage) as TReturn) : null
