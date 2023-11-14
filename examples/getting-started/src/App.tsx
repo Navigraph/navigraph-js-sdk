@@ -39,11 +39,13 @@ function App() {
 
       <h1 className="text-6xl text-black dark:text-white font-bold">Navigraph SDK Demo</h1>
 
+      {isInitialized && (
       <button
         className="py-2 px-4 font-semibold rounded-md bg-black text-white dark:bg-white dark:text-black"
         onClick={() => !isLoginInProgress && (user ? signOut() : handleSignIn())}>
         {user ? "Sign out" : !isLoginInProgress ? "Sign in" : "Signing in..."}
       </button>
+      )}
 
       {params?.verification_uri_complete && !user && (
         <div className="flex flex-col items-center gap-2">
