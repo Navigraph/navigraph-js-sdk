@@ -1,4 +1,6 @@
+import { NoPackagesFoundError, RequestFailedError } from "@navigraph/app"
 import { DeviceFlowParams } from "@navigraph/auth"
+import { NavigraphPackage } from "@navigraph/packages"
 import { useCallback, useState } from "react"
 import { useNavigraphAuth } from "./hooks/useNavigraphAuth"
 import { charts, packages } from "./lib/navigraph"
@@ -6,7 +8,7 @@ import { charts, packages } from "./lib/navigraph"
 function App() {
   const [params, setParams] = useState<DeviceFlowParams | null>(null)
   const [chartsIndex, setChartsIndex] = useState<string | undefined>(undefined)
-  const [packageLink, setPackageLink] = useState<string | undefined>(undefined)
+  const [packageDetails, setPackageDetails] = useState<NavigraphPackage | undefined>(undefined)
   const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
 
   const { user, isInitialized, signIn, signOut } = useNavigraphAuth()
@@ -16,22 +18,15 @@ function App() {
 
   async function fetchPackage() {
     try {
-      const pkg = await packages.getPackage()
-      if (!pkg) {
-        throw new Error("No package found.")
-      }
+      const pkg = await packages.getDefaultPackage()
+      if (!pkg.file?.url) throw new Error("Package found, but no URL was provided")
 
-      if (!pkg.file?.url) {
-        throw new Error("No package file found.")
-      }
-
-      setPackageLink(pkg.file.url)
+      setPackageDetails(pkg)
     } catch (error) {
-      if (error instanceof Error) {
-        setErrorMessage(error.message)
-      } else {
-        setErrorMessage("An unknown error occurred")
-      }
+      if (error instanceof NoPackagesFoundError) setErrorMessage("No packages found")
+      else if (error instanceof RequestFailedError) setErrorMessage("Failed to fetch packages")
+      else if (error instanceof Error) setErrorMessage("An unknown error occurred")
+      else setErrorMessage("An unknown error occurred")
     }
   }
 
@@ -80,18 +75,14 @@ function App() {
               Fetch charts index
             </button>
             <button onClick={fetchPackage} className="bg-white text-black px-4 py-2 font-semibold rounded-md">
-              Fetch packages
+              Fetch default package
             </button>
-            {packageLink && (
-              <a href={packageLink} className="text-blue-500 hover:text-blue-700">
-                Download Package
+            {packageDetails && (
+              <a href={packageDetails.file?.url} className="text-blue-500 hover:text-blue-700">
+                Download {packageDetails.format}
               </a>
             )}
-            {errorMessage && (
-              <a href={packageLink} className="text-red-500 hover:text-red-700">
-                {errorMessage}
-              </a>
-            )}
+            {errorMessage && <span className="text-red-500 hover:text-red-700">{errorMessage}</span>}
           </div>
         </>
       )}
