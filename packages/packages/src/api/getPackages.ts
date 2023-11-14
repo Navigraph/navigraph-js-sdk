@@ -44,10 +44,10 @@ interface PackageResponseItem {
  * // Fetch a single package in a specific format
  * fetchPackages({ format: 'DFD', single: true }).then(package => console.log(package));
  */
-export async function getPackages<
+export default async function getPackages<
   TSingle extends boolean = false,
   TReturn = TSingle extends true ? NavigraphPackage : NavigraphPackage[],
->(options?: { format?: string; single?: TSingle; default?: TSingle }): Promise<TReturn | null> {
+>(options?: { format?: string; single?: TSingle; default?: boolean }): Promise<TReturn | null> {
   try {
     const queryParams = [
       options?.format ? `format=${options.format}` : null,

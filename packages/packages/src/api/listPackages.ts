@@ -1,5 +1,5 @@
 import { NoPackagesFoundError } from "@navigraph/app"
-import { getPackages } from "./getPackages"
+import getPackages from "./getPackages"
 import { NavigraphPackage } from "./types"
 
 /**
@@ -14,7 +14,7 @@ import { NavigraphPackage } from "./types"
  * // Fetch packages in all available formats
  * listPackages().then(packages => console.log(packages));
  */
-export async function listPackages(): Promise<NavigraphPackage[]> {
+export default async function listPackages(): Promise<NavigraphPackage[]> {
   const packages = await getPackages()
   if (!packages) throw new NoPackagesFoundError()
   return packages
