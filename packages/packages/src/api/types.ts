@@ -40,5 +40,5 @@ export interface NavigraphPackage {
   /** The status of the package. */
   status: PackageStatus
   /** The file object */
-  file?: NavigraphFile
+  file: NavigraphFile
 }
