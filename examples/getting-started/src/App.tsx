@@ -19,7 +19,6 @@ function App() {
   async function fetchPackage() {
     try {
       const pkg = await packages.getDefaultPackage()
-      if (!pkg.file?.url) throw new Error("Package found, but no URL was provided")
 
       setPackageDetails(pkg)
     } catch (error) {
