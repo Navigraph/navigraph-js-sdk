@@ -67,13 +67,17 @@ function App() {
       {user && (
         <>
           <div className="flex flex-col items-center space-y-2">
-            <h2 className="text-2xl">
+            <h2 className="text-2xl mb-2">
               Welcome, <span className="text-blue-400 font-bold">{user.preferred_username}</span>
             </h2>
-            <button onClick={fetchChartsIndex} className="bg-white text-black py-2 px-4 font-semibold rounded-md">
+            <button
+              onClick={fetchChartsIndex}
+              className="bg-black dark:bg-white text-white dark:text-black py-2 px-4 font-semibold rounded-md">
               Fetch charts index
             </button>
-            <button onClick={fetchPackage} className="bg-white text-black px-4 py-2 font-semibold rounded-md">
+            <button
+              onClick={fetchPackage}
+              className="bg-black dark:bg-white text-white dark:text-black px-4 py-2 font-semibold rounded-md">
               Fetch default package
             </button>
             {packageDetails && (
