@@ -12,14 +12,14 @@ import { NavigraphPackage } from "./types"
  *
  * @example
  * try {
- *   const package = await getPackage();
+ *   const package = await getDefaultPackage();
  *   console.log(package);
  * } catch (error) {
  *   console.error("Failed to retrieve the package:", error);
  * }
  */
 export async function getDefaultPackage(): Promise<NavigraphPackage> {
-  const packageItem = await getPackages({ single: true })
+  const packageItem = await getPackages({ default: true })
   if (!packageItem) throw new NoPackagesFoundError()
   return packageItem
 }
