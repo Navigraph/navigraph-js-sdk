@@ -1,12 +1,23 @@
+import { DeviceFlowTokenExpiredError } from "@navigraph/app"
 import { DeviceFlowParams } from "@navigraph/auth"
 import { useCallback, useState } from "react"
 import { useNavigraphAuth } from "../hooks/useNavigraphAuth"
 
 export default function Auth() {
+  const [error, setError] = useState<Error | null>(null)
   const [params, setParams] = useState<DeviceFlowParams | null>(null)
   const { user, isInitialized, signIn, signOut } = useNavigraphAuth()
 
-  const handleSignIn = useCallback(() => signIn(params => setParams(params)).finally(() => setParams(null)), [signIn])
+  const handleSignIn = useCallback(
+    () =>
+      signIn(params => {
+        setParams(params)
+        setError(null)
+      })
+        .catch(err => setError(err))
+        .finally(() => setParams(null)),
+    [signIn],
+  )
 
   const isLoginInProgress = !!params
 
@@ -20,6 +31,12 @@ export default function Auth() {
           onClick={() => !isLoginInProgress && (user ? signOut() : handleSignIn())}>
           {user ? "Sign out" : !isLoginInProgress ? "Sign in" : "Signing in..."}
         </button>
+      )}
+
+      {error && (
+        <div className="text-red-500">
+          {error instanceof DeviceFlowTokenExpiredError ? "Session expired, try again!" : error.message}
+        </div>
       )}
 
       {params?.verification_uri_complete && !user && (
