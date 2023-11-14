@@ -41,25 +41,29 @@ interface PackageResponseItem {
  * fetchPackages().then(packages => console.log(packages));
  *
  * @example
- * // Fetch a single package in a specific format
- * fetchPackages({ format: 'DFD', single: true }).then(package => console.log(package));
+ * // Fetch the default package
+ * fetchPackages({ default: true }).then(package => console.log(package));
+ *
+ * @example
+ * // Fetch a single package in DFD format
+ * fetchPackages({ format: "DFD" }).then(package => console.log(package));
  */
 export default async function getPackages<
-  TSingle extends boolean = false,
-  TReturn = TSingle extends true ? NavigraphPackage : NavigraphPackage[],
->(options?: { format?: string; single?: TSingle; default?: boolean }): Promise<TReturn | null> {
+  TDefault extends boolean = false,
+  TFormat extends string | undefined = undefined,
+  TReturn = TDefault extends true ? NavigraphPackage : TFormat extends string ? NavigraphPackage : NavigraphPackage[],
+>(options?: { format?: TFormat; default?: TDefault }): Promise<TReturn | null> {
   try {
-    const queryParams = [
-      options?.format ? `format=${options.format}` : null,
-      options?.default ? "defaultOnly=true" : null,
-    ]
-      .filter(Boolean)
-      .join("&")
+    const params = [
+      ["format", options?.format ?? null],
+      ["defaultOnly", options?.default ?? null],
+    ].filter((p): p is [string, string] => p[1] !== null)
 
     const result = await navigraphRequest.get<PackageResponseItem[]>(
-      `${getPackagesApiRoot()}${queryParams ? `?${queryParams}` : ""}`,
+      `${getPackagesApiRoot()}${new URLSearchParams(params).toString()}`,
     )
-    if (options?.single || options?.default) {
+
+    if (options?.default) {
       return result?.data && result?.data.length > 0 ? (mapResponseToNavigraphPackage(result.data[0]) as TReturn) : null
     } else {
       return result?.data ? (result.data.map(mapResponseToNavigraphPackage) as TReturn) : null
