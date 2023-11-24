@@ -32,6 +32,6 @@
     "@navigraph/app": "1.3.4",
     "@navigraph/auth": "2.5.0",
     "@navigraph/charts": "2.0.3",
-    "@navigraph/packages": "1.0.0"
+    "@navigraph/packages": "0.0.1"
   }
 }
