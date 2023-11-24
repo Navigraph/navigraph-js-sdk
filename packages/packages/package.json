@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/packages",
-  "version": "1.0.0",
+  "version": "0.0.1",
   "license": "MIT",
   "description": "Allows interaction with the Navigraph Packages API as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
