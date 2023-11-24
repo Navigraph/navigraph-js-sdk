@@ -1,5 +1,13 @@
 # @navigraph/leaflet
 
+## 1.1.3
+
+### Patch Changes
+
+- Updated dependencies [[`fc8ef31`](https://github.com/Navigraph/navigraph-js-sdk/commit/fc8ef31c1a09b6ccf465ab0c91a58b7e59da9c99), [`5561a94`](https://github.com/Navigraph/navigraph-js-sdk/commit/5561a94808514046d8dd1b924b5a8b1101818a04)]:
+  - @navigraph/auth@2.5.1
+  - @navigraph/app@1.3.5
+
 ## 1.1.2
 
 ### Patch Changes

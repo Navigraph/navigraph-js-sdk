@@ -1,5 +1,11 @@
 # @navigraph/app
 
+## 1.3.5
+
+### Patch Changes
+
+- [#82](https://github.com/Navigraph/navigraph-js-sdk/pull/82) [`5561a94`](https://github.com/Navigraph/navigraph-js-sdk/commit/5561a94808514046d8dd1b924b5a8b1101818a04) Thanks [@m4rkus](https://github.com/m4rkus)! - Added `@navigraph/packages` module for interactions with the packages-api.
+
 ## 1.3.4
 
 ### Patch Changes
