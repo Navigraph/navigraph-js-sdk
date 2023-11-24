@@ -14,7 +14,8 @@
     "react-dom": "^18.2.0",
     "@navigraph/app": "*",
     "@navigraph/auth": "*",
-    "@navigraph/charts": "*"
+    "@navigraph/charts": "*",
+    "@navigraph/packages": "*"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",

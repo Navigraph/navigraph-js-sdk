@@ -1,73 +1,79 @@
-import { DeviceFlowParams } from "navigraph/auth";
-import { useCallback, useState } from "react";
-import { useNavigraphAuth } from "./hooks/useNavigraphAuth";
-import { charts } from "./lib/navigraph";
+import { NoPackagesFoundError, RequestFailedError } from "@navigraph/app"
+import { NavigraphPackage } from "@navigraph/packages"
+import { useCallback, useState } from "react"
+import Auth from "./components/Auth"
+import Button from "./components/Button"
+import { useNavigraphAuth } from "./hooks/useNavigraphAuth"
+import { charts, packages } from "./lib/navigraph"
+
+const AIRPORT_ICAO = "KJFK"
 
 function App() {
-  const [params, setParams] = useState<DeviceFlowParams | null>(null);
-  const [chartsIndex, setChartsIndex] = useState<string | undefined>(undefined);
+  const [output, setOutput] = useState<string | undefined>(undefined)
+  const [packageDetails, setPackageDetails] = useState<NavigraphPackage | undefined>(undefined)
+  const [errorMessage, setErrorMessage] = useState<string | undefined>(undefined)
 
-  const { user, isInitialized, signIn, signOut } = useNavigraphAuth();
+  const { user } = useNavigraphAuth()
 
-  const fetchChartsIndex = () =>
-    charts.getChartsIndex({ icao: "KJFK" }).then((d) => setChartsIndex(JSON.stringify(d, null, 2)));
+  const handleNavigraphError = useCallback(
+    (error: unknown) => {
+      if (error instanceof NoPackagesFoundError) setErrorMessage("No packages found")
+      else if (error instanceof RequestFailedError) setErrorMessage("Failed to fetch packages")
+      else if (error instanceof Error) setErrorMessage("An unknown error occurred")
+      else setErrorMessage("An unknown error occurred: " + error)
+    },
+    [setErrorMessage],
+  )
 
-  const handleSignIn = useCallback(
-    () => signIn((p) => setParams(p)).finally(() => setParams(null)),
-    [signIn]
-  );
+  const listCharts = () =>
+    charts
+      .getChartsIndex({ icao: AIRPORT_ICAO })
+      .then(charts => setOutput(JSON.stringify(charts, null, 2)))
+      .catch(err => handleNavigraphError(err))
 
-  const isLoginInProgress = !!params;
+  const fetchPackage = () =>
+    packages
+      .getPackage()
+      .then(pkg => setPackageDetails(pkg))
+      .catch(err => handleNavigraphError(err))
+
+  const listPackages = () =>
+    packages
+      .listPackages()
+      .then(pkgs => setOutput(JSON.stringify(pkgs, null, 2)))
+      .catch(err => handleNavigraphError(err))
 
   return (
     <main className="dark:bg-black dark:text-white flex flex-col space-y-10 items-center justify-center min-h-screen ">
-      {!isInitialized && <div>Loading...</div>}
-
       <h1 className="text-6xl text-black dark:text-white font-bold">Navigraph SDK Demo</h1>
 
-      <button
-        className="py-2 px-4 font-semibold rounded-md bg-black text-white dark:bg-white dark:text-black"
-        onClick={() => !isLoginInProgress && (user ? signOut() : handleSignIn())}
-      >
-        {user ? "Sign out" : !isLoginInProgress ? "Sign in" : "Signing in..."}
-      </button>
-
-      {params?.verification_uri_complete && !user && (
-        <div className="flex flex-col items-center gap-2">
-          <a
-            href={params.verification_uri_complete}
-            className="text-blue-600 bg-gray-500/10 p-3 rounded-lg"
-            target="_blank"
-            rel="noreferrer"
-          >
-            Open sign in page
-          </a>
-          <span className="opacity-50">or scan this QR code:</span>
-          <div className="p-2 rounded-lg bg-white mt-1">
-            <img
-              src={`https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${params.verification_uri_complete}`}
-            />
-          </div>
-        </div>
-      )}
+      <Auth />
 
       {user && (
         <>
-          <h2 className="text-2xl">
-            Welcome, <span className="text-blue-400 font-bold">{user.preferred_username}</span>
-          </h2>
-          <button
-            onClick={fetchChartsIndex}
-            className="bg-white text-black py-2 px-4 font-semibold rounded-md"
-          >
-            Fetch charts index
-          </button>
+          <div className="flex flex-col items-center space-y-2">
+            <h2 className="text-2xl mb-2">
+              Welcome, <span className="text-blue-400 font-bold">{user.preferred_username}</span>
+            </h2>
+
+            <Button onClick={listCharts}>List {AIRPORT_ICAO} charts</Button>
+            <Button onClick={listPackages}>List available packages</Button>
+            <Button onClick={fetchPackage}>Fetch default package</Button>
+
+            {packageDetails && (
+              <a href={packageDetails.file?.url} className="text-blue-500 hover:text-blue-700">
+                Download {packageDetails.format}
+              </a>
+            )}
+
+            {errorMessage && <span className="text-red-500 hover:text-red-700">{errorMessage}</span>}
+          </div>
         </>
       )}
 
-      {chartsIndex && <pre className="text-sm max-h-[40vh] overflow-auto">{chartsIndex}</pre>}
+      {output && <pre className="text-sm max-h-[40vh] max-w-[90vw] overflow-auto">{output}</pre>}
     </main>
-  );
+  )
 }
 
-export default App;
+export default App

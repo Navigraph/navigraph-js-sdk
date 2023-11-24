@@ -1,26 +1,27 @@
 {
-  "name": "@navigraph/leaflet",
-  "version": "1.1.2",
+  "name": "@navigraph/packages",
+  "version": "0.0.1",
   "license": "MIT",
-  "description": "Facilitates easy integration of Navigraph Enroute Charts into Leaflet-based projects.",
+  "description": "Allows interaction with the Navigraph Packages API as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
   "homepage": "https://navigraph.com",
   "repository": {
     "type": "git",
     "url": "https://github.com/Navigraph/navigraph-js-sdk",
-    "directory": "packages/leaflet"
+    "directory": "packages/packages"
   },
   "keywords": [
     "navigraph",
     "charts",
     "AIRAC",
+    "fmsdata",
     "sdk"
   ],
   "main": "./src/index.ts",
   "private": false,
   "sideEffects": false,
   "files": [
-    "dist"
+    "dist/**"
   ],
   "publishConfig": {
     "access": "public"
@@ -36,12 +37,5 @@
   "dependencies": {
     "@navigraph/auth": "2.5.0",
     "@navigraph/app": "1.3.4"
-  },
-  "peerDependencies": {
-    "leaflet": "^1.9.4"
-  },
-  "devDependencies": {
-    "@navigraph/auth": "2.5.0",
-    "@types/leaflet": "^1.9.3"
   }
 }

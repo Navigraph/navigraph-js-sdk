@@ -1,1 +1,1 @@
-export * from "@navigraph/charts";
+export * from "@navigraph/charts"
