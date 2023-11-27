@@ -1,5 +1,11 @@
 # navigraph
 
+## 1.2.34
+
+### Patch Changes
+
+- [`0879844`](https://github.com/Navigraph/navigraph-js-sdk/commit/0879844c11df222f15ff9ecb4c162172a469442c) Thanks [@SkySails](https://github.com/SkySails)! - Included missing `@navigraph/packages` module
+
 ## 1.2.33
 
 ### Patch Changes
