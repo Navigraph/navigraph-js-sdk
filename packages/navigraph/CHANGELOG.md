@@ -1,5 +1,11 @@
 # navigraph
 
+## 1.2.35
+
+### Patch Changes
+
+- [`2107588`](https://github.com/Navigraph/navigraph-js-sdk/commit/2107588cd9d8a158ccf0e255279bdad7a5dd2748) Thanks [@SkySails](https://github.com/SkySails)! - Fixed issue that prevented necessary files from being included
+
 ## 1.2.34
 
 ### Patch Changes
