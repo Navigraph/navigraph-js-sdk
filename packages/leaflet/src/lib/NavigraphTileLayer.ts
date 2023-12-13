@@ -1,6 +1,6 @@
 import { getApp, getDefaultAppDomain, Logger, NotInitializedError, Scope } from "@navigraph/app"
 import { NavigraphAuth } from "@navigraph/auth"
-import { Coords, DoneCallback, LatLngBounds, TileLayer, TileLayerOptions } from "leaflet"
+import { Coords, DoneCallback, TileLayer, TileLayerOptions } from "leaflet"
 
 enum NavigraphRasterSourceOption {
   "IFR HIGH" = "ifr.hi",
