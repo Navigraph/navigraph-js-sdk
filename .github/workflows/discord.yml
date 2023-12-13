@@ -1,0 +1,43 @@
+name: Discord Release Notifications
+
+on:
+  release:
+    types:
+      - created
+
+jobs:
+  run_main:
+    runs-on: ubuntu-latest
+    name: Send a release notification to Discord
+    steps:
+      - uses: actions/github-script@v7
+        with:
+          script: |
+            const { payload } = context;
+            if (payload.action !== "created") return
+
+            const { name, tag_name, body, html_url: url } = payload.release
+
+            const regex = /Thanks \[@\S+\]\(\S+\)!(.*)$/gm
+            const isRootPkg = !tag_name.startsWith("@") && !body.includes("Thanks")
+
+            const message = {
+              embeds: [
+                {
+                  title: `Release - ${name}`,
+                  description: isRootPkg 
+                     ? "Automatically updated to include recent changes to other SDK submodules" 
+                     : Array.from(body.matchAll(regex)).map(match => match[1]).join("\n\n"),
+                  url,
+                  color: 3447003,
+                }
+              ]
+            }
+
+            fetch("https://discord.com/api/webhooks/${{ secrets.DISCORD_WEBHOOK_ID }}/${{ secrets.DISCORD_WEBHOOK_TOKEN }}", {
+              method: "POST",
+              headers: { "Content-Type": "application/json" },
+              body: JSON.stringify(message),
+            })
+              .then((res) => res.text())
+              .then((text) => console.log(text))
