@@ -1,5 +1,11 @@
 # @navigraph/leaflet
 
+## 2.0.0
+
+### Major Changes
+
+- [#85](https://github.com/Navigraph/navigraph-js-sdk/pull/85) [`509b64d`](https://github.com/Navigraph/navigraph-js-sdk/commit/509b64d7db964fbacdab391a4c6db806b8d91f7c) Thanks [@SkySails](https://github.com/SkySails)! - Added support for FAA Sectionals (VFR & IFR)
+
 ## 1.1.3
 
 ### Patch Changes
