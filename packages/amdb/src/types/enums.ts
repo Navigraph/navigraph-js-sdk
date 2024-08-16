@@ -9,6 +9,8 @@ export enum FeatureType {
   RunwayShoulder = 7,
   Stopway = 8,
   RunwayDisplacedArea = 9,
+  /** Not provided */
+  // Clearway = 10,
   FinalApproachAndTakeoffArea = 11,
   TouchDownLiftOfArea = 12,
   HelipadThreshold = 13,
@@ -24,9 +26,27 @@ export enum FeatureType {
   ParkingStandLocation = 23,
   ParkingStandArea = 24,
   DeicingArea = 25,
+  AerodromeReferencePoint = 26,
+  VerticalPolygonalStructure = 27,
+  VerticalPointStructure = 28,
+  VerticalLineStructure = 29,
+  ConstructionArea = 30,
+  /** Not provided */
+  // SurveyControlPoint = 31,
+  /** Not provided */
+  // Asle = 32,
   BlastPad = 33,
   ServiceRoad = 34,
-  AerodromeReferencePoint = 26,
+  Water = 35,
+  Hotspot = 37, // Our data has 37 as the feattype for hotspot, although the ER-009 spec says it should be 36
+  /** Not provided */
+  // RunwayCenterlinePoint = 37,
+  /** Not provided */
+  // ArrestingSystemLocation = 38,
+  /** Not provided yet */
+  // AsrnEdge = 39
+  /** Not provided yet */
+  // AsrnNode = 40
 }
 
 export enum SurfaceType {
@@ -184,4 +204,63 @@ export enum BaseFeature {
   ConstructionArea,
   Blastpad,
   RunwayDisplacedArea,
+}
+
+export enum PolygonalStructureType {
+  TerminalBuilding = 1,
+  Hangar,
+  ControlTower,
+  NonTerminalBuilding,
+  Tank,
+  Tree,
+  Bush,
+  Forest,
+  EarthenWorks,
+  Navaid,
+  Sign,
+  Unknown = -32767,
+}
+
+export enum StructureMaterial {
+  Concrete = 1,
+  Metal,
+  StoneOrBrick,
+  Composition,
+  Rock,
+  EarthenWorks,
+  Wood,
+  Unknown = -32767,
+}
+
+export enum PointStructureType {
+  Smokestack = 1,
+  PowerlinePylon,
+  Antenna,
+  Windsock,
+  Tree,
+  Lightpole,
+  LightStanchion,
+  AirportBeacon,
+  Navaid,
+  Sign,
+  NotApplicable = -32765,
+  Unknown = -32767,
+}
+
+export enum Conformance {
+  NonConformant,
+  Conformant,
+  NotApplicable = -32765,
+  Unknown = -32767,
+}
+
+export enum LineStructureType {
+  PowerLine = 1,
+  CableRailway,
+  BushesOrTrees,
+  Wall,
+  Navaid,
+  Sign,
+  NotApplicable = -32765,
+  Unknown = -32767,
 }

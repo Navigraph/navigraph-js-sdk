@@ -4,9 +4,11 @@ import {
   AerodromeReferencePoint,
   ArrestingGearLocation,
   BlastPad,
+  ConstructionArea,
   FinalApproachAndTakeoffArea,
   FrequencyArea,
   HelipadThreshold,
+  Hotspot,
   LandAndHoldShortOperationLocation,
   PaintedCenterline,
   RunwayDisplacedArea,
@@ -18,6 +20,7 @@ import {
   RunwayThreshold,
   Stopway,
   TouchDownLiftOfArea,
+  Water,
 } from "./features"
 import {
   ApronElement,
@@ -35,6 +38,11 @@ import {
   TaxiwayShoulder,
 } from "./features/taxiways"
 import { AmdbFeature } from "./features/types"
+import {
+  VerticalLineStructure,
+  VerticalPointStructure,
+  VerticalPolygonalStructure,
+} from "./features/verticalStructures"
 
 export * from "./features"
 export * from "./enums"
@@ -49,10 +57,12 @@ export interface AmdbResultStructure {
   apronelement: FeatureCollection<ApronElement>
   arrestinggearlocation: FeatureCollection<ArrestingGearLocation>
   blastpad: FeatureCollection<BlastPad>
+  constructionarea: FeatureCollection<ConstructionArea>
   deicingarea: FeatureCollection<DeicingArea>
   finalapproachandtakeoffarea: FeatureCollection<FinalApproachAndTakeoffArea>
   frequencyarea: FeatureCollection<FrequencyArea>
   helipadthreshold: FeatureCollection<HelipadThreshold>
+  hotspot: FeatureCollection<Hotspot>
   landandholdshortoperationlocation: FeatureCollection<LandAndHoldShortOperationLocation>
   paintedcenterline: FeatureCollection<PaintedCenterline>
   parkingstandarea: FeatureCollection<ParkingStandArea>
@@ -73,6 +83,10 @@ export interface AmdbResultStructure {
   taxiwayintersectionmarking: FeatureCollection<TaxiwayIntersectionMarking>
   taxiwayshoulder: FeatureCollection<TaxiwayShoulder>
   touchdownliftoffarea: FeatureCollection<TouchDownLiftOfArea>
+  verticallinestructure: FeatureCollection<VerticalLineStructure>
+  verticalpointstructure: FeatureCollection<VerticalPointStructure>
+  verticalpolygonalstructure: FeatureCollection<VerticalPolygonalStructure>
+  water: FeatureCollection<Water>
 }
 
 export type AmdbLayerName = keyof AmdbResultStructure

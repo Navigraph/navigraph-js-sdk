@@ -60,5 +60,62 @@ export type FrequencyArea = AmdbFeature<
   Polygon
 >
 
+/**
+ * Part of the aircraft surface movement area that is, or will be, under construction
+ *
+ * ConstructionAreas may overlap with all other elements, and with other ConstructionArea features
+ */
+export type ConstructionArea = AmdbFeature<
+  {
+    /**
+     * Planned construction start date
+     *
+     * As of 2408 all pstdate entries are unknown **(0001-00-00)**
+     *
+     * Example: `2024-05-3`
+     */
+    pstdate: string
+    /**
+     * Planned construction end date
+     *
+     * As of 2408 all pendate entries are unknown **(0001-00-00)**
+     *
+     * Example: `2024-05-3`
+     */
+    pendate: string
+    /**
+     * Planned initial operational date
+     *
+     * As of 2408 all piocdate entries are unknown **(0001-00-00)**
+     *
+     * Example: `2024-05-3`
+     */
+    piocdate: string
+  },
+  FeatureType.ConstructionArea,
+  Polygon
+>
+
+/**
+ * Represents any enclosed bodies of water which intersect a 200m buffer around aircraft movement areas, and any adjacent major water bodies, only representing the parts of said major bodies which intersect a 5km buffer around the aircraft movement area
+ */
+export type Water = AmdbFeature<Record<string, never>, FeatureType.Water, Polygon>
+
+/**
+ * An area in an aerodrome movement area with a history or potential risk of collision or runway incursion, and where heightened attenion by pilots/drivers is necessary
+ */
+export type Hotspot = AmdbFeature<
+  {
+    /**
+     * Identifier of the hotspot
+     *
+     * Example: `HS12`
+     */
+    idhot: string | null
+  },
+  FeatureType.Hotspot,
+  Polygon
+>
+
 export * from "./helipads"
 export * from "./runway"
