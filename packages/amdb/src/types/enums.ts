@@ -19,7 +19,13 @@ export enum FeatureType {
   TaxiwayHoldingPosition = 18,
   RunwayExitLine = 19,
   FrequencyArea = 20,
+  ApronElement = 21,
+  StandGuidanceLine = 22,
+  ParkingStandLocation = 23,
+  ParkingStandArea = 24,
+  DeicingArea = 25,
   BlastPad = 33,
+  ServiceRoad = 34,
   AerodromeReferencePoint = 26,
 }
 
@@ -61,6 +67,7 @@ export enum PapiVasi {
   Apapi,
   Vasis,
   Avasis,
+  NotApplicable = -32765,
 }
 
 export enum LandingCategory {
@@ -70,12 +77,16 @@ export enum LandingCategory {
   Cat3A,
   Cat3B,
   Cat3C,
+  Unknown = -32767,
+  NotApplicable = -32765,
 }
 
 export enum StopbarCategory {
   None,
   Cat1,
   Cat2Or3,
+  Unknown = -32767,
+  NotApplicable = -32765,
 }
 
 export enum ThresholdType {
@@ -103,6 +114,7 @@ export enum GroundSurfaceType {
   LandingMats,
   Membrane,
   Wood,
+  Unknown = -32767,
 }
 
 export enum LineColor {
@@ -110,22 +122,66 @@ export enum LineColor {
   Orange,
   Blue,
   White,
+  Unknown = -32767,
 }
 
 export enum LineStyle {
   Solid,
   Dashed,
   Dotted,
+  Unknown = -32767,
 }
 
 export enum LineDirection {
   Bidirectional,
   StartToEndpoint,
   EndToStartpoint,
+  Unknown = -32767,
 }
 
 export enum BridgeType {
   None,
   Underpass,
   Overpass,
+  Unknown = -32767,
+}
+
+export enum Availability {
+  Unavailable,
+  Available,
+  Unknown = -32767,
+}
+
+export enum FuelType {
+  JetA1 = "1",
+  Avgas100LL = "2",
+  Mogas = "3",
+  JetB = "4",
+  "73Oct" = "5",
+  "80-87" = "6",
+  "100-130" = "7",
+  "115-145" = "8",
+  Jet = "9",
+  JetA = "10",
+  JetAPlus = "11",
+  JP4 = "12",
+}
+
+export enum BaseFeature {
+  NoOverlap,
+  ServiceRoad,
+  ApronElement,
+  TaxiwayElement,
+  ParkingStandArea,
+  Stopway = 5,
+  RunwayElement = 7, // Thats just how it is
+  RunwayIntersection,
+  RunwayShoulder,
+  FinalApproachAndTakeoffArea,
+  TouchDownLiftOffArea,
+  TaxiwayShoulder,
+  DeicingArea,
+  ConstructionArea,
+  Blastpad,
+  RunwayDisplacedArea,
 }

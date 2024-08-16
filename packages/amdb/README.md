@@ -4,7 +4,7 @@ This package is part of the Navigraph SDK, and is intended to be used in conjuct
 See the [navigraph](https://www.npmjs.com/package/navigraph) package for usage.
 
 > [!WARNING]
-> ### When real number or integer (non enumerated) values in AMDB feature properties have no value, it is represented with one of the three following default values:
+> ### When real number or integer values in AMDB feature properties have no value, it is represented with one of the three following default values:
 > | Data Type | Null   | Unknown | Not Applicable | Not Entered |
 > | --------- | ------ | ------- | -------------- | ----------- |
 > | Value     | -32768 | -32767  | -32765         | -32764      |

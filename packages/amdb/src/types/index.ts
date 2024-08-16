@@ -20,6 +20,14 @@ import {
   TouchDownLiftOfArea,
 } from "./features"
 import {
+  ApronElement,
+  DeicingArea,
+  ParkingStandArea,
+  ParkingStandLocation,
+  ServiceRoad,
+  StandGuidanceLine,
+} from "./features/aprons"
+import {
   TaxiwayElement,
   TaxiwayGuidanceLine,
   TaxiwayHoldingPosition,
@@ -38,13 +46,17 @@ type FeatureCollection<T extends AmdbFeature<object, FeatureType, Point | LineSt
 
 export interface AmdbResultStructure {
   aerodromereferencepoint: FeatureCollection<AerodromeReferencePoint>
+  apronelement: FeatureCollection<ApronElement>
   arrestinggearlocation: FeatureCollection<ArrestingGearLocation>
   blastpad: FeatureCollection<BlastPad>
+  deicingarea: FeatureCollection<DeicingArea>
   finalapproachandtakeoffarea: FeatureCollection<FinalApproachAndTakeoffArea>
   frequencyarea: FeatureCollection<FrequencyArea>
   helipadthreshold: FeatureCollection<HelipadThreshold>
   landandholdshortoperationlocation: FeatureCollection<LandAndHoldShortOperationLocation>
   paintedcenterline: FeatureCollection<PaintedCenterline>
+  parkingstandarea: FeatureCollection<ParkingStandArea>
+  parkingstandlocation: FeatureCollection<ParkingStandLocation>
   runwaydisplacedarea: FeatureCollection<RunwayDisplacedArea>
   runwayelement: FeatureCollection<RunwayElement>
   runwayexitline: FeatureCollection<RunwayExitLines>
@@ -52,6 +64,8 @@ export interface AmdbResultStructure {
   runwaymarking: FeatureCollection<RunwayMarking>
   runwayshoulder: FeatureCollection<RunwayShoulder>
   runwaythreshold: FeatureCollection<RunwayThreshold>
+  serviceroad: FeatureCollection<ServiceRoad>
+  standguidanceline: FeatureCollection<StandGuidanceLine>
   stopway: FeatureCollection<Stopway>
   taxiwayelement: FeatureCollection<TaxiwayElement>
   taxiwayguidanceline: FeatureCollection<TaxiwayGuidanceLine>
