@@ -12,7 +12,13 @@ export enum FeatureType {
   FinalApproachAndTakeoffArea = 11,
   TouchDownLiftOfArea = 12,
   HelipadThreshold = 13,
+  TaxiwayElement = 14,
+  TaxiwayShoulder = 15,
+  TaxiwayGuidanceLine = 16,
+  TaxiwayIntersectionMarking = 17,
+  TaxiwayHoldingPosition = 18,
   RunwayExitLine = 19,
+  FrequencyArea = 20,
   BlastPad = 33,
   AerodromeReferencePoint = 26,
 }
@@ -66,6 +72,12 @@ export enum LandingCategory {
   Cat3C,
 }
 
+export enum StopbarCategory {
+  None,
+  Cat1,
+  Cat2Or3,
+}
+
 export enum ThresholdType {
   Threshold,
   DisplacedThreshold,
@@ -110,4 +122,10 @@ export enum LineDirection {
   Bidirectional,
   StartToEndpoint,
   EndToStartpoint,
+}
+
+export enum BridgeType {
+  None,
+  Underpass,
+  Overpass,
 }

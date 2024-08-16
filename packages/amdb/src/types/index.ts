@@ -5,6 +5,7 @@ import {
   ArrestingGearLocation,
   BlastPad,
   FinalApproachAndTakeoffArea,
+  FrequencyArea,
   HelipadThreshold,
   LandAndHoldShortOperationLocation,
   PaintedCenterline,
@@ -18,6 +19,13 @@ import {
   Stopway,
   TouchDownLiftOfArea,
 } from "./features"
+import {
+  TaxiwayElement,
+  TaxiwayGuidanceLine,
+  TaxiwayHoldingPosition,
+  TaxiwayIntersectionMarking,
+  TaxiwayShoulder,
+} from "./features/taxiways"
 import { AmdbFeature } from "./features/types"
 
 export * from "./features"
@@ -33,6 +41,7 @@ export interface AmdbResultStructure {
   arrestinggearlocation: FeatureCollection<ArrestingGearLocation>
   blastpad: FeatureCollection<BlastPad>
   finalapproachandtakeoffarea: FeatureCollection<FinalApproachAndTakeoffArea>
+  frequencyarea: FeatureCollection<FrequencyArea>
   helipadthreshold: FeatureCollection<HelipadThreshold>
   landandholdshortoperationlocation: FeatureCollection<LandAndHoldShortOperationLocation>
   paintedcenterline: FeatureCollection<PaintedCenterline>
@@ -44,6 +53,11 @@ export interface AmdbResultStructure {
   runwayshoulder: FeatureCollection<RunwayShoulder>
   runwaythreshold: FeatureCollection<RunwayThreshold>
   stopway: FeatureCollection<Stopway>
+  taxiwayelement: FeatureCollection<TaxiwayElement>
+  taxiwayguidanceline: FeatureCollection<TaxiwayGuidanceLine>
+  taxiwayholdingposition: FeatureCollection<TaxiwayHoldingPosition>
+  taxiwayintersectionmarking: FeatureCollection<TaxiwayIntersectionMarking>
+  taxiwayshoulder: FeatureCollection<TaxiwayShoulder>
   touchdownliftoffarea: FeatureCollection<TouchDownLiftOfArea>
 }
 

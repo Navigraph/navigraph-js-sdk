@@ -486,6 +486,7 @@ export type BlastPad = AmdbFeature<
      * Example: `9`
      */
     idthr: string | null
+
     /**
      * Permanent state of feature (exceeding the AIRAC-cycle of 56 days)
      *
@@ -507,11 +508,12 @@ export type BlastPad = AmdbFeature<
 export type RunwayExitLines = AmdbFeature<
   {
     /**
-     * Taxiway segment name. This name **should** be identical to the corresponding taxiway name, but not neccesarily
+     * Taxiway segment name. This name will usually be identical to the corresponding taxiway name, but not neccesarily
      *
      * Example: `A3`
      */
     idlin: string | null
+
     /**
      * Permanent state of feature (exceeding the AIRAC-cycle of 56 days)
      *
@@ -520,12 +522,14 @@ export type RunwayExitLines = AmdbFeature<
      * Example: `Open: 1`
      */
     status: Status
+
     /**
      * The color of the painted taxiline
      *
      * Example: `Orange: 1`
      */
     color: LineColor
+
     /**
      * Style of the painted taxiline
      *
