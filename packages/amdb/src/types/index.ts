@@ -102,3 +102,11 @@ export enum Projection {
   AzimuthalEquidistant = "NAVIGRAPH:ARP_AZEQ",
   Epsg4326 = "EPSG:4326",
 }
+
+export interface AmdbSearchResult {
+  idarpt: string
+  iata: string | null
+  elev: number
+  name: string
+  coordinates: { lat: number; lon: number }
+}
