@@ -1,12 +1,13 @@
 import { initializeApp, Logger, NavigraphApp, Scope } from "navigraph/app"
 import { getAuth } from "navigraph/auth"
+import { getAmdbAPI } from "@navigraph/amdb"
 
 Logger.level = "debug"
 
 const config: NavigraphApp = {
   clientId: import.meta.env.NG_CLIENT_ID,
   clientSecret: import.meta.env.NG_CLIENT_SECRET,
-  scopes: [Scope.CHARTS, Scope.FMSDATA],
+  scopes: [Scope.TILES, Scope.AMDB],
 }
 
 if (!config.clientId || config.clientId.includes("<")) {
@@ -16,3 +17,4 @@ if (!config.clientId || config.clientId.includes("<")) {
 initializeApp(config)
 
 export const auth = getAuth()
+export const amdb = getAmdbAPI();
