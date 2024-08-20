@@ -91,6 +91,11 @@ export interface AmdbResultStructure {
 
 export type AmdbLayerName = keyof AmdbResultStructure
 
+// Type checks that FeatureType names match AmdbResultStructure so we can have an array of valid layers
+export const allLayers: AmdbLayerName[] = Object.keys(FeatureType)
+  .filter(item => !parseInt(item) && item != "0")
+  .map(item => item.toLowerCase()) as Lowercase<keyof typeof FeatureType>[]
+
 export type AmdbResult<P extends AmdbLayerName> = Pick<AmdbResultStructure, P>
 
 export enum Projection {

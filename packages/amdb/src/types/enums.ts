@@ -12,7 +12,7 @@ export enum FeatureType {
   /** Not provided */
   // Clearway = 10,
   FinalApproachAndTakeoffArea = 11,
-  TouchDownLiftOfArea = 12,
+  TouchDownLiftOffArea = 12,
   HelipadThreshold = 13,
   TaxiwayElement = 14,
   TaxiwayShoulder = 15,

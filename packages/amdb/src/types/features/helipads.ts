@@ -52,7 +52,7 @@ export type TouchDownLiftOfArea = AmdbFeature<
      */
     surftype: SurfaceType
   },
-  FeatureType.TouchDownLiftOfArea,
+  FeatureType.TouchDownLiftOffArea,
   Polygon
 >
 
