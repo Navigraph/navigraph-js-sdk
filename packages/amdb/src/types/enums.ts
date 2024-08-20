@@ -9,7 +9,7 @@ export enum FeatureType {
   RunwayShoulder = 7,
   Stopway = 8,
   RunwayDisplacedArea = 9,
-  /** Not provided */
+  // Not provided
   // Clearway = 10,
   FinalApproachAndTakeoffArea = 11,
   TouchDownLiftOffArea = 12,
@@ -31,21 +31,21 @@ export enum FeatureType {
   VerticalPointStructure = 28,
   VerticalLineStructure = 29,
   ConstructionArea = 30,
-  /** Not provided */
+  // Not provided
   // SurveyControlPoint = 31,
-  /** Not provided */
+  // Not provided
   // Asle = 32,
   BlastPad = 33,
   ServiceRoad = 34,
   Water = 35,
   Hotspot = 37, // Our data has 37 as the feattype for hotspot, although the ER-009 spec says it should be 36
-  /** Not provided */
+  // Not provided
   // RunwayCenterlinePoint = 37,
-  /** Not provided */
+  // Not provided
   // ArrestingSystemLocation = 38,
-  /** Not provided yet */
+  // Not provided yet
   // AsrnEdge = 39
-  /** Not provided yet */
+  // Not provided yet
   // AsrnNode = 40
 }
 
