@@ -3,7 +3,7 @@ import getAmdbLayer from "../api/getAmdbLayer"
 import getAmdbLayers from "../api/getAmdbLayers"
 import searchAmdb from "../api/searchAmdb"
 
-/** Grabs a reference to an object containing available Navigraph Charts API functionality */
+/** Grabs a reference to an object containing available Navigraph AMDB API functionality */
 export const getAmdbAPI = () => {
   const app = getApp()
 

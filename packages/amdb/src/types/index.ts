@@ -99,7 +99,13 @@ export const allLayers: AmdbLayerName[] = Object.keys(FeatureType)
 export type AmdbResult<P extends AmdbLayerName> = Pick<AmdbResultStructure, P>
 
 export enum Projection {
+  /**
+   * A version of {@link https://mathworld.wolfram.com/AzimuthalEquidistantProjection.html Azimuth Equidistant} where there aerodrome reference point is centered at (0, 0), and coordinates are specified in terms of (x, y) displacement in meters
+   */
   AzimuthalEquidistant = "NAVIGRAPH:ARP_AZEQ",
+  /**
+   * Standard coordinate system where locations are specified in decimal degrees of latitude and longitude
+   */
   Epsg4326 = "EPSG:4326",
 }
 
