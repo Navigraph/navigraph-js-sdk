@@ -1,6 +1,6 @@
+import { getAmdbAPI } from "@navigraph/amdb"
 import { initializeApp, Logger, NavigraphApp, Scope } from "navigraph/app"
 import { getAuth } from "navigraph/auth"
-import { getAmdbAPI } from "@navigraph/amdb"
 
 Logger.level = "debug"
 
@@ -17,4 +17,4 @@ if (!config.clientId || config.clientId.includes("<")) {
 initializeApp(config)
 
 export const auth = getAuth()
-export const amdb = getAmdbAPI();
+export const amdb = getAmdbAPI()

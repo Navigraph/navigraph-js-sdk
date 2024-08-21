@@ -1,5 +1,5 @@
 import { FAASource, NavigraphRasterSource, NavigraphTheme, NavigraphTileLayer } from "@navigraph/leaflet"
-import { geoJSON, Map, GeoJSON } from "leaflet"
+import { geoJSON, GeoJSON, Map } from "leaflet"
 import { amdb, auth } from "./navigraph"
 import "leaflet/dist/leaflet.css"
 import "./style.css"
@@ -32,79 +32,81 @@ document.querySelectorAll<HTMLButtonElement>(".themes > button").forEach(el => {
   })
 })
 
-let airport: AmdbSearchResult | null = null;
+let airport: AmdbSearchResult | null = null
 
-const visibleAmdbLayers: AmdbLayerName[] = [];
+const visibleAmdbLayers: AmdbLayerName[] = []
 
-let currentAmdbLayer: GeoJSON | null = null;
+let currentAmdbLayer: GeoJSON | null = null
 
 async function updateAmdb() {
-  (document.querySelectorAll('.amdb-layer') as NodeListOf<HTMLButtonElement>).forEach((element) => {
-    element.style.backgroundColor = visibleAmdbLayers.includes(element.id as AmdbLayerName) ? 'green' : ''
+  ;(document.querySelectorAll(".amdb-layer") as NodeListOf<HTMLButtonElement>).forEach(element => {
+    element.style.backgroundColor = visibleAmdbLayers.includes(element.id as AmdbLayerName) ? "green" : ""
   })
 
-  if(currentAmdbLayer && map.hasLayer(currentAmdbLayer)) {
+  if (currentAmdbLayer && map.hasLayer(currentAmdbLayer)) {
     map.removeLayer(currentAmdbLayer)
   }
 
-  if(!airport) return;
+  if (!airport) return
 
-  const data = await getAmdbLayers({ icao: airport?.idarpt, include: visibleAmdbLayers });
+  const data = await getAmdbLayers({ icao: airport?.idarpt, include: visibleAmdbLayers })
 
-  if(!data) return;
+  if (!data) return
 
-  currentAmdbLayer = geoJSON(Object.values(data), { onEachFeature: (feature, layer) => {
-    layer.on('click', (e) => {
-      currentAmdbLayer?.resetStyle();
+  currentAmdbLayer = geoJSON(Object.values(data), {
+    onEachFeature: (feature, layer) => {
+      layer.on("click", e => {
+        currentAmdbLayer?.resetStyle()
 
-      e.target.setStyle({ color: 'red' })
-    });
-    layer.bindPopup(`<p>${JSON.stringify(feature.properties, null, 4)}</p>`)
-  } }).addTo(map);
+        e.target.setStyle({ color: "red" })
+      })
+      layer.bindPopup(`<p>${JSON.stringify(feature.properties, null, 4)}</p>`)
+    },
+  }).addTo(map)
 }
 
-const amdbContainer = document.querySelector<HTMLDivElement>(".amdb-layers")!;
+const amdbContainer = document.querySelector<HTMLDivElement>(".amdb-layers")!
 
-allLayers.forEach((layer) => {
-  const button = document.createElement('button')
+allLayers.forEach(layer => {
+  const button = document.createElement("button")
 
   button.innerHTML = layer
 
-  button.id = layer;
-  button.className = 'amdb-layer'
+  button.id = layer
+  button.className = "amdb-layer"
 
-  button.addEventListener('click', () => {
-    if(visibleAmdbLayers.includes(layer)) {
-      visibleAmdbLayers.splice(visibleAmdbLayers.indexOf(layer), 1);
+  button.addEventListener("click", () => {
+    if (visibleAmdbLayers.includes(layer)) {
+      visibleAmdbLayers.splice(visibleAmdbLayers.indexOf(layer), 1)
     } else {
       visibleAmdbLayers.push(layer)
     }
 
-    updateAmdb();
-  });
+    updateAmdb()
+  })
 
   amdbContainer.appendChild(button)
 })
 
-const icaoInput = document.querySelector<HTMLInputElement>('#icao-input')
+const icaoInput = document.querySelector<HTMLInputElement>("#icao-input")
 
-icaoInput?.addEventListener('change', async () => {
-  const value = icaoInput.value;
+icaoInput?.addEventListener("change", async () => {
+  const value = icaoInput.value
 
-  if(value.length === 4 && /^[A-Z]{4}$/.test(value)) {
+  if (value.length === 4 && /^[A-Z]{4}$/.test(value)) {
     airport = (await amdb.searchAmdb(value))?.[0] ?? null
 
-    if(airport) {
-      icaoInput.style.backgroundColor = 'green'
-      amdbContainer.style.visibility = 'visible'
+    if (airport) {
+      icaoInput.style.backgroundColor = "green"
+      amdbContainer.style.visibility = "visible"
     } else {
-      icaoInput.style.backgroundColor = 'red'
-      amdbContainer.style.visibility = 'hidden'
+      icaoInput.style.backgroundColor = "red"
+      amdbContainer.style.visibility = "hidden"
     }
 
-    updateAmdb();
+    updateAmdb()
   } else {
-    icaoInput.style.backgroundColor = ''
+    icaoInput.style.backgroundColor = ""
   }
 })
 
@@ -120,4 +122,3 @@ auth.onAuthStateChanged(user => {
   console.log("User changed", user)
   signinBtn.innerHTML = user ? `Signed in as ${user.preferred_username}` : "Sign in"
 })
-
