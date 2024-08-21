@@ -116,3 +116,10 @@ export interface AmdbSearchResult {
   name: string
   coordinates: { lat: number; lon: number }
 }
+
+export interface AmdbCycleResult {
+  cycle_start_date: string
+  cycle_end_date: string
+  import_time: string
+  airac_cycle: number
+}

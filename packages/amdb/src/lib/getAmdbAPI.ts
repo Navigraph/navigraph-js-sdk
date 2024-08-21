@@ -1,4 +1,5 @@
 import { getApp, Logger, NotInitializedError, Scope } from "@navigraph/app"
+import getAmdbCycle from "../api/getAmdbCycle"
 import getAmdbLayer from "../api/getAmdbLayer"
 import getAmdbLayers from "../api/getAmdbLayers"
 import searchAmdb from "../api/searchAmdb"
@@ -18,6 +19,7 @@ export const getAmdbAPI = () => {
   return {
     getAmdbLayer,
     getAmdbLayers,
+    getAmdbCycle,
     searchAmdb,
   }
 }
