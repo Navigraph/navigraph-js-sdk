@@ -1,10 +1,15 @@
 {
   "name": "sdk",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "examples/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "examples/*"
+    ],
+    "nohoist": [
+      "**/@types/geojson"
+    ]
+  },
   "scripts": {
     "build": "turbo run build --filter=./packages/*",
     "dev": "turbo run dev --filter=./packages/* --no-cache --continue --parallel",

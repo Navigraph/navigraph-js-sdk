@@ -15,6 +15,7 @@
   },
   "dependencies": {
     "@navigraph/leaflet": "*",
+    "@navigraph/amdb": "*",
     "leaflet": "^1.9.4",
     "navigraph": "*"
   }

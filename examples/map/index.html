@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Navigraph Leaflet</title>
   </head>
+
   <body>
     <div class="auth container">
       <button id="signin">Sign in</button>
@@ -22,6 +23,10 @@
     <div class="themes container">
       <button>DAY</button>
       <button>NIGHT</button>
+    </div>
+    <div class="amdb-layers container" style="visibility: hidden"></div>
+    <div class="amdb-icao container">
+      <input type="text" id="icao-input" maxlength="4" required placeholder="EGLL" />
     </div>
     <div id="map"></div>
     <script type="module" src="/src/main.ts"></script>

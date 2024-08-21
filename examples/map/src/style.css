@@ -47,3 +47,27 @@ body {
   right: 10px;
   top: 10px;
 }
+
+.amdb-layers {
+  left: 780px;
+  top: 10px;
+
+  display: flex;
+
+  gap: 5px;
+
+  overflow-x: scroll;
+
+  max-width: 900px;
+
+  white-space: nowrap;
+}
+
+#icao-input {
+  width: 3em;
+}
+
+.amdb-icao {
+  left: 700px;
+  top: 10px;
+}

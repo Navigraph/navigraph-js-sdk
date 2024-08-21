@@ -1,6 +1,6 @@
 # Example Navigraph Map
 
-This is a very simple & barebones HTML + CSS + TS project that shows the basic use of the Navigraph SDK Leaflet module.
+This is a very simple & barebones HTML + CSS + TS project that shows the basic use of the Navigraph SDK Leaflet and AMDB modules.
 
 ## Installation
 
