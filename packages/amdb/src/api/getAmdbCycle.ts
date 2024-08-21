@@ -1,7 +1,7 @@
 import { Logger } from "@navigraph/app"
 import { isAxiosError, navigraphRequest } from "@navigraph/auth"
 import { getAmdbApiRoot } from "../constants"
-import { AmdbCycleResult } from "../types"
+import { AmdbCycleResponse } from "../types"
 
 /**
  * Fetches information about the currently active cycle
@@ -9,7 +9,7 @@ import { AmdbCycleResult } from "../types"
  */
 export default async function getAmdbCycle() {
   const result = await navigraphRequest
-    .get<AmdbCycleResult>(`${getAmdbApiRoot()}/cycle`)
+    .get<AmdbCycleResponse>(`${getAmdbApiRoot()}/cycle`)
     .catch((e: unknown) => Logger.err("Failed to fetch amdb cycle. Reason:", isAxiosError(e) ? e.message : e))
 
   return result?.data || null

@@ -52,7 +52,7 @@ type FeatureCollection<T extends AmdbFeature<object, FeatureType, Point | LineSt
   T["properties"]
 >
 
-export interface AmdbResultStructure {
+export interface AmdbResponseStructure {
   aerodromereferencepoint: FeatureCollection<AerodromeReferencePoint>
   apronelement: FeatureCollection<ApronElement>
   arrestinggearlocation: FeatureCollection<ArrestingGearLocation>
@@ -89,14 +89,14 @@ export interface AmdbResultStructure {
   water: FeatureCollection<Water>
 }
 
-export type AmdbLayerName = keyof AmdbResultStructure
+export type AmdbLayerName = keyof AmdbResponseStructure
 
-// Type checks that FeatureType names match AmdbResultStructure so we can have an array of valid layers
+// Type checks that FeatureType names match AmdbResponseStructure so we can have an array of valid layers
 export const allLayers: AmdbLayerName[] = Object.keys(FeatureType)
   .filter(item => !parseInt(item) && item != "0")
   .map(item => item.toLowerCase()) as Lowercase<keyof typeof FeatureType>[]
 
-export type AmdbResult<P extends AmdbLayerName> = Pick<AmdbResultStructure, P>
+export type AmdbResponse<P extends AmdbLayerName> = Pick<AmdbResponseStructure, P>
 
 export enum Projection {
   /**
@@ -109,7 +109,7 @@ export enum Projection {
   Epsg4326 = "EPSG:4326",
 }
 
-export interface AmdbSearchResult {
+export interface AmdbSearchResponse {
   idarpt: string
   iata: string | null
   elev: number
@@ -117,7 +117,7 @@ export interface AmdbSearchResult {
   coordinates: { lat: number; lon: number }
 }
 
-export interface AmdbCycleResult {
+export interface AmdbCycleResponse {
   cycle_start_date: string
   cycle_end_date: string
   import_time: string

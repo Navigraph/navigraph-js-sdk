@@ -1,7 +1,7 @@
 import { Logger } from "@navigraph/app"
 import { isAxiosError, navigraphRequest } from "@navigraph/auth"
 import { getAmdbApiRoot } from "../constants"
-import { AmdbLayerName, AmdbResult, Projection } from "../types"
+import { AmdbLayerName, AmdbResponse, Projection } from "../types"
 
 /**
  * Fetches a single layer from the AMDB for a specific airport
@@ -24,7 +24,7 @@ export default async function getAmdbLayer<L extends AmdbLayerName>({
   precision?: number
 }) {
   const result = await navigraphRequest
-    .get<AmdbResult<L>[L]>(`${getAmdbApiRoot()}/${icao}/${layer}`, {
+    .get<AmdbResponse<L>[L]>(`${getAmdbApiRoot()}/${icao}/${layer}`, {
       params: {
         projection,
         precision,

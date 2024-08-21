@@ -2,7 +2,7 @@ import { Logger } from "@navigraph/app"
 import { isAxiosError, navigraphRequest } from "@navigraph/auth"
 import { getAmdbApiRoot } from "../constants"
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { AerodromeReferencePoint, AmdbSearchResult } from "../types"
+import { AerodromeReferencePoint, AmdbSearchResponse } from "../types"
 
 /**
  * Searches for airports with AMDB data based on a query string and returns some metadata about them
@@ -13,7 +13,7 @@ import { AerodromeReferencePoint, AmdbSearchResult } from "../types"
  */
 export default async function searchAmdb(query: string) {
   const result = await navigraphRequest
-    .get<AmdbSearchResult[]>(`${getAmdbApiRoot()}/search`, {
+    .get<AmdbSearchResponse[]>(`${getAmdbApiRoot()}/search`, {
       params: {
         q: query,
       },
