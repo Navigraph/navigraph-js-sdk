@@ -194,7 +194,8 @@ export enum BaseFeature {
   TaxiwayElement,
   ParkingStandArea,
   Stopway = 5,
-  RunwayElement = 7, // Thats just how it is
+  RunwayElement = 7,
+
   RunwayIntersection,
   RunwayShoulder,
   FinalApproachAndTakeoffArea,
