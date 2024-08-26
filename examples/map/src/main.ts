@@ -3,7 +3,7 @@ import { geoJSON, GeoJSON, Map } from "leaflet"
 import { amdb, auth } from "./navigraph"
 import "leaflet/dist/leaflet.css"
 import "./style.css"
-import { allLayers, AmdbLayerName, AmdbSearchResult } from "@navigraph/amdb"
+import { allLayers, AmdbLayerName, AmdbSearchResponse } from "@navigraph/amdb"
 import getAmdbLayers from "@navigraph/amdb/src/api/getAmdbLayers"
 
 // Instantiate a Leaflet map and set view to Sweden
@@ -32,14 +32,14 @@ document.querySelectorAll<HTMLButtonElement>(".themes > button").forEach(el => {
   })
 })
 
-let airport: AmdbSearchResult | null = null
+let airport: AmdbSearchResponse | null = null
 
 const visibleAmdbLayers: AmdbLayerName[] = []
 
 let currentAmdbLayer: GeoJSON | null = null
 
 async function updateAmdb() {
-  ;(document.querySelectorAll(".amdb-layer") as NodeListOf<HTMLButtonElement>).forEach(element => {
+  (document.querySelectorAll(".amdb-layer") as NodeListOf<HTMLButtonElement>).forEach(element => {
     element.style.backgroundColor = visibleAmdbLayers.includes(element.id as AmdbLayerName) ? "green" : ""
   })
 
