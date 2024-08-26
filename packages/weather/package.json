@@ -1,0 +1,41 @@
+{
+  "name": "@navigraph/weather",
+  "version": "0.0.1",
+  "license": "MIT",
+  "description": "Allows interaction with the Navigraph Weather API as part of the Navigraph SDK",
+  "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
+  "homepage": "https://navigraph.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Navigraph/navigraph-js-sdk",
+    "directory": "packages/weather"
+  },
+  "keywords": [
+    "navigraph",
+    "weather",
+    "sdk"
+  ],
+  "main": "./src/index.ts",
+  "private": false,
+  "sideEffects": false,
+  "files": [
+    "dist/**"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
+  "scripts": {
+    "build": "tsup src/index.ts --dts",
+    "dev": "tsup src/index.ts --watch --sourcemap inline",
+    "lint": "eslint \"src/**/*.ts\"",
+    "clean": "rimraf .turbo node_modules dist",
+    "prepack": "clean-package",
+    "postpack": "clean-package restore"
+  },
+  "dependencies": {
+    "@navigraph/app": "1.3.5",
+    "@navigraph/auth": "2.5.1",
+    "geojson": "^0.5.0",
+    "metar-taf-parser": "^9.0.1"
+  }
+}
