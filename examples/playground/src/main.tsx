@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './pages/App.tsx'
 import { RecoilRoot } from 'recoil'
 import Auth from './pages/Auth.tsx'
+import Tiles from './pages/Tiles.tsx'
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,9 @@ const router = createBrowserRouter([
     }, {
       path: 'auth',
       element: <Auth />
+    }, {
+      path: 'tiles',
+      element: <Tiles />
     }]
   }
 ])

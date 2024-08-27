@@ -6,6 +6,7 @@ import { redirect } from "react-router-dom";
 import { userState } from "../state/user";
 import { authState } from "../state/auth";
 import { DeviceFlowTokenExpiredError } from "@navigraph/app";
+import JsonView from "../components/JsonView";
 
 export default function Auth() {
     const [error, setError] = useState<Error | null>(null)
@@ -36,9 +37,7 @@ export default function Auth() {
             {!params && !user && <LargeButton onClick={handleSignIn}>Sign In with device flow</LargeButton>}
             {params &&
                 <>
-                    <div className="bg-ng-background-400 p-2 rounded-lg shadow-md overflow-auto w-full no-scrollbar">
-                        <pre className="text-white text-xs">{JSON.stringify(params, null, 2)}</pre>
-                    </div>
+                    <JsonView content={params} />
 
                     <LargeButton onClick={() => window.open(params.verification_uri_complete, '_blank')}>Navigate to Sign In Page</LargeButton>
                 </>
@@ -52,9 +51,7 @@ export default function Auth() {
 
             {user &&
                 <>
-                    <div className="bg-ng-background-400 p-2 rounded-lg shadow-md overflow-auto w-full no-scrollbar">
-                        <pre className="text-white text-xs">{JSON.stringify(user, null, 2)}</pre>
-                    </div>
+                    <JsonView content={user} />
 
                     <LargeButton onClick={() => app?.auth.signOut()}>Sign Out</LargeButton>
                 </>

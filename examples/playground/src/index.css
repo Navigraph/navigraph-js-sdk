@@ -26,4 +26,8 @@
     -ms-overflow-style: none;  
     scrollbar-width: none;
   }
+
+  .pane {
+    @apply bg-ng-background-400 p-2 rounded-lg shadow-md
+  }
 }

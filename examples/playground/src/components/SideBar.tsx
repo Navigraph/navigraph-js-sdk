@@ -1,10 +1,12 @@
 import clsx from "clsx";
 import { IconType } from "react-icons";
-import { FaUser } from "react-icons/fa";
+import { FaMap, FaUser } from "react-icons/fa";
 import { MdOutlineSettings } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { appState } from "../state/app";
 import { useRecoilValue } from "recoil";
+import { Scope } from "@navigraph/app";
+import { userState } from "../state/user";
 
 interface SideBarLinkProps {
     path: string
@@ -29,10 +31,13 @@ function SideBarLink({ path, children, icon: Icon, disabled }: SideBarLinkProps)
 export default function SideBar() {
     const app = useRecoilValue(appState);
 
+    const user = useRecoilValue(userState);
+
     return (
         <div className="flex flex-col w-20 p-3 gap-5">
             <SideBarLink path="/app" icon={MdOutlineSettings}>App</SideBarLink>
             <SideBarLink path="/auth" icon={FaUser} disabled={!app}>Auth</SideBarLink>
-        </div>
+            <SideBarLink path="/tiles" icon={FaMap} disabled={!user?.scope.includes(Scope.TILES)}>Tiles</SideBarLink>
+        </div >
     )
 }
