@@ -1,19 +1,33 @@
-import { PropsWithChildren } from "react"
+import { useEffect } from "react"
 import MainWindow from "./MainWindow"
+import SideBar from "./components/SideBar"
+import { Outlet } from "react-router-dom"
+import { useRecoilState } from "recoil"
+import { appState } from "./state/app"
+import { initializeApp, NavigraphApp } from "@navigraph/app"
+import { getAuth } from "@navigraph/auth"
 
-function SideBar() {
-  return (
-    <div className="w-20">
+function Root() {
+  const [app, setApp] = useRecoilState(appState);
 
-    </div>
-  )
-}
+  useEffect(() => {
+    if (app) return;
 
-function Root({ children }: PropsWithChildren) {
+    const data = localStorage.getItem('NG_CONFIG');
+
+    if (!data) return;
+
+    const config = JSON.parse(data) as NavigraphApp;
+
+    initializeApp(config);
+
+    setApp({ config, auth: getAuth() })
+  }, []);
+
   return (
     <main className='flex flex-row h-screen'>
       <SideBar />
-      {children}
+      <Outlet />
       <MainWindow />
     </main>
   )
