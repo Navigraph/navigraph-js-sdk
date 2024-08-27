@@ -6,6 +6,9 @@ export default {
   ],
   theme: {
     extend: {
+      fontFamily: {
+        'inter': ['Inter', 'sans-serif']
+      },
       colors: {
         "ng-background": {
           "900": "#0E131B",

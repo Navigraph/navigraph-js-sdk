@@ -4,6 +4,9 @@
 
 @layer {
   :root {
-    @apply bg-ng-background-50
+    @apply bg-ng-background-600
+  }
+  a, span {
+    @apply font-inter text-gray-5
   }
 }
