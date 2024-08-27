@@ -54,7 +54,7 @@ export default function App() {
         setApp({ config, auth: getAuth() });
 
         setEditUnlocked(false);
-    }, [clientId, clientSecret]);
+    }, [clientId, clientSecret, scopes]);
 
     return (
         <div className="page-container flex flex-col items-center gap-3">

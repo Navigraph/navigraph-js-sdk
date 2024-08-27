@@ -15,3 +15,11 @@ export default function Button({ selected, onClick, children, className, disable
         </button>
     )
 }
+
+export function LargeButton({ onClick, children, className, disabled }: PropsWithChildren<Omit<Props, 'selected'>>) {
+    return (
+        <button disabled={disabled} onClick={onClick} className={clsx("p-2 rounded-lg shadow-lg text-white text-sm font-semibold disabled:text-gray-200", 'bg-blue-50 enabled:hover:bg-blue-25', className)}>
+            {children}
+        </button>
+    )
+}

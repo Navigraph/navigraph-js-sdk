@@ -1,21 +1,25 @@
 import clsx from "clsx";
 import { IconType } from "react-icons";
+import { FaUser } from "react-icons/fa";
 import { MdOutlineSettings } from "react-icons/md";
 import { NavLink } from "react-router-dom";
+import { appState } from "../state/app";
+import { useRecoilValue } from "recoil";
 
 interface SideBarLinkProps {
     path: string
     children: string
     icon: IconType
+    disabled?: boolean
 }
 
-function SideBarLink({ path, children, icon: Icon }: SideBarLinkProps) {
+function SideBarLink({ path, children, icon: Icon, disabled }: SideBarLinkProps) {
     return (
-        <NavLink className="flex flex-col gap-1 items-center group" to={path}>
+        <NavLink className={clsx("flex flex-col gap-1 items-center group", disabled && 'pointer-events-none')} to={path}>
             {({ isActive }) =>
                 <>
-                    <Icon className={clsx("group-hover:text-blue-25", isActive ? 'text-blue-25' : 'text-white')} size={20} />
-                    <span className={clsx("text-sm group-hover:text-blue-50", isActive && 'text-blue-25')}>{children}</span>
+                    <Icon className={clsx("group-hover:text-blue-25", disabled ? 'text-gray-900' : isActive ? 'text-blue-25' : 'text-white')} size={20} />
+                    <span className={clsx("text-sm group-hover:text-blue-50", disabled ? 'text-gray-900' : isActive ? 'text-blue-25' : 'text-white')}>{children}</span>
                 </>
             }
         </NavLink>
@@ -23,9 +27,12 @@ function SideBarLink({ path, children, icon: Icon }: SideBarLinkProps) {
 }
 
 export default function SideBar() {
+    const app = useRecoilValue(appState);
+
     return (
-        <div className="flex flex-col w-20 p-3">
-            <SideBarLink path="/app" icon={MdOutlineSettings} >App</SideBarLink>
+        <div className="flex flex-col w-20 p-3 gap-5">
+            <SideBarLink path="/app" icon={MdOutlineSettings}>App</SideBarLink>
+            <SideBarLink path="/auth" icon={FaUser} disabled={!app}>Auth</SideBarLink>
         </div>
     )
 }

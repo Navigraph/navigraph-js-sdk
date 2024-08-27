@@ -5,6 +5,7 @@ import './index.css'
 import { createBrowserRouter, RouterProvider } from 'react-router-dom'
 import App from './pages/App.tsx'
 import { RecoilRoot } from 'recoil'
+import Auth from './pages/Auth.tsx'
 
 const router = createBrowserRouter([
   {
@@ -13,6 +14,9 @@ const router = createBrowserRouter([
     children: [{
       path: 'app',
       element: <App />
+    }, {
+      path: 'auth',
+      element: <Auth />
     }]
   }
 ])

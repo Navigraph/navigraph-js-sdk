@@ -17,4 +17,13 @@
   .page-container {
     @apply w-96 bg-ng-background-100 text-xl pt-3
   }
+  
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  
+  .no-scrollbar {
+    -ms-overflow-style: none;  
+    scrollbar-width: none;
+  }
 }
