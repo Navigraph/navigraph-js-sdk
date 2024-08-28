@@ -3,7 +3,7 @@ import Button from "../components/Button";
 import { mapFaaState, mapSourceState, mapTacState, mapThemeState } from "../state/mapStyle";
 import { FaMoon, FaSun } from "react-icons/fa";
 import JsonView from "../components/JsonView";
-import { createPreset } from "../components/Map";
+import { createPreset } from "../components/map";
 import { protectedPage } from "../components/protectedPage";
 import { Scope } from "@navigraph/app";
 

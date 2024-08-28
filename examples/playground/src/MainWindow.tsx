@@ -1,4 +1,4 @@
-import MapPane from "./components/Map";
+import MapPane from "./components/map";
 
 export default function MainWindow() {
     return (
