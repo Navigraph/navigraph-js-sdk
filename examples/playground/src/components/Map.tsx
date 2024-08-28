@@ -1,5 +1,5 @@
-import { MapContainer, useMap, TileLayer, ImageOverlay } from "react-leaflet";
-import { useEffect, useMemo, useRef } from "react";
+import { MapContainer, useMap, TileLayer, ImageOverlay, GeoJSON, Popup } from "react-leaflet";
+import { memo, useEffect, useMemo, useRef } from "react";
 import { LatLngBounds, Map } from "leaflet";
 import { useRecoilState, useRecoilValue } from "recoil";
 import { appState } from "../state/app";
@@ -16,6 +16,8 @@ import { useQuery } from "@tanstack/react-query";
 import { protectedPage } from "./protectedPage";
 import { TbCircleX } from "react-icons/tb";
 import Button from "./Button";
+import { AmdbLayerName } from "@navigraph/amdb";
+import { amdbLayersState } from "../state/amdb";
 
 export function createPreset(source: NavigraphRasterSource, theme: NavigraphTheme, faa: boolean, tac: boolean): PresetConfig {
     if (source === 'WORLD') {
@@ -27,6 +29,27 @@ export function createPreset(source: NavigraphRasterSource, theme: NavigraphThem
 
     return { source, theme, type: faa ? 'FAA' : 'Navigraph' }
 }
+
+const AmdbLayer = protectedPage<{ idarpt: string, layers: AmdbLayerName[] }, [Scope.AMDB]>(memo(({ idarpt, layers, amdb }) => {
+    const { data } = useQuery({
+        queryKey: ['amdb-data', idarpt, layers],
+        queryFn: async () => {
+            return amdb.getAmdbLayers({ icao: idarpt, include: ['aerodromereferencepoint', ...layers] })
+        }
+    })
+
+    if (!data) return null;
+
+    return (
+        Object.entries(data).map(([layerName, data]) =>
+            <GeoJSON data={data}>
+                <Popup>
+                    {layerName}
+                </Popup>
+            </GeoJSON>
+        )
+    )
+}), [Scope.AMDB]);
 
 const ChartOverlay = protectedPage(({ charts }) => {
     const theme = useRecoilValue(mapThemeState);
@@ -130,6 +153,8 @@ export default function MapPane() {
     const app = useRecoilValue(appState);
     const user = useRecoilValue(userState);
 
+    const amdbLayers = useRecoilValue(amdbLayersState);
+
     return (
         <div className='w-full'>
             <MapContainer center={[51.505, -0.09]} zoom={13} className='h-screen' zoomControl={false} ref={mapRef} whenReady={() => {
@@ -145,6 +170,7 @@ export default function MapPane() {
                     />
                 )}
                 <ChartOverlay />
+                {amdbLayers.map((layer) => <AmdbLayer key={layer[0]} idarpt={layer[0]} layers={layer[1]} />)}
             </MapContainer>
         </div>
     )

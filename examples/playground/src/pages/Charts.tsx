@@ -8,7 +8,6 @@ import { AirportInfo, Chart, getChartsAPI } from "@navigraph/charts";
 import SpinningCircles from "react-loading-icons/dist/esm/components/spinning-circles";
 import JsonView from "../components/JsonView";
 import SegmentControl from "../components/SegmentControl";
-import clsx from "clsx";
 import Button from "../components/Button";
 import { IoLayers } from "react-icons/io5";
 import { LuTableProperties } from "react-icons/lu";
