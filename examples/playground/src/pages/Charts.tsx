@@ -12,6 +12,8 @@ import clsx from "clsx";
 import Button from "../components/Button";
 import { IoLayers } from "react-icons/io5";
 import { LuTableProperties } from "react-icons/lu";
+import { useRecoilState } from "recoil";
+import { chartOverlayState } from "../state/chartOverlay";
 
 enum ChartCategory {
     STAR,
@@ -32,13 +34,15 @@ const categoryKeys = [
 function ChartRow({ chart }: { chart: Chart }) {
     const [open, setOpen] = useState(false);
 
+    const [chartOverlay, setChartOverlay] = useRecoilState(chartOverlayState);
+
     return (
         <div className="max-h-96 flex flex-col gap-1">
             <div className="py-1 px-4 border-y-[0.5px] border-ng-background-500 flex gap-2 items-center justify-between hover:bg-ng-background-300 cursor-pointer">
                 <span className="text-sm font-semibold">{chart.name}<br />{chart.index_number}</span>
                 <div className="flex gap-2">
+                    {chart.is_georeferenced && <Button selected={chartOverlay?.id === chart.id} onClick={() => setChartOverlay(chart)}><IoLayers className="text-gray-25" size={20} /></Button>}
                     <Button selected={open} onClick={() => setOpen((x) => !x)}><LuTableProperties className="text-gray-25" size={20} /></Button>
-                    <Button onClick={() => null}><IoLayers className="text-gray-25" size={20} /></Button>
                 </div>
             </div>
             {open && <JsonView content={chart} />}

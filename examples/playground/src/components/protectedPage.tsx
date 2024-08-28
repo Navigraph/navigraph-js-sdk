@@ -24,8 +24,9 @@ export function protectedPage<P extends {}, S extends Scope[]>(Component: (props
             return null
         }
 
-        const charts = requiredScopes.includes(Scope.CHARTS) ? getChartsAPI() : undefined;
+        const charts = user.scope.includes(Scope.CHARTS) ? getChartsAPI() : undefined;
 
-        return Component({ user, auth: app.auth, charts, ...props } as unknown as any);
+
+        return <Component user={user} auth={app.auth} charts={charts} {...props as unknown as any} />;
     };
 }
