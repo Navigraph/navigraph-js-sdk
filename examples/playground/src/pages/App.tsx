@@ -60,7 +60,7 @@ export default function App() {
         <div className="page-container flex flex-col items-center gap-3">
             <h1>App Configuration</h1>
 
-            <div className="flex flex-col gap-2 bg-ng-background-400 p-2 rounded-lg shadow-md">
+            <div className="flex flex-col gap-2 pane">
                 <TextField value={clientId ?? ''} onChange={setClientId} label="Client ID" className="w-64" disabled={!editUnlocked} />
                 <TextField value={clientSecret ?? ''} onChange={setClientSecret} label="Client Secret" className="w-64" disabled={!editUnlocked} />
                 <span className="text-sm">Scopes: </span>

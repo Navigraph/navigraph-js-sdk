@@ -3,6 +3,18 @@
 @tailwind utilities;
 
 @layer {
+  ::-webkit-scrollbar {
+    @apply w-2
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-ng-background-300 rounded-lg
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-blue-100 rounded-lg
+  }
+
   :root {
     @apply bg-ng-background-600
   }
@@ -15,7 +27,7 @@
   }
 
   .page-container {
-    @apply w-96 bg-ng-background-100 text-xl pt-3
+    @apply w-96 bg-ng-background-400 text-xl pt-3
   }
   
   .no-scrollbar::-webkit-scrollbar {
@@ -28,6 +40,6 @@
   }
 
   .pane {
-    @apply bg-ng-background-400 p-2 rounded-lg shadow-md
+    @apply bg-ng-background-500 p-2 rounded-lg shadow-md border-2 border-ng-background-800
   }
 }

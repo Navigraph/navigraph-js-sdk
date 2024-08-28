@@ -6,6 +6,7 @@ import useAppConfigLoader from "./hooks/useAppConfigLoader"
 import App from "./pages/App"
 import Auth from "./pages/Auth"
 import Tiles from "./pages/Tiles"
+import Charts from "./pages/Charts"
 
 function Root() {
   useAppConfigLoader();
@@ -18,6 +19,7 @@ function Root() {
         <Route path="/app" element={<App />} />
         <Route path="/auth" element={<Auth />} />
         <Route path="/tiles" element={<Tiles />} />
+        <Route path="/charts" element={<Charts />} />
       </Routes>
       <Outlet />
       <MainWindow />

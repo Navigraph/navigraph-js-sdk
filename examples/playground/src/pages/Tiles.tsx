@@ -1,24 +1,17 @@
-import { useRecoilState, useRecoilValue } from "recoil";
-import { appState } from "../state/app";
-import { redirect } from "react-router-dom";
+import { useRecoilState } from "recoil";
 import Button from "../components/Button";
 import { mapFaaState, mapSourceState, mapTacState, mapThemeState } from "../state/mapStyle";
 import { FaMoon, FaSun } from "react-icons/fa";
 import JsonView from "../components/JsonView";
 import { createPreset } from "../components/Map";
+import { protectedPage } from "../components/protectedPage";
+import { Scope } from "@navigraph/app";
 
-export default function Tiles() {
-    const app = useRecoilValue(appState);
-
+const Tiles = protectedPage(() => {
     const [source, setSource] = useRecoilState(mapSourceState);
     const [theme, setTheme] = useRecoilState(mapThemeState);
     const [faa, setFaa] = useRecoilState(mapFaaState);
     const [tac, setTac] = useRecoilState(mapTacState);
-
-    if (!app) {
-        redirect('/');
-        return null;
-    }
 
     return (
         <div className="page-container flex flex-col items-center gap-3 px-3">
@@ -43,4 +36,6 @@ export default function Tiles() {
             <JsonView content={createPreset(source, theme, faa, tac)} />
         </div>
     )
-}
+}, [Scope.TILES]);
+
+export default Tiles;

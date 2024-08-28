@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { IconType } from "react-icons";
-import { FaMap, FaUser } from "react-icons/fa";
+import { FaGlobe, FaMap, FaUser } from "react-icons/fa";
 import { MdOutlineSettings } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { appState } from "../state/app";
@@ -37,7 +37,8 @@ export default function SideBar() {
         <div className="flex flex-col w-20 p-3 gap-5">
             <SideBarLink path="/app" icon={MdOutlineSettings}>App</SideBarLink>
             <SideBarLink path="/auth" icon={FaUser} disabled={!app}>Auth</SideBarLink>
-            <SideBarLink path="/tiles" icon={FaMap} disabled={!user?.scope.includes(Scope.TILES)}>Tiles</SideBarLink>
+            <SideBarLink path="/tiles" icon={FaGlobe} disabled={!user?.scope.includes(Scope.TILES)}>Tiles</SideBarLink>
+            <SideBarLink path="/charts" icon={FaMap} disabled={!user?.scope.includes(Scope.CHARTS)}>Charts</SideBarLink>
         </div >
     )
 }
