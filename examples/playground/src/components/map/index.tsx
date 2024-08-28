@@ -11,9 +11,8 @@ import { Scope } from "@navigraph/app";
 import "leaflet/dist/leaflet.css"
 import { mapFaaState, mapSourceState, mapTacState, mapThemeState } from "../../state/mapStyle";
 import { chartOverlayOpacityState, chartOverlayState } from "../../state/chartOverlay";
-import { calculateChartBounds } from "@navigraph/charts";
+import { calculateChartBounds, getChartsAPI } from "@navigraph/charts";
 import { useQuery } from "@tanstack/react-query";
-import { protectedPage } from "../protectedPage";
 import { TbCircleX } from "react-icons/tb";
 import Button from "../Button";
 import AmdbManager from "./amdb";
@@ -29,7 +28,7 @@ export function createPreset(source: NavigraphRasterSource, theme: NavigraphThem
     return { source, theme, type: faa ? 'FAA' : 'Navigraph' }
 }
 
-const ChartOverlay = protectedPage(({ charts }) => {
+const ChartOverlay = ({ charts }: { charts: ReturnType<typeof getChartsAPI> }) => {
     const theme = useRecoilValue(mapThemeState);
 
     const opacity = useRecoilValue(chartOverlayOpacityState);
@@ -72,7 +71,7 @@ const ChartOverlay = protectedPage(({ charts }) => {
             opacity={opacity}
         />
     )
-}, [Scope.CHARTS]);
+};
 
 function NavigraphTiles({ auth }: { auth: NavigraphAuth }) {
     const map = useMap();
@@ -131,6 +130,8 @@ export default function MapPane() {
     const app = useRecoilValue(appState);
     const user = useRecoilValue(userState);
 
+    const charts = user?.scope.includes(Scope.CHARTS) ? getChartsAPI() : undefined;
+
     return (
         <div className='w-full'>
             <MapContainer center={[51.505, -0.09]} zoom={13} className='h-screen' zoomControl={false} ref={mapRef} whenReady={() => {
@@ -145,7 +146,7 @@ export default function MapPane() {
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
                 )}
-                <ChartOverlay />
+                {charts && <ChartOverlay charts={charts} />}
                 <AmdbManager />
             </MapContainer>
         </div>
