@@ -83,8 +83,6 @@ function NavigraphTiles({ auth }: { auth: NavigraphAuth }) {
 
     const preset = useMemo<PresetConfig>(() => createPreset(source, theme, faa, tac), [source, theme, faa, tac]);
 
-    console.log(preset)
-
     const ngLayer = useRef(new NavigraphTileLayer(auth, preset));
 
     useEffect(() => {

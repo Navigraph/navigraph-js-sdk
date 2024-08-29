@@ -5,7 +5,7 @@ import { appState } from "../state/app";
 import { redirect } from "react-router-dom";
 import { userState } from "../state/user";
 import { authState } from "../state/auth";
-import { DeviceFlowTokenExpiredError } from "@navigraph/app";
+import { DeviceFlowTokenExpiredError, InvalidScopeError } from "@navigraph/app";
 import JsonView from "../components/JsonView";
 
 export default function Auth() {
@@ -45,7 +45,7 @@ export default function Auth() {
 
             {error && (
                 <div className="text-red-500">
-                    {error instanceof DeviceFlowTokenExpiredError ? "Session expired, try again!" : error.message}
+                    {error instanceof DeviceFlowTokenExpiredError ? "Session expired, try again!" : error instanceof InvalidScopeError ? "Invalid scope provided, perhaps the configured client does not have permission for all requested scopes" : error.message}
                 </div>
             )}
 

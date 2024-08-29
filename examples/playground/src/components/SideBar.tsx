@@ -1,6 +1,6 @@
 import clsx from "clsx";
 import { IconType } from "react-icons";
-import { FaDatabase, FaGlobe, FaMap, FaUser } from "react-icons/fa";
+import { FaDatabase, FaDownload, FaGlobe, FaMap, FaUser } from "react-icons/fa";
 import { MdOutlineSettings } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { appState } from "../state/app";
@@ -40,6 +40,7 @@ export default function SideBar() {
             <SideBarLink path="/tiles" icon={FaGlobe} disabled={!user?.scope.includes(Scope.TILES)}>Tiles</SideBarLink>
             <SideBarLink path="/charts" icon={FaMap} disabled={!user?.scope.includes(Scope.CHARTS)}>Charts</SideBarLink>
             <SideBarLink path="/amdb" icon={FaDatabase} disabled={!user?.scope.includes(Scope.AMDB)}>AMDB</SideBarLink>
+            <SideBarLink path="/packages" icon={FaDownload} disabled={!user?.scope.includes(Scope.FMSDATA)}>Packages</SideBarLink>
         </div >
     )
 }

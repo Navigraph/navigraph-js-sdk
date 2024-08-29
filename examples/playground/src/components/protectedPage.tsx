@@ -7,10 +7,12 @@ import { Scope } from "@navigraph/app";
 import { ReactNode } from "react";
 import { getChartsAPI } from "@navigraph/charts";
 import { getAmdbAPI } from "@navigraph/amdb";
+import { getPackagesAPI } from "@navigraph/packages";
 
 interface PropsStruct {
-    [Scope.CHARTS]: ReturnType<typeof getChartsAPI>
     [Scope.AMDB]: ReturnType<typeof getAmdbAPI>
+    [Scope.CHARTS]: ReturnType<typeof getChartsAPI>
+    [Scope.FMSDATA]: ReturnType<typeof getPackagesAPI>
 }
 
 export function protectedPage<P extends {}, S extends Scope[]>(Component: (props: P & { auth: NavigraphAuth, user: User } & Pick<PropsStruct, Extract<S[number], keyof PropsStruct>>) => ReactNode, requiredScopes: S) {
@@ -26,9 +28,10 @@ export function protectedPage<P extends {}, S extends Scope[]>(Component: (props
             return null
         }
 
-        const charts = user.scope.includes(Scope.CHARTS) ? getChartsAPI() : undefined;
         const amdb = user.scope.includes(Scope.AMDB) ? getAmdbAPI() : undefined;
+        const charts = user.scope.includes(Scope.CHARTS) ? getChartsAPI() : undefined;
+        const fmsdata = user.scope.includes(Scope.FMSDATA) ? getPackagesAPI() : undefined;
 
-        return <Component user={user} auth={app.auth} amdb={amdb} charts={charts} {...props as unknown as any} />;
+        return <Component user={user} auth={app.auth} amdb={amdb} charts={charts} fmsdata={fmsdata} {...props as unknown as any} />;
     };
 }

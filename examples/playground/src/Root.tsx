@@ -8,6 +8,7 @@ import Auth from "./pages/Auth"
 import Tiles from "./pages/Tiles"
 import Charts from "./pages/Charts"
 import Amdb from "./pages/Amdb"
+import Packages from "./pages/Packages"
 
 function Root() {
   useAppConfigLoader();
@@ -22,6 +23,7 @@ function Root() {
         <Route path="/tiles" element={<Tiles />} />
         <Route path="/charts" element={<Charts />} />
         <Route path="/amdb/*" element={<Amdb />} />
+        <Route path="/packages" element={<Packages />} />
       </Routes>
       <Outlet />
       <MainWindow />
