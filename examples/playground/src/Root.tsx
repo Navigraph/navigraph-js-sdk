@@ -1,6 +1,6 @@
 import MainWindow from "./MainWindow"
 import SideBar from "./components/SideBar"
-import { Outlet, Route, Routes } from "react-router-dom"
+import { Route, Routes } from "react-router-dom"
 import useUserUpdater from "./hooks/useUserUpdater"
 import useAppConfigLoader from "./hooks/useAppConfigLoader"
 import App from "./pages/App"
@@ -10,7 +10,7 @@ import Charts from "./pages/Charts"
 import Amdb from "./pages/Amdb"
 import Packages from "./pages/Packages"
 
-function Root() {
+export default function Root() {
   useAppConfigLoader();
   useUserUpdater();
 
@@ -25,10 +25,7 @@ function Root() {
         <Route path="/amdb/*" element={<Amdb />} />
         <Route path="/packages" element={<Packages />} />
       </Routes>
-      <Outlet />
       <MainWindow />
     </main>
   )
 }
-
-export default Root

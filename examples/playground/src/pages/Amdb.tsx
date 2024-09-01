@@ -1,28 +1,39 @@
 import JsonView from "../components/JsonView";
 import { protectedPage } from "../components/protectedPage";
 import { Scope } from "@navigraph/app";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { FaMagnifyingGlass } from "react-icons/fa6";
 import { TextField } from "../components/TextField";
 import SpinningCircles from "react-loading-icons/dist/esm/components/spinning-circles";
 import { Link, Route, Routes, useParams } from "react-router-dom";
 import { allLayers, getAmdbAPI } from "@navigraph/amdb";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useSetRecoilState } from "recoil";
 import { amdbLayersState } from "../state/amdb";
 import Button, { LargeButton } from "../components/Button";
+import { mapCenterState } from "../state/map";
+import { LatLng } from "leaflet";
 
 function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
     const { idarpt } = useParams();
 
     const { data: airport, isLoading } = useQuery({
-        queryKey: ['amdb-search'],
-        queryFn: async () => (await amdb.searchAmdb(idarpt!))?.find((airport) => airport.idarpt === idarpt!)
+        queryKey: ['amdb-search-specific', idarpt],
+        queryFn: async () => (await amdb.searchAmdb(idarpt!))?.find((airport) => airport.idarpt === idarpt!),
+        enabled: idarpt !== undefined
     });
 
     const [layers, setLayers] = useRecoilState(amdbLayersState);
 
     const airportLayers = layers.find((layers) => layers[0] === airport?.idarpt)?.[1];
+
+    const setMapCenter = useSetRecoilState(mapCenterState);
+
+    useEffect(() => {
+        if (airport) {
+            setMapCenter({ latLng: new LatLng(airport?.coordinates.lat, airport?.coordinates.lon), options: { zoom: 12 } });
+        }
+    }, [airport]);
 
     if (isLoading) {
         return <SpinningCircles />
@@ -32,8 +43,12 @@ function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
         return <span>{idarpt} has no AMDB data or does not exist</span>
     }
 
+    const allLayersSelected = allLayers.every((x) => x === 'aerodromereferencepoint' || airportLayers?.includes(x));
+
     return (
         <div className="px-3 flex flex-col items-center gap-3 min-h-0 pb-5">
+            <Link to="/amdb"><Button onClick={() => null} className="absolute left-2 w-min">Back</Button></Link>
+
             <h1>{airport.idarpt}/{airport.iata}</h1>
             <span className="text-sm">{airport.name}</span>
 
@@ -42,6 +57,14 @@ function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
                 <>
                     <div className="flex flex-col overflow-auto gap-3">
                         <Button selected disabled onClick={() => null}>aerodromereferencepoint</Button>
+                        <Button onClick={() => {
+                            if (allLayersSelected) {
+                                setLayers([...layers.filter((x) => x[0] !== airport.idarpt), [airport.idarpt, []]]);
+                            } else {
+                                setLayers([...layers.filter((x) => x[0] !== airport.idarpt), [airport.idarpt, allLayers.filter((x) => x !== 'aerodromereferencepoint')]]);
+                            }
+                        }} selected={allLayersSelected}>All Layers</Button>
+
                         {allLayers.map((layer) => {
                             if (layer === 'aerodromereferencepoint') return null;
 
@@ -100,7 +123,7 @@ function AmdbSearch({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
 
 const Amdb = protectedPage(({ amdb }) => {
     return (
-        <div className="page-container flex flex-col gap-3 items-center">
+        <div className="page-container flex flex-col gap-3 items-center relative">
             <h1>AMDB</h1>
 
             <Routes>

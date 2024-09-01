@@ -9,7 +9,7 @@ import { NavigraphAuth } from "@navigraph/auth";
 import { Scope } from "@navigraph/app";
 
 import "leaflet/dist/leaflet.css"
-import { mapFaaState, mapSourceState, mapTacState, mapThemeState } from "../../state/mapStyle";
+import { mapCenterState, mapFaaState, mapSourceState, mapTacState, mapThemeState, mapVisibleState } from "../../state/map";
 import { chartOverlayOpacityState, chartOverlayState } from "../../state/chartOverlay";
 import { calculateChartBounds, getChartsAPI } from "@navigraph/charts";
 import { useQuery } from "@tanstack/react-query";
@@ -125,27 +125,38 @@ function OverlayControls() {
 export default function MapPane() {
     const mapRef = useRef<Map>(null);
 
+    const mapCenter = useRecoilValue(mapCenterState);
+
+    useEffect(() => {
+        if (mapCenter) {
+            mapRef.current?.flyTo(mapCenter.latLng, mapCenter.options?.zoom)
+        }
+    }, [mapCenter]);
+
     const app = useRecoilValue(appState);
     const user = useRecoilValue(userState);
+
+    const [mapVisible, setMapVisible] = useRecoilState(mapVisibleState);
 
     const charts = user?.scope.includes(Scope.CHARTS) ? getChartsAPI() : undefined;
 
     return (
         <div className='w-full'>
-            <MapContainer center={[51.505, -0.09]} zoom={13} className='h-screen' zoomControl={false} ref={mapRef} whenReady={() => {
+            <MapContainer center={[51.505, -0.09]} zoom={13} className='h-screen bg-black' zoomControl={false} ref={mapRef} whenReady={() => {
                 setInterval(() => mapRef.current?.invalidateSize(), 1000)
             }}>
                 <OverlayControls />
-                {app && user?.scope.includes(Scope.TILES) ? (
+                {mapVisible && (app && user?.scope.includes(Scope.TILES) ? (
                     <NavigraphTiles auth={app.auth} />
                 ) : (
                     <TileLayer
                         attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
                         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
                     />
-                )}
+                ))}
                 {charts && <ChartOverlay charts={charts} />}
                 <AmdbManager />
+                <Button selected={mapVisible} className="absolute top-5 right-5 z-[999]" onClick={() => setMapVisible(!mapVisible)}>Map Visible</Button>
             </MapContainer>
         </div>
     )
