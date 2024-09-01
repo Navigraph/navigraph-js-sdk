@@ -16,6 +16,7 @@ import { useQuery } from "@tanstack/react-query";
 import { TbCircleX } from "react-icons/tb";
 import Button from "../Button";
 import AmdbManager from "./amdb";
+import { getAmdbAPI } from "@navigraph/amdb";
 
 export function createPreset(source: NavigraphRasterSource, theme: NavigraphTheme, faa: boolean, tac: boolean): PresetConfig {
     if (source === 'WORLD') {
@@ -155,7 +156,7 @@ export default function MapPane() {
                     />
                 ))}
                 {charts && <ChartOverlay charts={charts} />}
-                <AmdbManager />
+                {user?.scope.includes(Scope.AMDB) && <AmdbManager />}
                 <Button selected={mapVisible} className="absolute top-5 right-5 z-[999]" onClick={() => setMapVisible(!mapVisible)}>Map Visible</Button>
             </MapContainer>
         </div>

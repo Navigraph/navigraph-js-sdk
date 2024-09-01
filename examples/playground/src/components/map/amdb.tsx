@@ -1,107 +1,99 @@
 import { useRecoilValue } from "recoil";
 import { amdbLayersState } from "../../state/amdb";
 import { AmdbLayerName, getAmdbAPI } from "@navigraph/amdb";
-import { userState } from "../../state/user";
-import { Scope } from "@navigraph/app";
-import { forwardRef, memo, useCallback, useRef } from "react";
-import { useQuery } from "@tanstack/react-query";
-import { GeoJSON } from "react-leaflet";
-import { circleMarker, GeoJSON as LeafletGeoJson } from 'leaflet';
+import { memo, useEffect, useRef } from "react";
+import { useQueries } from "@tanstack/react-query";
+import { useMap } from "react-leaflet";
+import { circleMarker, geoJson, GeoJSON } from 'leaflet';
 import { renderToString } from "react-dom/server";
 import JsonView from "../JsonView";
 import amdbStyle, { layerOrder } from "./amdb_styles";
 
-const AmdbLayer = memo(forwardRef<LeafletGeoJson, { idarpt: string, layer: AmdbLayerName, onClick?: (e: LeafletGeoJson) => void }>(({ idarpt, layer, onClick }, ref) => {
-    const { data } = useQuery({
-        queryKey: ['amdb-data', idarpt, layer],
-        queryFn: async () => {
-            return amdb.getAmdbLayer({ icao: idarpt, layer })
-        }
-    })
-
+const AmdbManager = memo(() => {
     const amdb = getAmdbAPI();
 
-    if (!data) return null;
+    const map = useMap();
 
-    return (
-        <GeoJSON
-            ref={ref}
-            data={data ?? {}}
-            style={amdbStyle(layer)}
-            pointToLayer={(feature, latlng) => {
-                const marker = circleMarker(latlng, amdbStyle(layer)(feature));
-
-                marker.feature = feature;
-
-                return marker;
-            }}
-            onEachFeature={(feature, _layer) => {
-                _layer.on('click', (e) => {
-                    onClick?.(e.target);
-                });
-
-                if (feature.properties) {
-                    _layer.bindPopup(renderToString(
-                        <div className="flex flex-col items-center gap-2">
-                            <span className="text-ng-background-200">{layer}</span>
-                            <JsonView content={feature.properties} />
-                        </div>
-                    ))
-                }
-            }}
-        />
-
-    )
-}));
-
-export default function AmdbManager() {
     const amdbLayers = useRecoilValue(amdbLayersState);
 
-    const user = useRecoilValue(userState);
+    const data = useQueries({
+        queries: amdbLayers.flatMap(([idarpt, layers]) => layers.map((layer) => ({
+            queryKey: ['amdb-data', idarpt, layer],
+            queryFn: async () => ({ idarpt, layer, data: await amdb.getAmdbLayer({ icao: idarpt, layer }) }),
+        })))
+    })
 
-    const refs = useRef<Record<string, Partial<Record<AmdbLayerName, LeafletGeoJson>>>>({});
+    const layers = useRef<{ idarpt: string, layerName: AmdbLayerName, layer: GeoJSON }[]>([]);
 
-    const updateOrder = useCallback(() => {
-        Object.values(refs.current).forEach((layer) => {
-            [...Object.entries(layer)].sort((a, b) => layerOrder[b[0] as AmdbLayerName] - layerOrder[a[0] as AmdbLayerName]).forEach((layer) => layer[1]?.bringToFront())
+    useEffect(() => {
+        const toRemove = layers.current.filter(({ idarpt, layerName }) => !data.some(({ data }) => data?.idarpt === idarpt && data?.layer === layerName));
+
+        toRemove.forEach(({ layer }) => {
+            map.removeLayer(layer);
+            layers.current.splice(layers.current.findIndex((x) => x.layer === layer), 1);
         });
-    }, [refs.current]);
 
-    if (!user?.scope.includes(Scope.AMDB)) return;
+        const newLayers = data.flatMap(({ data }) => {
+            if (data?.data && !layers.current.some(({ idarpt, layerName }) => idarpt === data.idarpt && layerName === data.layer)) {
+                return [{
+                    idarpt: data.idarpt,
+                    layerName: data.layer,
+                    layer: geoJson(data.data, {
+                        style: amdbStyle(data.layer),
 
-    return amdbLayers.flatMap(([idarpt, layers]) =>
-        [...layers, 'aerodromereferencepoint' as const satisfies AmdbLayerName].map((layer) => (
-            <AmdbLayer
-                ref={(_layer) => {
-                    if (!refs.current[idarpt]) {
-                        refs.current[idarpt] = {};
-                    }
-                    refs.current[idarpt][layer] = _layer ?? undefined
+                        pointToLayer: (feature, latlng) => {
+                            const marker = circleMarker(latlng, amdbStyle(data.layer)(feature));
 
-                    updateOrder();
-                }}
-                key={`${idarpt}/${layer}`}
-                onClick={(_layer) => {
-                    const feature = _layer.feature;
+                            marker.feature = feature;
 
-                    if (feature?.type === 'Feature') {
-                        const style = amdbStyle(layer)(feature);
+                            return marker;
+                        },
 
-                        style.stroke = true;
-                        style.color = 'blue';
+                        onEachFeature: (feature, _layer) => {
+                            _layer.on('click', (e) => {
+                                const target = e.target as GeoJSON;
 
-                        Object.values(refs.current).forEach((layer) => {
-                            Object.values(layer).forEach((x) => {
-                                x?.resetStyle();
+                                const feature = target.feature;
+
+                                if (feature?.type === 'Feature') {
+                                    const style = amdbStyle(data.layer)(feature);
+
+                                    style.stroke = true;
+                                    style.color = 'blue';
+
+                                    layers.current.forEach(({ layer }) => {
+                                        layer.resetStyle();
+                                    })
+
+                                    target.setStyle(style);
+                                }
                             });
-                        })
 
-                        _layer.setStyle(style);
-                    }
-                }}
-                idarpt={idarpt}
-                layer={layer}
-            />
-        ))
-    )
-}
+                            if (feature.properties) {
+                                _layer.bindPopup(renderToString(
+                                    <div className="flex flex-col items-center gap-2">
+                                        <span className="text-ng-background-200">{data.layer}</span>
+                                        <JsonView content={feature.properties} />
+                                    </div>
+                                ))
+                            }
+                        }
+                    })
+                }];
+            }
+
+            return [];
+        });
+
+        newLayers.forEach(({ idarpt, layerName, layer }) => {
+            map.addLayer(layer);
+            layers.current.push({ idarpt, layerName, layer });
+        });
+
+        layers.current.sort((a, b) => layerOrder[b.layerName] - layerOrder[a.layerName]).forEach(({ layer }) => layer.bringToFront())
+    }, [data]);
+
+    return null;
+});
+
+export default AmdbManager;
