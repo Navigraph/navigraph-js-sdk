@@ -1,23 +1,23 @@
-import { useRecoilState } from "recoil";
-import { appState } from "../state/app";
-import { useEffect } from "react";
-import { getAuth } from "@navigraph/auth";
-import { initializeApp, NavigraphApp } from "@navigraph/app";
+import { initializeApp, NavigraphApp } from "@navigraph/app"
+import { getAuth } from "@navigraph/auth"
+import { useEffect } from "react"
+import { useRecoilState } from "recoil"
+import { appState } from "../state/app"
 
 export default function useAppConfigLoader() {
-    const [app, setApp] = useRecoilState(appState);
+  const [app, setApp] = useRecoilState(appState)
 
-    useEffect(() => {
-        if (app) return;
+  useEffect(() => {
+    if (app) return
 
-        const data = localStorage.getItem('NG_CONFIG');
+    const data = localStorage.getItem("NG_CONFIG")
 
-        if (!data) return;
+    if (!data) return
 
-        const config = JSON.parse(data) as NavigraphApp;
+    const config = JSON.parse(data) as NavigraphApp
 
-        initializeApp(config);
+    initializeApp(config)
 
-        setApp({ config, auth: getAuth() })
-    }, []);
+    setApp({ config, auth: getAuth() })
+  }, [])
 }

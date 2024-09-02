@@ -1,21 +1,21 @@
-import MainWindow from "./MainWindow"
-import SideBar from "./components/SideBar"
 import { Route, Routes } from "react-router-dom"
-import useUserUpdater from "./hooks/useUserUpdater"
+import SideBar from "./components/SideBar"
 import useAppConfigLoader from "./hooks/useAppConfigLoader"
+import useUserUpdater from "./hooks/useUserUpdater"
+import MainWindow from "./MainWindow"
+import Amdb from "./pages/Amdb"
 import App from "./pages/App"
 import Auth from "./pages/Auth"
-import Tiles from "./pages/Tiles"
 import Charts from "./pages/Charts"
-import Amdb from "./pages/Amdb"
 import Packages from "./pages/Packages"
+import Tiles from "./pages/Tiles"
 
 export default function Root() {
-  useAppConfigLoader();
-  useUserUpdater();
+  useAppConfigLoader()
+  useUserUpdater()
 
   return (
-    <main className='flex flex-row h-screen'>
+    <main className="flex flex-row h-screen">
       <SideBar />
       <Routes>
         <Route path="/app" element={<App />} />
