@@ -15,6 +15,7 @@ export default function App() {
     const [clientId, setClientId] = useState(config?.clientId);
     const [clientSecret, setClientSecret] = useState(config?.clientSecret);
     const [scopes, setScopes] = useState(config?.scopes ?? []);
+    const [domain, setDomain] = useState(config?.domain ?? 'navigraph.com');
 
     const [editUnlocked, setEditUnlocked] = useState(!app);
 
@@ -44,7 +45,8 @@ export default function App() {
         const config: NavigraphApp = {
             clientId,
             clientSecret,
-            scopes
+            scopes,
+            domain
         }
 
         localStorage.setItem('NG_CONFIG', JSON.stringify(config));
@@ -63,6 +65,11 @@ export default function App() {
             <div className="flex flex-col gap-2 pane">
                 <TextField value={clientId ?? ''} onChange={setClientId} label="Client ID" className="w-64" disabled={!editUnlocked} />
                 <TextField value={clientSecret ?? ''} onChange={setClientSecret} label="Client Secret" className="w-64" disabled={!editUnlocked} />
+                <select onChange={(e) => setDomain(e.target.value)} value={domain} disabled={!editUnlocked}>
+                    <option value="navigraph.com">Production</option>
+                    <option value="navigraphlabs.com">Staging</option>
+                    <option value="devigraph.com">Development</option>
+                </select>
                 <span className="text-sm">Scopes: </span>
                 {Object.values(Scope).map((scope) => (
                     <label className="flex gap-2 items-center text-sm ml-5">
