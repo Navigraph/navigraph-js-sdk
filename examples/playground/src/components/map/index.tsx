@@ -8,7 +8,6 @@ import { useRecoilState, useRecoilValue } from "recoil"
 import { appState } from "../../state/app"
 import { userState } from "../../state/user"
 import "leaflet/dist/leaflet.css"
-import { getAmdbAPI } from "@navigraph/amdb"
 import { calculateChartBounds, getChartsAPI } from "@navigraph/charts"
 import { useQuery } from "@tanstack/react-query"
 import { TbCircleX } from "react-icons/tb"
@@ -61,7 +60,7 @@ const ChartOverlay = ({ charts }: { charts: ReturnType<typeof getChartsAPI> }) =
     if (bounds) {
       map.flyToBounds(bounds)
     }
-  }, [bounds])
+  }, [bounds, map])
 
   const { data: urls } = useQuery({
     queryKey: ["chart-overlay-urls", chart],
@@ -95,12 +94,14 @@ function NavigraphTiles({ auth }: { auth: NavigraphAuth }) {
   const ngLayer = useRef(new NavigraphTileLayer(auth, preset))
 
   useEffect(() => {
-    ngLayer.current.addTo(map)
+    const layer = ngLayer.current
+
+    layer.addTo(map)
 
     return () => {
-      ngLayer.current.removeFrom(map)
+      layer.removeFrom(map)
     }
-  }, [])
+  }, [map])
 
   useEffect(() => {
     ngLayer.current.setPreset(preset)

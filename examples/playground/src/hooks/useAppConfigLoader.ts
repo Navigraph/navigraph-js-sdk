@@ -19,5 +19,5 @@ export default function useAppConfigLoader() {
     initializeApp(config)
 
     setApp({ config, auth: getAuth() })
-  }, [])
+  }, [app, setApp])
 }

@@ -107,7 +107,7 @@ const AmdbManager = memo(() => {
     layers.current
       .sort((a, b) => layerOrder[b.layerName] - layerOrder[a.layerName])
       .forEach(({ layer }) => layer.bringToFront())
-  }, [data])
+  }, [data, map])
 
   return null
 })

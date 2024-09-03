@@ -15,7 +15,7 @@ interface PropsStruct {
   [Scope.FMSDATA]: ReturnType<typeof getPackagesAPI>
 }
 
-export function protectedPage<P extends {}, S extends Scope[]>(
+export function protectedPage<P extends object, S extends Scope[]>(
   Component: (
     props: P & { auth: NavigraphAuth; user: User } & Pick<PropsStruct, Extract<S[number], keyof PropsStruct>>,
   ) => ReactNode,
@@ -44,6 +44,7 @@ export function protectedPage<P extends {}, S extends Scope[]>(
         amdb={amdb}
         charts={charts}
         fmsdata={fmsdata}
+        // eslint-disable-next-line @typescript-eslint/no-explicit-any
         {...(props as unknown as any)}
       />
     )

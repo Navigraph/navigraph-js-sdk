@@ -22,9 +22,13 @@ export default function Auth() {
         setParams(params)
         setError(null)
       })
-      .catch(err => setError(err))
+      .catch(err => {
+        if (err instanceof Error) {
+          setError(err)
+        }
+      })
       .finally(() => setParams(null))
-  }, [app?.auth])
+  }, [app?.auth, setParams])
 
   if (!app) redirect("/")
 

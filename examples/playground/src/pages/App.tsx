@@ -29,10 +29,10 @@ export default function App() {
     }
   }, [config])
 
-  const editConfig = useCallback(() => {
+  const editConfig = useCallback(async () => {
     if (!window.confirm("This will Sign Out any current logins")) return
 
-    auth?.signOut()
+    await auth?.signOut()
 
     localStorage.removeItem("NG_CONFIG")
 
@@ -56,7 +56,7 @@ export default function App() {
     setApp({ config, auth: getAuth() })
 
     setEditUnlocked(false)
-  }, [clientId, clientSecret, scopes])
+  }, [clientId, clientSecret, scopes, domain, setApp])
 
   return (
     <div className="page-container flex flex-col items-center gap-3">
@@ -92,10 +92,11 @@ export default function App() {
               value={scope}
               checked={scopes?.includes(scope)}
               onChange={e => {
-                if (scopes?.includes(e.target.value as Scope)) {
-                  setScopes(scopes.filter(scope => scope !== e.target.value))
+                const value = e.target.value as Scope
+                if (scopes?.includes(value)) {
+                  setScopes(scopes.filter(scope => scope !== value))
                 } else {
-                  setScopes([e.target.value as Scope, ...scopes])
+                  setScopes([value, ...scopes])
                 }
               }}
             />

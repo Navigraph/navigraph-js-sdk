@@ -33,7 +33,7 @@ function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
     if (airport) {
       setMapCenter({ latLng: new LatLng(airport?.coordinates.lat, airport?.coordinates.lon), options: { zoom: 12 } })
     }
-  }, [airport])
+  }, [airport, setMapCenter])
 
   if (isLoading) {
     return <SpinningCircles />

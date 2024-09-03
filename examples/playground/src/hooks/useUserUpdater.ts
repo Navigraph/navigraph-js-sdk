@@ -12,5 +12,5 @@ export default function useUserUpdater() {
     const unsubscribe = app?.auth.onAuthStateChanged(u => setUser(u))
 
     return () => unsubscribe?.()
-  }, [app?.auth])
+  }, [app?.auth, setUser])
 }
