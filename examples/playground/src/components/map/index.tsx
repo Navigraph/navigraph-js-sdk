@@ -5,12 +5,11 @@ import { LatLngBounds, Map } from "leaflet"
 import { useEffect, useMemo, useRef } from "react"
 import { ImageOverlay, MapContainer, TileLayer, useMap } from "react-leaflet"
 import { useRecoilState, useRecoilValue } from "recoil"
-import { appState } from "../../state/app"
-import { userState } from "../../state/user"
 import "leaflet/dist/leaflet.css"
 import { calculateChartBounds, getChartsAPI } from "@navigraph/charts"
 import { useQuery } from "@tanstack/react-query"
 import { TbCircleX } from "react-icons/tb"
+import { useNavigraphAuth } from "../../hooks/useNavigraphAuth"
 import { chartOverlayOpacityState, chartOverlayState } from "../../state/chartOverlay"
 import {
   mapCenterState,
@@ -151,8 +150,7 @@ export default function MapPane() {
     }
   }, [mapCenter])
 
-  const app = useRecoilValue(appState)
-  const user = useRecoilValue(userState)
+  const { auth, user } = useNavigraphAuth()
 
   const [mapVisible, setMapVisible] = useRecoilState(mapVisibleState)
 
@@ -170,8 +168,8 @@ export default function MapPane() {
           setInterval(() => mapRef.current?.invalidateSize(), 1000)
         }}>
         {mapVisible &&
-          (app && user?.scope.includes(Scope.TILES) ? (
-            <NavigraphTiles auth={app.auth} />
+          (auth && user?.scope.includes(Scope.TILES) ? (
+            <NavigraphTiles auth={auth} />
           ) : (
             <TileLayer
               attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

@@ -1,7 +1,8 @@
+import { SpinningCircles } from "react-loading-icons"
 import { Route, Routes } from "react-router-dom"
+import NavigraphLogo from "./components/NavigraphLogo"
 import SideBar from "./components/SideBar"
-import useAppConfigLoader from "./hooks/useAppConfigLoader"
-import useUserUpdater from "./hooks/useUserUpdater"
+import { useNavigraphAuth } from "./hooks/useNavigraphAuth"
 import MainWindow from "./MainWindow"
 import Amdb from "./pages/Amdb"
 import App from "./pages/App"
@@ -11,8 +12,16 @@ import Packages from "./pages/Packages"
 import Tiles from "./pages/Tiles"
 
 export default function Root() {
-  useAppConfigLoader()
-  useUserUpdater()
+  const { isInitialized } = useNavigraphAuth()
+
+  if (!isInitialized) {
+    return (
+      <div className="h-screen flex items-center justify-center flex-col">
+        <NavigraphLogo />
+        <SpinningCircles />
+      </div>
+    )
+  }
 
   return (
     <main className="flex flex-row h-screen">

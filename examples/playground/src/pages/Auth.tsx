@@ -1,23 +1,21 @@
 import { DeviceFlowTokenExpiredError, InvalidScopeError } from "@navigraph/app"
 import { useCallback, useState } from "react"
 import { redirect } from "react-router-dom"
-import { useRecoilState, useRecoilValue } from "recoil"
+import { useRecoilState } from "recoil"
 import { LargeButton } from "../components/Button"
 import JsonView from "../components/JsonView"
-import { appState } from "../state/app"
+import { useNavigraphAuth } from "../hooks/useNavigraphAuth"
 import { authState } from "../state/auth"
-import { userState } from "../state/user"
 
 export default function Auth() {
   const [error, setError] = useState<Error | null>(null)
   const [params, setParams] = useRecoilState(authState)
 
-  const app = useRecoilValue(appState)
-
-  const user = useRecoilValue(userState)
+  const { user, auth } = useNavigraphAuth()
 
   const handleSignIn = useCallback(() => {
-    app?.auth
+    if (!auth) return
+    auth
       .signInWithDeviceFlow(params => {
         setParams(params)
         setError(null)
@@ -28,9 +26,9 @@ export default function Auth() {
         }
       })
       .finally(() => setParams(null))
-  }, [app?.auth, setParams])
+  }, [auth, setParams])
 
-  if (!app) redirect("/")
+  if (!auth) redirect("/")
 
   return (
     <div className="page-container flex flex-col items-center gap-3 px-3">
@@ -61,7 +59,7 @@ export default function Auth() {
         <>
           <JsonView content={user} />
 
-          <LargeButton onClick={() => app?.auth.signOut()}>Sign Out</LargeButton>
+          <LargeButton onClick={() => auth?.signOut()}>Sign Out</LargeButton>
         </>
       )}
     </div>

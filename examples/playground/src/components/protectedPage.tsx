@@ -5,9 +5,7 @@ import { getChartsAPI } from "@navigraph/charts"
 import { getPackagesAPI } from "@navigraph/packages"
 import { ReactNode } from "react"
 import { useNavigate } from "react-router-dom"
-import { useRecoilValue } from "recoil"
-import { appState } from "../state/app"
-import { userState } from "../state/user"
+import { useNavigraphAuth } from "../hooks/useNavigraphAuth"
 
 interface PropsStruct {
   [Scope.AMDB]: ReturnType<typeof getAmdbAPI>
@@ -24,11 +22,9 @@ export function protectedPage<P extends object, S extends Scope[]>(
   return (props: P) => {
     const navigate = useNavigate()
 
-    const app = useRecoilValue(appState)
+    const { auth, user } = useNavigraphAuth()
 
-    const user = useRecoilValue(userState)
-
-    if (!app || !user || !requiredScopes.every(scope => user.scope.includes(scope))) {
+    if (!auth || !user || !requiredScopes.every(scope => user.scope.includes(scope))) {
       navigate("/")
       return null
     }
@@ -40,7 +36,7 @@ export function protectedPage<P extends object, S extends Scope[]>(
     return (
       <Component
         user={user}
-        auth={app.auth}
+        auth={auth}
         amdb={amdb}
         charts={charts}
         fmsdata={fmsdata}

@@ -4,9 +4,7 @@ import { IconType } from "react-icons"
 import { FaDatabase, FaDownload, FaGlobe, FaMap, FaUser } from "react-icons/fa"
 import { MdOutlineSettings } from "react-icons/md"
 import { NavLink } from "react-router-dom"
-import { useRecoilValue } from "recoil"
-import { appState } from "../state/app"
-import { userState } from "../state/user"
+import { useNavigraphAuth } from "../hooks/useNavigraphAuth"
 
 interface SideBarLinkProps {
   path: string
@@ -41,16 +39,14 @@ function SideBarLink({ path, children, icon: Icon, disabled }: SideBarLinkProps)
 }
 
 export default function SideBar() {
-  const app = useRecoilValue(appState)
-
-  const user = useRecoilValue(userState)
+  const { user, auth } = useNavigraphAuth()
 
   return (
     <div className="flex flex-col w-20 p-3 gap-5">
       <SideBarLink path="/app" icon={MdOutlineSettings}>
         App
       </SideBarLink>
-      <SideBarLink path="/auth" icon={FaUser} disabled={!app}>
+      <SideBarLink path="/auth" icon={FaUser} disabled={!auth}>
         Auth
       </SideBarLink>
       <SideBarLink path="/tiles" icon={FaGlobe} disabled={!user?.scope.includes(Scope.TILES)}>
