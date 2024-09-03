@@ -118,7 +118,7 @@ function OverlayControls() {
   if (!chart) return null
 
   return (
-    <div className="absolute right-5 top-5 bg-blue-gray-500 z-[999] p-2 rounded-md flex flex-col gap-2">
+    <div className="absolute right-5 top-16 bg-blue-gray-500 z-[999] p-2 rounded-md flex flex-col gap-2">
       <div className="flex justify-between items-center gap-3">
         <span className="text-xs">
           {chart.index_number}: {chart.name}
@@ -169,7 +169,6 @@ export default function MapPane() {
         whenReady={() => {
           setInterval(() => mapRef.current?.invalidateSize(), 1000)
         }}>
-        <OverlayControls />
         {mapVisible &&
           (app && user?.scope.includes(Scope.TILES) ? (
             <NavigraphTiles auth={app.auth} />
@@ -181,13 +180,14 @@ export default function MapPane() {
           ))}
         {charts && <ChartOverlay charts={charts} />}
         {user?.scope.includes(Scope.AMDB) && <AmdbManager />}
-        <Button
-          selected={mapVisible}
-          className="absolute top-5 right-5 z-[999]"
-          onClick={() => setMapVisible(!mapVisible)}>
-          Map Visible
-        </Button>
       </MapContainer>
+      <OverlayControls />
+      <Button
+        selected={mapVisible}
+        className="absolute top-5 right-5 z-[999]"
+        onClick={() => setMapVisible(!mapVisible)}>
+        Map Visible
+      </Button>
     </div>
   )
 }
