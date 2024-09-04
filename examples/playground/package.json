@@ -16,6 +16,7 @@
     "@navigraph/charts": "*",
     "@navigraph/leaflet": "*",
     "@navigraph/packages": "*",
+    "@navigraph/weather": "*",
     "@tanstack/react-query": "^5.52.2",
     "clsx": "^2.1.1",
     "leaflet": "^1.9.4",

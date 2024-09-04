@@ -21,6 +21,8 @@ import {
 } from "../../state/map"
 import Button from "../Button"
 import AmdbManager from "./AmdbManager"
+import Avwx from "./avwx"
+import WeatherRouteManager from "./weatherRoute"
 
 /**
  * Creates a Navigraph tiles preset config based on the 4 properties needed
@@ -154,7 +156,7 @@ export default function MapPane() {
       <MapContainer
         center={[51.505, -0.09]}
         zoom={13}
-        className="h-screen bg-black"
+        className="h-screen bg-black cursor-pointer"
         zoomControl={false}
         ref={mapRef}
         whenReady={() => {
@@ -170,6 +172,8 @@ export default function MapPane() {
             />
           ))}
         {user?.scope.includes(Scope.CHARTS) && <ChartOverlay />}
+        <WeatherRouteManager />
+        <Avwx />
         {user?.scope.includes(Scope.AMDB) && <AmdbManager />}
       </MapContainer>
       <OverlayControls />
