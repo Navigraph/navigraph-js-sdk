@@ -1,4 +1,5 @@
 import { getApp, Logger, NotInitializedError, Scope } from "@navigraph/app"
+import getAvwxReports from "../api/avwx/getAvwxReports"
 import getReportsAlongRoute from "../api/getReportsAlongRoute"
 import getMetarAtAirport from "../api/metar/getMetarAtAirport"
 import getMetarsAroundPoint from "../api/metar/getMetarsAroundPoint"
@@ -27,5 +28,6 @@ export const getWeatherApi = () => {
     getTafsAtAirport,
     getTafsAroundPoint,
     getReportsAlongRoute,
+    getAvwxReports,
   }
 }
