@@ -3,5 +3,4 @@ export enum Scope {
   "FMSDATA" = "fmsdata",
   "TILES" = "tiles",
   "AMDB" = "amdb",
-  "WEATHER" = "weather",
 }

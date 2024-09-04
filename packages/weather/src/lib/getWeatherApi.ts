@@ -1,4 +1,4 @@
-import { getApp, Logger, NotInitializedError, Scope } from "@navigraph/app"
+import { getApp, NotInitializedError } from "@navigraph/app"
 import getAvwxReports from "../api/avwx/getAvwxReports"
 import getReportsAlongRoute from "../api/getReportsAlongRoute"
 import getMetarAtAirport from "../api/metar/getMetarAtAirport"
@@ -14,11 +14,8 @@ export const getWeatherApi = () => {
 
   if (!app) {
     throw new NotInitializedError("Auth")
-  } else if (!app.scopes.includes(Scope.WEATHER)) {
-    Logger.warning(
-      "Your Navigraph Application does not have the WEATHER scope. Attempts to access the Weather API will fail.",
-    )
   }
+  // Weather API does not require any scopes as of now
 
   return {
     getMetarAtAirport,
