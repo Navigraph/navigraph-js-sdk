@@ -20,7 +20,7 @@ import {
   mapVisibleState,
 } from "../../state/map"
 import Button from "../Button"
-import AmdbManager from "./amdb"
+import AmdbManager from "./AmdbManager"
 
 export function createPreset(
   source: NavigraphRasterSource,

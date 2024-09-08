@@ -7,7 +7,7 @@ import { useMap } from "react-leaflet"
 import { useRecoilValue } from "recoil"
 import { amdbLayersState } from "../../state/amdb"
 import JsonView from "../JsonView"
-import amdbStyle, { layerOrder } from "./amdb_styles"
+import amdbStyle, { layerOrder } from "./amdbStyle"
 
 const AmdbManager = memo(() => {
   const amdb = getAmdbAPI()
