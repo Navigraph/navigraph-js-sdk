@@ -17,6 +17,7 @@ export default function SegmentControl({ segments, index, onChange, inactiveText
 
         return (
           <button
+            key={label}
             onClick={() => onChange(i)}
             disabled={disabled}
             className={clsx(

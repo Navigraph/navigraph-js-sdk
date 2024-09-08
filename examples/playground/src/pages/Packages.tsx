@@ -25,7 +25,7 @@ const Packages = protectedPage(
             </span>
             <div className="flex flex-col gap-3 overflow-auto px-3 self-stretch">
               {data.map(item => (
-                <Link to={item.file.url} download>
+                <Link to={item.file.url} download key={item.id}>
                   <JsonView onClick={() => null} content={item} />
                 </Link>
               ))}

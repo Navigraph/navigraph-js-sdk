@@ -19,8 +19,8 @@ function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
 
   const { data: airport, isLoading } = useQuery({
     queryKey: ["amdb-search-specific", idarpt],
-    queryFn: async () => (await amdb.searchAmdb(idarpt!))?.find(airport => airport.idarpt === idarpt!),
-    enabled: idarpt !== undefined,
+    queryFn: async () =>
+      idarpt ? (await amdb.searchAmdb(idarpt))?.find(airport => airport.idarpt === idarpt) : undefined,
   })
 
   const [layers, setLayers] = useRecoilState(amdbLayersState)
@@ -86,6 +86,7 @@ function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
 
               return (
                 <Button
+                  key={layer}
                   className="px-5"
                   selected={airportLayers.includes(layer)}
                   onClick={() => {
@@ -133,7 +134,7 @@ function AmdbSearch({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
         <div className="overflow-auto space-y-3 px-3 self-stretch">
           {response &&
             response.map(item => (
-              <Link to={`/amdb/${item.idarpt}`}>
+              <Link to={`/amdb/${item.idarpt}`} key={item.idarpt}>
                 <JsonView onClick={() => null} content={item} />
               </Link>
             ))}

@@ -67,7 +67,7 @@ export default function App() {
         />
         <span className="text-sm">Scopes: </span>
         {Object.values(Scope).map(scope => (
-          <label className="flex gap-2 items-center text-sm ml-5">
+          <label className="flex gap-2 items-center text-sm ml-5" key={scope}>
             {scope}
             <input
               disabled={!editUnlocked}

@@ -1,8 +1,7 @@
 import clsx from "clsx"
 
 interface Props {
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  content: any
+  content: unknown
   onClick?: () => void
 }
 
