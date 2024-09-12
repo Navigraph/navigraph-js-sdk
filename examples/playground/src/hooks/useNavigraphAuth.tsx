@@ -94,5 +94,7 @@ export function NavigraphAuthProvider({ children }: { children: React.ReactNode 
   )
 }
 
-// Hook for child components to access the authentication state
+/**
+ * A hook for accessing and mutating the navigraph authentication state of the app
+ */
 export const useNavigraphAuth = () => useContext(authContext)

@@ -13,6 +13,9 @@ interface PropsStruct {
   [Scope.FMSDATA]: ReturnType<typeof getPackagesAPI>
 }
 
+/**
+ * A react component wrapper which checks for specific navigraph scopes before rendering the wrapped component
+ */
 export function protectedPage<P extends object, S extends Scope[]>(
   Component: (
     props: P & { auth: NavigraphAuth; user: User } & Pick<PropsStruct, Extract<S[number], keyof PropsStruct>>,
@@ -24,6 +27,7 @@ export function protectedPage<P extends object, S extends Scope[]>(
 
     const { auth, user } = useNavigraphAuth()
 
+    // Check that there is a logged in user, and that every requested scope is present, otherwise navigate to home and do not render the wrapped component
     if (!auth || !user || !requiredScopes.every(scope => user.scope.includes(scope))) {
       navigate("/")
       return null

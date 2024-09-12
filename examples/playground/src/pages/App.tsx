@@ -5,6 +5,11 @@ import Button from "../components/Button"
 import { TextField } from "../components/TextField"
 import { useNavigraphAuth } from "../hooks/useNavigraphAuth"
 
+/**
+ * App config should NEVER be customisable in the actual APP, it should be initialized at the entry point, and hard configured
+ *
+ * ! DO NOT USE CODE IN THIS FILE AS AN EXAMPLE
+ */
 export default function App() {
   const { app: config, auth, setApp } = useNavigraphAuth()
 

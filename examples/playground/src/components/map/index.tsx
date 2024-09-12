@@ -6,9 +6,9 @@ import { useEffect, useMemo, useRef } from "react"
 import { ImageOverlay, MapContainer, TileLayer, useMap } from "react-leaflet"
 import { useRecoilState, useRecoilValue } from "recoil"
 import "leaflet/dist/leaflet.css"
-import { calculateChartBounds, getChartsAPI } from "@navigraph/charts"
-import { useQuery } from "@tanstack/react-query"
+import { calculateChartBounds } from "@navigraph/charts"
 import { TbCircleX } from "react-icons/tb"
+import useChartImage from "../../hooks/useChartImage"
 import { useNavigraphAuth } from "../../hooks/useNavigraphAuth"
 import { chartOverlayOpacityState, chartOverlayState } from "../../state/chartOverlay"
 import {
@@ -22,6 +22,9 @@ import {
 import Button from "../Button"
 import AmdbManager from "./AmdbManager"
 
+/**
+ * Creates a Navigraph tiles preset config based on the 4 properties needed
+ */
 export function createPreset(
   source: NavigraphRasterSource,
   theme: NavigraphTheme,
@@ -38,7 +41,10 @@ export function createPreset(
   return { source, theme, type: faa ? "FAA" : "Navigraph" }
 }
 
-const ChartOverlay = ({ charts }: { charts: ReturnType<typeof getChartsAPI> }) => {
+/**
+ * Handles the rendering of the currently selected chartOverlay to the leaflet map
+ */
+const ChartOverlay = () => {
   const theme = useRecoilValue(mapThemeState)
 
   const opacity = useRecoilValue(chartOverlayOpacityState)
@@ -55,29 +61,18 @@ const ChartOverlay = ({ charts }: { charts: ReturnType<typeof getChartsAPI> }) =
     return new LatLngBounds(sw, ne)
   }, [chart])
 
+  // If the bounds object changes, (meaning the chart has changed), move the map to the bounds of the new chart
   useEffect(() => {
     if (bounds) {
       map.flyToBounds(bounds)
     }
   }, [bounds, map])
 
-  const { data: urls } = useQuery({
-    queryKey: ["chart-overlay-urls", chart],
-    queryFn: async () => {
-      if (!chart) return null
+  const url = useChartImage(chart, theme)
 
-      const blobs = await Promise.all([
-        charts.getChartImage({ chart, theme: "light" }),
-        charts.getChartImage({ chart, theme: "dark" }),
-      ])
+  if (!url || !bounds) return null
 
-      return blobs.map(blob => (blob ? URL.createObjectURL(blob) : null))
-    },
-  })
-
-  if (!bounds || !urls?.[0] || !urls?.[1]) return null
-
-  return <ImageOverlay url={theme === "DAY" ? urls[0] : urls[1]} bounds={bounds} opacity={opacity} />
+  return <ImageOverlay url={url} bounds={bounds} opacity={opacity} />
 }
 
 function NavigraphTiles({ auth }: { auth: NavigraphAuth }) {
@@ -154,8 +149,6 @@ export default function MapPane() {
 
   const [mapVisible, setMapVisible] = useRecoilState(mapVisibleState)
 
-  const charts = user?.scope.includes(Scope.CHARTS) ? getChartsAPI() : undefined
-
   return (
     <div className="w-full">
       <MapContainer
@@ -176,7 +169,7 @@ export default function MapPane() {
               url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
             />
           ))}
-        {charts && <ChartOverlay charts={charts} />}
+        {user?.scope.includes(Scope.CHARTS) && <ChartOverlay />}
         {user?.scope.includes(Scope.AMDB) && <AmdbManager />}
       </MapContainer>
       <OverlayControls />

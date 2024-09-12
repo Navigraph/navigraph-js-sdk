@@ -5,6 +5,9 @@ interface Props {
   onClick?: () => void
 }
 
+/**
+ * Renders any object as JSON on a scrollable pane
+ */
 export default function JsonView({ content, onClick }: Props) {
   return (
     <div className={clsx("pane overflow-auto w-full no-scrollbar", onClick && "cursor-pointer")}>

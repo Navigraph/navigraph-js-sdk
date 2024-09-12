@@ -17,6 +17,8 @@ import { mapCenterState } from "../state/map"
 function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
   const { idarpt } = useParams()
 
+  // Find metadata for a specific airport by using the searchAmdb function and then searching for the chosen airport
+  // Most of the time searchAmdb will return only one airport, the correct one, if searching with the airports ICAO, but it is safe to then search for the matching one, incase one airports ICAO ends up as a substring of another airports name
   const { data: airport, isLoading } = useQuery({
     queryKey: ["amdb-search-specific", idarpt],
     queryFn: async () =>
@@ -25,11 +27,13 @@ function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
 
   const [layers, setLayers] = useRecoilState(amdbLayersState)
 
+  // Find the list of chosen layers for the chosen airport
   const airportLayers = layers.find(layers => layers[0] === airport?.idarpt)?.[1]
 
   const setMapCenter = useSetRecoilState(mapCenterState)
 
   useEffect(() => {
+    // When the page is opened to a new airport, move the map to that airport
     if (airport) {
       setMapCenter({ latLng: new LatLng(airport?.coordinates.lat, airport?.coordinates.lon), options: { zoom: 12 } })
     }
@@ -43,6 +47,8 @@ function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
     return <span>{idarpt} has no AMDB data or does not exist</span>
   }
 
+  // As we have made aerodromereferencepoint a required layer to be selected, it will never be part of the airportLayers state, and instead just be included by the map renderer if the airport has been added
+  // TODO: Doing it this way is bad, adding the airport to the map should just add aerodromereferencepoint to the list but always have that toggle as disabled
   const allLayersSelected = allLayers.every(x => x === "aerodromereferencepoint" || airportLayers?.includes(x))
 
   return (
@@ -119,6 +125,7 @@ function AmdbPage({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
 function AmdbSearch({ amdb }: { amdb: ReturnType<typeof getAmdbAPI> }) {
   const [query, setQuery] = useState("")
 
+  // Use the AMDB search endpoint based upon the current query string
   const { data: response, isLoading } = useQuery({
     queryKey: ["amdb-search", query],
     queryFn: () => amdb.searchAmdb(query),

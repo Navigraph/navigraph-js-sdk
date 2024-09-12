@@ -15,6 +15,10 @@ export default function Auth() {
 
   const handleSignIn = useCallback(() => {
     if (!auth) return
+
+    // When the user initiates signIn, we call auth.signInWithDeviceFlow, and save the params found in the callback to state
+    // These params are then used for navigating the user to a signIn page
+    // .finally() is used so if there is an error, or the signIn process is complete, we can remove the params from state
     auth
       .signInWithDeviceFlow(params => {
         setParams(params)
@@ -28,6 +32,8 @@ export default function Auth() {
       .finally(() => setParams(null))
   }, [auth, setParams])
 
+  // Auth not being defined is SPECIFIC to this customiseable app system, which you should NOT implement in your own application
+  // In your appliation, auth should be defined at all times after the syncronous initiliazation of your NavigraphApp at the entrypoint of your application
   if (!auth) redirect("/")
 
   return (
