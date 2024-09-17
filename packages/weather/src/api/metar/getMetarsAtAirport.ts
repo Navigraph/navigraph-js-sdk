@@ -3,6 +3,11 @@ import { isAxiosError, navigraphRequest } from "@navigraph/auth"
 import { getMetarApiRoot } from "../../constants"
 import { Metar } from "../types"
 
+/**
+ * Queries all METARs for an airport issued within approximately the last 10 hours
+ * @param icao - The ICAO code of the airport from which to load the METARs
+ * @returns - An array of METAR objects parsed from the raw reports using {@link https://www.npmjs.com/package/metar-taf-parser metar-taf-parser}
+ */
 export default async function getMetarsAtAirport(icao: string) {
   const result = await navigraphRequest
     .get<Metar[]>(`${getMetarApiRoot()}/multi/${icao}`)

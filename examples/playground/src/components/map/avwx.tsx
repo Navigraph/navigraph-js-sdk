@@ -18,11 +18,15 @@ export const weatherColors: Record<AVWXSource, string> = {
   SIGMET: "rgb(27, 136, 136)",
 }
 
+/**
+ * Handles the rendering of Aviation Weather reports to the map
+ */
 const Avwx = memo(() => {
   const weatherApi = getWeatherApi()
 
   const sources = useRecoilValue(avwxState)
 
+  // Queries reports for all of the selected AVWX layers
   const layers = useQueries({
     queries: sources.map(source => ({
       queryKey: ["avwx", source],
@@ -30,6 +34,7 @@ const Avwx = memo(() => {
     })),
   })
 
+  // Store refs to the map layers so they can be updated based on selections
   const layersRef = useRef<Partial<Record<AVWXSource, LeafletGeoJSON>>>({})
 
   return layers.map(({ data }) => {

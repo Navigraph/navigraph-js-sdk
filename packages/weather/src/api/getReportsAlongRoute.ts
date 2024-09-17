@@ -4,6 +4,12 @@ import { Position } from "geojson"
 import { getRouteApiRoot } from "../constants"
 import { Metar, Taf } from "./types"
 
+/**
+ * Queries all TAFs or METARs within a certain range of a geographic route issued within approximately the last 10 hours
+ * @param path - List of coordinates making up the query route
+ * @param type - The type of report to query, either `'metar'` or `'taf'`
+ * @returns - An array of TAF or METAR objects parsed from the raw reports using {@link https://www.npmjs.com/package/metar-taf-parser metar-taf-parser}
+ */
 export default async function getReportsAlongRoute<T extends "metar" | "taf">(
   path: Position[],
   type: T,

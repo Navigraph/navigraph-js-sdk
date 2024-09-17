@@ -3,6 +3,14 @@ import { isAxiosError, navigraphRequest } from "@navigraph/auth"
 import { getTafApiRoot } from "../../constants"
 import { Taf } from "../types"
 
+/**
+ * Queries all TAFs within a distance of a point issued within approximately the last 10 hours, ordered by distance from the center point
+ * @param latitude - Latitude of the center point
+ * @param longitude - longitude of the center point
+ * @param radius - Radius in **nautical miles** around the center point to search for TAFs within
+ * @param limit - Maximum number of TAFs to return
+ * @returns - An array of TAF objects parsed from the raw reports using {@link https://www.npmjs.com/package/metar-taf-parser metar-taf-parser}
+ */
 export default async function getTafsAroundPoint(latitude: number, longitude: number, radius?: number, limit?: number) {
   const result = await navigraphRequest
     .get<Taf[]>(`${getTafApiRoot()}/around/${latitude}/${longitude}`, {
