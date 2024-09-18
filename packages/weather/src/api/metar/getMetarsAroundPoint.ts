@@ -1,10 +1,10 @@
 import { Logger } from "@navigraph/app"
 import { isAxiosError, navigraphRequest } from "@navigraph/auth"
-import { getMetarApiRoot } from "../../constants"
+import { getWeatherApiRoot } from "../../constants"
 import { Metar } from "../types"
 
 /**
- * Queries all METARs within a distance of a point issued within approximately the last 10 hours, ordered by distance from the center point
+ * Queries all METARs within a distance of a point issued within approximately the last 10 hours, ordered from most recent to most outdated, then by distance from the center point
  * @param latitude - Latitude of the center point
  * @param longitude - longitude of the center point
  * @param radius - Radius in **nautical miles** around the center point to search for METARs within
@@ -18,7 +18,7 @@ export default async function getMetarsAroundPoint(
   limit?: number,
 ) {
   const result = await navigraphRequest
-    .get<Metar[]>(`${getMetarApiRoot()}/around/${latitude}/${longitude}`, {
+    .get<Metar[]>(`${getWeatherApiRoot()}/metar/around/${latitude}/${longitude}`, {
       params: {
         radius,
         limit,

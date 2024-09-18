@@ -1,7 +1,7 @@
 import { Logger } from "@navigraph/app"
 import { isAxiosError, navigraphRequest } from "@navigraph/auth"
 import { Position } from "geojson"
-import { getRouteApiRoot } from "../constants"
+import { getWeatherApiRoot } from "../constants"
 import { Metar, Taf } from "./types"
 
 /**
@@ -18,7 +18,7 @@ export default async function getReportsAlongRoute<T extends "metar" | "taf">(
   type ReportType = T extends "metar" ? Metar : T extends "taf" ? Taf : never
 
   const result = await navigraphRequest
-    .get<ReportType[]>(getRouteApiRoot(), {
+    .get<ReportType[]>(`${getWeatherApiRoot()}/route`, {
       params: {
         path: path.map(position => position.join(",")).join(";"),
         type,

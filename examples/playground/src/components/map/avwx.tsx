@@ -30,7 +30,7 @@ const Avwx = memo(() => {
   const layers = useQueries({
     queries: sources.map(source => ({
       queryKey: ["avwx", source],
-      queryFn: async () => [source, await weatherApi.getAvwxReports([source])] as const,
+      queryFn: async () => [source, await weatherApi.getAviationWeatherReports([source])] as const,
     })),
   })
 
