@@ -21,7 +21,7 @@ export const weatherColors: Record<AVWXSource, string> = {
 /**
  * Handles the rendering of Aviation Weather reports to the map
  */
-const Avwx = memo(() => {
+const AviationWeather = memo(() => {
   const weatherApi = getWeatherApi()
 
   const sources = useRecoilValue(avwxState)
@@ -88,4 +88,4 @@ const Avwx = memo(() => {
   })
 })
 
-export default Avwx
+export default AviationWeather

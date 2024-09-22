@@ -1,8 +1,10 @@
+import { buffer } from "@turf/buffer"
+import * as helpers from "@turf/helpers"
 import { LatLng, LeafletMouseEvent } from "leaflet"
-import { useEffect, useState } from "react"
-import { Marker, Polyline, useMap } from "react-leaflet"
-import { useRecoilState } from "recoil"
-import { weatherRouteEditState, weatherRouteState } from "../../state/weather"
+import { useEffect, useMemo, useState } from "react"
+import { GeoJSON, Marker, Polyline, useMap } from "react-leaflet"
+import { useRecoilState, useRecoilValue } from "recoil"
+import { weatherRouteEditState, weatherRouteRangeState, weatherRouteState } from "../../state/weather"
 
 /**
  * Handles the creation and rendering of routes for weather queries along routes
@@ -60,6 +62,19 @@ export default function WeatherRouteManager() {
     }
   }, [editActive, setEditActive])
 
+  const positions = useRecoilValue(weatherRouteState)
+  const range = useRecoilValue(weatherRouteRangeState)
+
+  const area = useMemo(() => {
+    if (positions.length < 2) {
+      return null
+    }
+
+    const linestring = helpers.lineString(positions.map(({ lng, lat }) => [lng, lat]))
+
+    return buffer(linestring, range * 1852, { units: "meters" })
+  }, [range, positions])
+
   return (
     <>
       <Polyline positions={route} />
@@ -67,6 +82,7 @@ export default function WeatherRouteManager() {
         <Polyline color="red" positions={[route[route.length - 1], nextPosition]} />
       )}
       {nextPosition && <Marker position={nextPosition} />}
+      {area && <GeoJSON key={Math.random()} data={area} />}
     </>
   )
 }

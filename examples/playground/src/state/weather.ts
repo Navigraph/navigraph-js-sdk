@@ -1,4 +1,4 @@
-import { AVWXSource } from "@navigraph/weather"
+import { AVWXSource, Metar, Taf } from "@navigraph/weather"
 import { LatLng } from "leaflet"
 import { atom } from "recoil"
 
@@ -25,4 +25,9 @@ export const weatherRouteRangeState = atom<number>({
 export const weatherRouteTypeState = atom<"metar" | "taf">({
   key: "weather-route-type",
   default: "metar",
+})
+
+export const metarTafMarkersState = atom<(Metar | Taf)[]>({
+  key: "metar-taf-markers",
+  default: [],
 })

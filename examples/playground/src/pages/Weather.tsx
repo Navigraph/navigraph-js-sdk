@@ -1,18 +1,19 @@
 import { AVWX_SOURCES, getWeatherApi } from "@navigraph/weather"
 import { useQuery } from "@tanstack/react-query"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { BiTrash } from "react-icons/bi"
 import { FaMagnifyingGlass } from "react-icons/fa6"
 import SpinningCircles from "react-loading-icons/dist/esm/components/spinning-circles"
-import { useRecoilState } from "recoil"
+import { useRecoilState, useSetRecoilState } from "recoil"
 import Button from "../components/Button"
 import JsonView from "../components/JsonView"
-import { weatherColors } from "../components/map/avwx"
+import { weatherColors } from "../components/map/AviationWeather"
 import { protectedPage } from "../components/protectedPage"
 import SegmentControl from "../components/SegmentControl"
 import { TextField } from "../components/TextField"
 import {
   avwxState,
+  metarTafMarkersState,
   weatherRouteEditState,
   weatherRouteRangeState,
   weatherRouteState,
@@ -25,6 +26,8 @@ function AirportPage() {
   const [page, setPage] = useState(0)
 
   const weatherApi = getWeatherApi()
+
+  const setMetarTafMarkers = useSetRecoilState(metarTafMarkersState)
 
   const { data: metar, isLoading: metarLoading } = useQuery({
     queryKey: ["metar", icao],
@@ -41,6 +44,18 @@ function AirportPage() {
     },
     enabled: icao.length === 4,
   })
+
+  useEffect(() => {
+    if (page === 0) {
+      setMetarTafMarkers(metar ?? [])
+    } else {
+      setMetarTafMarkers(taf ?? [])
+    }
+
+    return () => {
+      setMetarTafMarkers([])
+    }
+  }, [setMetarTafMarkers, page, metar, taf])
 
   return (
     <>
@@ -82,6 +97,8 @@ function RoutePage() {
 
   const weatherApi = getWeatherApi()
 
+  const setMetarTafMarkers = useSetRecoilState(metarTafMarkersState)
+
   const { data, isLoading } = useQuery({
     queryKey: ["route-reports", route, reportType, reportRange],
     queryFn: () => {
@@ -93,6 +110,14 @@ function RoutePage() {
     },
     enabled: route.length >= 2,
   })
+
+  useEffect(() => {
+    setMetarTafMarkers(data ?? [])
+
+    return () => {
+      setMetarTafMarkers([])
+    }
+  }, [setMetarTafMarkers, data])
 
   return (
     <>

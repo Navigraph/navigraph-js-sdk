@@ -21,7 +21,8 @@ import {
 } from "../../state/map"
 import Button from "../Button"
 import AmdbManager from "./AmdbManager"
-import Avwx from "./avwx"
+import AviationWeather from "./AviationWeather"
+import MetarTaf from "./MetarTaf"
 import WeatherRouteManager from "./weatherRoute"
 
 /**
@@ -173,7 +174,8 @@ export default function MapPane() {
           ))}
         {user?.scope.includes(Scope.CHARTS) && <ChartOverlay />}
         <WeatherRouteManager />
-        <Avwx />
+        <AviationWeather />
+        <MetarTaf />
         {user?.scope.includes(Scope.AMDB) && <AmdbManager />}
       </MapContainer>
       <OverlayControls />
