@@ -1,0 +1,12 @@
+diff --git a/node_modules/metar-taf-parser/package.json b/node_modules/metar-taf-parser/package.json
+index 3a6b1a2..ba19382 100644
+--- a/node_modules/metar-taf-parser/package.json
++++ b/node_modules/metar-taf-parser/package.json
+@@ -13,6 +13,7 @@
+     "decoder"
+   ],
+   "type": "module",
++  "typings": "metar-taf-parser.d.ts",
+   "main": "metar-taf-parser.js",
+   "author": "Alexander Harding <2166114+aeharding@users.noreply.github.com>",
+   "license": "MIT",

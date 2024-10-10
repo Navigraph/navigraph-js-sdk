@@ -3,6 +3,7 @@ import clsx from "clsx"
 import { IconType } from "react-icons"
 import { FaDatabase, FaDownload, FaGlobe, FaMap, FaUser } from "react-icons/fa"
 import { MdOutlineSettings } from "react-icons/md"
+import { TiWeatherPartlySunny } from "react-icons/ti"
 import { NavLink } from "react-router-dom"
 import { useNavigraphAuth } from "../hooks/useNavigraphAuth"
 
@@ -60,6 +61,9 @@ export default function SideBar() {
       </SideBarLink>
       <SideBarLink path="/packages" icon={FaDownload} disabled={!user?.scope.includes(Scope.FMSDATA)}>
         Packages
+      </SideBarLink>
+      <SideBarLink path="/weather" icon={TiWeatherPartlySunny} disabled={!user}>
+        Weather
       </SideBarLink>
     </div>
   )

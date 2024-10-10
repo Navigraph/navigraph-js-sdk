@@ -10,6 +10,7 @@ import Auth from "./pages/Auth"
 import Charts from "./pages/Charts"
 import Packages from "./pages/Packages"
 import Tiles from "./pages/Tiles"
+import Weather from "./pages/Weather"
 
 export default function Root() {
   const { isInitialized } = useNavigraphAuth()
@@ -33,6 +34,7 @@ export default function Root() {
         <Route path="/charts" element={<Charts />} />
         <Route path="/amdb/*" element={<Amdb />} />
         <Route path="/packages" element={<Packages />} />
+        <Route path="/weather" element={<Weather />} />
       </Routes>
       <MainWindow />
     </main>

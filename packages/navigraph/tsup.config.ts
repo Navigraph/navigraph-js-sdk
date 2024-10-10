@@ -13,5 +13,6 @@ export default defineConfig({
     "charts/dist/index": "./charts/index.ts",
     "packages/dist/index": "./packages/index.ts",
     "amdb/dist/index": "./amdb/index.ts",
+    "weather/dist/index": "./weather/index.ts",
   },
 })

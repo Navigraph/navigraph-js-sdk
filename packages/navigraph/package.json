@@ -33,6 +33,7 @@
     "@navigraph/auth": "2.5.2",
     "@navigraph/charts": "2.0.5",
     "@navigraph/packages": "1.0.1",
-    "@navigraph/amdb": "0.0.2"
+    "@navigraph/amdb": "0.0.2",
+    "@navigraph/weather": "0.0.1"
   }
 }
