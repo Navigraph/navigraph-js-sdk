@@ -119,3 +119,9 @@ export type Hotspot = AmdbFeature<
 
 export * from "./helipads"
 export * from "./runway"
+export * from "./aprons"
+export * from "./runway"
+export * from "./asrn"
+export * from "./taxiways"
+export * from "./types"
+export * from "./verticalStructures"

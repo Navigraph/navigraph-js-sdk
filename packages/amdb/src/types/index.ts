@@ -30,6 +30,7 @@ import {
   ServiceRoad,
   StandGuidanceLine,
 } from "./features/aprons"
+import { AsrnEdge, AsrnNode } from "./features/asrn"
 import {
   TaxiwayElement,
   TaxiwayGuidanceLine,
@@ -47,15 +48,17 @@ import {
 export * from "./features"
 export * from "./enums"
 
-type FeatureCollection<T extends AmdbFeature<object, FeatureType, Point | LineString | Polygon>> = GeoFeatureCollection<
-  T["geometry"],
-  T["properties"]
->
+type FeatureCollection<T extends AmdbFeature<object, FeatureType, Point | LineString | Polygon>> = {
+  type: "FeatureCollection"
+  features: Array<T>
+}
 
 export interface AmdbResponseStructure {
   aerodromereferencepoint: FeatureCollection<AerodromeReferencePoint>
   apronelement: FeatureCollection<ApronElement>
   arrestinggearlocation: FeatureCollection<ArrestingGearLocation>
+  asrnedge: FeatureCollection<AsrnEdge>
+  asrnnode: FeatureCollection<AsrnNode>
   blastpad: FeatureCollection<BlastPad>
   constructionarea: FeatureCollection<ConstructionArea>
   deicingarea: FeatureCollection<DeicingArea>

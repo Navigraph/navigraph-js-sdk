@@ -43,10 +43,8 @@ export enum FeatureType {
   // RunwayCenterlinePoint = 37,
   // Not provided
   // ArrestingSystemLocation = 38,
-  // Not provided yet
-  // AsrnEdge = 39
-  // Not provided yet
-  // AsrnNode = 40
+  AsrnEdge = 39,
+  AsrnNode = 40,
 }
 
 export enum SurfaceType {
@@ -264,4 +262,45 @@ export enum LineStructureType {
   Sign,
   NotApplicable = -32765,
   Unknown = -32767,
+}
+
+export enum NodeType {
+  /**
+   * A node that makes up part of a taxiway which cannot be categorised into any other type,
+   */
+  Taxiway,
+  /**
+   * A node placed on a holding point,
+   */
+  HoldingPosition,
+  /**
+   * A node located on the attached side of some runway element, representing the transition from taxiway to runway
+   */
+  RunwayBoundary,
+  /**
+   * A node connecting a runway centerline to a runway exit/entry line
+   */
+  RunwayExitLine,
+  RunwayIntersection,
+  ParkingBoundary,
+  ApronBoundary,
+  ParkingLink,
+  Deicing,
+  Stand,
+}
+
+export enum EdgeType {
+  Taxiway,
+  Runway,
+  RunwayExit,
+  TaxiwayLink,
+  Deicing = 5,
+  Apron,
+  Stand,
+}
+
+export enum EdgeDerivation {
+  FullyAbstract,
+  PartiallyAbstract,
+  FullyDerived,
 }
