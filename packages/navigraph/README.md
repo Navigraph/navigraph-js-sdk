@@ -22,6 +22,12 @@
   <a href="https://img.shields.io/npm/v/navigraph?label=%40navigraph%2Fcharts&style=flat-square">
     <img src="https://img.shields.io/npm/v/navigraph?label=%40navigraph%2Fcharts&style=flat-square" alt="npm - @navigraph/charts">
   </a>
+  <a href="https://img.shields.io/npm/v/navigraph?label=%40navigraph%2Famdb&style=flat-square">
+    <img src="https://img.shields.io/npm/v/navigraph?label=%40navigraph%2Famdb&style=flat-square" alt="npm - @navigraph/amdb">
+  </a>
+  <a href="https://img.shields.io/npm/v/navigraph?label=%40navigraph%2Fweather&style=flat-square">
+    <img src="https://img.shields.io/npm/v/navigraph?label=%40navigraph%2Fweather&style=flat-square" alt="npm - @navigraph/weather">
+  </a>
 </div>
 </div>
 
