@@ -1,5 +1,12 @@
 # navigraph
 
+## 1.3.1
+
+### Patch Changes
+
+- Updated dependencies [[`0b91270`](https://github.com/Navigraph/navigraph-js-sdk/commit/0b91270ffb953dc790fb9c75f96ccf104fd04e54)]:
+  - @navigraph/weather@2.0.0
+
 ## 1.3.0
 
 ### Minor Changes
