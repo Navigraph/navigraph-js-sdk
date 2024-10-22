@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/weather",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "Allows interaction with the Navigraph Weather API as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
