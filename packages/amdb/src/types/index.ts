@@ -1,4 +1,4 @@
-import { FeatureCollection as GeoFeatureCollection, LineString, Point, Polygon } from "geojson"
+import { LineString, Point, Polygon } from "geojson"
 import { FeatureType } from "./enums"
 import {
   AerodromeReferencePoint,
