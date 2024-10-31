@@ -1,3 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
+import {
+  ApronBoundaryNode,
+  AsrnNode,
+  HoldingPositionNode,
+  ParkingBoundaryNode,
+  ParkingStandArea,
+  RunwayBoundaryNode,
+  RunwayExitLineNode,
+  RunwayIntersectionNode,
+  StandNode,
+  TaxiwayLinkNode,
+  TaxiwayNode,
+} from "./features"
+
 export enum FeatureType {
   RunwayElement = 0,
   RunwayIntersection = 1,
@@ -264,38 +279,64 @@ export enum LineStructureType {
   Unknown = -32767,
 }
 
+/**
+ * Descriptions of each NodeType can be found in the associated interface
+ *
+ * See {@link AsrnNode}
+ */
 export enum NodeType {
-  /**
-   * A node that makes up part of a taxiway which cannot be categorised into any other type,
-   */
   Taxiway,
-  /**
-   * A node placed on a holding point,
-   */
   HoldingPosition,
-  /**
-   * A node located on the attached side of some runway element, representing the transition from taxiway to runway
-   */
   RunwayBoundary,
-  /**
-   * A node connecting a runway centerline to a runway exit/entry line
-   */
   RunwayExitLine,
   RunwayIntersection,
   ParkingBoundary,
   ApronBoundary,
-  ParkingLink,
+  TaxiwayLink,
   Deicing,
   Stand,
 }
 
 export enum EdgeType {
+  /**
+   * An edge running along a taxiway, or connecting two taxiways while crossing a runway
+   *
+   * Can connect to {@link TaxiwayNode}s, {@link HoldingPositionNode}s, {@link RunwayBoundaryNode}s, {@link ApronBoundaryNode}s, or {@link TaxiwayLinkNode}s (in any order or combination)
+   */
   Taxiway,
+  /**
+   * An edge running along the center of a runway
+   *
+   * Can connect {@link RunwayExitLineNode}s and {@link RunwayIntersectionNode}s (in any order or combination)
+   */
   Runway,
+  /**
+   * An edge running from the centerline of a runway to a taxiway
+   *
+   * Will connect a {@link RunwayExitLineNode} to a {@link RunwayBoundaryNode}
+   */
   RunwayExit,
+  /**
+   * Forms the portion of a stand entry occuring outside of the {@link ParkingStandArea}
+   *
+   * Will connect a {@link TaxiwayNode} to a {@link ParkingBoundaryNode}
+   */
   TaxiwayLink,
+  /**
+   * Not yet implemented
+   */
   Deicing = 5,
+  /**
+   * An edge running along an apron taxiline
+   *
+   * Can connect {@link ApronBoundaryNode}s and {@link TaxiwayNode}s
+   */
   Apron,
+  /**
+   * An edge running along a {@link ParkingStandArea} to form the main body of a stand line
+   *
+   * Will connect a {@link StandNode} to a {@link ParkingBoundaryNode}
+   */
   Stand,
 }
 

@@ -207,9 +207,11 @@ export type RunwayIntersectionNode = NodeBase<
 /**
  * Represents a node placed on the boundary of a {@link TaxiwayElement} and an ({@link ParkingStandArea} or {@link ApronElement}) where it is intersected by a stand entry line
  *
- * This node will generally connect a {@link TaxiwayLinkEdge} and a {@link StandEdge}.
+ * This node will generally connect a TaxiwayLink edge and a Stand edge.
  *
  * **NOTE:** These nodes can be colocated as each one will only connect to one {@link StandNode}
+ *
+ * There can also be multiple ParkingBoundaryNodes serving one {@link StandNode}
  */
 export type ParkingBoundaryNode = NodeBase<
   {
@@ -261,7 +263,7 @@ export type TaxiwayLinkNode = NodeBase<
      */
     idnetwrk: string | null
   },
-  NodeType.ParkingLink
+  NodeType.TaxiwayLink
 >
 
 /**
