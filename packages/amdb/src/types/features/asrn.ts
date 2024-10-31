@@ -45,6 +45,43 @@ export type AsrnEdge = AmdbFeature<
      * Sum of the absolute course changes between each geometry segment in this edge, measured in degrees
      */
     curvatur: number
+    /**
+     * `idapron` value of {@link ApronElement}(s) that this edge passes over.
+     *
+     * Value will be null if the edge crosses multiple {@link ApronElement}s with different `idapron` values (ignoring aprons with NULL `idapron` values)
+     */
+    idapron: string | null
+    /**
+     * Provides the `pcn` value of any polygon features that this edge passes over.
+     *
+     * Value will be null if the edge crosses multiple polygon features with different `pcn` values
+     *
+     * See {@link RunwayElement}.pcn for more information
+     */
+    pcn: string | null
+
+    /**
+     * Provides the maximum allowed wingspan which can cross this edge, measured in **meters**
+     *
+     * Minimum value from any {@link TaxiwayGuidanceLine}s, or {@link StandGuidanceLine}s that this edge is derived from
+     */
+    wingspan: number
+
+    /**
+     * Usage restriction (prohibited) for specific aircraft type according to `ICAO-ACN (ICAO-DOC. 8643)`
+     *
+     * Encoded as aircraft type according to ICAO-ACN. If there is more than one aircraft-type restriction, the different types should be divided by a `.`
+     *
+     * Derived from the restricted aircraft of any polygon features that this edge passes over
+     *
+     * Example: `B744.A380`
+     */
+    restacn: string | null
+
+    /**
+     * !IMPORTANT: This field is not implemented yet, it will always be null
+     */
+    idbase: string | null
   },
   FeatureType.AsrnEdge,
   LineString
