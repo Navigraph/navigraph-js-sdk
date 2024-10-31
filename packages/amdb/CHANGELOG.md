@@ -1,5 +1,11 @@
 # @navigraph/amdb
 
+## 0.0.4
+
+### Patch Changes
+
+- [#92](https://github.com/Navigraph/navigraph-js-sdk/pull/92) [`b394c59`](https://github.com/Navigraph/navigraph-js-sdk/commit/b394c599fd8114852699598d1cf57bd01b917000) Thanks [@professoralex13](https://github.com/professoralex13)! - Added missing exports of types that can be useful to developers
+
 ## 0.0.2
 
 ### Patch Changes
