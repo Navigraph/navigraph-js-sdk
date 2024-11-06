@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/amdb",
-  "version": "0.0.4",
+  "version": "1.0.0",
   "license": "MIT",
   "description": "Allows interaction with the Navigraph AMDB API as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
