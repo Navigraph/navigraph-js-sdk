@@ -206,6 +206,16 @@ const amdbStyle: StyleFunction = (_feature): PathOptions | CircleOptions => {
         radius: 15,
         color: "white",
       }
+    case FeatureType.AsrnEdge:
+      return {
+        fill: false,
+        color: "green",
+      }
+    case FeatureType.AsrnNode:
+      return {
+        radius: 5,
+        color: "red",
+      }
     case FeatureType.RunwayThreshold:
     case FeatureType.FinalApproachAndTakeoffArea:
     case FeatureType.HelipadThreshold:
