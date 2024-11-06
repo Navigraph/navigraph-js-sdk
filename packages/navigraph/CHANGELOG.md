@@ -1,5 +1,16 @@
 # navigraph
 
+## 1.4.0
+
+### Minor Changes
+
+- [#95](https://github.com/Navigraph/navigraph-js-sdk/pull/95) [`126a92f`](https://github.com/Navigraph/navigraph-js-sdk/commit/126a92faeb146238e12aad646918c946be7da071) Thanks [@professoralex13](https://github.com/professoralex13)! - Added ASRN to amdb
+
+### Patch Changes
+
+- Updated dependencies [[`126a92f`](https://github.com/Navigraph/navigraph-js-sdk/commit/126a92faeb146238e12aad646918c946be7da071)]:
+  - @navigraph/amdb@1.0.0
+
 ## 1.3.1
 
 ### Patch Changes
