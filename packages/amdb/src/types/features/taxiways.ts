@@ -43,7 +43,7 @@ export type TaxiwayElement = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
 
     /**
      * Indicates whether the taxiway is a bridge, and if so, what kind of bridge it is
@@ -104,7 +104,7 @@ export type TaxiwayShoulder = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
   },
   FeatureType.TaxiwayShoulder,
   Polygon

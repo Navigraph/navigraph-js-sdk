@@ -54,7 +54,7 @@ export type ApronElement = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
 
     /**
      * The name of the apron
@@ -226,7 +226,7 @@ export type ParkingStandArea = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
 
     /**
      * Availability of a jetway for the stands in this area
@@ -306,7 +306,7 @@ export type DeicingArea = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
 
     /**
      * Identifier of the underlying:
@@ -342,7 +342,7 @@ export type ServiceRoad = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
 
     /**
      * Type of feature which is overlapped by this road

@@ -379,7 +379,7 @@ export type RunwayShoulder = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
   },
   FeatureType.RunwayShoulder,
   Polygon
