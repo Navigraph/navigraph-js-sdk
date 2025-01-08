@@ -1,5 +1,17 @@
 # @navigraph/weather
 
+## 2.1.0
+
+### Minor Changes
+
+- [#97](https://github.com/Navigraph/navigraph-js-sdk/pull/97) [`cd467ac`](https://github.com/Navigraph/navigraph-js-sdk/commit/cd467ac5db40b9a01a13ee358b0fbdb41a485af1) Thanks [@professoralex13](https://github.com/professoralex13)! - fix types export
+
+### Patch Changes
+
+- Updated dependencies [[`cd467ac`](https://github.com/Navigraph/navigraph-js-sdk/commit/cd467ac5db40b9a01a13ee358b0fbdb41a485af1)]:
+  - @navigraph/auth@2.6.0
+  - @navigraph/app@1.4.0
+
 ## 2.0.0
 
 ### Major Changes
