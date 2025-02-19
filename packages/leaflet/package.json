@@ -38,7 +38,7 @@
     "@navigraph/app": "1.4.0"
   },
   "peerDependencies": {
-    "leaflet": "^1.9.4"
+    "leaflet": "1.9.0"
   },
   "devDependencies": {
     "@navigraph/auth": "2.6.0",
