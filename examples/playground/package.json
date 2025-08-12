@@ -21,7 +21,7 @@
     "@turf/buffer": "^7.1.0",
     "@turf/helpers": "^7.1.0",
     "clsx": "^2.1.1",
-    "leaflet": "^1.9.4",
+    "leaflet": "1.9.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-icons": "^5.3.0",

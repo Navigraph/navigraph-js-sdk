@@ -1,5 +1,13 @@
 # @navigraph/leaflet
 
+## 2.2.0
+
+### Minor Changes
+
+- [`a3d5a28`](https://github.com/Navigraph/navigraph-js-sdk/commit/a3d5a2879360dfec1366f47144bc453a0e36ead5) Thanks [@SkySails](https://github.com/SkySails)! - Locked leaflet version to `1.9.0` based on reports of this version working better with MSFS 2024.
+
+  This should hopefully get rid of the flashing that currently may occur when loading Navigraph maps inside instruments in the simulator.
+
 ## 2.1.0
 
 ### Minor Changes
