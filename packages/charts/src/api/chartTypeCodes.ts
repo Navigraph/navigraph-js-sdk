@@ -90,6 +90,22 @@ export enum ApproachChartTypeCode {
   /** @precision false */
   SoleUseFmsApproachOrGpsChart = "2N",
   /** @precision false */
+  VFRApproachGliderMicroLights = "6G",
+  /** @precision false */
+  VFRApproachGliderMicroLightsRelatedPages = "6H",
+  /** @precision false */
+  VFRApproachCharts = "6J",
+  /** @precision false */
+  VFRApproachChartsRelatedPages = '6K',
+  /** @precision false */
+  VFRApproachChartsHelicopter = "6M",
+  /** @precision false */
+  VFRApproachChartsHelicopterRelatedPages = "6N",
+  /** @precision false */
+  VFRSpecialEventApproach = "6R",
+  /** @precision false */
+  VFRTempApproach = "6U",
+  /** @precision false */
   RNPProcedures = "RP",
   /** @precision true */
   GLSApproachCharts = "RS",
@@ -98,6 +114,8 @@ export enum ApproachChartTypeCode {
 }
 
 export enum AirspaceChartTypeCode {
+  VFRAreaChart = "6A",
+  VFRAreaChartRelatedPages = "6B",
   AreaChart = "A",
   ClassBTCAOrTMAChart = "B",
   EnrouteVisualChart = "C",
@@ -105,6 +123,10 @@ export enum AirspaceChartTypeCode {
 }
 
 export enum AirportChartTypeCode {
+  VFRPrimaryAerodromeDiagram = "6P",
+  VFRApronDiagramsAndTextPages = "6Q",
+  VFRSpecialEventAerodromeDiagram = "6S",
+  VFRTempAerodromeDiagram = "6V",
   AirportChart = "AP",
   AirportFamiliarizationChart = "AF",
   AirportQualificationChart = "AQ",
@@ -118,6 +140,7 @@ export enum AirportChartTypeCode {
 }
 
 export enum DepartureChartTypeCode {
+  VFRDeparture = "6D",
   SIDOrDPChart = "G",
   SIDOrDPOrGPSChart = "G2",
   RNAVOrBothGPSAndFMSAuthorizedDepartureChar = "GG",
@@ -128,6 +151,7 @@ export enum DepartureChartTypeCode {
 }
 
 export enum ArrivalChartTypeCode {
+  VFRArrival = "6C",
   STARChart = "J",
   STARChartOrGp = "J2",
   RNAVOrBothGPSAndFMSAuthorizedArrivalChart = "JG",
@@ -140,6 +164,9 @@ export enum NoiseChartTypeCode {
 }
 
 export enum TextChartTypeCode {
+  VFRChartRelatedText = "6L",
+  VFRSpecialEventRelatedText = "6W",
+  VFRTempChartRelatedText = "6S",
   MiscTextPages = "ST",
   TerminalTextPages = "TP",
   TailoredTextPages = "TT",
