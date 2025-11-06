@@ -6,7 +6,7 @@ import { ChartsIndexResponse } from "./types"
 interface ChartsIndexRequestParams {
   icao: string
   /** @default "STD" */
-  version?: "CAO" | "STD",
+  version?: "CAO" | "STD"
   /** @default "IFR" */
   rules?: "VFR" | "IFR" | "ANY"
 }

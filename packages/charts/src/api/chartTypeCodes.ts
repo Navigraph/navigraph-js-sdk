@@ -96,7 +96,7 @@ export enum ApproachChartTypeCode {
   /** @precision false */
   VFRApproachCharts = "6J",
   /** @precision false */
-  VFRApproachChartsRelatedPages = '6K',
+  VFRApproachChartsRelatedPages = "6K",
   /** @precision false */
   VFRApproachChartsHelicopter = "6M",
   /** @precision false */
