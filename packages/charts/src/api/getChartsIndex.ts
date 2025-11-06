@@ -6,16 +6,18 @@ import { ChartsIndexResponse } from "./types"
 interface ChartsIndexRequestParams {
   icao: string
   /** @default "STD" */
-  version?: "CAO" | "STD"
+  version?: "CAO" | "STD",
+  /** @default "IFR" */
+  rules?: "VFR" | "IFR" | "ANY"
 }
 
 /** Fetches an index of available charts for a specified airport
  * @param options.icao - The ICAO code of an airport
  * @returns {Chart[]} A list of chart objects
  */
-export default async function getChartsIndex({ icao, version = "STD" }: ChartsIndexRequestParams) {
+export default async function getChartsIndex({ icao, version = "STD", rules = "IFR" }: ChartsIndexRequestParams) {
   const result = await navigraphRequest
-    .get<ChartsIndexResponse>(`${getChartsApiRoot()}/${icao}`, { params: { version } })
+    .get<ChartsIndexResponse>(`${getChartsApiRoot()}/${icao}`, { params: { version, rules } })
     .catch((e: unknown) => Logger.err("Failed to fetch charts index. Reason:", isAxiosError(e) ? e.message : e))
   return result?.data?.charts || null
 }
