@@ -165,8 +165,8 @@ export enum NoiseChartTypeCode {
 
 export enum TextChartTypeCode {
   VFRChartRelatedText = "6L",
-  VFRSpecialEventRelatedText = "6W",
-  VFRTempChartRelatedText = "6S",
+  VFRSpecialEventRelatedText = "6T",
+  VFRTempChartRelatedText = "6W",
   MiscTextPages = "ST",
   TerminalTextPages = "TP",
   TailoredTextPages = "TT",
