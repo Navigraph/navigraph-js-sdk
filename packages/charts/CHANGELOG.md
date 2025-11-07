@@ -1,5 +1,11 @@
 # @navigraph/charts
 
+## 2.2.0
+
+### Minor Changes
+
+- [#101](https://github.com/Navigraph/navigraph-js-sdk/pull/101) [`f1530e4`](https://github.com/Navigraph/navigraph-js-sdk/commit/f1530e4744fd9f06af5f16b29bbed7410106fc13) Thanks [@pepperoni505](https://github.com/pepperoni505)! - Add VFR chart support to SDK
+
 ## 2.1.0
 
 ### Minor Changes
