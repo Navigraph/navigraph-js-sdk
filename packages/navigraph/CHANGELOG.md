@@ -1,5 +1,12 @@
 # navigraph
 
+## 1.4.2
+
+### Patch Changes
+
+- Updated dependencies [[`f1530e4`](https://github.com/Navigraph/navigraph-js-sdk/commit/f1530e4744fd9f06af5f16b29bbed7410106fc13)]:
+  - @navigraph/charts@2.2.0
+
 ## 1.4.1
 
 ### Patch Changes
