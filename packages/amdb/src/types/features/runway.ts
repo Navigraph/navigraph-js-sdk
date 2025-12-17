@@ -379,7 +379,7 @@ export type RunwayShoulder = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
   },
   FeatureType.RunwayShoulder,
   Polygon
@@ -486,15 +486,6 @@ export type BlastPad = AmdbFeature<
      * Example: `9`
      */
     idthr: string | null
-
-    /**
-     * Permanent state of feature (exceeding the AIRAC-cycle of 56 days)
-     *
-     * Non-permanent closures or outages of less than 56 days are not adressed in the airport maping database but will be addressed via NOTAMS
-     *
-     * Example: `Open: 1`
-     */
-    status: Status
   },
   FeatureType.BlastPad,
   Polygon
