@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     name: Send a release notification to Discord
     steps:
-      - uses: actions/github-script@v7
+      - uses: actions/github-script@v9
         with:
           script: |
             const { payload } = context;
