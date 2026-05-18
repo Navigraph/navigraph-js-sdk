@@ -1,4 +1,4 @@
-import { LineString, Polygon } from "geojson"
+import { LineString, Point, Polygon } from "geojson"
 import {
   BridgeType,
   FeatureType,
@@ -78,6 +78,8 @@ export type TaxiwayElement = AmdbFeature<
      * Example: `Open: 1`
      */
     status: Status
+
+    centroid: Point
   },
   FeatureType.TaxiwayElement,
   Polygon
@@ -105,6 +107,8 @@ export type TaxiwayShoulder = AmdbFeature<
      * Example: `Asphalt: 2`
      */
     gsurftyp: GroundSurfaceType
+
+    centroid: Point
   },
   FeatureType.TaxiwayShoulder,
   Polygon
@@ -177,6 +181,9 @@ export type TaxiwayGuidanceLine = AmdbFeature<
      * Example: `StartToEndpoint: 1`
      */
     direc: LineDirection
+
+    midpoint: Point
+    longest_segment: number
   },
   FeatureType.TaxiwayGuidanceLine,
   LineString
@@ -201,6 +208,9 @@ export type TaxiwayIntersectionMarking = AmdbFeature<
      * Example: `A5`
      */
     idlin: string | null
+
+    midpoint: Point
+    longest_segment: number
   },
   FeatureType.TaxiwayIntersectionMarking,
   LineString
@@ -248,6 +258,9 @@ export type TaxiwayHoldingPosition = AmdbFeature<
      * Example: `07L.25R`
      */
     idp: string | null
+
+    midpoint: Point
+    longest_segment: number
   },
   FeatureType.TaxiwayHoldingPosition,
   LineString

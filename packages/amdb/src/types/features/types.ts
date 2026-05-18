@@ -15,10 +15,5 @@ export type AmdbFeature<P, F extends FeatureType, G extends Point | LineString |
      * Example: `NZCH`
      */
     idarpt: string
-  } & P &
-    (G extends Polygon
-      ? { centroid: Point }
-      : G extends LineString
-      ? { midpoint: F extends FeatureType.AsrnEdge ? undefined : Point } // This AsrnEdge check isn't very nice, but its neccessary since it is the only table without a populated midpoint value
-      : Record<string, never>)
+  } & P
 >

@@ -55,6 +55,8 @@ export type FrequencyArea = AmdbFeature<
      * Example: `Auckland Apron`
      */
     station: string | null
+
+    centroid: Point
   },
   FeatureType.FrequencyArea,
   Polygon
@@ -91,6 +93,8 @@ export type ConstructionArea = AmdbFeature<
      * Example: `2024-05-3`
      */
     piocdate: string
+
+    centroid: Point
   },
   FeatureType.ConstructionArea,
   Polygon
@@ -112,6 +116,8 @@ export type Hotspot = AmdbFeature<
      * Example: `HS12`
      */
     idhot: string | null
+
+    centroid: Point
   },
   FeatureType.Hotspot,
   Polygon

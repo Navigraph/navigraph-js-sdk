@@ -81,6 +81,8 @@ export type RunwayElement = AmdbFeature<
      * Example: `AsphaltGrooved: 3`
      */
     surftype: SurfaceType
+
+    centroid: Point
   },
   FeatureType.RunwayElement,
   Polygon
@@ -128,6 +130,8 @@ export type RunwayIntersection = AmdbFeature<
      * Example: `AsphaltGrooved: 3`
      */
     surftype: SurfaceType
+
+    centroid: Point
   },
   FeatureType.RunwayIntersection,
   Polygon
@@ -277,6 +281,8 @@ export type RunwayMarking = AmdbFeature<
      * Example: `02.20`
      */
     idrwy: string | null
+
+    centroid: Point
   },
   FeatureType.RunwayMarking,
   Polygon
@@ -299,6 +305,9 @@ export type PaintedCenterline = AmdbFeature<
      * Example: `02.20`
      */
     idrwy: string | null
+
+    midpoint: Point
+    longest_segment: number
   },
   FeatureType.PaintedCenterline,
   LineString
@@ -323,6 +332,9 @@ export type LandAndHoldShortOperationLocation = AmdbFeature<
      * Example: `07L.25R` or `EJ`
      */
     idp: string | null
+
+    midpoint: Point
+    longest_segment: number
   },
   FeatureType.LandAndHoldShortOperationLocation,
   LineString
@@ -347,6 +359,9 @@ export type ArrestingGearLocation = AmdbFeature<
      * Example: `Open: 1`
      */
     status: Status
+
+    midpoint: Point
+    longest_segment: number
   },
   FeatureType.ArrestingGearLocation,
   LineString
@@ -380,6 +395,8 @@ export type RunwayShoulder = AmdbFeature<
      * Example: `Asphalt: 2`
      */
     gsurftyp: GroundSurfaceType
+
+    centroid: Point
   },
   FeatureType.RunwayShoulder,
   Polygon
@@ -414,6 +431,8 @@ export type Stopway = AmdbFeature<
      * Example: `AsphaltGrooved: 3`
      */
     surftype: SurfaceType
+
+    centroid: Point
   },
   FeatureType.Stopway,
   Polygon
@@ -466,6 +485,8 @@ export type RunwayDisplacedArea = AmdbFeature<
      * Example: `AsphaltGrooved: 3`
      */
     surftype: SurfaceType
+
+    centroid: Point
   },
   FeatureType.RunwayDisplacedArea,
   Polygon
@@ -486,6 +507,8 @@ export type BlastPad = AmdbFeature<
      * Example: `9`
      */
     idthr: string | null
+
+    centroid: Point
   },
   FeatureType.BlastPad,
   Polygon
@@ -534,6 +557,9 @@ export type RunwayExitLines = AmdbFeature<
      * Example: `StartToEndpoint: 1`
      */
     direc: LineDirection
+
+    midpoint: Point
+    longest_segment: number
   },
   FeatureType.RunwayExitLine,
   LineString
