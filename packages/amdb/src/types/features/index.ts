@@ -117,6 +117,14 @@ export type Hotspot = AmdbFeature<
   Polygon
 >
 
+export type AirportHull = AmdbFeature<
+  {
+    idarpt: string
+  },
+  FeatureType.Airport_Hulls,
+  Polygon
+>
+
 export * from "./helipads"
 export * from "./runway"
 export * from "./aprons"

@@ -2,6 +2,7 @@ import { LineString, Point, Polygon } from "geojson"
 import { FeatureType } from "./enums"
 import {
   AerodromeReferencePoint,
+  AirportHull,
   ArrestingGearLocation,
   BlastPad,
   ConstructionArea,
@@ -90,6 +91,7 @@ export interface AmdbResponseStructure {
   verticalpointstructure: FeatureCollection<VerticalPointStructure>
   verticalpolygonalstructure: FeatureCollection<VerticalPolygonalStructure>
   water: FeatureCollection<Water>
+  airport_hulls: FeatureCollection<AirportHull>
 }
 
 export type AmdbLayerName = keyof AmdbResponseStructure
