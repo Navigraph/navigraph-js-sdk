@@ -1,5 +1,11 @@
 # @navigraph/weather
 
+## 2.1.1
+
+### Patch Changes
+
+- [#105](https://github.com/Navigraph/navigraph-js-sdk/pull/105) [`389754a`](https://github.com/Navigraph/navigraph-js-sdk/commit/389754a9a2cc682d897b2e684e0fa29680b22159) Thanks [@SkySails](https://github.com/SkySails)! - Removed package scripts from published NPM package. Most importantly, this prevevents the `postinstall` script (which is only intended to be used during development) from being included.
+
 ## 2.1.0
 
 ### Minor Changes
