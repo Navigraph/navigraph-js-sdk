@@ -60,7 +60,6 @@ export enum FeatureType {
   // ArrestingSystemLocation = 38,
   AsrnEdge = 39,
   AsrnNode = 40,
-  Airport_Hulls = 99, // Custom layer for general airport location queries
 }
 
 export enum SurfaceType {
