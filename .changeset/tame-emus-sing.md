@@ -3,4 +3,6 @@
 "navigraph": patch
 ---
 
-Fixed field names
+Fixed surface type field names
+Added missing geometry meta fields
+Remove BlastPad.status
