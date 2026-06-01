@@ -54,7 +54,7 @@ export type ApronElement = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
 
     /**
      * The name of the apron
@@ -62,6 +62,8 @@ export type ApronElement = AmdbFeature<
      * Example: `International Apron`
      */
     idapron: string | null
+
+    centroid: Point
   },
   FeatureType.ApronElement,
   Polygon
@@ -132,6 +134,9 @@ export type StandGuidanceLine = AmdbFeature<
      * Example: `International Terminal`
      */
     termref: string | null
+
+    midpoint: Point
+    longest_segment: number
   },
   FeatureType.StandGuidanceLine,
   LineString
@@ -226,7 +231,7 @@ export type ParkingStandArea = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
 
     /**
      * Availability of a jetway for the stands in this area
@@ -269,6 +274,8 @@ export type ParkingStandArea = AmdbFeature<
      * Example: `International Terminal`
      */
     termref: string | null
+
+    centroid: Point
   },
   FeatureType.ParkingStandArea,
   Polygon
@@ -306,7 +313,7 @@ export type DeicingArea = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
 
     /**
      * Identifier of the underlying:
@@ -324,6 +331,8 @@ export type DeicingArea = AmdbFeature<
      * Example: `W13`
      */
     ident: string | null
+
+    centroid: Point
   },
   FeatureType.DeicingArea,
   Polygon
@@ -342,7 +351,7 @@ export type ServiceRoad = AmdbFeature<
      *
      * Example: `Asphalt: 2`
      */
-    gsurftype: GroundSurfaceType
+    gsurftyp: GroundSurfaceType
 
     /**
      * Type of feature which is overlapped by this road
@@ -357,6 +366,8 @@ export type ServiceRoad = AmdbFeature<
      * Example: `International Apron`
      */
     idbase: string | null
+
+    centroid: Point
   },
   FeatureType.ServiceRoad,
   Polygon

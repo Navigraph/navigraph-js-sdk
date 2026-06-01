@@ -48,6 +48,8 @@ export type VerticalPolygonalStructure = AmdbFeature<
      * Example: `Terminal 5B`
      */
     ident: string | null
+
+    centroid: Point
   },
   FeatureType.VerticalPolygonalStructure,
   Polygon
@@ -172,6 +174,9 @@ export type VerticalLineStructure = AmdbFeature<
      * Example: `Metal: 2`
      */
     material: StructureMaterial
+
+    midpoint: Point
+    longest_segment: number
   },
   FeatureType.VerticalLineStructure,
   LineString
