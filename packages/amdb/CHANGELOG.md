@@ -1,5 +1,13 @@
 # @navigraph/amdb
 
+## 1.1.1
+
+### Patch Changes
+
+- [#100](https://github.com/Navigraph/navigraph-js-sdk/pull/100) [`db5c89c`](https://github.com/Navigraph/navigraph-js-sdk/commit/db5c89c08f108b0f2034b75b40738a64a210862c) Thanks [@professoralex13](https://github.com/professoralex13)! - Fixed surface type field names
+  Added missing geometry meta fields
+  Remove BlastPad.status
+
 ## 1.1.0
 
 ### Minor Changes
