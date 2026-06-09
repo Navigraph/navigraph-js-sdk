@@ -53,7 +53,11 @@ export default async function runWithLock(
   await new Promise<void>(r =>
     setTimeout(async () => {
       const currentResult = await STORAGE.getItem(key)
-      if (!currentResult) return
+      if (!currentResult) {
+        if (retry) await timerRunWithLock()
+        r()
+        return
+      }
 
       // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
       const data: Lock = JSON.parse(currentResult)
