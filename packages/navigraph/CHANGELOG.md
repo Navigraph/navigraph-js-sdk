@@ -1,5 +1,19 @@
 # navigraph
 
+## 1.4.4
+
+### Patch Changes
+
+- [#100](https://github.com/Navigraph/navigraph-js-sdk/pull/100) [`db5c89c`](https://github.com/Navigraph/navigraph-js-sdk/commit/db5c89c08f108b0f2034b75b40738a64a210862c) Thanks [@professoralex13](https://github.com/professoralex13)! - Fixed surface type field names
+  Added missing geometry meta fields
+  Remove BlastPad.status
+- Updated dependencies [[`b762068`](https://github.com/Navigraph/navigraph-js-sdk/commit/b762068f7b845b03d5508c7d3a54bcc9d6d17dc3), [`db5c89c`](https://github.com/Navigraph/navigraph-js-sdk/commit/db5c89c08f108b0f2034b75b40738a64a210862c)]:
+  - @navigraph/auth@2.6.1
+  - @navigraph/amdb@1.1.1
+  - @navigraph/charts@2.2.1
+  - @navigraph/packages@1.1.1
+  - @navigraph/weather@2.1.2
+
 ## 1.4.3
 
 ### Patch Changes

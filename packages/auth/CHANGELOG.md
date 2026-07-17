@@ -1,5 +1,11 @@
 # @navigraph/auth
 
+## 2.6.1
+
+### Patch Changes
+
+- [#108](https://github.com/Navigraph/navigraph-js-sdk/pull/108) [`b762068`](https://github.com/Navigraph/navigraph-js-sdk/commit/b762068f7b845b03d5508c7d3a54bcc9d6d17dc3) Thanks [@SkySails](https://github.com/SkySails)! - Prevent auth lock acquisition from hanging when the lock is cleared during ownership verification.
+
 ## 2.6.0
 
 ### Minor Changes

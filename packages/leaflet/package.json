@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/leaflet",
-  "version": "2.2.0",
+  "version": "2.2.1",
   "license": "MIT",
   "description": "Facilitates easy integration of Navigraph Enroute Charts into Leaflet-based projects.",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
@@ -34,14 +34,14 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@navigraph/auth": "2.6.0",
+    "@navigraph/auth": "2.6.1",
     "@navigraph/app": "1.4.0"
   },
   "peerDependencies": {
     "leaflet": "1.9.0"
   },
   "devDependencies": {
-    "@navigraph/auth": "2.6.0",
+    "@navigraph/auth": "2.6.1",
     "@types/leaflet": "^1.9.3"
   }
 }
