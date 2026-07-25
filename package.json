@@ -21,7 +21,7 @@
     "postpack": "turbo run postpack --filter=./packages/*",
     "test": "jest --verbose",
     "release": "changeset publish",
-    "postinstall": "patch-package"
+    "postinstall": "patch-package && (cd packages/weather && patch-package)"
   },
   "devDependencies": {
     "@changesets/changelog-github": "^0.4.5",
