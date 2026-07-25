@@ -1,5 +1,11 @@
 # @navigraph/weather
 
+## 2.1.3
+
+### Patch Changes
+
+- [`0486755`](https://github.com/Navigraph/navigraph-js-sdk/commit/0486755c82fbcb53709acb0ea280754d79ef4022) Thanks [@SkySails](https://github.com/SkySails)! - Fixes `npm i` failing with `patch-package: not found`. The tarball had no scripts in it, but the registry metadata still listed a `postinstall` hook. `npm` reads the metadata rather than the tarball, so it tried to run a tool that was never a dependency.
+
 ## 2.1.2
 
 ### Patch Changes
