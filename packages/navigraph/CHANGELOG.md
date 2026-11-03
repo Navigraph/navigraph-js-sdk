@@ -1,5 +1,16 @@
 # navigraph
 
+## 1.4.8
+
+### Patch Changes
+
+- Updated dependencies [[`0744203`](https://github.com/Navigraph/navigraph-js-sdk/commit/0744203056df619313a442e4f44a1f7b330faa3e), [`e156994`](https://github.com/Navigraph/navigraph-js-sdk/commit/e1569943730ba47527d0c6dec4ea677324e72ff4), [`822a023`](https://github.com/Navigraph/navigraph-js-sdk/commit/822a02356c5703359caae9bbe1c2376d67c41131)]:
+  - @navigraph/auth@2.6.4
+  - @navigraph/weather@2.1.6
+  - @navigraph/amdb@1.1.4
+  - @navigraph/charts@2.2.4
+  - @navigraph/packages@1.1.4
+
 ## 1.4.7
 
 ### Patch Changes
