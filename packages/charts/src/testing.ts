@@ -32,12 +32,11 @@ export function createChart(overrides: Partial<Chart> = {}): Chart {
   } as Chart
 }
 
-type Response = Awaited<ReturnType<typeof navigraphRequest.get>>
 type RequestSpy = MockInstance<typeof navigraphRequest.get>
 
 /** Makes every Navigraph API request succeed with `data`. Returns the spy so tests can inspect the requests. */
 export function mockApiResponse(data: unknown): RequestSpy {
-  return vi.spyOn(navigraphRequest, "get").mockResolvedValue({ status: 200, data } as Response)
+  return vi.spyOn(navigraphRequest, "get").mockResolvedValue({ status: 200, data })
 }
 
 /** Makes every Navigraph API request fail like an Axios request would, and silences the resulting error log. */

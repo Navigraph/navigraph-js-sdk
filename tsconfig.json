@@ -19,6 +19,6 @@
     // tsup 6 sets the deprecated baseUrl option when it builds the declaration files.
     "ignoreDeprecations": "6.0"
   },
-  "include": ["packages", ".eslintrc.js", "tsup.config.ts", "vitest.config.mts"],
+  "include": ["packages", "tsup.config.ts", "vitest.config.mts"],
   "exclude": ["**/node_modules"]
 }

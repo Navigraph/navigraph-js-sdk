@@ -54,8 +54,6 @@ jobs:
 
       - name: Lint packages
         run: bun run lint
-        env:
-          TIMING: 1
 
   typecheck:
     name: Typecheck
