@@ -38,7 +38,6 @@ export interface CancelTokenSource {
 // Axios re-exports
 export const isAxiosError = (payload: unknown): payload is AxiosError => axios.isAxiosError(payload)
 // Keeps the declaration files on our own type, so they do not import from axios.
-// oxlint-disable-next-line typescript/no-unnecessary-type-assertion
 export const CancelToken = axios.CancelToken as NavigraphCancelTokenStatic
 
 export const navigraphRequest = axios.create()
@@ -47,10 +46,8 @@ navigraphRequest.interceptors.request.use(async config => {
   const token = await tokenStorage.getAccessToken()
 
   if (token) {
-    config.headers = {
-      ...config.headers,
-      Authorization: `Bearer ${token}`,
-    }
+    config.headers = config.headers ?? {}
+    config.headers.Authorization = `Bearer ${token}`
   }
 
   return config
