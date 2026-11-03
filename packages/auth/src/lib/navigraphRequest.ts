@@ -73,9 +73,9 @@ navigraphRequest.interceptors.response.use(
 
         return axios.request({
           ...error.config,
-          headers: {
+          headers: Object.assign({}, error.config?.headers, {
             Authorization: "Bearer " + tokenResponse.access_token,
-          },
+          }),
         })
       }
 
