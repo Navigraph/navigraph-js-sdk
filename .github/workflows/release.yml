@@ -29,22 +29,23 @@ jobs:
         with:
           node-version: 24
           registry-url: "https://registry.npmjs.org"
-          cache: "yarn"
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
 
       - name: Install dependencies
-        run: yarn install --frozen-lockfile
-        env:
-          CI: true
+        run: bun install --frozen-lockfile
 
       - name: Build packages
-        run: yarn build
+        run: bun run build
 
       - name: Create Release Pull Request or Publish to npm
-        uses: changesets/action@v1.7.0
+        uses: changesets/action@v2.1.2
         with:
-          publish: yarn release
-          commit: "ci(changesets): version packages [no ci]"
-          title: "ci(changesets): version packages"
-          setupGitUser: false
-        env:
-          GITHUB_TOKEN: ${{ secrets.BOT_TOKEN }}
+          publish-script: bun run release
+          version-script: bun run version
+          commit-message: "ci(changesets): version packages [no ci]"
+          pr-title: "ci(changesets): version packages"
+          github-token: ${{ secrets.BOT_TOKEN }}

@@ -5,7 +5,6 @@
       "dependsOn": ["^build"],
       "outputs": ["dist/**"]
     },
-    "lint": { "outputs": [] },
     "dev": { "cache": false },
     "clean": { "cache": false },
     "prepack": { "cache": false },

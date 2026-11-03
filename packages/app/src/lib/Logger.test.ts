@@ -1,51 +1,56 @@
-import logger from "./Logger"
+import { describe, expect, test, vi } from "vitest"
+import logger, { LogLevel } from "./Logger"
 
-describe("Logging utility", () => {
-  test("Configured level above logged level", () => {
+const silence = (method: "log" | "warn" | "error" | "debug") =>
+  vi.spyOn(console, method).mockImplementation(() => undefined)
+
+describe("Logger", () => {
+  test("drops messages less severe than the configured level", () => {
     logger.level = "err"
-    const spy = jest.spyOn(console, "log").mockImplementation()
+    const log = silence("log")
+
     logger.info("Message")
-    expect(spy).not.toBeCalled()
-    spy.mockRestore()
+
+    expect(log).not.toHaveBeenCalled()
   })
 
-  test("Configured level below logged level", () => {
+  test.for<{ configured: LogLevel }>([{ configured: "info" }, { configured: "debug" }])(
+    "prints info messages when the configured level is $configured",
+    ({ configured }) => {
+      logger.level = configured
+      const log = silence("log")
+
+      logger.info("Message")
+
+      expect(log).toHaveBeenCalledWith("[Navigraph]", "Message")
+    },
+  )
+
+  test("prefixes the message and passes every argument through unchanged", () => {
+    logger.level = "info"
+    const log = silence("log")
+
+    logger.info("Loaded", 5, { icao: "ESSA" })
+
+    expect(log).toHaveBeenCalledWith("[Navigraph]", "Loaded", 5, { icao: "ESSA" })
+  })
+
+  test.for([
+    { method: "emerg", output: "error" },
+    { method: "alert", output: "error" },
+    { method: "crit", output: "error" },
+    { method: "err", output: "error" },
+    { method: "warning", output: "warn" },
+    { method: "notice", output: "log" },
+    { method: "info", output: "log" },
+    { method: "log", output: "log" },
+    { method: "debug", output: "debug" },
+  ] as const)("writes $method messages to console.$output", ({ method, output }) => {
     logger.level = "debug"
-    const spy = jest.spyOn(console, "log").mockImplementation()
-    logger.info("Message")
-    expect(spy).toBeCalled()
-    spy.mockRestore()
-  })
+    const write = silence(output)
 
-  test("Configured level at logged level", () => {
-    logger.level = "info"
-    const spy = jest.spyOn(console, "log").mockImplementation()
-    logger.info("Message")
-    expect(spy).toBeCalled()
-    spy.mockRestore()
-  })
+    logger[method]("Message")
 
-  test("One argument", () => {
-    logger.level = "info"
-    const spy = jest.spyOn(console, "log").mockImplementation()
-    logger.info("Message")
-    expect(spy).toHaveBeenCalledWith("[Navigraph]", "Message")
-    spy.mockRestore()
-  })
-
-  test("Multi argument", () => {
-    logger.level = "info"
-    const spy = jest.spyOn(console, "log").mockImplementation()
-    logger.info("More", "messages")
-    expect(spy).toHaveBeenCalledWith("[Navigraph]", "More", "messages")
-    spy.mockRestore()
-  })
-
-  test("Non-string", () => {
-    logger.level = "info"
-    const spy = jest.spyOn(console, "log").mockImplementation()
-    logger.info(5)
-    expect(spy).toHaveBeenCalledWith("[Navigraph]", 5)
-    spy.mockRestore()
+    expect(write).toHaveBeenCalledWith("[Navigraph]", "Message")
   })
 })

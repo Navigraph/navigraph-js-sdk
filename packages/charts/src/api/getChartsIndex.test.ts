@@ -1,29 +1,42 @@
-import { navigraphRequest } from "@navigraph/auth"
+import { describe, expect, test } from "vitest"
+import { createChart, mockApiFailure, mockApiResponse } from "../testing"
 import getChartsIndex from "./getChartsIndex"
 
-const getSpy = jest.spyOn(navigraphRequest, "get")
-const consoleSpy = jest.spyOn(console, "error").mockImplementation()
+describe("getChartsIndex", () => {
+  test("resolves with the charts for the airport", async () => {
+    const charts = [createChart({ id: "ESSA01P1" }), createChart({ id: "ESSA01P2" })]
+    mockApiResponse({ charts })
 
-it("given a valid icao, when no user is authenticated, should return null and log an error", async () => {
-  getSpy.mockImplementation(() =>
-    Promise.reject({
-      message: "Request failed with status code 401",
-      isAxiosError: true,
-      response: {
-        status: 401,
-        data: "Unauthorized",
-      },
-    }),
-  )
+    const result = await getChartsIndex({ icao: "ESSA" })
 
-  const response = await getChartsIndex({ icao: "ESSA" })
+    expect(result).toEqual(charts)
+  })
 
-  expect(response).toEqual(null)
-  expect(consoleSpy).toHaveBeenCalledWith(
-    "[Navigraph]",
-    "Failed to fetch charts index. Reason:",
-    "Request failed with status code 401",
-  )
+  test("requests standard IFR charts by default", async () => {
+    const request = mockApiResponse({ charts: [] })
+
+    await getChartsIndex({ icao: "ESSA" })
+
+    expect(request).toHaveBeenCalledWith("https://api.navigraph.com/v2/charts/ESSA", {
+      params: { version: "STD", rules: "IFR" },
+    })
+  })
+
+  test("requests the given chart version and flight rules", async () => {
+    const request = mockApiResponse({ charts: [] })
+
+    await getChartsIndex({ icao: "ESSA", version: "CAO", rules: "VFR" })
+
+    expect(request).toHaveBeenCalledWith("https://api.navigraph.com/v2/charts/ESSA", {
+      params: { version: "CAO", rules: "VFR" },
+    })
+  })
+
+  test("resolves with null when the request fails", async () => {
+    mockApiFailure(401)
+
+    const result = await getChartsIndex({ icao: "ESSA" })
+
+    expect(result).toBeNull()
+  })
 })
-
-// TODO: Figure out how to mock `navigraphRequest` without breaking the interceptors in order to simulate authenticated requests

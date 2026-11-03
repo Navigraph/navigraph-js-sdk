@@ -1,7 +1,7 @@
 import { Logger } from "@navigraph/app"
 import { isAxiosError, navigraphRequest } from "@navigraph/auth"
 import { getAmdbApiRoot } from "../constants"
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// oxlint-disable-next-line typescript/no-unused-vars
 import { AerodromeReferencePoint, AmdbSearchResponse } from "../types"
 
 /**

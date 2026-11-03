@@ -24,11 +24,15 @@ const Packages = protectedPage(
               Note that this is only a list of packages available for this client
             </span>
             <div className="flex flex-col gap-3 overflow-auto px-3 self-stretch">
-              {data.map(item => (
-                <Link to={item.file.url} download key={item.id}>
-                  <JsonView onClick={() => null} content={item} />
-                </Link>
-              ))}
+              {data.map(item =>
+                item.file ? (
+                  <Link to={item.file.url} download key={item.id}>
+                    <JsonView onClick={() => null} content={item} />
+                  </Link>
+                ) : (
+                  <JsonView key={item.id} onClick={() => null} content={item} />
+                ),
+              )}
             </div>
           </>
         )}

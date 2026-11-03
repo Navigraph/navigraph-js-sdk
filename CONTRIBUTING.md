@@ -12,7 +12,7 @@ git clone https://github.com/<your_github_username>/sdk.git
 cd sdk
 ```
 
-3. Setup all the dependencies and packages by running `yarn`.
+3. Install [Bun](https://bun.sh) and set up all the dependencies and packages by running `bun install`.
 
 ## Development
 
@@ -25,11 +25,12 @@ In order to improve the developer experience, we have opted to use a monorepo po
 
 ### Commands
 
-| Command              | Description                                                                                                         |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| **`yarn`**           | Bootstraps the entire project, symlinks all dependencies for cross-component development and builds all components. |
-| **`yarn build`**     | Builds all packages.                                                                                                |
-| **`yarn changeset`** | Opens an interactive prompt to handle changelog / versioning.                                                       |
+| Command               | Description                                                                                 |
+| --------------------- | ------------------------------------------------------------------------------------------- |
+| **`bun install`**     | Bootstraps the entire project and symlinks all dependencies for cross-component development. |
+| **`bun run build`**   | Builds all packages.                                                                        |
+| **`bun run test`**    | Runs the tests.                                                                             |
+| **`bunx changeset`**  | Opens an interactive prompt to handle changelog / versioning.                               |
 
 ## Found a bug?
 
@@ -74,16 +75,14 @@ https://www.conventionalcommits.org/ or check out the
 
 3. Make and commit your changes following the
    [commit convention](https://github.com/Navigraph/sdk/blob/main/CONTRIBUTING.md#commit-convention).
-   As you develop, you can run `yarn pkg <module> build` and
-   `yarn pkg <module> test` to make sure everything works as expected. Please
-   note that you might have to run `yarn boot` first in order to build all
-   dependencies.
+   As you develop, you can run `bun run build` and `bun run test` to make
+   sure everything works as expected.
 
-4. Run `yarn changeset` to create a detailed description of your changes. This
+4. Run `bunx changeset` to create a detailed description of your changes. This
    will be used to generate a changelog when we publish an update.
    [Learn more about Changeset](https://github.com/atlassian/changesets/tree/master/packages/cli).
    Please note that you might have to run `git fetch origin main:master` (where
-   origin will be your fork on GitHub) before `yarn changeset` works.
+   origin will be your fork on GitHub) before `bunx changeset` works.
 
 5. Commit generated changesets to your branch & create the PR.
 

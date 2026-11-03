@@ -1,34 +1,36 @@
 import { NonGeoreferencedChartError } from "@navigraph/app"
-import { Chart } from "../api/types"
+import { describe, expect, test } from "vitest"
+import { createChart } from "../testing"
 import calculateChartBounds from "./calculateChartBounds"
 
-// prettier-ignore
-const georeferencedChart = {
-  is_georeferenced: true,
-  width: 2500,
-  height: 1517,
-  bounding_boxes: {
-    planview: {
-      pixels: { x1: 58, y1: 1447, x2: 2431, y2: 58 },
-      latlng: { lng1: 16.655056, lat1: 59.516333, lng2: 18.708056, lat2: 60.122111 },
-    },
-  },
-} as Chart;
+describe("calculateChartBounds", () => {
+  test("extends the planview coordinates out to the edges of the chart image", () => {
+    // The planview is 64 px wide and tall and covers 8° in each direction: 0.125° per pixel.
+    // Margins around it: 8 px left (1°), 24 px right (3°), 16 px top (2°), 32 px bottom (4°).
+    const chart = createChart({
+      is_georeferenced: true,
+      width: 96,
+      height: 112,
+      bounding_boxes: {
+        planview: {
+          pixels: { x1: 8, y1: 80, x2: 72, y2: 16 },
+          latlng: { lng1: 10, lat1: 50, lng2: 18, lat2: 58 },
+        },
+        insets: [],
+      },
+    })
 
-const nonGeoreferencedChart = {
-  ...georeferencedChart,
-  is_georeferenced: false,
-} as Chart
+    const bounds = calculateChartBounds(chart)
 
-describe("Chart Bounds Calculation", () => {
-  it("given a georeferenced chart, calculates chart bounds correctly", () => {
-    expect(calculateChartBounds(georeferencedChart)).toEqual({
-      ne: { lat: 60.147406265658745, lng: 18.76775132237674 },
-      sw: { lat: 59.48580423110152, lng: 16.60487732321955 },
+    expect(bounds).toEqual({
+      sw: { lng: 9, lat: 46 },
+      ne: { lng: 21, lat: 60 },
     })
   })
 
-  it("given a non-georeferenced chart, throws a NonGeoreferencedChartError", () => {
-    expect(() => calculateChartBounds(nonGeoreferencedChart)).toThrowError(NonGeoreferencedChartError)
+  test("throws NonGeoreferencedChartError for a chart without georeferencing", () => {
+    const chart = createChart({ is_georeferenced: false, bounding_boxes: null })
+
+    expect(() => calculateChartBounds(chart)).toThrow(NonGeoreferencedChartError)
   })
 })

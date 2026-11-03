@@ -16,12 +16,14 @@ export const layerOrder: Record<AmdbLayerName, number> = {
   runwaythreshold: 0,
   parkingstandlocation: 0,
   hotspot: 0,
+  asrnnode: 0,
   frequencyarea: 1,
   taxiwayholdingposition: 1,
   taxiwayintersectionmarking: 1,
   taxiwayguidanceline: 2,
   standguidanceline: 2,
   runwayexitline: 2,
+  asrnedge: 2,
   serviceroad: 3,
   deicingarea: 4,
   parkingstandarea: 5,
@@ -169,7 +171,7 @@ const amdbStyle: StyleFunction = (_feature): PathOptions | CircleOptions => {
           [StopbarCategory.Unknown]: "yellow",
           [StopbarCategory.Cat1]: "hsl(25, 100%, 50%)",
           [StopbarCategory.Cat2Or3]: "hsl(0, 100%, 50%)",
-        }[feature.properties.catstop as StopbarCategory],
+        }[feature.properties.catstop],
       }
     case FeatureType.TaxiwayIntersectionMarking:
       return {
