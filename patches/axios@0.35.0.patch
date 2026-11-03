@@ -1,0 +1,22 @@
+diff --git a/lib/defaults/index.js b/lib/defaults/index.js
+index 0000000..0000000 100644
+--- a/lib/defaults/index.js
++++ b/lib/defaults/index.js
+@@ -25,9 +25,6 @@ function getDefaultAdapter() {
+   if (typeof XMLHttpRequest !== 'undefined') {
+     // For browsers use XHR adapter
+     adapter = require('../adapters/xhr');
+-  } else if (typeof process !== 'undefined' && Object.prototype.toString.call(process) === '[object process]') {
+-    // For node use HTTP adapter
+-    adapter = require('../adapters/http');
+   }
+   return adapter;
+ }
+diff --git a/lib/env/classes/FormData.js b/lib/env/classes/FormData.js
+index 0000000..0000000 100644
+--- a/lib/env/classes/FormData.js
++++ b/lib/env/classes/FormData.js
+@@ -1,2 +1,2 @@
+ // eslint-disable-next-line strict
+-module.exports = require('form-data');
++module.exports = typeof FormData !== 'undefined' ? FormData : null;
