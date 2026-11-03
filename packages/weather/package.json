@@ -1,6 +1,6 @@
 {
   "name": "@navigraph/weather",
-  "version": "2.1.3",
+  "version": "2.1.4",
   "license": "MIT",
   "description": "Allows interaction with the Navigraph Weather API as part of the Navigraph SDK",
   "author": "Navigraph <contact@navigraph.com> (https://navigraph.com)",
@@ -33,8 +33,8 @@
     "postpack": "clean-package restore"
   },
   "dependencies": {
-    "@navigraph/app": "1.4.0",
-    "@navigraph/auth": "2.6.1"
+    "@navigraph/app": "1.4.1",
+    "@navigraph/auth": "2.6.2"
   },
   "devDependencies": {
     "metar-taf-parser": "^8.0.5",
