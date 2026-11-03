@@ -43,8 +43,7 @@
     "vitest": "^5.1.0"
   },
   "patchedDependencies": {
-    "axios@0.24.0": "patches/axios@0.24.0.patch",
-    "metar-taf-parser@8.0.5": "patches/metar-taf-parser@8.0.5.patch"
+    "axios@0.24.0": "patches/axios@0.24.0.patch"
   },
   "packageManager": "bun@1.4.4"
 }

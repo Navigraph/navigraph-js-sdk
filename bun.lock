@@ -157,12 +157,11 @@
       },
       "devDependencies": {
         "@types/geojson": "^7946.0.14",
-        "metar-taf-parser": "^8.0.5",
+        "metar-taf-parser": "9.1.2",
       },
     },
   },
   "patchedDependencies": {
-    "metar-taf-parser@8.0.5": "patches/metar-taf-parser@8.0.5.patch",
     "axios@0.24.0": "patches/axios@0.24.0.patch",
   },
   "catalog": {
@@ -719,7 +718,7 @@
 
     "merge2": ["merge2@1.4.1", "", {}, "sha512-8q7VEgMJW4J8tcfVPy8g09NcQwZdbwFEqhe/WZkoIzjn/3TGDwtOCYtXGxA3O8tPzpczCCDgv+P2P5y00ZJOOg=="],
 
-    "metar-taf-parser": ["metar-taf-parser@8.0.5", "", {}, "sha512-cNau4OR7ha/DehoXTkeJ0KKjB8Pdgxf/RMo2LcTcQxTFowRVfWssbsyyEP05VE51BwBxsZsdd1/+n01ZQd5G0Q=="],
+    "metar-taf-parser": ["metar-taf-parser@9.1.2", "", {}, "sha512-UCUupdxEDmQyyGXJvly8PdZGzSpgyCTSiaI/Ue/IM7gsw0pfOs8kT/C3BADJ+ady4NEoygj9sJi53b7O87MRfQ=="],
 
     "micromatch": ["micromatch@4.0.8", "", { "dependencies": { "braces": "^3.0.3", "picomatch": "^2.3.1" } }, "sha512-PXwfBhYu0hBCPw8Dn0E+WDYb7af3dSLVWKi3HGv84IdF4TyFoC0ysxFd0Goxw7nSv4T/PzEJQxsYsEiFCKo2BA=="],
 
