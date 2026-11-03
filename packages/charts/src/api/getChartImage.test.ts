@@ -1,10 +1,11 @@
 import { navigraphRequest } from "@navigraph/auth"
+import { beforeEach, expect, it, vi } from "vitest"
 import { ChartTypeCode } from "./chartTypeCodes"
 import getChartImage from "./getChartImage"
 import { Chart } from "./types"
 
-const getSpy = jest.spyOn(navigraphRequest, "get")
-const consoleSpy = jest.spyOn(console, "error").mockImplementation()
+const getSpy = vi.spyOn(navigraphRequest, "get")
+const consoleSpy = vi.spyOn(console, "error").mockImplementation(() => undefined)
 
 const chart: Chart = {
   image_day: "essa01p1_d.png",
@@ -32,7 +33,7 @@ const chart: Chart = {
 }
 
 beforeEach(() => {
-  jest.clearAllMocks()
+  vi.clearAllMocks()
 })
 
 it("given a valid chart, when no user is authenticated, should return null and log an error", async () => {

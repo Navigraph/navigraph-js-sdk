@@ -1,7 +1,7 @@
-diff --git a/node_modules/metar-taf-parser/package.json b/node_modules/metar-taf-parser/package.json
+diff --git a/package.json b/package.json
 index 3a6b1a2..ba19382 100644
---- a/node_modules/metar-taf-parser/package.json
-+++ b/node_modules/metar-taf-parser/package.json
+--- a/package.json
++++ b/package.json
 @@ -13,6 +13,7 @@
      "decoder"
    ],

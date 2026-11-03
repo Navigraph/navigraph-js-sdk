@@ -17,6 +17,6 @@
     "downlevelIteration": true,
     "declarationMap": true
   },
-  "include": ["packages", ".eslintrc.js", "tsup.config.ts", "jest.config.js"],
+  "include": ["packages", ".eslintrc.js", "tsup.config.ts", "vitest.config.mts"],
   "exclude": ["**/node_modules"]
 }

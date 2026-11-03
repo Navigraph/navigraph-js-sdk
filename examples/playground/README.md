@@ -12,10 +12,10 @@ git clone https://github.com/Navigraph/navigraph-js-sdk.git
 cd navigraph-js-sdk/examples/playground
 ```
 
-Install project dependencies using Yarn:
+Install project dependencies using [Bun](https://bun.sh):
 
 ```bash
-yarn
+bun install
 ```
 
 ## Running the Project
@@ -23,5 +23,5 @@ yarn
 To start the development server, run the following command:
 
 ```bash
-yarn dev
+bun run dev
 ```

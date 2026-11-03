@@ -1,4 +1,5 @@
 import { NonGeoreferencedChartError } from "@navigraph/app"
+import { describe, expect, it } from "vitest"
 import { Chart } from "../api/types"
 import calculateChartBounds from "./calculateChartBounds"
 

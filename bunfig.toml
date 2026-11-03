@@ -1,0 +1,4 @@
+[install]
+# Installs each workspace's dependencies in its own node_modules. tsup --dts-resolve only inlines
+# types it finds there, which is how @types/geojson and metar-taf-parser end up in the bundled .d.ts files.
+linker = "isolated"

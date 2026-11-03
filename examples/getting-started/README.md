@@ -10,10 +10,10 @@ git clone https://github.com/Navigraph/navigraph-js-sdk.git
 cd navigraph-js-sdk/examples/getting-started
 ```
 
-Install project dependencies using Yarn:
+Install project dependencies using [Bun](https://bun.sh):
 
 ```bash
-yarn
+bun install
 ```
 
 Create an `.env.local` file in the root of your project and add the following environment variables:
@@ -30,5 +30,5 @@ Make sure to replace `your_client_id` and `your_client_secret` with your real cr
 To start the development server, run the following command:
 
 ```bash
-yarn dev
+bun run dev
 ```

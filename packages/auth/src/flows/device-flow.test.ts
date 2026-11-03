@@ -1,3 +1,4 @@
+// @vitest-environment jsdom
 import {
   DeviceFlowTokenExpiredError,
   initializeApp,
@@ -7,11 +8,12 @@ import {
   UserDeniedAccessError,
 } from "@navigraph/app"
 import axios from "axios"
+import { beforeAll, beforeEach, describe, expect, it, vi } from "vitest"
 import getAuth from "../lib/getAuth"
 
-const postSpy = jest.spyOn(axios, "post")
+const postSpy = vi.spyOn(axios, "post")
 const ogTimeout = setTimeout
-const timeoutSpy = jest.spyOn(global, "setTimeout")
+const timeoutSpy = vi.spyOn(global, "setTimeout")
 
 const generateJWT = () => {
   const header = {
@@ -87,7 +89,7 @@ describe("Device Flow Authentication", () => {
 
   beforeEach(() => {
     localStorage.clear()
-    jest.clearAllMocks()
+    vi.clearAllMocks()
   })
 
   it("given a valid client config, returns a valid user object", async () => {
@@ -116,9 +118,9 @@ describe("Device Flow Authentication", () => {
       return Promise.reject()
     })
 
-    const callback = jest.fn()
-    const catchHandler = jest.fn()
-    const userChangedCallback = jest.fn()
+    const callback = vi.fn()
+    const catchHandler = vi.fn()
+    const userChangedCallback = vi.fn()
 
     // Mock setTimeout for the two next calls (first and second token request)
     timeoutSpy.mockImplementation(cb => ogTimeout(cb, 10))

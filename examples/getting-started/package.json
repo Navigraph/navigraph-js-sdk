@@ -15,7 +15,8 @@
     "@navigraph/app": "*",
     "@navigraph/auth": "*",
     "@navigraph/charts": "*",
-    "@navigraph/packages": "*"
+    "@navigraph/packages": "*",
+    "navigraph": "*"
   },
   "devDependencies": {
     "@types/react": "^18.2.15",
