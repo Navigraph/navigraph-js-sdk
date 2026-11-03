@@ -1,5 +1,18 @@
 # navigraph
 
+## 1.4.7
+
+### Patch Changes
+
+- [`9c53f77`](https://github.com/Navigraph/navigraph-js-sdk/commit/9c53f775acc0d0af72ebbec86bc078fed50f3659) Thanks [@SkySails](https://github.com/SkySails)! - Ship ES2017 code instead of ES2015.
+- Updated dependencies [[`9c53f77`](https://github.com/Navigraph/navigraph-js-sdk/commit/9c53f775acc0d0af72ebbec86bc078fed50f3659), [`51d1a64`](https://github.com/Navigraph/navigraph-js-sdk/commit/51d1a649569606eff59341c70ed551ec7c62f83f)]:
+  - @navigraph/app@1.4.2
+  - @navigraph/auth@2.6.3
+  - @navigraph/charts@2.2.3
+  - @navigraph/packages@1.1.3
+  - @navigraph/amdb@1.1.3
+  - @navigraph/weather@2.1.5
+
 ## 1.4.6
 
 ### Patch Changes
