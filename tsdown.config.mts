@@ -8,6 +8,8 @@ export default defineConfig({
   outExtensions: ({ format }) => ({ js: format === "cjs" ? ".cjs.js" : ".esm.js", dts: ".d.ts" }),
   sourcemap: false,
   dts: { sourcemap: false },
+  // JSDoc stays in the declaration files for editors, not in the runtime code.
+  outputOptions: { comments: { jsdoc: false, legal: true, annotation: true } },
   deps: {
     // devDependencies get bundled on purpose, such as axios into @navigraph/auth. This silences the hint about it.
     onlyBundle: false,
