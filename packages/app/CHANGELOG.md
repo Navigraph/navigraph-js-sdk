@@ -1,5 +1,11 @@
 # @navigraph/app
 
+## 1.4.1
+
+### Patch Changes
+
+- [#111](https://github.com/Navigraph/navigraph-js-sdk/pull/111) [`f20ceea`](https://github.com/Navigraph/navigraph-js-sdk/commit/f20ceea4acbe7c0b95a517f509dd044c66dc3e88) Thanks [@SkySails](https://github.com/SkySails)! - Add SimBrief scopes
+
 ## 1.4.0
 
 ### Minor Changes
