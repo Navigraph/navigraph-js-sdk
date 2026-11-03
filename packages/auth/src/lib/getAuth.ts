@@ -58,7 +58,7 @@ export default function getAuth({ keys, storage }: AuthParameters = {}) {
     onAuthStateChanged: (callback: UserCallback, initialNotify = true): Unsubscribe => {
       const promise = INITIALIZED ? Promise.resolve() : initPromise
 
-      // eslint-disable-next-line @typescript-eslint/no-floating-promises
+      // oxlint-disable-next-line typescript/no-floating-promises
       promise.then(() => {
         initialNotify && callback(USER)
         USER_LISTENERS.add(callback)

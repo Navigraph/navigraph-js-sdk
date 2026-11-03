@@ -20,7 +20,7 @@ function App() {
       if (error instanceof NoPackagesFoundError) setErrorMessage("No packages found")
       else if (error instanceof RequestFailedError) setErrorMessage("Failed to fetch packages")
       else if (error instanceof Error) setErrorMessage("An unknown error occurred")
-      else setErrorMessage("An unknown error occurred: " + error)
+      else setErrorMessage("An unknown error occurred: " + String(error))
     },
     [setErrorMessage],
   )

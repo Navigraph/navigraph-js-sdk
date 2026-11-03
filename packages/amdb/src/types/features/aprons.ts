@@ -3,7 +3,7 @@ import {
   Availability,
   BaseFeature,
   FeatureType,
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  // oxlint-disable-next-line typescript/no-unused-vars
   FuelType,
   GroundSurfaceType,
   LineColor,
@@ -11,7 +11,7 @@ import {
   LineStyle,
   Status,
 } from "../enums"
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
+// oxlint-disable-next-line typescript/no-unused-vars
 import { TaxiwayElement } from "./taxiways"
 import { AmdbFeature } from "./types"
 

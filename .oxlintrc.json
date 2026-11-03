@@ -6,7 +6,8 @@
   "options": {
     "typeAware": true,
     "denyWarnings": true,
-    "reportUnusedDisableDirectives": "error"
+    "reportUnusedDisableDirectives": "error",
+    "respectEslintDisableDirectives": false
   },
   "rules": {
     "no-unused-vars": ["warn", { "caughtErrors": "none" }],
@@ -48,5 +49,15 @@
     "typescript/no-unsafe-return": "error",
     "typescript/require-await": "error",
     "typescript/restrict-plus-operands": "error"
-  }
+  },
+  "overrides": [
+    {
+      "files": ["examples/**"],
+      "plugins": ["typescript", "react"],
+      "rules": {
+        "react/rules-of-hooks": "error",
+        "react/exhaustive-deps": "warn"
+      }
+    }
+  ]
 }

@@ -1,4 +1,4 @@
-/* eslint-disable @typescript-eslint/no-unused-vars */
+/* oxlint-disable typescript/no-unused-vars */
 import { LineString, Point } from "geojson"
 import { EdgeDerivation, EdgeType, FeatureType, LineDirection, NodeType, StopbarCategory } from "../enums"
 import { ApronElement, DeicingArea, ParkingStandArea, ParkingStandLocation, StandGuidanceLine } from "./aprons"

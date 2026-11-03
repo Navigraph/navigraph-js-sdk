@@ -44,7 +44,7 @@ export function protectedPage<P extends object, S extends Scope[]>(
         amdb={amdb}
         charts={charts}
         fmsdata={fmsdata}
-        // eslint-disable-next-line @typescript-eslint/no-explicit-any
+        // oxlint-disable-next-line typescript/no-explicit-any
         {...(props as unknown as any)}
       />
     )

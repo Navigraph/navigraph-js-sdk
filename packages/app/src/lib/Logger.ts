@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* oxlint-disable no-console */
 export const LEVELS = ["emerg", "alert", "crit", "err", "warning", "notice", "info", "debug"] as const
 export type LogLevel = (typeof LEVELS)[number]
 

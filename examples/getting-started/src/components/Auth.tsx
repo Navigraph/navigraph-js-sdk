@@ -14,7 +14,7 @@ export default function Auth() {
         setParams(params)
         setError(null)
       })
-        .catch(err => setError(err))
+        .catch((err: unknown) => setError(err instanceof Error ? err : new Error(String(err))))
         .finally(() => setParams(null)),
     [signIn],
   )

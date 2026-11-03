@@ -132,7 +132,7 @@ async function poll(
   } catch (exception: unknown) {
     if (axios.isAxiosError(exception)) {
       // TODO: Throws a TypeError when the request fails without a response, such as on a network error.
-      // eslint-disable-next-line no-unsafe-optional-chaining
+      // oxlint-disable-next-line no-unsafe-optional-chaining
       const { error } = exception.response?.data as { error: string }
 
       switch (error) {

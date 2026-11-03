@@ -36,7 +36,7 @@ export default async function runWithLock(
 
   if (result) {
     // Check to make sure the lock hasn't expired
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+    // oxlint-disable-next-line typescript/no-unsafe-assignment
     const data: Lock = JSON.parse(result)
     if (data.time >= Date.now() - timeout) {
       if (retry) await timerRunWithLock()
@@ -59,7 +59,7 @@ export default async function runWithLock(
         return
       }
 
-      // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
+      // oxlint-disable-next-line typescript/no-unsafe-assignment
       const data: Lock = JSON.parse(currentResult)
 
       if (data.id !== id) {

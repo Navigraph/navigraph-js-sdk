@@ -171,7 +171,7 @@ const amdbStyle: StyleFunction = (_feature): PathOptions | CircleOptions => {
           [StopbarCategory.Unknown]: "yellow",
           [StopbarCategory.Cat1]: "hsl(25, 100%, 50%)",
           [StopbarCategory.Cat2Or3]: "hsl(0, 100%, 50%)",
-        }[feature.properties.catstop as StopbarCategory],
+        }[feature.properties.catstop],
       }
     case FeatureType.TaxiwayIntersectionMarking:
       return {
