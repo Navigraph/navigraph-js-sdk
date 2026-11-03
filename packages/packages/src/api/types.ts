@@ -39,6 +39,6 @@ export interface NavigraphPackage {
   format: string
   /** The status of the package. */
   status: PackageStatus
-  /** The file object */
-  file: NavigraphFile
+  /** The file to download. Missing when the package has no files. */
+  file?: NavigraphFile
 }
