@@ -6,8 +6,7 @@
   "options": {
     "typeAware": true,
     "denyWarnings": true,
-    "reportUnusedDisableDirectives": "error",
-    "respectEslintDisableDirectives": false
+    "reportUnusedDisableDirectives": "error"
   },
   "rules": {
     "no-unused-vars": ["warn", { "caughtErrors": "none" }],
