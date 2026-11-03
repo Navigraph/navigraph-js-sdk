@@ -13,6 +13,11 @@
       "description": "metar-taf-parser stays on the version the weather API (wx-api) parses reports with.",
       "matchPackageNames": ["metar-taf-parser"],
       "enabled": false
+    },
+    {
+      "description": "axios stays on 0.x, which is still patched for security. 1.x is a bigger migration.",
+      "matchPackageNames": ["axios"],
+      "allowedVersions": "<1.0.0"
     }
   ]
 }
