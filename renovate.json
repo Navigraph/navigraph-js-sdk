@@ -2,5 +2,17 @@
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
   "extends": [
     "config:recommended"
+  ],
+  "packageRules": [
+    {
+      "description": "Leaflet stays on 1.9.0, which stops the map flashing in MSFS 2024.",
+      "matchPackageNames": ["leaflet"],
+      "enabled": false
+    },
+    {
+      "description": "metar-taf-parser stays on the version the weather API (wx-api) parses reports with.",
+      "matchPackageNames": ["metar-taf-parser"],
+      "enabled": false
+    }
   ]
 }
