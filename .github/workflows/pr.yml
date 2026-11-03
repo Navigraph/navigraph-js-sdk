@@ -7,10 +7,6 @@ on:
       - reopened
       - synchronize
       - ready_for_review
-    paths-ignore:
-      - "**/CHANGELOG.md"
-      - "**/package.json"
-      - ".changeset/*"
 
 jobs:
   build:
@@ -60,6 +56,29 @@ jobs:
         run: bun run lint
         env:
           TIMING: 1
+
+  typecheck:
+    name: Typecheck
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v6
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: 24
+
+      - name: Setup Bun
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version-file: package.json
+
+      - name: Install dependencies
+        run: bun install --frozen-lockfile
+
+      - name: Typecheck packages and examples
+        run: bun run typecheck
 
   test:
     name: Test

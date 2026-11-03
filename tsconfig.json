@@ -5,7 +5,7 @@
     "lib": ["dom", "esnext"],
     "declaration": true,
     "sourceMap": true,
-    "moduleResolution": "node",
+    "moduleResolution": "bundler",
     "skipLibCheck": true,
     "strict": true,
     "noImplicitAny": true,
@@ -14,8 +14,10 @@
     "esModuleInterop": true,
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
-    "downlevelIteration": true,
-    "declarationMap": true
+    "declarationMap": true,
+    "types": ["node"],
+    // tsup 6 sets the deprecated baseUrl option when it builds the declaration files.
+    "ignoreDeprecations": "6.0"
   },
   "include": ["packages", ".eslintrc.js", "tsup.config.ts", "vitest.config.mts"],
   "exclude": ["**/node_modules"]

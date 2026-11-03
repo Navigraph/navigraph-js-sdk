@@ -38,7 +38,7 @@ const AviationWeather = memo(() => {
   const layersRef = useRef<Partial<Record<AVWXSource, LeafletGeoJSON>>>({})
 
   return layers.map(({ data }) => {
-    if (!data) return null
+    if (!data?.[1]) return null
 
     return (
       <GeoJSON

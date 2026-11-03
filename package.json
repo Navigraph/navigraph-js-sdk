@@ -1,10 +1,17 @@
 {
   "name": "sdk",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "examples/*"
-  ],
+  "workspaces": {
+    "packages": [
+      "packages/*",
+      "examples/*"
+    ],
+    "catalog": {
+      "@vitejs/plugin-react": "^6.2.1",
+      "vite": "^8.3.5",
+      "typescript": "^6.0.3"
+    }
+  },
   "scripts": {
     "build": "turbo run build --filter='./packages/*'",
     "dev": "turbo run dev --filter='./packages/*' --no-cache --continue --parallel",
@@ -14,6 +21,7 @@
     "prepack": "turbo run prepack --filter='./packages/*'",
     "postpack": "turbo run postpack --filter='./packages/*'",
     "test": "vitest run",
+    "typecheck": "tsc --noEmit && bun run --filter './examples/*' typecheck",
     "release": "changeset publish",
     "version": "changeset version && bun install --lockfile-only"
   },
@@ -36,8 +44,8 @@
     "rimraf": "^3.0.2",
     "tsup": "^6.3.0",
     "turbo": "^1.10.12",
-    "typescript": "^5.0.4",
-    "vite": "^8.3.5",
+    "typescript": "catalog:",
+    "vite": "catalog:",
     "vitest": "^5.1.0"
   },
   "patchedDependencies": {

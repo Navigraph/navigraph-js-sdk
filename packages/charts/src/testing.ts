@@ -1,5 +1,5 @@
 import { navigraphRequest } from "@navigraph/auth"
-import { vi } from "vitest"
+import { MockInstance, vi } from "vitest"
 import { ChartTypeCode } from "./api/chartTypeCodes"
 import { Chart } from "./api/types"
 
@@ -33,14 +33,15 @@ export function createChart(overrides: Partial<Chart> = {}): Chart {
 }
 
 type Response = Awaited<ReturnType<typeof navigraphRequest.get>>
+type RequestSpy = MockInstance<typeof navigraphRequest.get>
 
 /** Makes every Navigraph API request succeed with `data`. Returns the spy so tests can inspect the requests. */
-export function mockApiResponse(data: unknown) {
+export function mockApiResponse(data: unknown): RequestSpy {
   return vi.spyOn(navigraphRequest, "get").mockResolvedValue({ status: 200, data } as Response)
 }
 
 /** Makes every Navigraph API request fail like an Axios request would, and silences the resulting error log. */
-export function mockApiFailure(status: number) {
+export function mockApiFailure(status: number): RequestSpy {
   vi.spyOn(console, "error").mockImplementation(() => undefined)
 
   return vi.spyOn(navigraphRequest, "get").mockRejectedValue({
