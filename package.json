@@ -13,13 +13,13 @@
     }
   },
   "scripts": {
-    "build": "turbo run build --filter='./packages/*'",
-    "dev": "turbo run dev --filter='./packages/*' --no-cache --continue --parallel",
-    "clean": "turbo run clean --filter='./packages/*'",
+    "build": "bun run --filter './packages/*' build",
+    "dev": "bun run --filter './packages/*' --parallel --no-exit-on-error dev",
+    "clean": "bun run --filter './packages/*' clean",
     "lint": "oxlint && prettier --check \"{packages,examples}/*/src/**/*.{ts,tsx}\"",
     "lint:fix": "oxlint --fix && prettier --write \"{packages,examples}/*/src/**/*.{ts,tsx}\"",
-    "prepack": "turbo run prepack --filter='./packages/*'",
-    "postpack": "turbo run postpack --filter='./packages/*'",
+    "prepack": "bun run --filter './packages/*' prepack",
+    "postpack": "bun run --filter './packages/*' postpack",
     "test": "vitest run",
     "typecheck": "tsc --noEmit && bun run --filter './examples/*' typecheck",
     "release": "changeset publish",
@@ -38,7 +38,6 @@
     "prettier": "^3.0.2",
     "rimraf": "^6.1.3",
     "tsdown": "0.23.4",
-    "turbo": "^1.10.12",
     "typescript": "catalog:",
     "vite": "catalog:",
     "vitest": "^5.1.0"

@@ -23,7 +23,7 @@
   ],
   "scripts": {
     "build": "tsdown",
-    "clean": "rimraf --glob .turbo node_modules './**/dist'"
+    "clean": "rimraf --glob node_modules './**/dist'"
   },
   "publishConfig": {
     "access": "public"

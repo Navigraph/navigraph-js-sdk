@@ -16,7 +16,7 @@ cd sdk
 
 ## Development
 
-In order to improve the developer experience, we have opted to use a monorepo powered by [Turborepo](https://github.com/vercel/turborepo).
+In order to improve the developer experience, we have opted to use a monorepo built on [Bun workspaces](https://bun.sh/docs/install/workspaces).
 
 ### Tooling
 
