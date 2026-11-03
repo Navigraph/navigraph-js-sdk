@@ -3,12 +3,12 @@
   "pipeline": {
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**"]
+      "outputs": ["dist/**", "*/dist/**"]
     },
     "dev": { "cache": false },
     "clean": { "cache": false },
     "prepack": { "cache": false },
     "postpack": { "cache": false }
   },
-  "globalDependencies": ["tsconfig.json"]
+  "globalDependencies": ["tsconfig.json", "tsdown.config.mts", "patches/**"]
 }
