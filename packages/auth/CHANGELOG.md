@@ -1,5 +1,13 @@
 # @navigraph/auth
 
+## 2.6.4
+
+### Patch Changes
+
+- [`0744203`](https://github.com/Navigraph/navigraph-js-sdk/commit/0744203056df619313a442e4f44a1f7b330faa3e) Thanks [@SkySails](https://github.com/SkySails)! - Update the bundled axios from 0.24.0 to 0.35.0, addressing open security advisories.
+
+- [`822a023`](https://github.com/Navigraph/navigraph-js-sdk/commit/822a02356c5703359caae9bbe1c2376d67c41131) Thanks [@SkySails](https://github.com/SkySails)! - Keep a request's headers when `navigraphRequest` retries it after refreshing the access token.
+
 ## 2.6.3
 
 ### Patch Changes
