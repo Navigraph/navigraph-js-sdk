@@ -22,7 +22,7 @@
     "**/package.json"
   ],
   "scripts": {
-    "build": "tsup --format esm,cjs --dts ",
+    "build": "tsdown",
     "clean": "rimraf .turbo node_modules ./**/dist"
   },
   "publishConfig": {

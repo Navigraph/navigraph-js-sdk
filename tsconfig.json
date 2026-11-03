@@ -15,10 +15,8 @@
     "resolveJsonModule": true,
     "allowSyntheticDefaultImports": true,
     "declarationMap": true,
-    "types": ["node"],
-    // tsup 6 sets the deprecated baseUrl option when it builds the declaration files.
-    "ignoreDeprecations": "6.0"
+    "types": ["node"]
   },
-  "include": ["packages", "tsup.config.ts", "vitest.config.mts"],
+  "include": ["packages", "tsdown.config.mts", "vitest.config.mts"],
   "exclude": ["**/node_modules"]
 }
