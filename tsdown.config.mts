@@ -4,7 +4,8 @@ export default defineConfig({
   entry: "src/index.ts",
   // The ESM build writes the one index.d.ts that both formats use.
   format: { cjs: { dts: false }, esm: {} },
-  target: "es6",
+  // Coherent GT 2.0 in MSFS 2020 and 2024 supports ES2017 but nothing newer.
+  target: "es2017",
   outExtensions: ({ format }) => ({ js: format === "cjs" ? ".cjs.js" : ".esm.js", dts: ".d.ts" }),
   sourcemap: false,
   dts: { sourcemap: false },
