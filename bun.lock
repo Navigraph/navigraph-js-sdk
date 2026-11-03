@@ -83,10 +83,10 @@
     },
     "packages/amdb": {
       "name": "@navigraph/amdb",
-      "version": "1.1.2",
+      "version": "1.1.3",
       "dependencies": {
-        "@navigraph/app": "1.4.1",
-        "@navigraph/auth": "2.6.2",
+        "@navigraph/app": "1.4.2",
+        "@navigraph/auth": "2.6.3",
       },
       "devDependencies": {
         "@types/geojson": "^7946.0.14",
@@ -94,13 +94,13 @@
     },
     "packages/app": {
       "name": "@navigraph/app",
-      "version": "1.4.1",
+      "version": "1.4.2",
     },
     "packages/auth": {
       "name": "@navigraph/auth",
-      "version": "2.6.2",
+      "version": "2.6.3",
       "dependencies": {
-        "@navigraph/app": "1.4.1",
+        "@navigraph/app": "1.4.2",
       },
       "devDependencies": {
         "@navigraph/pkce": "^1.0.3",
@@ -109,21 +109,21 @@
     },
     "packages/charts": {
       "name": "@navigraph/charts",
-      "version": "2.2.2",
+      "version": "2.2.3",
       "dependencies": {
-        "@navigraph/app": "1.4.1",
-        "@navigraph/auth": "2.6.2",
+        "@navigraph/app": "1.4.2",
+        "@navigraph/auth": "2.6.3",
       },
     },
     "packages/leaflet": {
       "name": "@navigraph/leaflet",
-      "version": "2.2.2",
+      "version": "2.2.3",
       "dependencies": {
-        "@navigraph/app": "1.4.1",
-        "@navigraph/auth": "2.6.2",
+        "@navigraph/app": "1.4.2",
+        "@navigraph/auth": "2.6.3",
       },
       "devDependencies": {
-        "@navigraph/auth": "2.6.2",
+        "@navigraph/auth": "2.6.3",
         "@types/leaflet": "^1.9.3",
       },
       "peerDependencies": {
@@ -132,30 +132,30 @@
     },
     "packages/navigraph": {
       "name": "navigraph",
-      "version": "1.4.6",
+      "version": "1.4.7",
       "dependencies": {
-        "@navigraph/amdb": "1.1.2",
-        "@navigraph/app": "1.4.1",
-        "@navigraph/auth": "2.6.2",
-        "@navigraph/charts": "2.2.2",
-        "@navigraph/packages": "1.1.2",
-        "@navigraph/weather": "2.1.4",
+        "@navigraph/amdb": "1.1.3",
+        "@navigraph/app": "1.4.2",
+        "@navigraph/auth": "2.6.3",
+        "@navigraph/charts": "2.2.3",
+        "@navigraph/packages": "1.1.3",
+        "@navigraph/weather": "2.1.5",
       },
     },
     "packages/packages": {
       "name": "@navigraph/packages",
-      "version": "1.1.2",
+      "version": "1.1.3",
       "dependencies": {
-        "@navigraph/app": "1.4.1",
-        "@navigraph/auth": "2.6.2",
+        "@navigraph/app": "1.4.2",
+        "@navigraph/auth": "2.6.3",
       },
     },
     "packages/weather": {
       "name": "@navigraph/weather",
-      "version": "2.1.4",
+      "version": "2.1.5",
       "dependencies": {
-        "@navigraph/app": "1.4.1",
-        "@navigraph/auth": "2.6.2",
+        "@navigraph/app": "1.4.2",
+        "@navigraph/auth": "2.6.3",
       },
       "devDependencies": {
         "@types/geojson": "^7946.0.14",

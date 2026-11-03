@@ -1,5 +1,11 @@
 # @navigraph/app
 
+## 1.4.2
+
+### Patch Changes
+
+- [`9c53f77`](https://github.com/Navigraph/navigraph-js-sdk/commit/9c53f775acc0d0af72ebbec86bc078fed50f3659) Thanks [@SkySails](https://github.com/SkySails)! - Ship ES2017 code instead of ES2015.
+
 ## 1.4.1
 
 ### Patch Changes
