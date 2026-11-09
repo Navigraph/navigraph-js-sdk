@@ -1,16 +1,24 @@
 {
   "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
-  ],
+  "dependencyDashboard": true,
+
+  "extends": ["config:recommended"],
+  "labels": ["dependencies"],
+
+  "enabledManagers": ["github-actions", "bun"],
   "packageRules": [
+    {
+      "description": ["Only allow bun updates for vulnerability alerts"],
+      "matchManagers": ["bun"],
+      "enabled": false
+    },
     {
       "description": "Leaflet stays on 1.9.0, which stops the map flashing in MSFS 2024.",
       "matchPackageNames": ["leaflet"],
       "enabled": false
     },
     {
-      "description": "metar-taf-parser stays on the version the weather API (wx-api) parses reports with.",
+      "description": "metar-taf-parser stays on the version the weather API parses reports with.",
       "matchPackageNames": ["metar-taf-parser"],
       "enabled": false
     },
@@ -19,5 +27,16 @@
       "matchPackageNames": ["axios"],
       "allowedVersions": "<1.0.0"
     }
-  ]
+  ],
+  "vulnerabilityAlerts": {
+    "enabled": true,
+    "prHourlyLimit": 5,
+    "prConcurrentLimit": 10,
+    "labels": ["dependencies", "security"]
+  },
+
+  "minimumReleaseAge": "30 days",
+  "internalChecksFilter": "strict",
+
+  "semanticCommits": "disabled"
 }
